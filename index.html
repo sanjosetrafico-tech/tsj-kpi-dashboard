@@ -1,1417 +1,2316 @@
-<! DOCTYPE html>
-// =====================================================
-// TSJ - API DASHBOARD KPI
-//
-// Lee:
-// 1) KPI SEP 26           -> pestaña PLAN
-// 2) IPK POR LINEA SEP    -> pestaña Ipk mensual
-//
-// Devuelve JSON / JSONP para el dashboard
-// =====================================================
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
 
-// =====================================================
-// CONFIGURACIÓN
-// =====================================================
+  <title>TSJ | KPI Operativos</title>
 
-// Google Sheet: KPI SEP 26
-const KPI_SHEET_ID =
-  '12wb3QNFpfer_6-RLkq3wQNV5i1NmqBohJ9u06xfN8ok';
+  <meta
+    name="description"
+    content="Tablero operativo de indicadores TSJ Transporte San José"
+  >
 
-// Google Sheet: IPK POR LINEA SEP
-const IPK_SHEET_ID =
-  '1jfqsPpANydPYXvvH7zkFeq-dnuPi0ogSD51sosRvQYc';
+  <style>
+    :root {
+      --ink: #181416;
+      --muted: #716a70;
+      --pink: #ed2e91;
+      --pink-dark: #be176d;
+      --pink-pale: #fff0f8;
+      --line: #ebe6e9;
+      --paper: #ffffff;
+      --bg: #f7f5f6;
+      --good: #11815d;
+      --warn: #d77817;
+      --bad: #c43351;
+    }
 
-const KPI_TAB = 'PLAN';
-const IPK_TAB = 'Ipk mensual';
+    * {
+      box-sizing: border-box;
+    }
 
+    body {
+      margin: 0;
+      background: var(--bg);
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        sans-serif;
+      color: var(--ink);
+      font-size: 16px;
+    }
 
-// =====================================================
-// ENDPOINT PRINCIPAL
-// =====================================================
+    .shell {
+      max-width: 1440px;
+      margin: auto;
+      padding: 28px 30px 50px;
 
-function doGet(e) {
+      display: grid;
+      grid-template-columns:
+        minmax(0, 1.45fr)
+        minmax(340px, .8fr);
 
-  try {
+      column-gap: 20px;
+      align-items: start;
+    }
 
-    const daily =
-      obtenerKPIDiarios();
+    .header-pro,
+    .heading-pro,
+    .alert,
+    .footer {
+      grid-column: 1 / -1;
+    }
 
-    const targets =
-      obtenerMetasAcumuladas();
+    /* =========================
+       HEADER
+    ========================= */
 
-    const ipkMonthly =
-      obtenerIPKMensualPorLinea();
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
+    .header-pro {
+      padding: 18px 0 16px;
+      border-bottom: 1px solid #ded8dc;
+    }
 
-    const resultado = {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
 
-      ok: true,
+    .brand img {
+      width: 76px;
+      height: 42px;
+      object-fit: contain;
+    }
 
-      updatedAt:
-        new Date()
-          .toISOString(),
+    .brand-name {
+      font-size: 14px;
+      letter-spacing: .08em;
+      font-weight: 800;
+    }
 
-      data: {
+    .brand-name span {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .02em;
+      margin-top: 4px;
+    }
 
-        daily:
-          daily,
+    .updated {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      color: var(--muted);
+    }
 
-        targets:
-          targets,
+    .updated::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--pink);
+      box-shadow: 0 0 0 4px var(--pink-pale);
+    }
 
-        ipkMonthly:
-          ipkMonthly
+    .updated b {
+      font-size: 13px;
+      color: var(--ink);
+    }
 
+    /* =========================
+       TÍTULO
+    ========================= */
+
+    .heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+    }
+
+    .heading-pro {
+      padding: 25px 0 24px;
+      margin-bottom: 20px;
+    }
+
+    .heading h1 {
+      font-size: 32px;
+      margin: 0;
+      letter-spacing: -1.4px;
+    }
+
+    .heading p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* =========================
+       SELECTOR FECHA
+    ========================= */
+
+    .period {
+      position: relative;
+      display: inline-flex;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 50px;
+      box-shadow: 0 3px 0 var(--pink);
+      overflow: hidden;
+      cursor: pointer;
+      min-width: 180px;
+      justify-content: center;
+    }
+
+    .date-caption {
+      padding: 11px 17px;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .period select {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      border: 0;
+    }
+
+    .period:focus-within {
+      outline: 2px solid var(--pink);
+      outline-offset: 3px;
+    }
+
+    /* =========================
+       ALERTA
+    ========================= */
+
+    .alert {
+      border-left: 4px solid var(--warn);
+      background: #fffaf2;
+      padding: 13px 17px;
+      border-radius: 0 12px 12px 0;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .alert b {
+      margin-right: 5px;
+    }
+
+    /* =========================
+       KPI
+    ========================= */
+
+    .kpis {
+      grid-column: 1;
+      grid-row: 4;
+
+      display: grid;
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 13px;
+    }
+
+    .kpi {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 17px 16px 14px;
+      min-height: 146px;
+    }
+
+    .kpi h2 {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      margin: 0 0 15px;
+      line-height: 1.25;
+    }
+
+    .value {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .delta {
+      font-size: 12px;
+      font-weight: 700;
+      margin-top: 5px;
+    }
+
+    .good {
+      color: var(--good);
+    }
+
+    .warn {
+      color: var(--warn);
+    }
+
+    .bad {
+      color: var(--bad);
+    }
+
+    .track {
+      height: 6px;
+      background: #f0ecee;
+      border-radius: 20px;
+      margin-top: 14px;
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      border-radius: 20px;
+    }
+
+    .fill.good {
+      background: var(--good);
+    }
+
+    .fill.warn {
+      background: var(--warn);
+    }
+
+    .fill.bad {
+      background: var(--bad);
+    }
+
+    /* =========================
+       PANELES
+    ========================= */
+
+    .grid {
+      display: contents;
+    }
+
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+    }
+
+    .panel h2 {
+      font-size: 16px;
+      margin: 0 0 4px;
+    }
+
+    .sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    .grid .panel:first-child {
+      grid-column: 1 / -1;
+      grid-row: 5;
+      margin-top: 20px;
+    }
+
+    .grid .panel:last-child {
+      grid-column: 2;
+      grid-row: 4;
+      align-self: start;
+    }
+
+    /* =========================
+       GRÁFICO
+    ========================= */
+
+    .trend {
+      height: 360px;
+      position: relative;
+    }
+
+    .chart {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .axis {
+      font-size: 11px;
+      fill: #8b8389;
+    }
+
+    /* =========================
+       METAS
+    ========================= */
+
+    .targets {
+      display: grid;
+      gap: 5px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns:
+        1.45fr 70px 78px;
+
+      gap: 12px;
+      align-items: center;
+
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    .row:last-child {
+      border-bottom: 0;
+    }
+
+    .tag {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .pill {
+      font-size: 11px;
+      text-align: center;
+      padding: 5px 7px;
+      border-radius: 20px;
+      font-weight: 800;
+    }
+
+    .pill.good {
+      background: #e9f7f1;
+    }
+
+    .pill.warn {
+      background: #fff2df;
+    }
+
+    .pill.bad {
+      background: #feeaf0;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .footer {
+      grid-row: 6;
+      font-size: 12px;
+      color: var(--muted);
+      margin: 18px 4px;
+    }
+
+    .footer b {
+      color: var(--ink);
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 980px) {
+
+      .shell {
+        display: block;
       }
 
-    };
+      .kpis {
+        grid-template-columns:
+          repeat(3, 1fr);
+
+        margin-bottom: 24px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .grid .panel:first-child,
+      .grid .panel:last-child {
+        margin-top: 0;
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+
+    @media (max-width: 620px) {
+
+      .shell {
+        padding: 20px 15px;
+      }
+
+      .top,
+      .heading {
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .top {
+        flex-direction: column;
+      }
+
+      .heading {
+        flex-direction: column;
+      }
+
+      .kpis {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .kpi:last-child {
+        grid-column: span 2;
+      }
+
+      .trend {
+        height: 290px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<main class="shell">
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="top header-pro">
+
+    <div class="brand">
+
+      <img
+        src="logo-tsj.png"
+        alt="Logo Transporte San José"
+      >
+
+      <div class="brand-name">
+        TRANSPORTE SAN JOSÉ
+
+        <span>
+          Panel de indicadores operativos
+        </span>
+      </div>
+
+    </div>
+
+    <div
+      class="updated"
+      id="connectionStatus"
+    >
+      <b>Conectando</b>
+      <span>Google Sheets</span>
+    </div>
+
+  </header>
 
 
-    return responder(
-      resultado,
-      e
+  <!-- =========================
+       ENCABEZADO
+  ========================== -->
+
+  <section class="heading heading-pro">
+
+    <div>
+
+      <h1>
+        Resumen operativo
+      </h1>
+
+      <p>
+        Seguimiento de metas,
+        servicio y productividad.
+      </p>
+
+    </div>
+
+
+    <label
+      class="period"
+      title="Seleccionar fecha"
+    >
+
+      <span
+        class="date-caption"
+        id="dateCaption"
+      >
+        CARGANDO...
+      </span>
+
+      <select
+        id="datePicker"
+        aria-label="Seleccionar fecha de los indicadores"
+      >
+      </select>
+
+    </label>
+
+  </section>
+
+
+  <!-- =========================
+       ALERTA
+  ========================== -->
+
+  <div
+    class="alert"
+    id="dataAlert"
+  >
+    <b>Actualizando:</b>
+    obteniendo información desde Google Sheets.
+  </div>
+
+
+  <!-- =========================
+       KPI
+  ========================== -->
+
+  <section class="kpis">
+
+    <article
+      class="kpi"
+      data-key="service"
+    >
+
+      <h2>
+        Cumplimiento plan de servicio
+      </h2>
+
+      <div class="value">—</div>
+      <div class="delta">Cargando...</div>
+
+      <div class="track">
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
+      </div>
+
+    </article>
+
+
+    <article
+      class="kpi"
+      data-key="kms"
+    >
+
+      <h2>
+        Cumplimiento plan de kms
+      </h2>
+
+      <div class="value">—</div>
+      <div class="delta">Cargando...</div>
+
+      <div class="track">
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
+      </div>
+
+    </article>
+
+
+    <article
+      class="kpi"
+      data-key="extra"
+    >
+
+      <h2>
+        Cumplimiento plan Hs Extras Conducción
+      </h2>
+
+      <div class="value">—</div>
+      <div class="delta">Cargando...</div>
+
+      <div class="track">
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
+      </div>
+
+    </article>
+
+
+    <article
+      class="kpi"
+      data-key="titularidad"
+    >
+
+      <h2>
+        Titularidad
+      </h2>
+
+      <div class="value">—</div>
+      <div class="delta">Cargando...</div>
+
+      <div class="track">
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
+      </div>
+
+    </article>
+
+
+    <article
+      class="kpi"
+      data-key="sinRes"
+    >
+
+      <h2>
+        Siniestros con responsabilidad
+      </h2>
+
+      <div class="value">—</div>
+      <div class="delta">Cargando...</div>
+
+      <div class="track">
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
+      </div>
+
+    </article>
+
+
+    <article
+      class="kpi"
+      data-key="sinResNo"
+    >
+
+      <h2>
+        Siniestros sin responsabilidad
+      </h2>
+
+      <div class="value">—</div>
+      <div class="delta">Cargando...</div>
+
+      <div class="track">
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
+      </div>
+
+    </article>
+
+
+    <article
+      class="kpi"
+      data-key="horario"
+    >
+
+      <h2>
+        Cumplimiento Horario
+      </h2>
+
+      <div class="value">—</div>
+      <div class="delta">Cargando...</div>
+
+      <div class="track">
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
+      </div>
+
+    </article>
+
+
+    <article
+      class="kpi"
+      data-key="cabecera"
+    >
+
+      <h2>
+        Cumplimiento Cabecera
+      </h2>
+
+      <div class="value">—</div>
+      <div class="delta">Cargando...</div>
+
+      <div class="track">
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
+      </div>
+
+    </article>
+
+
+    <article
+      class="kpi"
+      data-key="porton"
+    >
+
+      <h2>
+        Cumplimiento Portón
+      </h2>
+
+      <div class="value">—</div>
+      <div class="delta">Cargando...</div>
+
+      <div class="track">
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
+      </div>
+
+    </article>
+
+
+    <article
+      class="kpi"
+      data-key="ipk"
+    >
+
+      <h2>
+        IPK
+      </h2>
+
+      <div class="value">—</div>
+      <div class="delta">Cargando...</div>
+
+      <div class="track">
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
+      </div>
+
+    </article>
+
+
+    <article
+      class="kpi"
+      data-key="estetica"
+    >
+
+      <h2>
+        Estética
+      </h2>
+
+      <div class="value">—</div>
+      <div class="delta">Cargando...</div>
+
+      <div class="track">
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
+      </div>
+
+    </article>
+
+
+    <article
+      class="kpi"
+      data-key="vueltas"
+    >
+
+      <h2>
+        Vueltas Perdidas (Cantidad)
+      </h2>
+
+      <div class="value">—</div>
+      <div class="delta">Cargando...</div>
+
+      <div class="track">
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
+      </div>
+
+    </article>
+
+  </section>
+
+
+  <!-- =========================
+       PANELES
+  ========================== -->
+
+  <section class="grid">
+
+
+    <!-- IPK POR LÍNEA -->
+
+    <article class="panel">
+
+      <h2>
+        IPK mensual por línea · septiembre
+      </h2>
+
+      <p class="sub">
+        Acumulado del mes según datos disponibles.
+      </p>
+
+      <div
+        class="trend"
+        id="ipkChart"
+      >
+        Cargando gráfico...
+      </div>
+
+    </article>
+
+
+    <!-- METAS -->
+
+    <article class="panel">
+
+      <h2>
+        Metas y acumulado mensual
+      </h2>
+
+      <p
+        class="sub"
+        id="targetsSubtitle"
+      >
+        Actualizando...
+      </p>
+
+      <div
+        class="targets"
+        id="targets"
+      >
+      </div>
+
+    </article>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <p class="footer">
+
+    <b>Fuente:</b>
+
+    KPI SEP 26 ·
+    IPK POR LINEA SEP ·
+    Pasajeros sujetos a revisión a 12 h. ·
+    Los km pueden variar por actualización GPS.
+
+  </p>
+
+</main>
+
+
+<script>
+  "use strict";
+
+
+  // ==========================================================
+  // CONFIGURACIÓN
+  // ==========================================================
+
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycbxzu1Mob_Z7E0-33nMXmFDk1zsaOWnUyzb1s58z1NH_2qDK4utHfvtO9-N31GtMuYwyEA/exec";
+
+
+  // Refresco automático
+  const REFRESH_MS =
+    30000;
+
+
+  const JSONP_CALLBACK =
+    "tsjDashboardCallback";
+
+
+  // ==========================================================
+  // ESTADO
+  // ==========================================================
+
+  let dailyData = {};
+
+  let targetsData = [];
+
+  let ipkMonthlyData = [];
+
+  let currentJsonpScript = null;
+
+  let latestAvailableDate = null;
+
+
+  // ==========================================================
+  // ELEMENTOS
+  // ==========================================================
+
+  const picker =
+    document.getElementById(
+      "datePicker"
     );
 
 
-  } catch (error) {
+  const dateCaption =
+    document.getElementById(
+      "dateCaption"
+    );
 
 
-    const resultado = {
-
-      ok: false,
-
-      error:
-        error.message
-
-    };
+  const alertBox =
+    document.getElementById(
+      "dataAlert"
+    );
 
 
-    return responder(
-      resultado,
-      e
+  // ==========================================================
+  // FECHAS
+  // ==========================================================
+
+  function parseDate(value) {
+
+    return new Date(
+      value + "T12:00:00"
     );
 
   }
 
-}
 
+  function shortDate(value) {
 
-// =====================================================
-// RESPUESTA JSON / JSONP
-// =====================================================
-
-function responder(data, e) {
-
-  const callback =
-    e &&
-    e.parameter &&
-    e.parameter.callback
-      ? e.parameter.callback
-      : null;
-
-
-  // JSONP
-  if (callback) {
-
-    return ContentService
-      .createTextOutput(
-        callback +
-        '(' +
-        JSON.stringify(data) +
-        ');'
-      )
-      .setMimeType(
-        ContentService
-          .MimeType
-          .JAVASCRIPT
-      );
-
-  }
-
-
-  // JSON normal
-  return ContentService
-    .createTextOutput(
-      JSON.stringify(data)
+    return new Intl.DateTimeFormat(
+      "es-AR",
+      {
+        day: "2-digit",
+        month: "short"
+      }
     )
-    .setMimeType(
-      ContentService
-        .MimeType
-        .JSON
-    );
-
-}
-
-
-// =====================================================
-// KPI DIARIOS
-// =====================================================
-
-function obtenerKPIDiarios() {
-
-  const ss =
-    SpreadsheetApp
-      .openById(
-        KPI_SHEET_ID
-      );
-
-
-  const sheet =
-    ss.getSheetByName(
-      KPI_TAB
-    );
-
-
-  if (!sheet) {
-
-    throw new Error(
-      'No existe la pestaña PLAN'
-    );
+      .format(
+        parseDate(value)
+      )
+      .replace(".", "");
 
   }
 
 
-  const lastRow =
-    sheet.getLastRow();
+  function numericDate(value) {
 
-
-  const values =
-    sheet
-      .getRange(
-        3,
-        1,
-        lastRow - 2,
-        25
-      )
-      .getDisplayValues();
-
-
-  const daily = {};
-
-
-  values.forEach(
-    row => {
-
-
-      const fechaTexto =
-        String(
-          row[0] || ''
-        ).trim();
-
-
-      if (
-        !fechaTexto ||
-        fechaTexto
-          .toUpperCase() ===
-          'TOTAL'
-      ) {
-
-        return;
-
+    return new Intl.DateTimeFormat(
+      "es-AR",
+      {
+        day: "2-digit",
+        month: "2-digit"
       }
-
-
-      const fecha =
-        convertirFecha(
-          fechaTexto
-        );
-
-
-      if (!fecha) {
-
-        return;
-
-      }
-
-
-      // Si todavía no tiene
-      // servicio ejecutado,
-      // no consideramos cargado el día.
-
-      const servicioEjecutado =
-        row[2];
-
-
-      if (
-        servicioEjecutado === '' ||
-        servicioEjecutado === null
-      ) {
-
-        return;
-
-      }
-
-
-      // ---------------------------------------------
-      // COLUMNAS DE PLAN
-      //
-      // D = Cumplimiento servicio
-      // I = Cumplimiento km
-      // L = Titularidad
-      // O = Cumplimiento hs extras
-      // P = Siniestros
-      // R = IPK
-      // S = Cumplimiento horario
-      // T = Cabecera
-      // U = Portón
-      // V = Estética
-      // X = Vueltas perdidas
-      // ---------------------------------------------
-
-
-      const service =
-        numero(
-          row[3]
-        );
-
-
-      const kms =
-        numero(
-          row[8]
-        );
-
-
-      const titularidad =
-        numero(
-          row[11]
-        );
-
-
-      const extra =
-        numero(
-          row[14]
-        );
-
-
-      const siniestros =
-        numero(
-          row[15]
-        );
-
-
-      const ipk =
-        numero(
-          row[17]
-        );
-
-
-      const horario =
-        numero(
-          row[18]
-        );
-
-
-      const cabecera =
-        numero(
-          row[19]
-        );
-
-
-      const porton =
-        numero(
-          row[20]
-        );
-
-
-      const estetica =
-        numero(
-          row[21]
-        );
-
-
-      const vueltas =
-        numero(
-          row[23]
-        );
-
-
-      daily[fecha] = {
-
-
-        service:
-          crearPorcentaje(
-            service,
-            service >= 95
-          ),
-
-
-        kms:
-          crearPorcentaje(
-            kms,
-            kms >= 95
-          ),
-
-
-        extra: {
-
-          value:
-            formatoPorcentaje(
-              extra
-            ),
-
-          status:
-            extra <= 100
-              ? 'good'
-              : 'warn',
-
-          progress:
-            limitar(
-              extra
-            )
-
-        },
-
-
-        titularidad:
-          crearPorcentaje(
-            titularidad,
-            titularidad >= 80
-          ),
-
-
-        sinRes: {
-
-          value:
-            String(
-              siniestros
-            ),
-
-          status:
-            siniestros <= 10
-              ? 'good'
-              : 'bad',
-
-          progress:
-            limitar(
-              siniestros * 10
-            )
-
-        },
-
-
-        // Se completa luego
-        // desde el resumen lateral.
-        sinResNo: {
-
-          value:
-            '0',
-
-          status:
-            'good',
-
-          progress:
-            0
-
-        },
-
-
-        horario:
-          crearPorcentaje(
-            horario,
-            horario >= 90
-          ),
-
-
-        cabecera:
-          crearPorcentaje(
-            cabecera,
-            cabecera >= 90
-          ),
-
-
-        porton:
-          crearPorcentaje(
-            porton,
-            porton >= 90
-          ),
-
-
-        ipk: {
-
-          value:
-            formatoDecimal(
-              ipk
-            ),
-
-          status:
-            ipk >= 2
-              ? 'good'
-              : 'bad',
-
-          progress:
-            limitar(
-              (ipk / 2) * 100
-            )
-
-        },
-
-
-        estetica:
-          crearPorcentaje(
-            estetica,
-            estetica >= 100
-          ),
-
-
-        vueltas: {
-
-          value:
-            String(
-              vueltas
-            ),
-
-          status:
-            vueltas === 0
-              ? 'good'
-              : 'warn',
-
-          progress:
-            limitar(
-              vueltas * 10
-            )
-
-        }
-
-      };
-
-    }
-  );
-
-
-  actualizarUltimoDiaDesdeResumen(
-    daily
-  );
-
-
-  return daily;
-
-}
-
-
-// =====================================================
-// ACTUALIZAR ÚLTIMO DÍA DESDE RESUMEN
-// =====================================================
-
-function actualizarUltimoDiaDesdeResumen(
-  daily
-) {
-
-  const ss =
-    SpreadsheetApp
-      .openById(
-        KPI_SHEET_ID
+    )
+      .format(
+        parseDate(value)
       );
-
-
-  const sheet =
-    ss.getSheetByName(
-      KPI_TAB
-    );
-
-
-  // AB:AF
-  //
-  // Indicador | fecha | Meta | Acum
-
-  const values =
-    sheet
-      .getRange(
-        'AB4:AF20'
-      )
-      .getDisplayValues();
-
-
-  if (!values.length) {
-
-    return;
 
   }
 
 
-  const fechaTexto =
-    values[0][1];
+  function fullDate(value) {
+
+    return new Intl.DateTimeFormat(
+      "es-AR",
+      {
+        day: "2-digit",
+        month: "short",
+        year: "numeric"
+      }
+    )
+      .format(
+        parseDate(value)
+      )
+      .replace(".", "")
+      .toUpperCase();
+
+  }
 
 
-  const fecha =
-    convertirFecha(
-      fechaTexto
-    );
+  // ==========================================================
+  // ESTADO DE CONEXIÓN
+  // ==========================================================
 
-
-  if (
-    !fecha ||
-    !daily[fecha]
+  function setConnectionStatus(
+    title,
+    detail,
+    error = false
   ) {
 
-    return;
-
-  }
-
-
-  for (
-    let i = 1;
-    i < values.length;
-    i++
-  ) {
-
-
-    const indicador =
-      normalizarTexto(
-        values[i][0]
+    const container =
+      document.getElementById(
+        "connectionStatus"
       );
 
 
-    const valor =
-      values[i][1];
+    if (!container) {
+      return;
+    }
 
 
-    if (!indicador) {
+    const bold =
+      container.querySelector("b");
 
-      continue;
+
+    const span =
+      container.querySelector("span");
+
+
+    if (bold) {
+
+      bold.textContent =
+        title;
+
+
+      bold.style.color =
+        error
+          ? "var(--bad)"
+          : "";
 
     }
 
 
-    // Siniestros con responsabilidad
+    if (span) {
 
-    if (
-      indicador.includes(
-        'siniestros con responsabilidad'
-      )
-    ) {
-
-      const n =
-        numero(
-          valor
-        );
-
-
-      daily[fecha]
-        .sinRes = {
-
-          value:
-            String(n),
-
-          status:
-            n <= 10
-              ? 'good'
-              : 'bad',
-
-          progress:
-            limitar(
-              n * 10
-            )
-
-        };
-
-    }
-
-
-    // Siniestros sin responsabilidad
-
-    if (
-      indicador.includes(
-        'siniestros sin respon'
-      )
-    ) {
-
-      const n =
-        numero(
-          valor
-        );
-
-
-      daily[fecha]
-        .sinResNo = {
-
-          value:
-            String(n),
-
-          status:
-            n <= 6
-              ? 'good'
-              : 'bad',
-
-          progress:
-            limitar(
-              n * 15
-            )
-
-        };
-
-    }
-
-  }
-
-}
-
-
-// =====================================================
-// METAS Y ACUMULADOS
-// =====================================================
-
-function obtenerMetasAcumuladas() {
-
-  const ss =
-    SpreadsheetApp
-      .openById(
-        KPI_SHEET_ID
-      );
-
-
-  const sheet =
-    ss.getSheetByName(
-      KPI_TAB
-    );
-
-
-  const values =
-    sheet
-      .getRange(
-        'AB4:AF20'
-      )
-      .getDisplayValues();
-
-
-  const resultado =
-    [];
-
-
-  if (!values.length) {
-
-    return resultado;
-
-  }
-
-
-  for (
-    let i = 1;
-    i < values.length;
-    i++
-  ) {
-
-
-    const nombre =
-      values[i][0];
-
-
-    if (!nombre) {
-
-      continue;
-
-    }
-
-
-    resultado.push({
-
-      indicador:
-        nombre,
-
-      valorDia:
-        values[i][1],
-
-      meta:
-        values[i][2],
-
-      acumulado:
-        values[i][3]
-
-    });
-
-  }
-
-
-  // Cabecera y Portón
-  // se obtienen de TOTAL.
-
-  const lastRow =
-    sheet.getLastRow();
-
-
-  const data =
-    sheet
-      .getRange(
-        1,
-        1,
-        lastRow,
-        21
-      )
-      .getDisplayValues();
-
-
-  const total =
-    data.find(
-      row =>
-        String(
-          row[0]
-        )
-          .trim()
-          .toUpperCase() ===
-          'TOTAL'
-    );
-
-
-  if (total) {
-
-
-    resultado.push({
-
-      indicador:
-        'Cumplimiento Cabecera',
-
-      valorDia:
-        '',
-
-      meta:
-        '≥90%',
-
-      acumulado:
-        total[19]
-
-    });
-
-
-    resultado.push({
-
-      indicador:
-        'Cumplimiento Portón',
-
-      valorDia:
-        '',
-
-      meta:
-        '≥90%',
-
-      acumulado:
-        total[20]
-
-    });
-
-  }
-
-
-  return resultado;
-
-}
-
-
-// =====================================================
-// IPK MENSUAL POR LÍNEA
-// =====================================================
-
-function obtenerIPKMensualPorLinea() {
-
-  const ss =
-    SpreadsheetApp
-      .openById(
-        IPK_SHEET_ID
-      );
-
-
-  const sheet =
-    ss.getSheetByName(
-      IPK_TAB
-    );
-
-
-  if (!sheet) {
-
-    throw new Error(
-      'No existe la pestaña Ipk mensual'
-    );
-
-  }
-
-
-  const values =
-    sheet
-      .getDataRange()
-      .getDisplayValues();
-
-
-  const lineas = [
-
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'L',
-    'M',
-    'P'
-
-  ];
-
-
-  const acumulado =
-    {};
-
-
-  lineas.forEach(
-    linea => {
-
-      acumulado[linea] = {
-
-        km:
-          0,
-
-        pasajeros:
-          0
-
-      };
-
-    }
-  );
-
-
-  // Busca bloques:
-  //
-  // LINEA | KM | PASAJEROS | IPK
-
-  for (
-    let r = 0;
-    r < values.length;
-    r++
-  ) {
-
-
-    for (
-      let c = 0;
-      c < values[r].length;
-      c++
-    ) {
-
-
-      const header =
-        String(
-          values[r][c] || ''
-        ).trim();
-
-
-      if (
-        !/^IPK\s+\d{1,2}-\d{1,2}$/i
-          .test(
-            header
-          )
-      ) {
-
-        continue;
-
-      }
-
-
-      for (
-        let rr = r + 1;
-        rr <= r + 11 &&
-        rr < values.length;
-        rr++
-      ) {
-
-
-        const linea =
-          String(
-            values[rr][c - 3] ||
-            ''
-          ).trim();
-
-
-        if (
-          !acumulado[linea]
-        ) {
-
-          continue;
-
-        }
-
-
-        const km =
-          numero(
-            values[rr][c - 2]
-          );
-
-
-        const pasajeros =
-          numero(
-            values[rr][c - 1]
-          );
-
-
-        acumulado[linea]
-          .km +=
-          km;
-
-
-        acumulado[linea]
-          .pasajeros +=
-          pasajeros;
-
-      }
+      span.textContent =
+        detail;
 
     }
 
   }
 
 
-  return lineas.map(
-    linea => {
+  // ==========================================================
+  // NORMALIZAR KPI
+  // ==========================================================
+
+  function normalizeKpi(item) {
+
+    if (!item) {
+      return null;
+    }
 
 
-      const item =
-        acumulado[linea];
-
-
-      const ipk =
-        item.km > 0
-          ? item.pasajeros /
-            item.km
-          : 0;
-
+    if (Array.isArray(item)) {
 
       return {
+        value: item[0],
+        status: item[1],
+        progress: item[2]
+      };
 
-        linea:
-          linea,
+    }
 
-        km:
-          redondear(
-            item.km,
-            2
-          ),
 
-        pasajeros:
-          Math.round(
-            item.pasajeros
-          ),
+    return {
 
-        ipk:
-          redondear(
-            ipk,
-            2
+      value:
+        item.value ??
+        item.valor ??
+        "—",
+
+      status:
+        item.status ??
+        item.estado ??
+        "warn",
+
+      progress:
+        Number(
+          item.progress ??
+          item.progreso ??
+          0
+        )
+
+    };
+
+  }
+
+
+  // ==========================================================
+  // SELECTOR DE FECHAS
+  // ==========================================================
+
+  function rebuildDateSelector(
+    dates,
+    preferredDate
+  ) {
+
+    picker.innerHTML =
+      "";
+
+
+    dates.forEach(
+      function(date) {
+
+        const option =
+          document.createElement(
+            "option"
+          );
+
+
+        option.value =
+          date;
+
+
+        option.textContent =
+          fullDate(date);
+
+
+        picker.appendChild(
+          option
+        );
+
+      }
+    );
+
+
+    let selectedDate =
+      null;
+
+
+    /*
+     * Si el usuario estaba viendo una fecha
+     * que todavía existe, la mantenemos.
+     */
+
+    if (
+      preferredDate &&
+      dailyData[preferredDate]
+    ) {
+
+      selectedDate =
+        preferredDate;
+
+    } else {
+
+      /*
+       * Primera carga:
+       * mostramos el último día disponible.
+       */
+
+      selectedDate =
+        dates[
+          dates.length - 1
+        ];
+
+    }
+
+
+    picker.value =
+      selectedDate;
+
+
+    return selectedDate;
+
+  }
+
+
+  // ==========================================================
+  // RENDER KPI DEL DÍA
+  // ==========================================================
+
+  function renderDay(date) {
+
+    const data =
+      dailyData[date];
+
+
+    if (!data) {
+      return;
+    }
+
+
+    dateCaption.textContent =
+      fullDate(date);
+
+
+    document
+      .querySelectorAll(
+        ".kpi"
+      )
+      .forEach(
+        function(card) {
+
+          const key =
+            card.dataset.key;
+
+
+          const valueElement =
+            card.querySelector(
+              ".value"
+            );
+
+
+          const deltaElement =
+            card.querySelector(
+              ".delta"
+            );
+
+
+          const fillElement =
+            card.querySelector(
+              ".fill"
+            );
+
+
+          const item =
+            normalizeKpi(
+              data[key]
+            );
+
+
+          if (!item) {
+
+            valueElement.textContent =
+              "—";
+
+
+            deltaElement.textContent =
+              "Sin carga para este día";
+
+
+            deltaElement.className =
+              "delta warn";
+
+
+            fillElement.className =
+              "fill warn";
+
+
+            fillElement.style.width =
+              "0%";
+
+
+            return;
+
+          }
+
+
+          const status =
+            [
+              "good",
+              "warn",
+              "bad"
+            ].includes(
+              item.status
+            )
+              ? item.status
+              : "warn";
+
+
+          valueElement.textContent =
+            item.value;
+
+
+          deltaElement.textContent =
+            "Dato del día · " +
+            shortDate(date);
+
+
+          deltaElement.className =
+            "delta " +
+            status;
+
+
+          fillElement.className =
+            "fill " +
+            status;
+
+
+          fillElement.style.width =
+            Math.max(
+              0,
+              Math.min(
+                100,
+                Number(
+                  item.progress
+                ) || 0
+              )
+            ) +
+            "%";
+
+        }
+      );
+
+
+    renderOperationalAlert(
+      data
+    );
+
+  }
+
+
+  // ==========================================================
+  // ALERTA OPERATIVA
+  // ==========================================================
+
+  function percentageValue(item) {
+
+    const kpi =
+      normalizeKpi(item);
+
+
+    if (!kpi) {
+      return NaN;
+    }
+
+
+    return Number(
+      String(kpi.value)
+        .replace("%", "")
+        .replace(",", ".")
+    );
+
+  }
+
+
+  function renderOperationalAlert(
+    data
+  ) {
+
+    if (!data) {
+
+      alertBox.style.display =
+        "";
+
+
+      alertBox.innerHTML =
+        "<b>Sin datos:</b> no hay información para la fecha seleccionada.";
+
+
+      return;
+
+    }
+
+
+    const warnings = [];
+
+
+    const titularidad =
+      percentageValue(
+        data.titularidad
+      );
+
+
+    const horario =
+      percentageValue(
+        data.horario
+      );
+
+
+    if (
+      Number.isFinite(
+        titularidad
+      ) &&
+      titularidad < 80
+    ) {
+
+      warnings.push(
+        "la titularidad"
+      );
+
+    }
+
+
+    if (
+      Number.isFinite(
+        horario
+      ) &&
+      horario < 90
+    ) {
+
+      warnings.push(
+        "el cumplimiento horario"
+      );
+
+    }
+
+
+    if (!warnings.length) {
+
+      alertBox.style.display =
+        "none";
+
+
+      return;
+
+    }
+
+
+    alertBox.style.display =
+      "";
+
+
+    alertBox.innerHTML =
+      "<b>Atención:</b> " +
+      warnings.join(" y ") +
+      (
+        warnings.length > 1
+          ? " se encuentran "
+          : " se encuentra "
+      ) +
+      "por debajo de la meta.";
+
+  }
+
+
+  // ==========================================================
+  // METAS Y ACUMULADOS
+  // ==========================================================
+
+  function statusFromTarget(item) {
+
+    const name =
+      String(
+        item.indicador || ""
+      )
+        .toLowerCase();
+
+
+    const value =
+      Number(
+        String(
+          item.acumulado || ""
+        )
+          .replace("%", "")
+          .replace(",", ".")
+      );
+
+
+    if (
+      !Number.isFinite(value)
+    ) {
+
+      return "warn";
+
+    }
+
+
+    if (
+      name.includes(
+        "titularidad"
+      )
+    ) {
+
+      return value >= 80
+        ? "good"
+        : "bad";
+
+    }
+
+
+    if (
+      name.includes(
+        "horario"
+      ) ||
+      name.includes(
+        "cabecera"
+      ) ||
+      name.includes(
+        "portón"
+      ) ||
+      name.includes(
+        "porton"
+      )
+    ) {
+
+      return value >= 90
+        ? "good"
+        : "bad";
+
+    }
+
+
+    if (
+      name.includes(
+        "plan de servicio"
+      ) ||
+      name.includes(
+        "plan de kms"
+      )
+    ) {
+
+      return value >= 95
+        ? "good"
+        : "bad";
+
+    }
+
+
+    if (
+      name.includes(
+        "hs extras"
+      )
+    ) {
+
+      return value <= 100
+        ? "good"
+        : "bad";
+
+    }
+
+
+    if (
+      name.includes(
+        "ipk"
+      )
+    ) {
+
+      return value >= 2
+        ? "good"
+        : "bad";
+
+    }
+
+
+    if (
+      name.includes(
+        "estetica"
+      ) ||
+      name.includes(
+        "estética"
+      )
+    ) {
+
+      return value >= 100
+        ? "good"
+        : "bad";
+
+    }
+
+
+    return "good";
+
+  }
+
+
+  function renderTargets(items) {
+
+    const container =
+      document.getElementById(
+        "targets"
+      );
+
+
+    container.innerHTML =
+      "";
+
+
+    if (
+      !Array.isArray(items) ||
+      !items.length
+    ) {
+
+      container.innerHTML =
+        '<div class="row"><span>Sin datos acumulados</span></div>';
+
+
+      return;
+
+    }
+
+
+    items.forEach(
+      function(item) {
+
+        const row =
+          document.createElement(
+            "div"
+          );
+
+
+        row.className =
+          "row";
+
+
+        const status =
+          statusFromTarget(
+            item
+          );
+
+
+        row.innerHTML =
+          "<span>" +
+            escapeHtml(
+              item.indicador ||
+              ""
+            ) +
+          "</span>" +
+
+          '<span class="tag">' +
+            "Meta " +
+            escapeHtml(
+              item.meta ||
+              "—"
+            ) +
+          "</span>" +
+
+          '<span class="pill ' +
+            status +
+          '">' +
+            escapeHtml(
+              item.acumulado ||
+              "—"
+            ) +
+          "</span>";
+
+
+        container.appendChild(
+          row
+        );
+
+      }
+    );
+
+  }
+
+
+  // ==========================================================
+  // IPK POR LÍNEA
+  // ==========================================================
+
+  function renderIpkChart(items) {
+
+    const container =
+      document.getElementById(
+        "ipkChart"
+      );
+
+
+    if (
+      !Array.isArray(items) ||
+      !items.length
+    ) {
+
+      container.innerHTML =
+        "<p>Sin datos de IPK por línea.</p>";
+
+
+      return;
+
+    }
+
+
+    const width =
+      900;
+
+    const height =
+      300;
+
+    const left =
+      45;
+
+    const right =
+      20;
+
+    const top =
+      35;
+
+    const bottom =
+      42;
+
+
+    const chartWidth =
+      width -
+      left -
+      right;
+
+
+    const chartHeight =
+      height -
+      top -
+      bottom;
+
+
+    const maxValue =
+      Math.max(
+        3,
+        ...items.map(
+          function(item) {
+
+            return Number(
+              item.ipk
+            ) || 0;
+
+          }
+        )
+      );
+
+
+    const step =
+      chartWidth /
+      items.length;
+
+
+    const barWidth =
+      Math.min(
+        42,
+        step * .55
+      );
+
+
+    let bars = "";
+
+    let labels = "";
+
+    let values = "";
+
+
+    items.forEach(
+      function(
+        item,
+        index
+      ) {
+
+        const ipk =
+          Number(
+            item.ipk
+          ) || 0;
+
+
+        const x =
+          left +
+          index * step +
+          (
+            step -
+            barWidth
+          ) / 2;
+
+
+        const barHeight =
+          (
+            ipk /
+            maxValue
+          ) *
+          chartHeight;
+
+
+        const y =
+          top +
+          chartHeight -
+          barHeight;
+
+
+        const fill =
+          ipk >= 2
+            ? "#1b1718"
+            : "#ed2e91";
+
+
+        bars +=
+          '<rect ' +
+            'x="' + x + '" ' +
+            'y="' + y + '" ' +
+            'width="' + barWidth + '" ' +
+            'height="' + barHeight + '" ' +
+            'rx="4" ' +
+            'fill="' + fill + '"' +
+          ' />';
+
+
+        labels +=
+          '<text ' +
+            'x="' +
+            (
+              x +
+              barWidth / 2
+            ) +
+            '" ' +
+
+            'y="' +
+            (
+              height -
+              15
+            ) +
+            '" ' +
+
+            'text-anchor="middle" ' +
+            'class="axis" ' +
+            'font-weight="700">' +
+
+            escapeHtml(
+              item.linea
+            ) +
+
+          '</text>';
+
+
+        values +=
+          '<text ' +
+            'x="' +
+            (
+              x +
+              barWidth / 2
+            ) +
+            '" ' +
+
+            'y="' +
+            Math.max(
+              15,
+              y - 7
+            ) +
+            '" ' +
+
+            'text-anchor="middle" ' +
+            'font-size="11" ' +
+            'font-weight="800">' +
+
+            ipk
+              .toFixed(2)
+              .replace(
+                ".",
+                ","
+              ) +
+
+          '</text>';
+
+      }
+    );
+
+
+    const metaY =
+      top +
+      chartHeight -
+      (
+        2 /
+        maxValue
+      ) *
+      chartHeight;
+
+
+    container.innerHTML =
+      '<svg ' +
+        'class="chart" ' +
+        'viewBox="0 0 ' +
+        width +
+        " " +
+        height +
+        '" ' +
+        'preserveAspectRatio="xMidYMid meet">' +
+
+        '<line ' +
+          'x1="' +
+          left +
+          '" ' +
+
+          'y1="' +
+          metaY +
+          '" ' +
+
+          'x2="' +
+          (
+            width -
+            right
+          ) +
+          '" ' +
+
+          'y2="' +
+          metaY +
+          '" ' +
+
+          'stroke="#d77817" ' +
+          'stroke-width="2" ' +
+          'stroke-dasharray="6 5"' +
+        ' />' +
+
+        '<text ' +
+          'x="' +
+          (
+            width -
+            right -
+            5
+          ) +
+          '" ' +
+
+          'y="' +
+          (
+            metaY -
+            6
+          ) +
+          '" ' +
+
+          'text-anchor="end" ' +
+          'fill="#b86413" ' +
+          'font-size="11" ' +
+          'font-weight="700">' +
+
+          'META 2,00' +
+
+        '</text>' +
+
+        bars +
+        values +
+        labels +
+
+      '</svg>';
+
+  }
+
+
+  // ==========================================================
+  // RESPUESTA DEL APPS SCRIPT
+  // ==========================================================
+
+  window[JSONP_CALLBACK] =
+    function(payload) {
+
+      console.log(
+        "Respuesta Google Sheets:",
+        payload
+      );
+
+
+      if (
+        !payload ||
+        payload.ok !== true
+      ) {
+
+        showApiError(
+          payload?.error ||
+          "La API devolvió una respuesta inválida."
+        );
+
+
+        return;
+
+      }
+
+
+      try {
+
+        /*
+         * Guardamos la fecha que el usuario
+         * estaba consultando ANTES del refresco.
+         */
+
+        const previousSelection =
+          picker.value;
+
+
+        const data =
+          payload.data || {};
+
+
+        dailyData =
+          data.daily || {};
+
+
+        targetsData =
+          data.targets || [];
+
+
+        ipkMonthlyData =
+          data.ipkMonthly || [];
+
+
+        /*
+         * Estas fechas provienen directamente
+         * de los días que Apps Script leyó
+         * de la columna FECHA.
+         */
+
+        const dates =
+          Object.keys(
+            dailyData
           )
+            .filter(
+              function(date) {
+
+                return /^\d{4}-\d{2}-\d{2}$/
+                  .test(date);
+
+              }
+            )
+            .sort();
+
+
+        if (!dates.length) {
+
+          throw new Error(
+            "No se encontraron fechas cargadas."
+          );
+
+        }
+
+
+        latestAvailableDate =
+          dates[
+            dates.length - 1
+          ];
+
+
+        /*
+         * Reconstruimos el selector.
+         *
+         * - Primera carga:
+         *   muestra la última fecha disponible.
+         *
+         * - Refrescos siguientes:
+         *   mantiene la fecha elegida por el usuario.
+         */
+
+        const selectedDate =
+          rebuildDateSelector(
+            dates,
+            previousSelection
+          );
+
+
+        renderDay(
+          selectedDate
+        );
+
+
+        /*
+         * Metas y acumulados corresponden al
+         * resumen mensual actual que devuelve
+         * Google Sheets.
+         */
+
+        renderTargets(
+          targetsData
+        );
+
+
+        document
+          .getElementById(
+            "targetsSubtitle"
+          )
+          .textContent =
+          "Acumulado actualizado al " +
+          shortDate(
+            latestAvailableDate
+          );
+
+
+        renderIpkChart(
+          ipkMonthlyData
+        );
+
+
+        setConnectionStatus(
+          "Actualización automática",
+          "Datos al " +
+          numericDate(
+            latestAvailableDate
+          ),
+          false
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+
+        showApiError(
+          error.message
+        );
+
+      }
+
+    };
+
+
+  // ==========================================================
+  // CARGA JSONP
+  // ==========================================================
+
+  function loadDashboardData() {
+
+    if (
+      currentJsonpScript &&
+      currentJsonpScript.parentNode
+    ) {
+
+      currentJsonpScript
+        .parentNode
+        .removeChild(
+          currentJsonpScript
+        );
+
+    }
+
+
+    const script =
+      document.createElement(
+        "script"
+      );
+
+
+    currentJsonpScript =
+      script;
+
+
+    script.src =
+      API_URL +
+      "?callback=" +
+      encodeURIComponent(
+        JSONP_CALLBACK
+      ) +
+      "&_=" +
+      Date.now();
+
+
+    script.async =
+      true;
+
+
+    script.onerror =
+      function() {
+
+        showApiError(
+          "No se pudo conectar con Google Sheets."
+        );
 
       };
+
+
+    document.body
+      .appendChild(
+        script
+      );
+
+  }
+
+
+  // ==========================================================
+  // ERRORES
+  // ==========================================================
+
+  function showApiError(message) {
+
+    console.error(
+      "Dashboard TSJ:",
+      message
+    );
+
+
+    setConnectionStatus(
+      "Error de conexión",
+      "No se pudieron actualizar los datos",
+      true
+    );
+
+
+    alertBox.style.display =
+      "";
+
+
+    alertBox.innerHTML =
+      "<b>Error:</b> " +
+      escapeHtml(
+        message
+      );
+
+  }
+
+
+  // ==========================================================
+  // SEGURIDAD HTML
+  // ==========================================================
+
+  function escapeHtml(value) {
+
+    return String(
+      value ?? ""
+    )
+      .replaceAll(
+        "&",
+        "&amp;"
+      )
+      .replaceAll(
+        "<",
+        "&lt;"
+      )
+      .replaceAll(
+        ">",
+        "&gt;"
+      )
+      .replaceAll(
+        '"',
+        "&quot;"
+      )
+      .replaceAll(
+        "'",
+        "&#039;"
+      );
+
+  }
+
+
+  // ==========================================================
+  // CAMBIO MANUAL DE FECHA
+  // ==========================================================
+
+  picker.addEventListener(
+    "change",
+    function(event) {
+
+      const selectedDate =
+        event.target.value;
+
+
+      if (
+        dailyData[
+          selectedDate
+        ]
+      ) {
+
+        renderDay(
+          selectedDate
+        );
+
+      }
 
     }
   );
 
-}
+
+  // ==========================================================
+  // INICIO
+  // ==========================================================
+
+  loadDashboardData();
 
 
-// =====================================================
-// CREAR KPI PORCENTAJE
-// =====================================================
+  // ==========================================================
+  // ACTUALIZACIÓN AUTOMÁTICA
+  // ==========================================================
 
-function crearPorcentaje(
-  valor,
-  cumple
-) {
-
-  return {
-
-    value:
-      formatoPorcentaje(
-        valor
-      ),
-
-    status:
-      cumple
-        ? 'good'
-        : 'bad',
-
-    progress:
-      limitar(
-        valor
-      )
-
-  };
-
-}
-
-
-// =====================================================
-// CONVERTIR TEXTO A NÚMERO
-// =====================================================
-
-function numero(valor) {
-
-  if (
-    valor === null ||
-    valor === undefined ||
-    valor === ''
-  ) {
-
-    return 0;
-
-  }
-
-
-  let texto =
-    String(
-      valor
-    )
-      .trim()
-      .replace(
-        '%',
-        ''
-      )
-      .replace(
-        /\s/g,
-        ''
-      );
-
-
-  // Ej:
-  // 1,658 -> 1658
-  //
-  // 60,5 -> 60.5
-
-  if (
-    /^\d{1,3}(,\d{3})+$/
-      .test(
-        texto
-      )
-  ) {
-
-    texto =
-      texto.replace(
-        /,/g,
-        ''
-      );
-
-  } else {
-
-    texto =
-      texto.replace(
-        ',',
-        '.'
-      );
-
-  }
-
-
-  texto =
-    texto.replace(
-      /[^0-9.\-]/g,
-      ''
-    );
-
-
-  const n =
-    Number(
-      texto
-    );
-
-
-  return Number.isFinite(
-    n
-  )
-    ? n
-    : 0;
-
-}
-
-
-// =====================================================
-// FORMATO PORCENTAJE
-// =====================================================
-
-function formatoPorcentaje(
-  valor
-) {
-
-  const n =
-    Number(
-      valor
-    );
-
-
-  if (
-    !Number.isFinite(
-      n
-    )
-  ) {
-
-    return '—';
-
-  }
-
-
-  return (
-    formatoNumero(
-      n
-    ) +
-    '%'
+  setInterval(
+    loadDashboardData,
+    REFRESH_MS
   );
 
-}
+</script>
 
-
-// =====================================================
-// FORMATO DECIMAL
-// =====================================================
-
-function formatoDecimal(
-  valor
-) {
-
-  const n =
-    Number(
-      valor
-    );
-
-
-  if (
-    !Number.isFinite(
-      n
-    )
-  ) {
-
-    return '—';
-
-  }
-
-
-  return n
-    .toFixed(
-      2
-    )
-    .replace(
-      '.',
-      ','
-    );
-
-}
-
-
-// =====================================================
-// FORMATO NÚMERO
-// =====================================================
-
-function formatoNumero(
-  valor
-) {
-
-  const n =
-    Number(
-      valor
-    );
-
-
-  if (
-    Number.isInteger(
-      n
-    )
-  ) {
-
-    return String(
-      n
-    );
-
-  }
-
-
-  return n
-    .toFixed(
-      1
-    )
-    .replace(
-      '.',
-      ','
-    );
-
-}
-
-
-// =====================================================
-// CONVERTIR FECHA
-// =====================================================
-
-function convertirFecha(
-  valor
-) {
-
-  if (!valor) {
-
-    return null;
-
-  }
-
-
-  const texto =
-    String(
-      valor
-    )
-      .trim()
-      .toLowerCase();
-
-
-  const match =
-    texto.match(
-      /^(\d{1,2})-([a-záéíóú]{3,})/
-    );
-
-
-  if (!match) {
-
-    return null;
-
-  }
-
-
-  const dia =
-    Number(
-      match[1]
-    );
-
-
-  const meses = {
-
-    ene: 1,
-    feb: 2,
-    mar: 3,
-    abr: 4,
-    may: 5,
-    jun: 6,
-    jul: 7,
-    ago: 8,
-    sep: 9,
-    oct: 10,
-    nov: 11,
-    dic: 12
-
-  };
-
-
-  const mes =
-    meses[
-      match[2]
-        .substring(
-          0,
-          3
-        )
-    ];
-
-
-  if (!mes) {
-
-    return null;
-
-  }
-
-
-  const yyyy =
-    2026;
-
-
-  return (
-    yyyy +
-    '-' +
-    String(
-      mes
-    )
-      .padStart(
-        2,
-        '0'
-      ) +
-    '-' +
-    String(
-      dia
-    )
-      .padStart(
-        2,
-        '0'
-      )
-  );
-
-}
-
-
-// =====================================================
-// LIMITAR ENTRE 0 Y 100
-// =====================================================
-
-function limitar(
-  valor
-) {
-
-  const n =
-    Number(
-      valor
-    );
-
-
-  if (
-    !Number.isFinite(
-      n
-    )
-  ) {
-
-    return 0;
-
-  }
-
-
-  return Math.max(
-    0,
-    Math.min(
-      100,
-      n
-    )
-  );
-
-}
-
-
-// =====================================================
-// REDONDEAR
-// =====================================================
-
-function redondear(
-  valor,
-  decimales
-) {
-
-  const factor =
-    Math.pow(
-      10,
-      decimales
-    );
-
-
-  return (
-    Math.round(
-      valor *
-      factor
-    ) /
-    factor
-  );
-
-}
-
-
-// =====================================================
-// NORMALIZAR TEXTO
-// =====================================================
-
-function normalizarTexto(
-  texto
-) {
-
-  return String(
-    texto || ''
-  )
-    .trim()
-    .toLowerCase()
-    .normalize(
-      'NFD'
-    )
-    .replace(
-      /[\u0300-\u036f]/g,
-      ''
-    );
-
-}
+</body>
+</html>
