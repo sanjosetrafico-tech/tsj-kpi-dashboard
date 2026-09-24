@@ -69,9 +69,9 @@
       grid-column: 1 / -1;
     }
 
-    /* =========================================
+    /* =========================
        HEADER
-    ========================================= */
+    ========================= */
 
     .top {
       display: flex;
@@ -133,9 +133,9 @@
       color: var(--ink);
     }
 
-    /* =========================================
+    /* =========================
        TÍTULO
-    ========================================= */
+    ========================= */
 
     .heading {
       display: flex;
@@ -160,6 +160,10 @@
       font-size: 15px;
     }
 
+    /* =========================
+       SELECTOR FECHA
+    ========================= */
+
     .period {
       position: relative;
       display: inline-flex;
@@ -169,27 +173,36 @@
       box-shadow: 0 3px 0 var(--pink);
       overflow: hidden;
       cursor: pointer;
+      min-width: 180px;
+      justify-content: center;
     }
 
     .date-caption {
       padding: 11px 17px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       white-space: nowrap;
+      pointer-events: none;
     }
 
-    .period input {
+    .period select {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       opacity: 0;
       cursor: pointer;
+      border: 0;
     }
 
-    /* =========================================
+    .period:focus-within {
+      outline: 2px solid var(--pink);
+      outline-offset: 3px;
+    }
+
+    /* =========================
        ALERTA
-    ========================================= */
+    ========================= */
 
     .alert {
       border-left: 4px solid var(--warn);
@@ -204,9 +217,9 @@
       margin-right: 5px;
     }
 
-    /* =========================================
+    /* =========================
        KPI
-    ========================================= */
+    ========================= */
 
     .kpis {
       grid-column: 1;
@@ -284,9 +297,9 @@
       background: var(--bad);
     }
 
-    /* =========================================
+    /* =========================
        PANELES
-    ========================================= */
+    ========================= */
 
     .grid {
       display: contents;
@@ -322,9 +335,9 @@
       align-self: start;
     }
 
-    /* =========================================
+    /* =========================
        GRÁFICO
-    ========================================= */
+    ========================= */
 
     .trend {
       height: 360px;
@@ -342,14 +355,9 @@
       fill: #8b8389;
     }
 
-    .gridline {
-      stroke: #eee9ec;
-      stroke-width: 1;
-    }
-
-    /* =========================================
+    /* =========================
        METAS
-    ========================================= */
+    ========================= */
 
     .targets {
       display: grid;
@@ -400,9 +408,9 @@
       background: #feeaf0;
     }
 
-    /* =========================================
+    /* =========================
        FOOTER
-    ========================================= */
+    ========================= */
 
     .footer {
       grid-row: 6;
@@ -415,9 +423,9 @@
       color: var(--ink);
     }
 
-    /* =========================================
+    /* =========================
        RESPONSIVE
-    ========================================= */
+    ========================= */
 
     @media (max-width: 980px) {
 
@@ -428,6 +436,7 @@
       .kpis {
         grid-template-columns:
           repeat(3, 1fr);
+
         margin-bottom: 24px;
       }
 
@@ -443,7 +452,6 @@
         grid-column: auto;
         grid-row: auto;
       }
-
     }
 
     @media (max-width: 620px) {
@@ -478,7 +486,6 @@
       .trend {
         height: 290px;
       }
-
     }
   </style>
 </head>
@@ -487,9 +494,9 @@
 
 <main class="shell">
 
-  <!-- =========================================
+  <!-- =========================
        HEADER
-  ========================================== -->
+  ========================== -->
 
   <header class="top header-pro">
 
@@ -502,6 +509,7 @@
 
       <div class="brand-name">
         TRANSPORTE SAN JOSÉ
+
         <span>
           Panel de indicadores operativos
         </span>
@@ -509,7 +517,10 @@
 
     </div>
 
-    <div class="updated" id="connectionStatus">
+    <div
+      class="updated"
+      id="connectionStatus"
+    >
       <b>Conectando</b>
       <span>Google Sheets</span>
     </div>
@@ -517,15 +528,17 @@
   </header>
 
 
-  <!-- =========================================
-       TÍTULO
-  ========================================== -->
+  <!-- =========================
+       ENCABEZADO
+  ========================== -->
 
   <section class="heading heading-pro">
 
     <div>
 
-      <h1>Resumen operativo</h1>
+      <h1>
+        Resumen operativo
+      </h1>
 
       <p>
         Seguimiento de metas,
@@ -547,20 +560,20 @@
         CARGANDO...
       </span>
 
-      <input
+      <select
         id="datePicker"
-        type="date"
         aria-label="Seleccionar fecha de los indicadores"
       >
+      </select>
 
     </label>
 
   </section>
 
 
-  <!-- =========================================
+  <!-- =========================
        ALERTA
-  ========================================== -->
+  ========================== -->
 
   <div
     class="alert"
@@ -571,9 +584,9 @@
   </div>
 
 
-  <!-- =========================================
+  <!-- =========================
        KPI
-  ========================================== -->
+  ========================== -->
 
   <section class="kpis">
 
@@ -581,6 +594,7 @@
       class="kpi"
       data-key="service"
     >
+
       <h2>
         Cumplimiento plan de servicio
       </h2>
@@ -589,8 +603,12 @@
       <div class="delta">Cargando...</div>
 
       <div class="track">
-        <div class="fill" style="width:0%"></div>
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
       </div>
+
     </article>
 
 
@@ -598,6 +616,7 @@
       class="kpi"
       data-key="kms"
     >
+
       <h2>
         Cumplimiento plan de kms
       </h2>
@@ -606,8 +625,12 @@
       <div class="delta">Cargando...</div>
 
       <div class="track">
-        <div class="fill" style="width:0%"></div>
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
       </div>
+
     </article>
 
 
@@ -615,6 +638,7 @@
       class="kpi"
       data-key="extra"
     >
+
       <h2>
         Cumplimiento plan Hs Extras Conducción
       </h2>
@@ -623,8 +647,12 @@
       <div class="delta">Cargando...</div>
 
       <div class="track">
-        <div class="fill" style="width:0%"></div>
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
       </div>
+
     </article>
 
 
@@ -632,14 +660,21 @@
       class="kpi"
       data-key="titularidad"
     >
-      <h2>Titularidad</h2>
+
+      <h2>
+        Titularidad
+      </h2>
 
       <div class="value">—</div>
       <div class="delta">Cargando...</div>
 
       <div class="track">
-        <div class="fill" style="width:0%"></div>
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
       </div>
+
     </article>
 
 
@@ -647,6 +682,7 @@
       class="kpi"
       data-key="sinRes"
     >
+
       <h2>
         Siniestros con responsabilidad
       </h2>
@@ -655,8 +691,12 @@
       <div class="delta">Cargando...</div>
 
       <div class="track">
-        <div class="fill" style="width:0%"></div>
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
       </div>
+
     </article>
 
 
@@ -664,6 +704,7 @@
       class="kpi"
       data-key="sinResNo"
     >
+
       <h2>
         Siniestros sin responsabilidad
       </h2>
@@ -672,8 +713,12 @@
       <div class="delta">Cargando...</div>
 
       <div class="track">
-        <div class="fill" style="width:0%"></div>
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
       </div>
+
     </article>
 
 
@@ -681,6 +726,7 @@
       class="kpi"
       data-key="horario"
     >
+
       <h2>
         Cumplimiento Horario
       </h2>
@@ -689,8 +735,12 @@
       <div class="delta">Cargando...</div>
 
       <div class="track">
-        <div class="fill" style="width:0%"></div>
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
       </div>
+
     </article>
 
 
@@ -698,6 +748,7 @@
       class="kpi"
       data-key="cabecera"
     >
+
       <h2>
         Cumplimiento Cabecera
       </h2>
@@ -706,8 +757,12 @@
       <div class="delta">Cargando...</div>
 
       <div class="track">
-        <div class="fill" style="width:0%"></div>
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
       </div>
+
     </article>
 
 
@@ -715,6 +770,7 @@
       class="kpi"
       data-key="porton"
     >
+
       <h2>
         Cumplimiento Portón
       </h2>
@@ -723,8 +779,12 @@
       <div class="delta">Cargando...</div>
 
       <div class="track">
-        <div class="fill" style="width:0%"></div>
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
       </div>
+
     </article>
 
 
@@ -732,14 +792,21 @@
       class="kpi"
       data-key="ipk"
     >
-      <h2>IPK</h2>
+
+      <h2>
+        IPK
+      </h2>
 
       <div class="value">—</div>
       <div class="delta">Cargando...</div>
 
       <div class="track">
-        <div class="fill" style="width:0%"></div>
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
       </div>
+
     </article>
 
 
@@ -747,14 +814,21 @@
       class="kpi"
       data-key="estetica"
     >
-      <h2>Estética</h2>
+
+      <h2>
+        Estética
+      </h2>
 
       <div class="value">—</div>
       <div class="delta">Cargando...</div>
 
       <div class="track">
-        <div class="fill" style="width:0%"></div>
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
       </div>
+
     </article>
 
 
@@ -762,6 +836,7 @@
       class="kpi"
       data-key="vueltas"
     >
+
       <h2>
         Vueltas Perdidas (Cantidad)
       </h2>
@@ -770,16 +845,20 @@
       <div class="delta">Cargando...</div>
 
       <div class="track">
-        <div class="fill" style="width:0%"></div>
+        <div
+          class="fill"
+          style="width:0%"
+        ></div>
       </div>
+
     </article>
 
   </section>
 
 
-  <!-- =========================================
+  <!-- =========================
        PANELES
-  ========================================== -->
+  ========================== -->
 
   <section class="grid">
 
@@ -832,10 +911,16 @@
   </section>
 
 
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
   <p class="footer">
 
     <b>Fuente:</b>
-    KPI SEP 26 · IPK POR LINEA SEP ·
+
+    KPI SEP 26 ·
+    IPK POR LINEA SEP ·
     Pasajeros sujetos a revisión a 12 h. ·
     Los km pueden variar por actualización GPS.
 
@@ -853,9 +938,10 @@
   // ==========================================================
 
   const API_URL =
-    "https://script.google.com/macros/s/AKfycbxIfuHkocHZB2r1rqUgmpARUCWfXUSFOE5d-3GmAGiYn3boNlWzsGehWzAcmNyOsS3eTA/exec";
+    "https://script.google.com/macros/s/AKfycbx0LSMukWZCj9zkouq9OZ-gm5TondJmq2gukXGCoZ-3UJHze9DZWnZ4sEGhliQiZa4h1g/exec";
 
 
+  // Refresco automático
   const REFRESH_MS =
     30000;
 
@@ -869,10 +955,14 @@
   // ==========================================================
 
   let dailyData = {};
+
   let targetsData = [];
+
   let ipkMonthlyData = [];
 
   let currentJsonpScript = null;
+
+  let latestAvailableDate = null;
 
 
   // ==========================================================
@@ -978,6 +1068,11 @@
       );
 
 
+    if (!container) {
+      return;
+    }
+
+
     const bold =
       container.querySelector("b");
 
@@ -986,24 +1081,32 @@
       container.querySelector("span");
 
 
-    bold.textContent =
-      title;
+    if (bold) {
+
+      bold.textContent =
+        title;
 
 
-    span.textContent =
-      detail;
+      bold.style.color =
+        error
+          ? "var(--bad)"
+          : "";
+
+    }
 
 
-    bold.style.color =
-      error
-        ? "var(--bad)"
-        : "";
+    if (span) {
+
+      span.textContent =
+        detail;
+
+    }
 
   }
 
 
   // ==========================================================
-  // NORMALIZACIÓN DE KPI
+  // NORMALIZAR KPI
   // ==========================================================
 
   function normalizeKpi(item) {
@@ -1049,6 +1152,85 @@
 
 
   // ==========================================================
+  // SELECTOR DE FECHAS
+  // ==========================================================
+
+  function rebuildDateSelector(
+    dates,
+    preferredDate
+  ) {
+
+    picker.innerHTML =
+      "";
+
+
+    dates.forEach(
+      function(date) {
+
+        const option =
+          document.createElement(
+            "option"
+          );
+
+
+        option.value =
+          date;
+
+
+        option.textContent =
+          fullDate(date);
+
+
+        picker.appendChild(
+          option
+        );
+
+      }
+    );
+
+
+    let selectedDate =
+      null;
+
+
+    /*
+     * Si el usuario estaba viendo una fecha
+     * que todavía existe, la mantenemos.
+     */
+
+    if (
+      preferredDate &&
+      dailyData[preferredDate]
+    ) {
+
+      selectedDate =
+        preferredDate;
+
+    } else {
+
+      /*
+       * Primera carga:
+       * mostramos el último día disponible.
+       */
+
+      selectedDate =
+        dates[
+          dates.length - 1
+        ];
+
+    }
+
+
+    picker.value =
+      selectedDate;
+
+
+    return selectedDate;
+
+  }
+
+
+  // ==========================================================
   // RENDER KPI DEL DÍA
   // ==========================================================
 
@@ -1058,117 +1240,122 @@
       dailyData[date];
 
 
+    if (!data) {
+      return;
+    }
+
+
     dateCaption.textContent =
       fullDate(date);
-
-
-    document
-      .getElementById(
-        "targetsSubtitle"
-      )
-      .textContent =
-      "Meta · avance acumulado al " +
-      shortDate(date);
 
 
     document
       .querySelectorAll(
         ".kpi"
       )
-      .forEach(card => {
+      .forEach(
+        function(card) {
 
-        const key =
-          card.dataset.key;
-
-
-        const valueElement =
-          card.querySelector(
-            ".value"
-          );
+          const key =
+            card.dataset.key;
 
 
-        const deltaElement =
-          card.querySelector(
-            ".delta"
-          );
+          const valueElement =
+            card.querySelector(
+              ".value"
+            );
 
 
-        const fillElement =
-          card.querySelector(
-            ".fill"
-          );
+          const deltaElement =
+            card.querySelector(
+              ".delta"
+            );
 
 
-        const item =
-          normalizeKpi(
-            data?.[key]
-          );
+          const fillElement =
+            card.querySelector(
+              ".fill"
+            );
 
 
-        if (!item) {
+          const item =
+            normalizeKpi(
+              data[key]
+            );
+
+
+          if (!item) {
+
+            valueElement.textContent =
+              "—";
+
+
+            deltaElement.textContent =
+              "Sin carga para este día";
+
+
+            deltaElement.className =
+              "delta warn";
+
+
+            fillElement.className =
+              "fill warn";
+
+
+            fillElement.style.width =
+              "0%";
+
+
+            return;
+
+          }
+
+
+          const status =
+            [
+              "good",
+              "warn",
+              "bad"
+            ].includes(
+              item.status
+            )
+              ? item.status
+              : "warn";
+
 
           valueElement.textContent =
-            "—";
+            item.value;
 
 
           deltaElement.textContent =
-            "Sin carga para este día";
+            "Dato del día · " +
+            shortDate(date);
 
 
           deltaElement.className =
-            "delta warn";
+            "delta " +
+            status;
 
 
           fillElement.className =
-            "fill warn";
+            "fill " +
+            status;
 
 
           fillElement.style.width =
-            "0%";
-
-
-          return;
+            Math.max(
+              0,
+              Math.min(
+                100,
+                Number(
+                  item.progress
+                ) || 0
+              )
+            ) +
+            "%";
 
         }
-
-
-        const status =
-          ["good", "warn", "bad"]
-            .includes(item.status)
-            ? item.status
-            : "warn";
-
-
-        valueElement.textContent =
-          item.value;
-
-
-        deltaElement.textContent =
-          "Dato del día · " +
-          shortDate(date);
-
-
-        deltaElement.className =
-          "delta " +
-          status;
-
-
-        fillElement.className =
-          "fill " +
-          status;
-
-
-        fillElement.style.width =
-          Math.max(
-            0,
-            Math.min(
-              100,
-              Number(item.progress) || 0
-            )
-          ) +
-          "%";
-
-      });
+      );
 
 
     renderOperationalAlert(
@@ -1296,9 +1483,7 @@
   // METAS Y ACUMULADOS
   // ==========================================================
 
-  function statusFromTarget(
-    item
-  ) {
+  function statusFromTarget(item) {
 
     const name =
       String(
@@ -1320,7 +1505,9 @@
     if (
       !Number.isFinite(value)
     ) {
+
       return "warn";
+
     }
 
 
@@ -1403,17 +1590,6 @@
 
     if (
       name.includes(
-        "siniestros"
-      )
-    ) {
-
-      return "good";
-
-    }
-
-
-    if (
-      name.includes(
         "estetica"
       ) ||
       name.includes(
@@ -1433,9 +1609,7 @@
   }
 
 
-  function renderTargets(
-    items
-  ) {
+  function renderTargets(items) {
 
     const container =
       document.getElementById(
@@ -1461,66 +1635,66 @@
     }
 
 
-    items.forEach(item => {
+    items.forEach(
+      function(item) {
 
-      const row =
-        document.createElement(
-          "div"
+        const row =
+          document.createElement(
+            "div"
+          );
+
+
+        row.className =
+          "row";
+
+
+        const status =
+          statusFromTarget(
+            item
+          );
+
+
+        row.innerHTML =
+          "<span>" +
+            escapeHtml(
+              item.indicador ||
+              ""
+            ) +
+          "</span>" +
+
+          '<span class="tag">' +
+            "Meta " +
+            escapeHtml(
+              item.meta ||
+              "—"
+            ) +
+          "</span>" +
+
+          '<span class="pill ' +
+            status +
+          '">' +
+            escapeHtml(
+              item.acumulado ||
+              "—"
+            ) +
+          "</span>";
+
+
+        container.appendChild(
+          row
         );
 
-
-      row.className =
-        "row";
-
-
-      const status =
-        statusFromTarget(
-          item
-        );
-
-
-      row.innerHTML =
-        "<span>" +
-          escapeHtml(
-            item.indicador ||
-            ""
-          ) +
-        "</span>" +
-
-        '<span class="tag">' +
-          "Meta " +
-          escapeHtml(
-            item.meta ||
-            "—"
-          ) +
-        "</span>" +
-
-        '<span class="pill ' +
-          status +
-        '">' +
-          escapeHtml(
-            item.acumulado ||
-            "—"
-          ) +
-        "</span>";
-
-
-      container.appendChild(
-        row
-      );
-
-    });
+      }
+    );
 
   }
 
 
   // ==========================================================
-  // GRÁFICO IPK MENSUAL POR LÍNEA
+  // IPK POR LÍNEA
   // ==========================================================
 
-  function renderIpkChart(
-    items
-  ) {
+  function renderIpkChart(items) {
 
     const container =
       document.getElementById(
@@ -1536,23 +1710,36 @@
       container.innerHTML =
         "<p>Sin datos de IPK por línea.</p>";
 
+
       return;
 
     }
 
 
-    const width = 900;
-    const height = 300;
+    const width =
+      900;
 
-    const left = 45;
-    const right = 20;
-    const top = 35;
-    const bottom = 42;
+    const height =
+      300;
+
+    const left =
+      45;
+
+    const right =
+      20;
+
+    const top =
+      35;
+
+    const bottom =
+      42;
+
 
     const chartWidth =
       width -
       left -
       right;
+
 
     const chartHeight =
       height -
@@ -1564,10 +1751,13 @@
       Math.max(
         3,
         ...items.map(
-          item =>
-            Number(
+          function(item) {
+
+            return Number(
               item.ipk
-            ) || 0
+            ) || 0;
+
+          }
         )
       );
 
@@ -1585,12 +1775,17 @@
 
 
     let bars = "";
+
     let labels = "";
+
     let values = "";
 
 
     items.forEach(
-      (item, index) => {
+      function(
+        item,
+        index
+      ) {
 
         const ipk =
           Number(
@@ -1629,57 +1824,69 @@
 
         bars +=
           '<rect ' +
-          'x="' + x + '" ' +
-          'y="' + y + '" ' +
-          'width="' + barWidth + '" ' +
-          'height="' + barHeight + '" ' +
-          'rx="4" ' +
-          'fill="' + fill + '"' +
+            'x="' + x + '" ' +
+            'y="' + y + '" ' +
+            'width="' + barWidth + '" ' +
+            'height="' + barHeight + '" ' +
+            'rx="4" ' +
+            'fill="' + fill + '"' +
           ' />';
 
 
         labels +=
           '<text ' +
-          'x="' +
-          (
-            x +
-            barWidth / 2
-          ) +
-          '" ' +
-          'y="' +
-          (
-            height - 15
-          ) +
-          '" ' +
-          'text-anchor="middle" ' +
-          'class="axis" ' +
-          'font-weight="700">' +
-          escapeHtml(
-            item.linea
-          ) +
+            'x="' +
+            (
+              x +
+              barWidth / 2
+            ) +
+            '" ' +
+
+            'y="' +
+            (
+              height -
+              15
+            ) +
+            '" ' +
+
+            'text-anchor="middle" ' +
+            'class="axis" ' +
+            'font-weight="700">' +
+
+            escapeHtml(
+              item.linea
+            ) +
+
           '</text>';
 
 
         values +=
           '<text ' +
-          'x="' +
-          (
-            x +
-            barWidth / 2
-          ) +
-          '" ' +
-          'y="' +
-          Math.max(
-            15,
-            y - 7
-          ) +
-          '" ' +
-          'text-anchor="middle" ' +
-          'font-size="11" ' +
-          'font-weight="800">' +
-          ipk
-            .toFixed(2)
-            .replace(".", ",") +
+            'x="' +
+            (
+              x +
+              barWidth / 2
+            ) +
+            '" ' +
+
+            'y="' +
+            Math.max(
+              15,
+              y - 7
+            ) +
+            '" ' +
+
+            'text-anchor="middle" ' +
+            'font-size="11" ' +
+            'font-weight="800">' +
+
+            ipk
+              .toFixed(2)
+              .replace(
+                ".",
+                ","
+              ) +
+
           '</text>';
 
       }
@@ -1707,15 +1914,25 @@
         'preserveAspectRatio="xMidYMid meet">' +
 
         '<line ' +
-          'x1="' + left + '" ' +
-          'y1="' + metaY + '" ' +
+          'x1="' +
+          left +
+          '" ' +
+
+          'y1="' +
+          metaY +
+          '" ' +
+
           'x2="' +
           (
             width -
             right
           ) +
           '" ' +
-          'y2="' + metaY + '" ' +
+
+          'y2="' +
+          metaY +
+          '" ' +
+
           'stroke="#d77817" ' +
           'stroke-width="2" ' +
           'stroke-dasharray="6 5"' +
@@ -1729,16 +1946,21 @@
             5
           ) +
           '" ' +
+
           'y="' +
           (
-            metaY - 6
+            metaY -
+            6
           ) +
           '" ' +
+
           'text-anchor="end" ' +
           'fill="#b86413" ' +
           'font-size="11" ' +
           'font-weight="700">' +
+
           'META 2,00' +
+
         '</text>' +
 
         bars +
@@ -1781,6 +2003,15 @@
 
       try {
 
+        /*
+         * Guardamos la fecha que el usuario
+         * estaba consultando ANTES del refresco.
+         */
+
+        const previousSelection =
+          picker.value;
+
+
         const data =
           payload.data || {};
 
@@ -1797,14 +2028,23 @@
           data.ipkMonthly || [];
 
 
+        /*
+         * Estas fechas provienen directamente
+         * de los días que Apps Script leyó
+         * de la columna FECHA.
+         */
+
         const dates =
           Object.keys(
             dailyData
           )
             .filter(
-              date =>
-                /^\d{4}-\d{2}-\d{2}$/
-                  .test(date)
+              function(date) {
+
+                return /^\d{4}-\d{2}-\d{2}$/
+                  .test(date);
+
+              }
             )
             .sort();
 
@@ -1818,42 +2058,54 @@
         }
 
 
-        const latest =
+        latestAvailableDate =
           dates[
             dates.length - 1
           ];
 
 
-        picker.min =
-          dates[0];
-
-
-        picker.max =
-          latest;
-
-
         /*
-         * Siempre abrimos el último día cargado.
+         * Reconstruimos el selector.
          *
-         * Si hoy el último dato es 23/09,
-         * mostrará 23/09.
+         * - Primera carga:
+         *   muestra la última fecha disponible.
          *
-         * Cuando aparezca 24/09,
-         * pasará automáticamente a 24/09.
+         * - Refrescos siguientes:
+         *   mantiene la fecha elegida por el usuario.
          */
 
-        picker.value =
-          latest;
+        const selectedDate =
+          rebuildDateSelector(
+            dates,
+            previousSelection
+          );
 
 
         renderDay(
-          latest
+          selectedDate
         );
 
+
+        /*
+         * Metas y acumulados corresponden al
+         * resumen mensual actual que devuelve
+         * Google Sheets.
+         */
 
         renderTargets(
           targetsData
         );
+
+
+        document
+          .getElementById(
+            "targetsSubtitle"
+          )
+          .textContent =
+          "Acumulado actualizado al " +
+          shortDate(
+            latestAvailableDate
+          );
 
 
         renderIpkChart(
@@ -1864,7 +2116,9 @@
         setConnectionStatus(
           "Actualización automática",
           "Datos al " +
-          numericDate(latest),
+          numericDate(
+            latestAvailableDate
+          ),
           false
         );
 
@@ -1891,10 +2145,6 @@
 
   function loadDashboardData() {
 
-    /*
-     * Eliminamos el <script> anterior.
-     */
-
     if (
       currentJsonpScript &&
       currentJsonpScript.parentNode
@@ -1918,16 +2168,6 @@
     currentJsonpScript =
       script;
 
-
-    /*
-     * JSONP:
-     *
-     * Google devuelve:
-     *
-     * tsjDashboardCallback({...})
-     *
-     * en vez de JSON puro.
-     */
 
     script.src =
       API_URL +
@@ -1965,9 +2205,7 @@
   // ERRORES
   // ==========================================================
 
-  function showApiError(
-    message
-  ) {
+  function showApiError(message) {
 
     console.error(
       "Dashboard TSJ:",
@@ -1996,7 +2234,7 @@
 
 
   // ==========================================================
-  // SEGURIDAD PARA HTML
+  // SEGURIDAD HTML
   // ==========================================================
 
   function escapeHtml(value) {
@@ -2029,23 +2267,25 @@
 
 
   // ==========================================================
-  // SELECTOR DE FECHA
+  // CAMBIO MANUAL DE FECHA
   // ==========================================================
 
   picker.addEventListener(
     "change",
     function(event) {
 
-      const date =
+      const selectedDate =
         event.target.value;
 
 
       if (
-        dailyData[date]
+        dailyData[
+          selectedDate
+        ]
       ) {
 
         renderDay(
-          date
+          selectedDate
         );
 
       }
@@ -2062,7 +2302,7 @@
 
 
   // ==========================================================
-  // REFRESCO AUTOMÁTICO
+  // ACTUALIZACIÓN AUTOMÁTICA
   // ==========================================================
 
   setInterval(
