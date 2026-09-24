@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TSJ | KPI Operativos</title>
+  <meta name="description" content="Tablero operativo de indicadores TSJ Transporte San José">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='32' rx='28' ry='18' fill='none' stroke='%23ed2e91' stroke-width='5'/%3E%3Cpath d='M15 38h34' stroke='%231b1718' stroke-width='7'/%3E%3C/svg%3E">
+  <style>
+    :root{--ink:#181416;--muted:#716a70;--pink:#ed2e91;--pink-dark:#be176d;--pink-pale:#fff0f8;--line:#ebe6e9;--paper:#fff;--bg:#f7f5f6;--good:#11815d;--warn:#d77817;--bad:#c43351}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);font-size:16px}.shell{max-width:1440px;margin:auto;padding:28px 30px 50px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px}.brand{display:flex;align-items:center;gap:16px}.mark{width:94px;height:50px;position:relative;display:grid;place-items:center;font-size:28px;font-weight:900;font-style:italic;letter-spacing:-5px;color:#191617}.mark:before{content:"";position:absolute;inset:3px 0;border:5px solid var(--pink);border-radius:50%;transform:skewX(-15deg)}.mark:after{content:"";position:absolute;width:83px;height:17px;border-bottom:7px solid #1b1718;bottom:0;transform:skewX(-15deg);border-radius:50%}.brand-name{font-size:14px;letter-spacing:.11em;font-weight:800}.brand-name span{display:block;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.07em;margin-top:3px}.updated{font-size:13px;color:var(--muted);text-align:right}.updated b{display:block;color:var(--ink);font-size:14px}.heading{display:flex;align-items:end;justify-content:space-between;margin:0 0 22px}.heading h1{font-size:31px;margin:0;letter-spacing:-1.2px}.heading p{margin:7px 0 0;color:var(--muted)}.period{background:var(--ink);color:white;border-radius:50px;padding:10px 15px;font-weight:700;font-size:13px}.alert{border-left:4px solid var(--warn);background:#fffaf2;padding:13px 17px;border-radius:0 12px 12px 0;font-size:14px;margin-bottom:20px}.alert b{margin-right:5px}.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:13px;margin-bottom:24px}.kpi{background:var(--paper);border:1px solid var(--line);border-radius:15px;padding:17px 16px 14px;min-height:146px}.kpi h2{font-size:12px;color:var(--muted);font-weight:700;margin:0 0 15px;line-height:1.25}.value{font-size:30px;font-weight:800;letter-spacing:-1px}.delta{font-size:12px;font-weight:700;margin-top:5px}.good{color:var(--good)}.warn{color:var(--warn)}.bad{color:var(--bad)}.track{height:6px;background:#f0ecee;border-radius:20px;margin-top:14px;overflow:hidden}.fill{height:100%;border-radius:20px;background:var(--pink)}.fill.good{background:var(--good)}.fill.warn{background:var(--warn)}.fill.bad{background:var(--bad)}.grid{display:grid;grid-template-columns:1.3fr .8fr;gap:20px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px}.panel h2{font-size:16px;margin:0 0 4px}.sub{font-size:13px;color:var(--muted);margin:0 0 20px}.trend{height:248px;position:relative}.chart{width:100%;height:100%;overflow:visible}.axis{font-size:11px;fill:#8b8389}.gridline{stroke:#eee9ec;stroke-width:1}.area{fill:url(#area);opacity:.7}.line{fill:none;stroke:var(--pink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.point{fill:#fff;stroke:var(--pink);stroke-width:3}.targets{display:grid;gap:5px}.row{display:grid;grid-template-columns:1.45fr 60px 78px;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px}.row:last-child{border:0}.pill{font-size:11px;text-align:center;padding:5px 7px;border-radius:20px;font-weight:800}.pill.good{background:#e9f7f1}.pill.warn{background:#fff2df}.pill.bad{background:#feeaf0}.tag{font-size:11px;color:var(--muted);font-weight:700;text-align:right}.footer{font-size:12px;color:var(--muted);margin:18px 4px}.footer b{color:var(--ink)}@media(max-width:980px){.kpis{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:1fr}}@media(max-width:620px){.shell{padding:20px 15px}.top,.heading{align-items:flex-start;gap:14px}.top{flex-direction:column}.heading{flex-direction:column}.updated{text-align:left}.kpis{grid-template-columns:repeat(2,1fr)}.kpi:last-child{grid-column:span 2}.row{grid-template-columns:1fr 54px 65px}.value{font-size:27px}}
+  </style>
+  <style>
+    .header-pro{margin-bottom:0;padding:18px 0 16px;border-bottom:1px solid #ded8dc}.header-pro .brand{gap:13px}.header-pro .brand-name{font-size:14px;letter-spacing:.08em}.header-pro .brand-name span{font-size:12px;letter-spacing:.02em;margin-top:4px}.header-pro .updated{display:flex;align-items:center;gap:9px;font-size:13px}.header-pro .updated:before{content:"";width:8px;height:8px;border-radius:50%;background:#ed2e91;box-shadow:0 0 0 4px #fff0f8}.header-pro .updated b{font-size:13px;font-weight:700}.heading-pro{padding:25px 0 24px;margin-bottom:20px}.heading-pro h1{font-size:32px;letter-spacing:-1.4px}.heading-pro p{font-size:15px;color:#716a70}.heading-pro .period{position:relative;display:inline-flex;padding:0;letter-spacing:.02em;box-shadow:0 3px 0 #ed2e91;overflow:hidden;cursor:pointer}.period .date-caption{padding:11px 17px;font-size:13px;font-weight:700;color:#fff;white-space:nowrap}.period input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}.period:focus-within{outline:2px solid #ed2e91;outline-offset:3px}.shell{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(340px,.8fr);column-gap:20px;align-items:start}.header-pro,.heading-pro,.alert,.footer{grid-column:1/-1}.kpis{grid-column:1;grid-row:4;grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:0}.grid{display:contents}.grid .panel:first-child{grid-column:1/-1;grid-row:5;margin-top:20px}.grid .panel:last-child{grid-column:2;grid-row:4;align-self:start}.footer{grid-row:6}@media(max-width:980px){.shell{display:block}.kpis{grid-template-columns:repeat(3,1fr);margin-bottom:24px}.grid{display:grid}.grid .panel:first-child,.grid .panel:last-child{margin-top:0;grid-column:auto;grid-row:auto}}@media(max-width:620px){.header-pro{padding:13px 0}.header-pro .updated{margin-top:4px}.heading-pro{padding:20px 0}.heading-pro h1{font-size:28px}.kpis{grid-template-columns:repeat(2,1fr)}}
+  </style>
+  <style>
+    .grid .panel:first-child .trend{height:360px}.grid .panel:first-child .chart{width:auto;height:100%;max-width:100%;display:block;margin:0 auto}@media(max-width:620px){.grid .panel:first-child .trend{height:290px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="top header-pro"><div class="brand"><img src="logo-tsj.png" alt="Logo de TSJ" style="width:76px;height:42px;object-fit:contain"><div class="brand-name">TRANSPORTE SAN JOSÉ<span>Panel de indicadores operativos</span></div></div><div class="updated"><b>Actualización diaria</b>Datos al 22/09</div></header>
+    <section class="heading heading-pro"><div><h1>Resumen operativo</h1><p>Seguimiento de metas, servicio y productividad.</p></div><label class="period" title="Seleccionar fecha"><span class="date-caption" id="dateCaption">22 SEP 2026</span><input id="datePicker" type="date" value="2026-09-22" min="2026-09-01" max="2026-09-22" aria-label="Seleccionar fecha de los indicadores"></label></section>
+    <div class="alert" id="dataAlert"><b>Atención:</b> la titularidad y el cumplimiento horario se encuentran por debajo de la meta acumulada.</div>
+    <section class="kpis">
+      <article class="kpi" data-key="service"><h2>Cumplimiento plan de servicio</h2><div class="value">100%</div><div class="delta good">Dato del día · 22-sep</div><div class="track"><div class="fill good" style="width:100%"></div></div></article>
+      <article class="kpi" data-key="kms"><h2>Cumplimiento plan de kms</h2><div class="value">100%</div><div class="delta good">Dato del día · 22-sep</div><div class="track"><div class="fill good" style="width:100%"></div></div></article>
+      <article class="kpi" data-key="extra"><h2>Cumplimiento plan Hs Extras Conducción</h2><div class="value">101%</div><div class="delta good">Dato del día · 22-sep</div><div class="track"><div class="fill good" style="width:100%"></div></div></article>
+      <article class="kpi" data-key="titularidad"><h2>Titularidad</h2><div class="value">60%</div><div class="delta bad">Dato del día · 22-sep</div><div class="track"><div class="fill bad" style="width:60%"></div></div></article>
+      <article class="kpi" data-key="sinRes"><h2>Siniestros con responsabilidad</h2><div class="value">0</div><div class="delta good">Dato del día · 22-sep</div><div class="track"><div class="fill good" style="width:0%"></div></div></article>
+      <article class="kpi" data-key="sinResNo"><h2>Siniestros sin responsabilidad</h2><div class="value">0</div><div class="delta good">Dato del día · 22-sep</div><div class="track"><div class="fill good" style="width:0%"></div></div></article>
+      <article class="kpi" data-key="horario"><h2>Cumplimiento Horario</h2><div class="value">90%</div><div class="delta good">Dato del día · 22-sep</div><div class="track"><div class="fill good" style="width:90%"></div></div></article>
+      <article class="kpi" data-key="cabecera"><h2>Cumplimiento Cabecera</h2><div class="value">90%</div><div class="delta good">Dato del día · 22-sep</div><div class="track"><div class="fill good" style="width:90%"></div></div></article>
+      <article class="kpi" data-key="porton"><h2>Cumplimiento Portón</h2><div class="value">99%</div><div class="delta good">Dato del día · 22-sep</div><div class="track"><div class="fill good" style="width:99%"></div></div></article>
+      <article class="kpi" data-key="ipk"><h2>IPK</h2><div class="value">2,30</div><div class="delta good">Dato del día · 22-sep</div><div class="track"><div class="fill good" style="width:100%"></div></div></article>
+      <article class="kpi" data-key="estetica"><h2>Estetica</h2><div class="value">100%</div><div class="delta good">Dato del día · 22-sep</div><div class="track"><div class="fill good" style="width:100%"></div></div></article>
+      <article class="kpi" data-key="vueltas"><h2>Vueltas Perdidas (Cantidad)</h2><div class="value">0</div><div class="delta good">Dato del día · 22-sep</div><div class="track"><div class="fill good" style="width:0%"></div></div></article>
+    </section>
+    <section class="grid">
+<article class="panel"><h2>IPK mensual por línea · septiembre</h2><div class="trend"><svg class="chart" viewBox="0 0 620 250" preserveAspectRatio="xMidYMid meet" aria-label="IPK mensual por línea de septiembre"><line class="gridline" x1="32" y1="52" x2="610" y2="52"/><line class="gridline" x1="32" y1="103" x2="610" y2="103"/><line class="gridline" x1="32" y1="154" x2="610" y2="154"/><line class="gridline" x1="32" y1="205" x2="610" y2="205"/><line x1="32" y1="103" x2="610" y2="103" stroke="#d77817" stroke-width="2" stroke-dasharray="6 5"/><text class="axis" x="8" y="56">3,0</text><text class="axis" x="8" y="107">2,0</text><text class="axis" x="8" y="158">1,0</text><text class="axis" x="12" y="209">0,0</text><text x="545" y="98" fill="#b86413" font-size="11" font-weight="700">META 2,00</text><g fill="#1b1718"><rect x="48" y="85" width="23" height="120" rx="3"/><rect fill="#ed2e91" x="98" y="149" width="23" height="56" rx="3"/><rect fill="#ed2e91" x="148" y="129" width="23" height="76" rx="3"/><rect x="198" y="64" width="23" height="141" rx="3"/><rect fill="#ed2e91" x="248" y="104" width="23" height="101" rx="3"/><rect x="298" y="86" width="23" height="119" rx="3"/><rect x="348" y="84" width="23" height="121" rx="3"/><rect x="398" y="96" width="23" height="109" rx="3"/><rect fill="#ed2e91" x="448" y="116" width="23" height="89" rx="3"/><rect fill="#ed2e91" x="498" y="124" width="23" height="81" rx="3"/><rect fill="#ed2e91" x="548" y="134" width="23" height="71" rx="3"/></g><g fill="#1b1718" font-size="11" font-weight="800" text-anchor="middle"><text x="59" y="80">2,36</text><text fill="#b61769" x="109" y="144">1,10</text><text fill="#b61769" x="159" y="124">1,50</text><text x="209" y="59">2,76</text><text fill="#b61769" x="259" y="99">1,99</text><text x="309" y="81">2,33</text><text x="359" y="79">2,37</text><text x="409" y="91">2,14</text><text fill="#b61769" x="459" y="111">1,75</text><text fill="#b61769" x="509" y="119">1,58</text><text fill="#b61769" x="559" y="129">1,40</text></g><g class="axis" font-weight="700" text-anchor="middle"><text x="59" y="228">A</text><text x="109" y="228">B</text><text x="159" y="228">C</text><text x="209" y="228">D</text><text x="259" y="228">E</text><text x="309" y="228">F</text><text x="359" y="228">G</text><text x="409" y="228">H</text><text x="459" y="228">L</text><text x="509" y="228">M</text><text x="559" y="228">P</text></g></svg></div></article>
+      <article class="panel"><h2>Metas y acumulado mensual</h2><p class="sub">Meta · avance acumulado al 22-sep</p><div class="targets">
+        <div class="row"><span>Plan de servicio</span><span class="tag">Meta ≥95%</span><span class="pill good">100%</span></div>
+        <div class="row"><span>Plan de kms</span><span class="tag">Meta ≥95%</span><span class="pill good">97%</span></div>
+        <div class="row"><span>Titularidad</span><span class="tag">Meta ≥80%</span><span class="pill bad">65%</span></div>
+        <div class="row"><span>Hs Extras Conducción</span><span class="tag">Meta ≤100%</span><span class="pill good">96%</span></div>
+        <div class="row"><span>Siniestros con responsabilidad</span><span class="tag">Meta ≤10</span><span class="pill good">4</span></div>
+        <div class="row"><span>Siniestros sin responsabilidad</span><span class="tag">Meta ≤6</span><span class="pill good">1</span></div>
+        <div class="row"><span>IPK</span><span class="tag">Meta 2,00</span><span class="pill good">2,14</span></div>
+        <div class="row"><span>Cumplimiento Horario</span><span class="tag">Meta ≥90%</span><span class="pill bad">89%</span></div>
+        <div class="row"><span>Cumplimiento Cabecera</span><span class="tag">Meta ≥90%</span><span class="pill good">90,1%</span></div>
+        <div class="row"><span>Cumplimiento Portón</span><span class="tag">Meta ≥90%</span><span class="pill good">96,3%</span></div>
+        <div class="row"><span>Estetica</span><span class="tag">Meta 100%</span><span class="pill good">100%</span></div>
+        <div class="row"><span>Vueltas Perdidas</span><span class="tag">Meta ≤5%</span><span class="pill good">2%</span></div>
+      </div></article>
+    </section>
+    <p class="footer"><b>Fuente:</b> KPI SEP 26 · Pasajeros sujetos a revisión a 12 h. · Los km pueden variar por actualización de GPS.</p>
+  </main>
+  <script>
+    // ==============================
+    // CONFIGURACIÓN API
+    // ==============================
+    // Pegá acá la URL pública de tu Google Apps Script (/exec)
+    const API_URL = 'https://script.google.com/macros/s/AKfycbx0LSMukWZCj9zkouq9OZ-gm5TondJmq2gukXGCoZ-3UJHze9DZWnZ4sEGhliQiZa4h1g/exec';
+
+    // Refresco automático cada 30 segundos
+    const REFRESH_MS = 30000;
+
+    const picker = document.querySelector('#datePicker');
+    const formatter = new Intl.DateTimeFormat('es-AR', { day: '2-digit', month: 'short' });
+    const toLabel = (value) => formatter.format(new Date(`${value}T12:00:00`)).replace('.', '');
+    const toNumericDate = (value) => new Intl.DateTimeFormat('es-AR', { day: '2-digit', month: '2-digit' }).format(new Date(`${value}T12:00:00`));
+
+    let dashboardData = {};
+
+    function normalizeStatus(status, numericValue = 0) {
+      if (['good', 'warn', 'bad'].includes(status)) return status;
+      if (numericValue >= 95) return 'good';
+      if (numericValue >= 85) return 'warn';
+      return 'bad';
+    }
+
+    function normalizeDailyRecord(record) {
+      const out = {};
+      const keys = ['service','kms','extra','titularidad','sinRes','sinResNo','horario','cabecera','porton','ipk','estetica','vueltas'];
+      keys.forEach((key) => {
+        const item = record?.[key];
+        if (Array.isArray(item)) {
+          out[key] = item;
+          return;
+        }
+        if (item && typeof item === 'object') {
+          const raw = item.value ?? item.valor ?? '—';
+          const progress = Number(item.progress ?? item.progreso ?? item.width ?? 0);
+          const status = normalizeStatus(item.status ?? item.estado, progress);
+          out[key] = [String(raw), status, Math.max(0, Math.min(100, progress))];
+          return;
+        }
+        if (item !== undefined && item !== null) {
+          const text = String(item);
+          const numeric = Number(text.replace('%','').replace(',','.'));
+          const progress = Number.isFinite(numeric) ? Math.max(0, Math.min(100, numeric)) : 0;
+          out[key] = [text, normalizeStatus(null, progress), progress];
+        }
+      });
+      return out;
+    }
+
+    function setConnectionState(message, isError = false) {
+      const updated = document.querySelector('.header-pro .updated');
+      const bold = updated.querySelector('b');
+      bold.textContent = isError ? 'Error de conexión' : 'Actualización automática';
+      bold.style.color = isError ? 'var(--bad)' : '';
+      updated.lastChild.textContent = message;
+    }
+
+    function renderDay(value) {
+      const data = dashboardData[value];
+      const label = toLabel(value);
+      document.querySelector('#dateCaption').textContent = new Intl.DateTimeFormat('es-AR', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(`${value}T12:00:00`)).replace('.', '').toUpperCase();
+      document.querySelector('.targets').previousElementSibling.textContent = `Meta · avance acumulado al ${label}`;
+
+      document.querySelectorAll('.kpi').forEach((card) => {
+        const valueEl = card.querySelector('.value');
+        const delta = card.querySelector('.delta');
+        const fill = card.querySelector('.fill');
+        const item = data && data[card.dataset.key];
+
+        if (!item) {
+          valueEl.textContent = '—';
+          delta.className = 'delta warn';
+          delta.textContent = 'Sin carga para este día';
+          fill.className = 'fill warn';
+          fill.style.width = '0%';
+          return;
+        }
+
+        valueEl.textContent = item[0];
+        delta.className = `delta ${item[1]}`;
+        delta.textContent = `Dato del día · ${label}`;
+        fill.className = `fill ${item[1]}`;
+        fill.style.width = `${item[2]}%`;
+      });
+
+      const alert = document.querySelector('#dataAlert');
+      if (data) {
+        const warnings = [];
+        const titularidad = Number(String(data.titularidad?.[0] ?? '').replace('%','').replace(',','.'));
+        const horario = Number(String(data.horario?.[0] ?? '').replace('%','').replace(',','.'));
+        if (Number.isFinite(titularidad) && titularidad < 80) warnings.push('la titularidad');
+        if (Number.isFinite(horario) && horario < 90) warnings.push('el cumplimiento horario');
+
+        if (warnings.length) {
+          alert.style.display = '';
+          alert.innerHTML = `<b>Atención:</b> ${warnings.join(' y ')} ${warnings.length > 1 ? 'se encuentran' : 'se encuentra'} por debajo de la meta.`;
+        } else {
+          alert.style.display = 'none';
+        }
+      } else {
+        alert.style.display = '';
+        alert.innerHTML = `<b>Sin datos diarios:</b> todavía no hay una carga disponible para el ${label}.`;
+      }
+    }
+
+    function applyApiPayload(payload) {
+      // Formato recomendado:
+      // { ok:true, data:{ daily:{ "2026-09-24": {...} } } }
+      // También acepta directamente: { "2026-09-24": {...} }
+      const source = payload?.data?.daily ?? payload?.daily ?? payload?.data ?? payload;
+      if (!source || typeof source !== 'object') throw new Error('La API no devolvió datos válidos.');
+
+      const normalized = {};
+      Object.entries(source).forEach(([date, record]) => {
+        if (/^\d{4}-\d{2}-\d{2}$/.test(date) && record && typeof record === 'object') {
+          normalized[date] = normalizeDailyRecord(record);
+        }
+      });
+
+      if (!Object.keys(normalized).length) throw new Error('No se encontraron fechas con formato YYYY-MM-DD en la respuesta.');
+
+      dashboardData = normalized;
+      const dates = Object.keys(dashboardData).sort();
+      const latest = dates[dates.length - 1];
+
+      picker.min = dates[0];
+      picker.max = latest;
+      picker.value = latest;
+
+      renderDay(picker.value);
+      setConnectionState(`Datos al ${toNumericDate(latest)}`);
+    }
+
+    function loadDashboardData() {
+      if (!API_URL) {
+        setConnectionState('Falta configurar API_URL', true);
+        return;
+      }
+
+      const callbackName = `tsjCallback_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+      const script = document.createElement('script');
+      let finished = false;
+
+      const cleanup = () => {
+        if (finished) return;
+        finished = true;
+        clearTimeout(timeoutId);
+        try { delete window[callbackName]; } catch (_) { window[callbackName] = undefined; }
+        if (script.parentNode) script.parentNode.removeChild(script);
+      };
+
+      const fail = (message) => {
+        cleanup();
+        setConnectionState('No se pudieron actualizar los datos', true);
+        const alert = document.querySelector('#dataAlert');
+        alert.style.display = '';
+        alert.innerHTML = `<b>Error:</b> ${message}`;
+      };
+
+      window[callbackName] = (payload) => {
+        try {
+          if (payload?.ok === false) {
+            throw new Error(payload.error || 'La API informó un error.');
+          }
+          applyApiPayload(payload);
+          cleanup();
+        } catch (error) {
+          console.error('Error procesando dashboard:', error);
+          fail(`no se pudieron procesar los datos de Google Sheets. ${error.message}`);
+        }
+      };
+
+      const separator = API_URL.includes('?') ? '&' : '?';
+      script.src = `${API_URL}${separator}callback=${encodeURIComponent(callbackName)}&_=${Date.now()}`;
+      script.async = true;
+      script.onerror = () => fail('no se pudo conectar con Google Sheets.');
+
+      const timeoutId = setTimeout(() => {
+        fail('la conexión con Google Sheets tardó demasiado.');
+      }, 20000);
+
+      document.body.appendChild(script);
+    }
+
+    picker.addEventListener('change', (event) => renderDay(event.target.value));
+
+    loadDashboardData();
+    setInterval(loadDashboardData, REFRESH_MS);
+  </script>
+</body>
+</html>
