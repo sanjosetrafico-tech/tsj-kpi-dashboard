@@ -583,8 +583,6 @@ th{
    GUARDIA
 ========================================================= */
 
-/* KPI de Guardia más compactos */
-
 #guardia .kpis{
   margin-bottom:14px;
 }
@@ -609,15 +607,13 @@ th{
 }
 
 
-/* Auxilios + Novedades lado a lado */
+/* AUXILIOS + NOVEDADES 50 / 50 */
 
 .guard-mechanical-grid{
   display:grid;
-
   grid-template-columns:
-    minmax(0,.82fr)
-    minmax(0,1.18fr);
-
+    minmax(0,1fr)
+    minmax(0,1fr);
   gap:14px;
   align-items:start;
   margin-bottom:14px;
@@ -654,7 +650,6 @@ th{
   padding:20px 10px;
   font-size:11px;
 }
-
 
 .aux-panel{
   border-top:5px solid var(--blue);
@@ -900,7 +895,6 @@ th{
   font-size:11px;
 }
 
-
 @media(max-width:1100px){
 
   .kpis{
@@ -922,7 +916,6 @@ th{
     grid-template-columns:repeat(3,1fr);
   }
 }
-
 
 @media(max-width:720px){
 
@@ -948,7 +941,6 @@ th{
   }
 }
 
-
 @media(max-width:480px){
 
   .kpis,
@@ -963,11 +955,9 @@ th{
 
 </head>
 
-
 <body>
 
 <div class="shell">
-
 
 <header class="top">
 
@@ -985,7 +975,6 @@ th{
 
   </div>
 
-
   <div class="status-wrap">
 
     <div class="live">
@@ -1001,7 +990,6 @@ th{
 
     </div>
 
-
     <button
       id="refreshBtn"
       class="refresh"
@@ -1013,13 +1001,11 @@ th{
 
 </header>
 
-
 <section class="hero">
 
   <h1>
     Rutina de regularidad y frecuencia
   </h1>
-
 
   <div class="date-control hidden">
 
@@ -1032,12 +1018,10 @@ th{
 
 </section>
 
-
 <div
   id="errorBox"
   class="error"
 ></div>
-
 
 <nav class="tabs">
 
@@ -1078,7 +1062,6 @@ th{
 
 </nav>
 
-
 <main>
 
   <section
@@ -1108,7 +1091,6 @@ th{
 
 </main>
 
-
 <footer class="foot">
 
   <span>
@@ -1121,22 +1103,17 @@ th{
 
 </footer>
 
-
 </div>
-
 
 <script>
 
-
 const API_URL =
 'https://script.google.com/macros/s/AKfycbxzu1Mob_Z7E0-33nMXmFDk1zsaOWnUyzb1s58z1NH_2qDK4utHfvtO9-N31GtMuYwyEA/exec';
-
 
 let DATA = {};
 
 let ACTIVE_TAB =
   'plan';
-
 
 const DATE_BY_TAB = {
   salidas:'',
@@ -1144,11 +1121,9 @@ const DATE_BY_TAB = {
   kpi:''
 };
 
-
 const $ =
   s =>
     document.querySelector(s);
-
 
 const esc =
   v =>
@@ -1164,14 +1139,12 @@ const esc =
         }[m])
       );
 
-
 const num =
   v =>
     Number(v || 0)
       .toLocaleString(
         'es-AR'
       );
-
 
 const pad2 =
   v =>
@@ -1181,16 +1154,12 @@ const pad2 =
         '0'
       );
 
-
 function sourceLabel(src){
 
   return src?.name
-
     ? `Fuente: ${esc(src.name)}`
-
     : 'Fuente no disponible';
 }
-
 
 function kpi(
   label,
@@ -1219,7 +1188,6 @@ function kpi(
   `;
 }
 
-
 function mini(
   title,
   value,
@@ -1242,7 +1210,6 @@ function mini(
   `;
 }
 
-
 function bars(
   items,
   limit=12
@@ -1255,7 +1222,6 @@ function bars(
         limit
       );
 
-
   if (!a.length){
 
     return `
@@ -1265,7 +1231,6 @@ function bars(
       </div>
     `;
   }
-
 
   const max =
     Math.max(
@@ -1277,13 +1242,11 @@ function bars(
       1
     );
 
-
   return `
 
     <div class="bars">
 
       ${
-
         a.map(
           x => `
 
@@ -1327,7 +1290,6 @@ function bars(
   `;
 }
 
-
 function table(
   headers,
   rows
@@ -1343,7 +1305,6 @@ function table(
     `;
   }
 
-
   return `
 
     <div class="table-wrap">
@@ -1355,7 +1316,6 @@ function table(
           <tr>
 
             ${
-
               headers.map(
                 h =>
                   `<th>${esc(h[0])}</th>`
@@ -1367,18 +1327,15 @@ function table(
 
         </thead>
 
-
         <tbody>
 
           ${
-
             rows.map(
               r => `
 
                 <tr>
 
                   ${
-
                     headers.map(
                       h => `
 
@@ -1386,12 +1343,10 @@ function table(
 
                           ${
                             h[2]
-
                               ? h[2](
                                   r[h[1]],
                                   r
                                 )
-
                               : esc(
                                   r[h[1]]
                                   ??
@@ -1429,24 +1384,19 @@ function todayISO(){
   const p =
     DATA.period || {};
 
-
   return (
     p.year &&
     p.month &&
     p.day
   )
-
   ? `${p.year}-${pad2(p.month)}-${pad2(p.day)}`
-
   : '';
 }
-
 
 function kpiDefaultISO(){
 
   const p =
     DATA.period || {};
-
 
   const days =
     (DATA.kpi?.daily || [])
@@ -1461,15 +1411,12 @@ function kpiDefaultISO(){
               /^(\d{1,2})[\/-](\d{1,2})/
             );
 
-
           return (
             m &&
             +m[2] ===
             +p.month
           )
-
           ? +m[1]
-
           : 0;
         }
       )
@@ -1483,7 +1430,6 @@ function kpiDefaultISO(){
           b-a
       );
 
-
   const d =
     days[0]
     ||
@@ -1492,14 +1438,10 @@ function kpiDefaultISO(){
       (+p.day || 1)-1
     );
 
-
   return p.year
-
     ? `${p.year}-${pad2(p.month)}-${pad2(d)}`
-
     : '';
 }
-
 
 function selectedISO(
   tab=ACTIVE_TAB
@@ -1512,7 +1454,6 @@ function selectedISO(
   );
 }
 
-
 function selectedDDMM(
   tab=ACTIVE_TAB
 ){
@@ -1523,14 +1464,10 @@ function selectedDDMM(
         /^(\d{4})-(\d{2})-(\d{2})$/
       );
 
-
   return m
-
     ? `${m[3]}/${m[2]}`
-
     : '';
 }
-
 
 function selectedLabel(
   tab=ACTIVE_TAB
@@ -1539,9 +1476,7 @@ function selectedLabel(
   const v =
     selectedISO(tab);
 
-
   return v
-
     ? new Date(
         v +
         'T12:00:00'
@@ -1554,22 +1489,18 @@ function selectedLabel(
           year:'numeric'
         }
       )
-
     : '';
 }
-
 
 function monthLabel(){
 
   const p =
     DATA.period || {};
 
-
   return (
     p.month &&
     p.year
   )
-
   ? new Date(
       p.year,
       p.month-1,
@@ -1582,10 +1513,8 @@ function monthLabel(){
         year:'numeric'
       }
     )
-
   : '';
 }
-
 
 function shortDateLabel(
   ddmm
@@ -1600,12 +1529,9 @@ function shortDateLabel(
       /^(\d{1,2})[\/-](\d{1,2})/
     );
 
-
   if (!m){
-
     return ddmm || '';
   }
-
 
   const mon = [
     'ene',
@@ -1622,10 +1548,8 @@ function shortDateLabel(
     'dic'
   ][+m[2]-1];
 
-
   return `${+m[1]}-${mon}`;
 }
-
 
 function sameDay(
   value,
@@ -1640,7 +1564,6 @@ function sameDay(
     .match(
       /^(\d{1,2})[\/-](\d{1,2})/
     );
-
 
   return (
     !!m
@@ -1663,7 +1586,6 @@ function countBy(
 
   const o = {};
 
-
   (rows || [])
     .forEach(
       r => {
@@ -1677,14 +1599,12 @@ function countBy(
           ||
           'Sin dato';
 
-
         o[k] =
           (o[k] || 0)
           +
           1;
       }
     );
-
 
   return Object
     .entries(o)
@@ -1704,7 +1624,6 @@ function countBy(
         )
     );
 }
-
 
 function sortByLineAndService(
   rows
@@ -1752,7 +1671,6 @@ function sortByLineAndService(
   );
 }
 
-
 function sortByLine(
   rows
 ){
@@ -1799,15 +1717,10 @@ function normalizeBaseLine(value){
       ''
     );
 
-
   if (!line){
     return '';
   }
 
-
-  /*
-   * P, P1 y P2 son líneas independientes.
-   */
   if (
     line === 'P'
     ||
@@ -1818,30 +1731,19 @@ function normalizeBaseLine(value){
     return line;
   }
 
-
-  /*
-   * Ramales:
-   *
-   * F20 / F201 / F/20 / F/201 -> F
-   * G1 / G/1                  -> G
-   * H2 / H/2                  -> H
-   */
   const match =
     line.match(
       /^([A-Z]+)(?:\/?\d+)?$/
     );
-
 
   return match
     ? match[1]
     : line;
 }
 
-
 function countByNormalizedLine(rows){
 
   const counts = {};
-
 
   (rows || [])
     .forEach(
@@ -1852,11 +1754,9 @@ function countByNormalizedLine(rows){
             row.linea
           );
 
-
         if (!line){
           return;
         }
-
 
         counts[line] =
           (
@@ -1868,7 +1768,6 @@ function countByNormalizedLine(rows){
           1;
       }
     );
-
 
   return Object
     .entries(
@@ -1905,7 +1804,6 @@ function renderPlan(){
   const d =
     DATA.planServ || {};
 
-
   const comp =
     Math.max(
       0,
@@ -1916,24 +1814,17 @@ function renderPlan(){
       )
     );
 
-
   const total =
     (+d.conductoresTM || 0)
     +
     (+d.conductoresTT || 0);
 
-
   const color =
     comp >= 100
-
       ? 'var(--good)'
-
       : comp >= 95
-
         ? 'var(--warn)'
-
         : 'var(--bad)';
-
 
   const note =
     (+d.inasistenciasTM || 0) > 0
@@ -1941,14 +1832,11 @@ function renderPlan(){
     comp >= 100
 
     ? `
-
       <div class="service-note">
         Se cambia franco para cumplir con el servicio.
       </div>
     `
-
     : '';
-
 
   $('#plan').innerHTML = `
 
@@ -1974,7 +1862,6 @@ function renderPlan(){
 
     </div>
 
-
     <div class="plan-hero">
 
       <article class="gauge-card">
@@ -1994,11 +1881,9 @@ function renderPlan(){
             </b>
 
             <span>
-
               ${num(d.serviceDone)}
               /
               ${num(d.servicePlanned)}
-
             </span>
 
           </div>
@@ -2010,7 +1895,6 @@ function renderPlan(){
         </div>
 
       </article>
-
 
       <div class="plan-main">
 
@@ -2067,9 +1951,7 @@ function renderPlan(){
 
     </div>
 
-
     ${note}
-
 
     <div class="plan-detail">
 
@@ -2099,7 +1981,6 @@ function renderPlan(){
         </div>
 
       </article>
-
 
       <article class="hero-stat">
 
@@ -2145,12 +2026,10 @@ function renderSalidas(){
   const d =
     DATA.salidas || {};
 
-
   const key =
     selectedDDMM(
       'salidas'
     );
-
 
   const units =
     sortByLineAndService(
@@ -2164,7 +2043,6 @@ function renderSalidas(){
         )
     );
 
-
   const drivers =
     sortByLineAndService(
       (d.driverRows || [])
@@ -2177,7 +2055,6 @@ function renderSalidas(){
         )
     );
 
-
   const late =
     (d.lateRows || [])
       .filter(
@@ -2187,7 +2064,6 @@ function renderSalidas(){
             key
           )
       );
-
 
   const day =
     (d.daily || [])
@@ -2200,7 +2076,6 @@ function renderSalidas(){
       )
     ||
     {};
-
 
   $('#salidas').innerHTML = `
 
@@ -2228,7 +2103,6 @@ function renderSalidas(){
       </div>
 
     </div>
-
 
     <div class="kpis">
 
@@ -2273,7 +2147,6 @@ function renderSalidas(){
 
     </div>
 
-
     <div class="grid2">
 
       <article class="panel">
@@ -2290,7 +2163,6 @@ function renderSalidas(){
         )}
 
       </article>
-
 
       <article class="panel">
 
@@ -2309,7 +2181,6 @@ function renderSalidas(){
 
     </div>
 
-
     <div class="grid2">
 
       <article class="panel">
@@ -2323,15 +2194,12 @@ function renderSalidas(){
             ['Fecha','fecha'],
             ['Avería','averia'],
             ['Reemplazo','reemplazo'],
-
             [
               'Motivo',
               'motivo',
-
               v =>
                 `<span class="pill">${esc(v)}</span>`
             ],
-
             ['Línea','linea'],
             ['Servicio','turno']
           ],
@@ -2339,7 +2207,6 @@ function renderSalidas(){
         )}
 
       </article>
-
 
       <article class="panel">
 
@@ -2353,11 +2220,9 @@ function renderSalidas(){
             ['Chofer','chofer'],
             ['Prevista','prevista'],
             ['Real','real'],
-
             [
               'Demora',
               'minutos',
-
               v =>
                 `${num(v)} min`
             ]
@@ -2395,7 +2260,6 @@ function normalizeGuardText(
   .toUpperCase();
 }
 
-
 function splitGuardiaObservations(
   rows
 ){
@@ -2405,7 +2269,6 @@ function splitGuardiaObservations(
     tarde:[]
   };
 
-
   (rows || [])
     .forEach(
       row => {
@@ -2414,7 +2277,6 @@ function splitGuardiaObservations(
           normalizeGuardText(
             row.turno
           );
-
 
         if (
           turno ===
@@ -2428,7 +2290,6 @@ function splitGuardiaObservations(
           return;
         }
 
-
         if (
           turno ===
           'TARDE'
@@ -2441,10 +2302,8 @@ function splitGuardiaObservations(
       }
     );
 
-
   return out;
 }
-
 
 function renderGuardEvents(
   rows,
@@ -2456,13 +2315,11 @@ function renderGuardEvents(
   ) {
 
     return `
-
       <div class="shift-empty">
         ${esc(emptyText)}
       </div>
     `;
   }
-
 
   return rows
     .map(
@@ -2484,18 +2341,15 @@ function renderGuardEvents(
     .join('');
 }
 
-
 function renderGuardia(){
 
   const d =
     DATA.guardia || {};
 
-
   const key =
     selectedDDMM(
       'guardia'
     );
-
 
   const aux =
     sortByLine(
@@ -2509,7 +2363,6 @@ function renderGuardia(){
         )
     );
 
-
   const inc =
     sortByLine(
       (d.incidents || [])
@@ -2521,7 +2374,6 @@ function renderGuardia(){
             )
         )
     );
-
 
   const drv =
     sortByLineAndService(
@@ -2535,7 +2387,6 @@ function renderGuardia(){
         )
     );
 
-
   const det =
     sortByLine(
       (d.detours || [])
@@ -2548,7 +2399,6 @@ function renderGuardia(){
         )
     );
 
-
   const obs =
     (d.observations || [])
       .filter(
@@ -2559,17 +2409,11 @@ function renderGuardia(){
           )
       );
 
-
   const groupedObs =
     splitGuardiaObservations(
       obs
     );
 
-
-  /*
-   * Contamos líneas reales.
-   * Los ramales no generan líneas adicionales.
-   */
   const lines =
     new Set(
       [
@@ -2597,7 +2441,6 @@ function renderGuardia(){
       .filter(Boolean)
     );
 
-
   $('#guardia').innerHTML = `
 
     <div class="section-head">
@@ -2624,7 +2467,6 @@ function renderGuardia(){
       </div>
 
     </div>
-
 
     <div class="kpis">
 
@@ -2669,13 +2511,7 @@ function renderGuardia(){
 
     </div>
 
-
-    <!-- =================================================
-         AUXILIOS + NOVEDADES MECANICAS
-    ================================================== -->
-
     <div class="guard-mechanical-grid">
-
 
       <article class="panel aux-panel">
 
@@ -2691,18 +2527,15 @@ function renderGuardia(){
 
         </h3>
 
-
         ${table(
           [
             ['Línea','linea'],
             ['Interno','interno'],
             ['Falla','falla'],
             ['Hs solicitud','hsSolicitud'],
-
             [
               'Hs resolución',
               'hsResolucion',
-
               v => {
 
                 if (
@@ -2711,16 +2544,13 @@ function renderGuardia(){
                 ) {
 
                   return `
-
                     <span class="resolved-pill">
                       ${esc(v)}
                     </span>
                   `;
                 }
 
-
                 return `
-
                   <span class="pending-pill">
                     Pendiente
                   </span>
@@ -2732,7 +2562,6 @@ function renderGuardia(){
         )}
 
       </article>
-
 
       <article class="panel mechanical-panel">
 
@@ -2748,30 +2577,23 @@ function renderGuardia(){
 
         </h3>
 
-
         ${table(
           [
             ['Línea','linea'],
-
             ['Interno','interno'],
-
             ['Falla','falla'],
-
             [
               'Intervención',
               'intervencion',
-
               v =>
                 esc(
                   v ||
                   '-'
                 )
             ],
-
             [
               'Resolución',
               'resolucion',
-
               v => {
 
                 if (
@@ -2787,24 +2609,18 @@ function renderGuardia(){
                       'PENDIENTE'
                     );
 
-
                   return `
-
                     <span class="${
                       pendiente
                         ? 'pending-pill'
                         : 'resolved-pill'
                     }">
-
                       ${esc(v)}
-
                     </span>
                   `;
                 }
 
-
                 return `
-
                   <span class="pending-pill">
                     Pendiente
                   </span>
@@ -2817,13 +2633,7 @@ function renderGuardia(){
 
       </article>
 
-
     </div>
-
-
-    <!-- =================================================
-         CAMBIOS DE CONDUCTOR
-    ================================================== -->
 
     <article class="panel driver-panel">
 
@@ -2839,7 +2649,6 @@ function renderGuardia(){
 
       </h3>
 
-
       ${table(
         [
           ['Titular','titular'],
@@ -2852,11 +2661,6 @@ function renderGuardia(){
       )}
 
     </article>
-
-
-    <!-- =================================================
-         DESVIOS
-    ================================================== -->
 
     <div class="grid2">
 
@@ -2875,7 +2679,6 @@ function renderGuardia(){
 
       </article>
 
-
       <article class="panel">
 
         <h3>
@@ -2892,7 +2695,6 @@ function renderGuardia(){
 
     </div>
 
-
     <article class="panel detour-panel">
 
       <h3 class="panel-title">
@@ -2907,7 +2709,6 @@ function renderGuardia(){
 
       </h3>
 
-
       ${table(
         [
           ['Línea','linea'],
@@ -2920,17 +2721,11 @@ function renderGuardia(){
 
     </article>
 
-
-    <!-- =================================================
-         PARTE DE NOVEDADES
-    ================================================== -->
-
     <article class="panel">
 
       <h3>
         Parte de Guardia · novedades por turno
       </h3>
-
 
       <div class="shift-block">
 
@@ -2952,16 +2747,13 @@ function renderGuardia(){
               groupedObs
                 .manana
                 .length === 1
-
               ? 'novedad'
-
               : 'novedades'
             }
 
           </span>
 
         </div>
-
 
         <div class="shift-body">
 
@@ -2973,7 +2765,6 @@ function renderGuardia(){
         </div>
 
       </div>
-
 
       <div class="shift-block">
 
@@ -2995,16 +2786,13 @@ function renderGuardia(){
               groupedObs
                 .tarde
                 .length === 1
-
               ? 'novedad'
-
               : 'novedades'
             }
 
           </span>
 
         </div>
-
 
         <div class="shift-body">
 
@@ -3034,7 +2822,6 @@ function renderOS(){
   const s =
     d.summary || {};
 
-
   $('#os').innerHTML = `
 
     <div class="section-head">
@@ -3060,7 +2847,6 @@ function renderOS(){
       </div>
 
     </div>
-
 
     <div class="kpis">
 
@@ -3096,7 +2882,6 @@ function renderOS(){
 
     </div>
 
-
     <div class="grid3">
 
       <article class="panel">
@@ -3111,7 +2896,6 @@ function renderOS(){
 
       </article>
 
-
       <article class="panel">
 
         <h3>
@@ -3123,7 +2907,6 @@ function renderOS(){
         )}
 
       </article>
-
 
       <article class="panel">
 
@@ -3138,7 +2921,6 @@ function renderOS(){
       </article>
 
     </div>
-
 
     <article class="panel">
 
@@ -3176,22 +2958,16 @@ function fmtPct(v){
     v === undefined ||
     v === ''
   ) {
-
     return '-';
   }
-
 
   const s =
     String(v).trim();
 
-
   return s.includes('%')
-
     ? s
-
     : s + '%';
 }
-
 
 function fmtNumRaw(v){
 
@@ -3200,14 +2976,11 @@ function fmtNumRaw(v){
     v === undefined ||
     v === ''
   ) {
-
     return '-';
   }
 
-
   return String(v);
 }
-
 
 function rawNumber(v){
 
@@ -3216,10 +2989,8 @@ function rawNumber(v){
     v === undefined ||
     v === ''
   ) {
-
     return null;
   }
-
 
   const n =
     parseFloat(
@@ -3238,14 +3009,10 @@ function rawNumber(v){
         )
     );
 
-
   return Number.isFinite(n)
-
     ? n
-
     : null;
 }
-
 
 function metricPass(
   value,
@@ -3258,39 +3025,30 @@ function metricPass(
   const t =
     rawNumber(meta);
 
-
   if (
     n === null ||
     t === null
   ) {
-
     return null;
   }
-
 
   const s =
     String(meta);
 
-
   if (
     s.includes('≤')
   ) {
-
     return n <= t;
   }
-
 
   if (
     s.includes('≥')
   ) {
-
     return n >= t;
   }
 
-
   return n >= t;
 }
-
 
 function metricProgress(
   value
@@ -3299,14 +3057,11 @@ function metricProgress(
   const n =
     rawNumber(value);
 
-
   if (
     n === null
   ) {
-
     return 0;
   }
-
 
   return Math.max(
     0,
@@ -3317,7 +3072,6 @@ function metricProgress(
   );
 }
 
-
 function kpiCard(
   metric,
   dateLabel
@@ -3325,26 +3079,18 @@ function kpiCard(
 
   const pass =
     metric.meta
-
       ? metricPass(
           metric.raw,
           metric.meta
         )
-
       : null;
-
 
   const status =
     pass === true
-
       ? 'status-good'
-
       : pass === false
-
         ? 'status-bad'
-
         : '';
-
 
   return `
 
@@ -3380,7 +3126,6 @@ function kpiCard(
   `;
 }
 
-
 function renderKPI(){
 
   const d =
@@ -3394,7 +3139,6 @@ function renderKPI(){
   const m =
     d.metas || {};
 
-
   const r =
     (d.daily || [])
       .find(
@@ -3404,7 +3148,6 @@ function renderKPI(){
             key
           )
       );
-
 
   if (!r){
 
@@ -3430,21 +3173,17 @@ function renderKPI(){
     return;
   }
 
-
   const metrics = [
 
     {
       label:
         'Cumplimiento plan de servicio',
-
       display:
         fmtPct(
           r.planCumplimiento
         ),
-
       raw:
         r.planCumplimiento,
-
       meta:
         m.planCumplimiento
     },
@@ -3452,15 +3191,12 @@ function renderKPI(){
     {
       label:
         'Cumplimiento plan de kms',
-
       display:
         fmtPct(
           r.kmCumplimiento
         ),
-
       raw:
         r.kmCumplimiento,
-
       meta:
         m.kmCumplimiento
     },
@@ -3468,15 +3204,12 @@ function renderKPI(){
     {
       label:
         'Cumplimiento plan Hs Extras Conducción',
-
       display:
         fmtPct(
           r.hsCumplimiento
         ),
-
       raw:
         r.hsCumplimiento,
-
       meta:
         m.hsCumplimiento
     },
@@ -3484,14 +3217,11 @@ function renderKPI(){
     {
       label:
         'Titularidad',
-
       display:
         r.titularidad ||
         '-',
-
       raw:
         r.titularidad,
-
       meta:
         m.titularidad
     },
@@ -3499,13 +3229,11 @@ function renderKPI(){
     {
       label:
         'Siniestros',
-
       display:
         fmtNumRaw(
           r.siniestros ||
           0
         ),
-
       raw:
         r.siniestros ||
         0
@@ -3514,14 +3242,11 @@ function renderKPI(){
     {
       label:
         'Cumplimiento Horario',
-
       display:
         r.horarioGeneral ||
         '-',
-
       raw:
         r.horarioGeneral,
-
       meta:
         m.horarioGeneral
     },
@@ -3529,14 +3254,11 @@ function renderKPI(){
     {
       label:
         'Cumplimiento Cabecera',
-
       display:
         r.horarioCab ||
         '-',
-
       raw:
         r.horarioCab,
-
       meta:
         m.horarioCab
     },
@@ -3544,14 +3266,11 @@ function renderKPI(){
     {
       label:
         'Cumplimiento Portón',
-
       display:
         r.horarioPorton ||
         '-',
-
       raw:
         r.horarioPorton,
-
       meta:
         m.horarioPorton
     },
@@ -3559,15 +3278,12 @@ function renderKPI(){
     {
       label:
         'IPK',
-
       display:
         fmtNumRaw(
           r.ipk
         ),
-
       raw:
         r.ipk,
-
       meta:
         m.ipk
     },
@@ -3575,15 +3291,12 @@ function renderKPI(){
     {
       label:
         'Estética',
-
       display:
         fmtPct(
           r.estetica
         ),
-
       raw:
         r.estetica,
-
       meta:
         m.estetica
     },
@@ -3591,21 +3304,17 @@ function renderKPI(){
     {
       label:
         'Vueltas Perdidas (Cantidad)',
-
       display:
         fmtNumRaw(
           r.vueltasPerdidas ||
           0
         ),
-
       raw:
         r.vueltasPerdidaPct,
-
       meta:
         m.vueltasPerdidaPct
     }
   ];
-
 
   const indicators =
     (d.indicators || [])
@@ -3613,7 +3322,6 @@ function renderKPI(){
         x =>
           x.label
       );
-
 
   const monthly =
     indicators.length
@@ -3627,18 +3335,12 @@ function renderKPI(){
               x.meta
             );
 
-
           const cls =
             pass === false
-
               ? 'bad'
-
               : pass === null
-
                 ? 'neutral'
-
                 : '';
-
 
           return `
 
@@ -3649,22 +3351,18 @@ function renderKPI(){
               </div>
 
               <div class="meta">
-
                 Meta
                 ${esc(
                   x.meta ||
                   '-'
                 )}
-
               </div>
 
               <div class="kpi-badge ${cls}">
-
                 ${esc(
                   x.accumulated ||
                   '-'
                 )}
-
               </div>
 
             </div>
@@ -3674,12 +3372,10 @@ function renderKPI(){
       .join('')
 
     : `
-
       <div class="empty">
         Sin acumulado mensual disponible.
       </div>
     `;
-
 
   $('#kpi').innerHTML = `
 
@@ -3709,13 +3405,11 @@ function renderKPI(){
 
     </div>
 
-
     <div class="kpi-dashboard">
 
       <div class="kpi-card-grid">
 
         ${
-
           metrics.map(
             x =>
               kpiCard(
@@ -3729,7 +3423,6 @@ function renderKPI(){
         }
 
       </div>
-
 
       <aside class="kpi-month-panel">
 
@@ -3771,46 +3464,36 @@ function configureDatePicker(){
   const el =
     $('#datePicker');
 
-
   if (
     !p.year ||
     !p.month
   ) {
-
     return;
   }
-
 
   const today =
     todayISO();
 
-
   if (
     !DATE_BY_TAB.salidas
   ) {
-
     DATE_BY_TAB.salidas =
       today;
   }
 
-
   if (
     !DATE_BY_TAB.guardia
   ) {
-
     DATE_BY_TAB.guardia =
       today;
   }
 
-
   if (
     !DATE_BY_TAB.kpi
   ) {
-
     DATE_BY_TAB.kpi =
       kpiDefaultISO();
   }
-
 
   const hide =
     ACTIVE_TAB ===
@@ -3819,7 +3502,6 @@ function configureDatePicker(){
     ACTIVE_TAB ===
     'os';
 
-
   el.parentElement
     .classList
     .toggle(
@@ -3827,24 +3509,17 @@ function configureDatePicker(){
       hide
     );
 
-
   if (hide){
-
     return;
   }
-
 
   el.min =
     `${p.year}-${pad2(p.month)}-01`;
 
-
   el.max =
     ACTIVE_TAB === 'kpi'
-
       ? kpiDefaultISO()
-
       : today;
-
 
   el.value =
     DATE_BY_TAB[
@@ -3860,7 +3535,6 @@ function configureDatePicker(){
 function renderAll(){
 
   configureDatePicker();
-
 
   if (
     DATA.generatedAt
@@ -3878,22 +3552,15 @@ function renderAll(){
         );
   }
 
-
   renderPlan();
-
   renderSalidas();
-
   renderGuardia();
-
   renderOS();
-
   renderKPI();
-
 
   const errs =
     DATA.errors ||
     [];
-
 
   $('#errorBox')
     .classList
@@ -3902,15 +3569,12 @@ function renderAll(){
       !!errs.length
     );
 
-
   $('#errorBox')
     .textContent =
       errs.length
-
         ? 'Algunas fuentes no pudieron leerse: '
           +
           errs.join(' · ')
-
         : '';
 }
 
@@ -3931,12 +3595,10 @@ function setStatus(
       ok
     );
 
-
   $('#statusText')
     .textContent =
       text;
 }
-
 
 function loadLive(force = false){
 
@@ -3947,18 +3609,15 @@ function loadLive(force = false){
       : 'Actualizando…'
   );
 
-
   const cb =
     'tsj_cb_'
     +
     Date.now();
 
-
   const s =
     document.createElement(
       'script'
     );
-
 
   window[cb] =
     payload => {
@@ -3969,28 +3628,21 @@ function loadLive(force = false){
           payload ||
           {};
 
-
         setStatus(
           !!payload?.ok,
-
           payload?.ok
-
             ? 'Datos en vivo'
-
             : 'Datos parciales'
         );
-
 
         renderAll();
 
       } finally {
 
         delete window[cb];
-
         s.remove();
       }
     };
-
 
   s.onerror =
     () => {
@@ -4000,24 +3652,19 @@ function loadLive(force = false){
         'Sin conexión'
       );
 
-
       $('#errorBox')
         .classList
         .add(
           'show'
         );
 
-
       $('#errorBox')
         .textContent =
           'No se pudo conectar con la fuente de datos.';
 
-
       delete window[cb];
-
       s.remove();
     };
-
 
   let url =
     API_URL
@@ -4030,17 +3677,12 @@ function loadLive(force = false){
     +
     Date.now();
 
-
   if (force) {
-
-    url +=
-      '&force=1';
+    url += '&force=1';
   }
-
 
   s.src =
     url;
-
 
   document.body
     .appendChild(
@@ -4067,7 +3709,6 @@ document
           ACTIVE_TAB =
             btn.dataset.tab;
 
-
           document
             .querySelectorAll(
               '.tab'
@@ -4079,7 +3720,6 @@ document
                     'active'
                   )
             );
-
 
           document
             .querySelectorAll(
@@ -4093,12 +3733,10 @@ document
                   )
             );
 
-
           btn.classList
             .add(
               'active'
             );
-
 
           $(
             '#'
@@ -4110,13 +3748,11 @@ document
             'active'
           );
 
-
           renderAll();
         }
       );
     }
   );
-
 
 $('#datePicker')
   .addEventListener(
@@ -4140,13 +3776,12 @@ $('#datePicker')
           e.target.value;
       }
 
-
       renderAll();
     }
   );
 
 
-/* Botón: lectura nueva de Drive */
+/* Botón Actualizar: fuerza lectura de Drive */
 
 $('#refreshBtn')
   .addEventListener(
@@ -4160,13 +3795,12 @@ $('#refreshBtn')
 loadLive(false);
 
 
-/* Actualización automática cada 5 minutos */
+/* Refresco automático cada 5 minutos */
 
 setInterval(
   () => loadLive(false),
   300000
 );
-
 
 </script>
 
