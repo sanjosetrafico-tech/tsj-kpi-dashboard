@@ -14,11 +14,9 @@
   TSJ | Rutina de regularidad y frecuencia
 </title>
 
-
 <style>
 
 :root{
-
   --ink:#181416;
   --muted:#746d72;
 
@@ -31,9 +29,7 @@
   --bg:#f6f4f5;
 
   --good:#11815d;
-
   --warn:#d77817;
-
   --bad:#c43351;
 
   --shadow:
@@ -41,14 +37,11 @@
     rgba(44,30,39,.07);
 }
 
-
 *{
   box-sizing:border-box;
 }
 
-
 body{
-
   margin:0;
 
   background:
@@ -68,17 +61,13 @@ body{
   font-size:15px;
 }
 
-
 button,
 input{
   font:inherit;
 }
 
-
 .shell{
-
-  max-width:
-    1500px;
+  max-width:1500px;
 
   margin:auto;
 
@@ -86,9 +75,7 @@ input{
     24px 28px 48px;
 }
 
-
 .top{
-
   display:flex;
 
   justify-content:
@@ -102,9 +89,7 @@ input{
     24px;
 }
 
-
 .brand{
-
   display:flex;
 
   align-items:center;
@@ -112,17 +97,13 @@ input{
   gap:16px;
 }
 
-
 .brand-logo{
-
   width:118px;
 
   height:auto;
 }
 
-
 .brand-name{
-
   font-size:14px;
 
   font-weight:850;
@@ -130,9 +111,7 @@ input{
   letter-spacing:.1em;
 }
 
-
 .status-wrap{
-
   display:flex;
 
   align-items:center;
@@ -140,9 +119,7 @@ input{
   gap:12px;
 }
 
-
 .live{
-
   display:flex;
 
   align-items:center;
@@ -155,9 +132,7 @@ input{
   font-size:12px;
 }
 
-
 .dot{
-
   width:9px;
 
   height:9px;
@@ -168,16 +143,12 @@ input{
     var(--warn);
 }
 
-
 .dot.ok{
-
   background:
     var(--good);
 }
 
-
 .refresh{
-
   border:
     1px solid var(--line);
 
@@ -194,9 +165,7 @@ input{
   cursor:pointer;
 }
 
-
 .hero{
-
   display:flex;
 
   justify-content:
@@ -210,9 +179,7 @@ input{
     18px;
 }
 
-
 .hero h1{
-
   font-size:32px;
 
   line-height:1.04;
@@ -223,9 +190,7 @@ input{
   margin:0;
 }
 
-
 .date-control{
-
   display:flex;
 
   background:
@@ -238,9 +203,7 @@ input{
     7px 10px;
 }
 
-
 .date-control input{
-
   border:0;
 
   outline:0;
@@ -256,15 +219,11 @@ input{
     dark;
 }
 
-
 .date-control.hidden{
-
   display:none;
 }
 
-
 .tabs{
-
   display:flex;
 
   gap:7px;
@@ -283,9 +242,7 @@ input{
     22px;
 }
 
-
 .tab{
-
   border:0;
 
   background:
@@ -305,9 +262,7 @@ input{
   cursor:pointer;
 }
 
-
 .tab.active{
-
   background:#fff;
 
   color:
@@ -318,21 +273,15 @@ input{
     rgba(0,0,0,.06);
 }
 
-
 .tab-panel{
-
   display:none;
 }
 
-
 .tab-panel.active{
-
   display:block;
 }
 
-
 .section-head{
-
   display:flex;
 
   justify-content:
@@ -346,17 +295,13 @@ input{
     6px 0 14px;
 }
 
-
 .section-head h2{
-
   font-size:22px;
 
   margin:0;
 }
 
-
 .source{
-
   color:
     var(--muted);
 
@@ -365,9 +310,7 @@ input{
   text-align:right;
 }
 
-
 .kpis{
-
   display:grid;
 
   grid-template-columns:
@@ -382,14 +325,12 @@ input{
     16px;
 }
 
-
 .kpi,
 .panel,
 .mini,
 .gauge-card,
 .kpi-ref-card,
 .kpi-month-panel{
-
   background:
     var(--paper);
 
@@ -403,19 +344,15 @@ input{
     var(--shadow);
 }
 
-
 .kpi{
-
   padding:17px;
 
   min-height:
     116px;
 }
 
-
 .kpi .label,
 .mini .t{
-
   color:
     var(--muted);
 
@@ -429,9 +366,7 @@ input{
   letter-spacing:.05em;
 }
 
-
 .kpi .value{
-
   font-size:31px;
 
   font-weight:900;
@@ -439,9 +374,7 @@ input{
   margin-top:8px;
 }
 
-
 .kpi .sub{
-
   font-size:12px;
 
   color:
@@ -450,32 +383,24 @@ input{
   margin-top:5px;
 }
 
-
 .kpi.good .value,
 .mini.good .n{
-
   color:
     var(--good);
 }
 
-
 .kpi.warn .value{
-
   color:
     var(--warn);
 }
 
-
 .kpi.bad .value,
 .mini.bad .n{
-
   color:
     var(--bad);
 }
 
-
 .grid2{
-
   display:grid;
 
   grid-template-columns:
@@ -487,9 +412,7 @@ input{
     14px;
 }
 
-
 .grid3{
-
   display:grid;
 
   grid-template-columns:
@@ -498,9 +421,7 @@ input{
   gap:14px;
 }
 
-
 .panel{
-
   padding:18px;
 
   margin-bottom:
@@ -509,18 +430,14 @@ input{
   overflow:hidden;
 }
 
-
 .panel h3{
-
   margin:
     0 0 15px;
 
   font-size:15px;
 }
 
-
 .bars{
-
   display:flex;
 
   flex-direction:
@@ -529,9 +446,7 @@ input{
   gap:11px;
 }
 
-
 .bar-row{
-
   display:grid;
 
   grid-template-columns:
@@ -544,9 +459,7 @@ input{
   gap:9px;
 }
 
-
 .bar-label{
-
   font-size:12px;
 
   overflow:hidden;
@@ -558,9 +471,7 @@ input{
     nowrap;
 }
 
-
 .track{
-
   height:9px;
 
   background:
@@ -572,9 +483,7 @@ input{
   overflow:hidden;
 }
 
-
 .fill{
-
   height:100%;
 
   background:
@@ -584,9 +493,7 @@ input{
     999px;
 }
 
-
 .bar-value{
-
   text-align:right;
 
   font-size:12px;
@@ -594,9 +501,7 @@ input{
   font-weight:800;
 }
 
-
 .table-wrap{
-
   border:
     1px solid var(--line);
 
@@ -608,9 +513,7 @@ input{
   background:#fff;
 }
 
-
 table{
-
   width:100%;
 
   border-collapse:
@@ -620,10 +523,8 @@ table{
     fixed;
 }
 
-
 th,
 td{
-
   padding:
     9px 8px;
 
@@ -642,9 +543,7 @@ td{
   line-height:1.3;
 }
 
-
 th{
-
   background:
     #faf8f9;
 
@@ -659,9 +558,7 @@ th{
   letter-spacing:.04em;
 }
 
-
 .pill{
-
   display:inline-flex;
 
   border-radius:
@@ -682,10 +579,11 @@ th{
 }
 
 
-/* PLAN SERV */
+/* =========================================================
+   PLAN SERV
+========================================================= */
 
 .plan-hero{
-
   display:grid;
 
   grid-template-columns:
@@ -697,9 +595,7 @@ th{
     14px;
 }
 
-
 .gauge-card{
-
   display:flex;
 
   flex-direction:
@@ -712,9 +608,7 @@ th{
   padding:22px;
 }
 
-
 .gauge{
-
   --p:0;
 
   --gauge-color:
@@ -740,9 +634,7 @@ th{
   place-items:center;
 }
 
-
 .gauge:after{
-
   content:"";
 
   position:absolute;
@@ -756,9 +648,7 @@ th{
   background:#fff;
 }
 
-
 .gauge-content{
-
   position:relative;
 
   z-index:1;
@@ -766,15 +656,11 @@ th{
   text-align:center;
 }
 
-
 .gauge-content b{
-
   font-size:29px;
 }
 
-
 .gauge-content span{
-
   display:block;
 
   color:
@@ -783,18 +669,14 @@ th{
   font-size:11px;
 }
 
-
 .gauge-label{
-
   margin-top:
     12px;
 
   font-weight:850;
 }
 
-
 .plan-main{
-
   display:grid;
 
   grid-template-columns:
@@ -803,15 +685,11 @@ th{
   gap:12px;
 }
 
-
 .mini{
-
   padding:17px;
 }
 
-
 .mini .n{
-
   margin-top:6px;
 
   font-size:26px;
@@ -819,23 +697,17 @@ th{
   font-weight:900;
 }
 
-
 .mini.good{
-
   background:
     #f6fbf9;
 }
 
-
 .mini.bad{
-
   background:
     #fff6f8;
 }
 
-
 .plan-detail{
-
   display:grid;
 
   grid-template-columns:
@@ -844,9 +716,7 @@ th{
   gap:14px;
 }
 
-
 .hero-stat{
-
   background:
     var(--ink);
 
@@ -858,9 +728,7 @@ th{
   padding:20px;
 }
 
-
 .hero-stat .over{
-
   font-size:11px;
 
   color:
@@ -872,9 +740,7 @@ th{
   font-weight:800;
 }
 
-
 .hero-stat .big{
-
   margin-top:7px;
 
   font-size:32px;
@@ -882,9 +748,7 @@ th{
   font-weight:900;
 }
 
-
 .hero-stat .small{
-
   margin-top:3px;
 
   color:
@@ -893,9 +757,7 @@ th{
   font-size:13px;
 }
 
-
 .service-note{
-
   margin:
     -2px 0 14px;
 
@@ -925,7 +787,6 @@ th{
 ========================================================= */
 
 .guardia-final{
-
   display:grid;
 
   grid-template-columns:
@@ -940,15 +801,11 @@ th{
     14px;
 }
 
-
 .guardia-final > .panel{
-
   margin-bottom:0;
 }
 
-
 .shift-block{
-
   border:
     1px solid var(--line);
 
@@ -963,13 +820,7 @@ th{
     14px;
 }
 
-
-/*
- * ENCABEZADOS MÁS LLAMATIVOS
- */
-
 .shift-title{
-
   display:flex;
 
   align-items:center;
@@ -992,9 +843,7 @@ th{
   letter-spacing:.065em;
 }
 
-
 .shift-title.morning{
-
   color:
     #245e1b;
 
@@ -1008,9 +857,7 @@ th{
     1px solid #c9dfc0;
 }
 
-
 .shift-title.afternoon{
-
   color:
     #934b00;
 
@@ -1024,9 +871,7 @@ th{
     1px solid #efc99c;
 }
 
-
 .shift-count{
-
   display:inline-flex;
 
   align-items:center;
@@ -1054,9 +899,7 @@ th{
   text-transform:none;
 }
 
-
 .shift-body{
-
   display:flex;
 
   flex-direction:
@@ -1068,9 +911,7 @@ th{
     13px 14px;
 }
 
-
 .guard-event{
-
   display:grid;
 
   grid-template-columns:
@@ -1088,9 +929,7 @@ th{
   line-height:1.5;
 }
 
-
 .guard-event-dot{
-
   width:7px;
 
   height:7px;
@@ -1103,9 +942,7 @@ th{
     var(--pink);
 }
 
-
 .guard-event-date{
-
   color:
     var(--muted);
 
@@ -1116,9 +953,7 @@ th{
   margin-right:5px;
 }
 
-
 .shift-empty{
-
   padding:
     4px 0;
 
@@ -1128,16 +963,12 @@ th{
   font-size:12px;
 }
 
-
 .mechanical-panel{
-
   border-top:
     5px solid var(--warn);
 }
 
-
 .mechanical-panel h3{
-
   display:flex;
 
   align-items:center;
@@ -1148,9 +979,7 @@ th{
   gap:8px;
 }
 
-
 .mechanical-count{
-
   display:inline-flex;
 
   min-width:28px;
@@ -1174,15 +1003,11 @@ th{
   font-weight:900;
 }
 
-
 .mechanical-panel table{
-
   table-layout:auto;
 }
 
-
 .pending-pill{
-
   display:inline-flex;
 
   padding:
@@ -1202,9 +1027,7 @@ th{
   font-weight:850;
 }
 
-
 .resolved-pill{
-
   display:inline-flex;
 
   padding:
@@ -1225,10 +1048,11 @@ th{
 }
 
 
-/* KPI */
+/* =========================================================
+   KPI
+========================================================= */
 
 .kpi-alert{
-
   border-left:
     4px solid var(--warn);
 
@@ -1247,9 +1071,7 @@ th{
     16px;
 }
 
-
 .kpi-dashboard{
-
   display:grid;
 
   grid-template-columns:
@@ -1261,9 +1083,7 @@ th{
   align-items:start;
 }
 
-
 .kpi-card-grid{
-
   display:grid;
 
   grid-template-columns:
@@ -1275,9 +1095,7 @@ th{
   gap:14px;
 }
 
-
 .kpi-ref-card{
-
   padding:
     17px 18px;
 
@@ -1290,9 +1108,7 @@ th{
     column;
 }
 
-
 .metric-label{
-
   min-height:
     32px;
 
@@ -1304,9 +1120,7 @@ th{
   font-weight:800;
 }
 
-
 .metric-value{
-
   font-size:31px;
 
   font-weight:900;
@@ -1315,9 +1129,7 @@ th{
     7px 0 4px;
 }
 
-
 .metric-sub{
-
   margin-top:auto;
 
   color:
@@ -1328,9 +1140,7 @@ th{
   font-weight:750;
 }
 
-
 .metric-track{
-
   height:6px;
 
   background:
@@ -1344,9 +1154,7 @@ th{
   margin-top:13px;
 }
 
-
 .metric-fill{
-
   height:100%;
 
   background:
@@ -1356,45 +1164,33 @@ th{
     999px;
 }
 
-
 .status-bad .metric-fill{
-
   background:
     var(--bad);
 }
 
-
 .status-bad .metric-sub{
-
   color:
     var(--bad);
 }
 
-
 .status-good .metric-sub{
-
   color:
     var(--good);
 }
 
-
 .kpi-month-panel{
-
   padding:
     22px 24px;
 }
 
-
 .kpi-month-panel h3{
-
   margin:0;
 
   font-size:18px;
 }
 
-
 .month-sub{
-
   margin:
     5px 0 18px;
 
@@ -1404,9 +1200,7 @@ th{
   font-size:12px;
 }
 
-
 .kpi-month-row{
-
   display:grid;
 
   grid-template-columns:
@@ -1425,15 +1219,11 @@ th{
     1px solid #ece7ea;
 }
 
-
 .kpi-month-row .name{
-
   font-size:12px;
 }
 
-
 .kpi-month-row .meta{
-
   color:
     #6c6268;
 
@@ -1442,9 +1232,7 @@ th{
   font-weight:700;
 }
 
-
 .kpi-badge{
-
   justify-self:end;
 
   min-width:82px;
@@ -1468,9 +1256,7 @@ th{
   font-weight:900;
 }
 
-
 .kpi-badge.bad{
-
   background:
     #fde7ee;
 
@@ -1478,9 +1264,7 @@ th{
     var(--bad);
 }
 
-
 .kpi-badge.neutral{
-
   background:
     #f0edef;
 
@@ -1488,9 +1272,7 @@ th{
     #6d656a;
 }
 
-
 .empty{
-
   padding:25px;
 
   text-align:center;
@@ -1505,16 +1287,12 @@ th{
     12px;
 }
 
-
 .muted{
-
   color:
     var(--muted);
 }
 
-
 .error{
-
   display:none;
 
   background:
@@ -1536,15 +1314,11 @@ th{
     14px;
 }
 
-
 .error.show{
-
   display:block;
 }
 
-
 .foot{
-
   margin-top:24px;
 
   display:flex;
@@ -1562,7 +1336,6 @@ th{
 @media(max-width:1100px){
 
   .kpis{
-
     grid-template-columns:
       repeat(3,1fr);
   }
@@ -1571,19 +1344,16 @@ th{
   .plan-hero,
   .kpi-dashboard,
   .guardia-final{
-
     grid-template-columns:
       1fr;
   }
 
   .plan-main{
-
     grid-template-columns:
       repeat(2,1fr);
   }
 
   .kpi-card-grid{
-
     grid-template-columns:
       repeat(3,1fr);
   }
@@ -1593,7 +1363,6 @@ th{
 @media(max-width:720px){
 
   .shell{
-
     padding:
       18px 14px 35px;
   }
@@ -1601,7 +1370,6 @@ th{
   .top,
   .hero,
   .section-head{
-
     align-items:
       flex-start;
 
@@ -1612,13 +1380,11 @@ th{
   .kpis,
   .plan-main,
   .plan-detail{
-
     grid-template-columns:
       1fr 1fr;
   }
 
   .kpi-card-grid{
-
     grid-template-columns:
       1fr 1fr;
   }
@@ -1631,7 +1397,6 @@ th{
   .plan-main,
   .plan-detail,
   .kpi-card-grid{
-
     grid-template-columns:
       1fr;
   }
@@ -1818,11 +1583,8 @@ let ACTIVE_TAB =
 
 
 const DATE_BY_TAB = {
-
   salidas:'',
-
   guardia:'',
-
   kpi:''
 };
 
@@ -1838,17 +1600,11 @@ const esc =
       .replace(
         /[&<>"']/g,
         m => ({
-
           '&':'&amp;',
-
           '<':'&lt;',
-
           '>':'&gt;',
-
           '"':'&quot;',
-
           "'":'&#039;'
-
         }[m])
       );
 
@@ -2108,7 +1864,9 @@ function table(
 }
 
 
-/* FECHAS */
+/* =========================================================
+   FECHAS
+========================================================= */
 
 function todayISO(){
 
@@ -2294,7 +2052,6 @@ function shortDateLabel(
 
 
   const mon = [
-
     'ene',
     'feb',
     'mar',
@@ -2307,7 +2064,6 @@ function shortDateLabel(
     'oct',
     'nov',
     'dic'
-
   ][+m[2]-1];
 
 
@@ -2340,7 +2096,9 @@ function sameDay(
 }
 
 
-/* AGRUPACION */
+/* =========================================================
+   AGRUPACION
+========================================================= */
 
 function countBy(
   rows,
@@ -2467,7 +2225,9 @@ function sortByLine(
 }
 
 
-/* PLAN */
+/* =========================================================
+   PLAN SERV
+========================================================= */
 
 function renderPlan(){
 
@@ -2705,7 +2465,9 @@ function renderPlan(){
 }
 
 
-/* PLANILLERIA */
+/* =========================================================
+   PLANILLERIA
+========================================================= */
 
 function renderSalidas(){
 
@@ -2985,24 +2747,12 @@ function normalizeGuardText(
 }
 
 
-/*
- * Ahora el backend ya envía:
- *
- * {
- *   fecha:"04/10",
- *   turno:"MANANA",
- *   texto:"11:25 ..."
- * }
- */
-
 function splitGuardiaObservations(
   rows
 ){
 
   const out = {
-
     manana:[],
-
     tarde:[]
   };
 
@@ -3329,8 +3079,6 @@ function renderGuardia(){
         </h3>
 
 
-        <!-- TURNO MAÑANA -->
-
         <div class="shift-block">
 
           <div class="shift-title morning">
@@ -3373,8 +3121,6 @@ function renderGuardia(){
 
         </div>
 
-
-        <!-- TURNO TARDE -->
 
         <div class="shift-block">
 
@@ -3493,7 +3239,9 @@ function renderGuardia(){
 }
 
 
-/* OS */
+/* =========================================================
+   OS
+========================================================= */
 
 function renderOS(){
 
@@ -3658,7 +3406,9 @@ function renderOS(){
 }
 
 
-/* KPI */
+/* =========================================================
+   KPI
+========================================================= */
 
 function fmtPct(v){
 
@@ -4250,7 +4000,9 @@ function renderKPI(){
 }
 
 
-/* DATE PICKER */
+/* =========================================================
+   DATE PICKER
+========================================================= */
 
 function configureDatePicker(){
 
@@ -4342,7 +4094,9 @@ function configureDatePicker(){
 }
 
 
-/* RENDER */
+/* =========================================================
+   RENDER GENERAL
+========================================================= */
 
 function renderAll(){
 
@@ -4402,7 +4156,9 @@ function renderAll(){
 }
 
 
-/* CONEXION */
+/* =========================================================
+   CONEXION
+========================================================= */
 
 function setStatus(
   ok,
@@ -4423,11 +4179,21 @@ function setStatus(
 }
 
 
-function loadLive(){
+/*
+ * force = false:
+ * usa la caché del Apps Script.
+ *
+ * force = true:
+ * agrega &force=1 y fuerza
+ * lectura nueva de Drive.
+ */
+function loadLive(force = false){
 
   setStatus(
     false,
-    'Actualizando…'
+    force
+      ? 'Actualizando datos…'
+      : 'Actualizando…'
   );
 
 
@@ -4502,7 +4268,7 @@ function loadLive(){
     };
 
 
-  s.src =
+  let url =
     API_URL
     +
     '?callback='
@@ -4514,6 +4280,21 @@ function loadLive(){
     Date.now();
 
 
+  /*
+   * Sólo el botón Actualizar
+   * obliga a releer los archivos.
+   */
+  if (force) {
+
+    url +=
+      '&force=1';
+  }
+
+
+  s.src =
+    url;
+
+
   document.body
     .appendChild(
       s
@@ -4521,7 +4302,9 @@ function loadLive(){
 }
 
 
-/* EVENTOS */
+/* =========================================================
+   EVENTOS
+========================================================= */
 
 document
   .querySelectorAll(
@@ -4616,19 +4399,33 @@ $('#datePicker')
   );
 
 
+/*
+ * BOTON ACTUALIZAR:
+ * fuerza lectura nueva
+ */
 $('#refreshBtn')
   .addEventListener(
     'click',
-    loadLive
+    () => loadLive(true)
   );
 
 
-loadLive();
+/*
+ * CARGA INICIAL:
+ * usa caché normal
+ */
+loadLive(false);
 
 
+/*
+ * REFRESCO AUTOMATICO:
+ * cada 5 minutos.
+ *
+ * No fuerza Drive.
+ */
 setInterval(
-  loadLive,
-  60000
+  () => loadLive(false),
+  300000
 );
 
 
