@@ -44,12 +44,8 @@
 
 body{
   margin:0;
-
-  background:
-    var(--bg);
-
-  color:
-    var(--ink);
+  background:var(--bg);
+  color:var(--ink);
 
   font-family:
     Inter,
@@ -587,6 +583,79 @@ th{
    GUARDIA
 ========================================================= */
 
+/* KPI de Guardia más compactos */
+
+#guardia .kpis{
+  margin-bottom:14px;
+}
+
+#guardia .kpi{
+  min-height:94px;
+  padding:13px 15px;
+}
+
+#guardia .kpi .label{
+  font-size:11px;
+}
+
+#guardia .kpi .value{
+  font-size:27px;
+  margin-top:5px;
+}
+
+#guardia .kpi .sub{
+  font-size:11px;
+  margin-top:3px;
+}
+
+
+/* Auxilios + Novedades lado a lado */
+
+.guard-mechanical-grid{
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,.82fr)
+    minmax(0,1.18fr);
+
+  gap:14px;
+  align-items:start;
+  margin-bottom:14px;
+}
+
+.guard-mechanical-grid .panel{
+  margin-bottom:0;
+  padding:14px;
+}
+
+.guard-mechanical-grid .panel h3{
+  margin-bottom:11px;
+  font-size:14px;
+}
+
+.guard-mechanical-grid th,
+.guard-mechanical-grid td{
+  padding:7px 6px;
+  font-size:10px;
+  line-height:1.2;
+}
+
+.guard-mechanical-grid th{
+  font-size:9px;
+}
+
+.guard-mechanical-grid .pending-pill,
+.guard-mechanical-grid .resolved-pill{
+  padding:3px 6px;
+  font-size:9px;
+}
+
+.guard-mechanical-grid .empty{
+  padding:20px 10px;
+  font-size:11px;
+}
+
+
 .aux-panel{
   border-top:5px solid var(--blue);
 }
@@ -840,7 +909,8 @@ th{
 
   .grid2,
   .plan-hero,
-  .kpi-dashboard{
+  .kpi-dashboard,
+  .guard-mechanical-grid{
     grid-template-columns:1fr;
   }
 
@@ -1712,6 +1782,121 @@ function sortByLine(
 
 
 /* =========================================================
+   NORMALIZACION DE LINEAS
+========================================================= */
+
+function normalizeBaseLine(value){
+
+  let line =
+    String(
+      value ||
+      ''
+    )
+    .trim()
+    .toUpperCase()
+    .replace(
+      /\s+/g,
+      ''
+    );
+
+
+  if (!line){
+    return '';
+  }
+
+
+  /*
+   * P, P1 y P2 son líneas independientes.
+   */
+  if (
+    line === 'P'
+    ||
+    line === 'P1'
+    ||
+    line === 'P2'
+  ){
+    return line;
+  }
+
+
+  /*
+   * Ramales:
+   *
+   * F20 / F201 / F/20 / F/201 -> F
+   * G1 / G/1                  -> G
+   * H2 / H/2                  -> H
+   */
+  const match =
+    line.match(
+      /^([A-Z]+)(?:\/?\d+)?$/
+    );
+
+
+  return match
+    ? match[1]
+    : line;
+}
+
+
+function countByNormalizedLine(rows){
+
+  const counts = {};
+
+
+  (rows || [])
+    .forEach(
+      row => {
+
+        const line =
+          normalizeBaseLine(
+            row.linea
+          );
+
+
+        if (!line){
+          return;
+        }
+
+
+        counts[line] =
+          (
+            counts[line]
+            ||
+            0
+          )
+          +
+          1;
+      }
+    );
+
+
+  return Object
+    .entries(
+      counts
+    )
+    .map(
+      ([label,value]) => ({
+        label,
+        value
+      })
+    )
+    .sort(
+      (a,b) =>
+        b.value -
+        a.value
+        ||
+        a.label.localeCompare(
+          b.label,
+          'es',
+          {
+            numeric:true
+          }
+        )
+    );
+}
+
+
+/* =========================================================
    PLAN SERV
 ========================================================= */
 
@@ -2138,12 +2323,15 @@ function renderSalidas(){
             ['Fecha','fecha'],
             ['Avería','averia'],
             ['Reemplazo','reemplazo'],
+
             [
               'Motivo',
               'motivo',
+
               v =>
                 `<span class="pill">${esc(v)}</span>`
             ],
+
             ['Línea','linea'],
             ['Servicio','turno']
           ],
@@ -2165,9 +2353,11 @@ function renderSalidas(){
             ['Chofer','chofer'],
             ['Prevista','prevista'],
             ['Real','real'],
+
             [
               'Demora',
               'minutos',
+
               v =>
                 `${num(v)} min`
             ]
@@ -2376,22 +2566,32 @@ function renderGuardia(){
     );
 
 
+  /*
+   * Contamos líneas reales.
+   * Los ramales no generan líneas adicionales.
+   */
   const lines =
     new Set(
       [
         ...aux.map(
           r =>
-            r.linea
+            normalizeBaseLine(
+              r.linea
+            )
         ),
 
         ...inc.map(
           r =>
-            r.linea
+            normalizeBaseLine(
+              r.linea
+            )
         ),
 
         ...det.map(
           r =>
-            r.linea
+            normalizeBaseLine(
+              r.linea
+            )
         )
       ]
       .filter(Boolean)
@@ -2464,163 +2664,165 @@ function renderGuardia(){
       ${kpi(
         'Líneas afectadas',
         num(lines.size),
-        'Distintas líneas'
+        'Líneas reales'
       )}
 
     </div>
 
 
     <!-- =================================================
-         1. AUXILIOS MECANICOS
+         AUXILIOS + NOVEDADES MECANICAS
     ================================================== -->
 
-    <article class="panel aux-panel">
-
-      <h3 class="panel-title">
-
-        <span>
-          Auxilios mecánicos
-        </span>
-
-        <span class="count-badge blue">
-          ${num(aux.length)}
-        </span>
-
-      </h3>
+    <div class="guard-mechanical-grid">
 
 
-      ${table(
-        [
-          ['Línea','linea'],
-          ['Interno','interno'],
-          ['Falla','falla'],
-          ['Hs solicitud','hsSolicitud'],
+      <article class="panel aux-panel">
 
+        <h3 class="panel-title">
+
+          <span>
+            Auxilios mecánicos
+          </span>
+
+          <span class="count-badge blue">
+            ${num(aux.length)}
+          </span>
+
+        </h3>
+
+
+        ${table(
           [
-            'Hs resolución',
-            'hsResolucion',
+            ['Línea','linea'],
+            ['Interno','interno'],
+            ['Falla','falla'],
+            ['Hs solicitud','hsSolicitud'],
 
-            v => {
+            [
+              'Hs resolución',
+              'hsResolucion',
 
-              if (
-                v &&
-                String(v).trim()
-              ) {
+              v => {
+
+                if (
+                  v &&
+                  String(v).trim()
+                ) {
+
+                  return `
+
+                    <span class="resolved-pill">
+                      ${esc(v)}
+                    </span>
+                  `;
+                }
+
 
                 return `
 
-                  <span class="resolved-pill">
-                    ${esc(v)}
+                  <span class="pending-pill">
+                    Pendiente
                   </span>
                 `;
               }
-
-
-              return `
-
-                <span class="pending-pill">
-                  Pendiente
-                </span>
-              `;
-            }
-          ]
-        ],
-        aux
-      )}
-
-    </article>
-
-
-    <!-- =================================================
-         2. NOVEDADES MECANICAS
-    ================================================== -->
-
-    <article class="panel mechanical-panel">
-
-      <h3 class="panel-title">
-
-        <span>
-          Novedades mecánicas
-        </span>
-
-        <span class="count-badge orange">
-          ${num(inc.length)}
-        </span>
-
-      </h3>
-
-
-      ${table(
-        [
-          ['Línea','linea'],
-
-          ['Interno','interno'],
-
-          ['Falla','falla'],
-
-          [
-            'Intervención',
-            'intervencion',
-
-            v =>
-              esc(
-                v ||
-                '-'
-              )
+            ]
           ],
+          aux
+        )}
 
+      </article>
+
+
+      <article class="panel mechanical-panel">
+
+        <h3 class="panel-title">
+
+          <span>
+            Novedades mecánicas
+          </span>
+
+          <span class="count-badge orange">
+            ${num(inc.length)}
+          </span>
+
+        </h3>
+
+
+        ${table(
           [
-            'Resolución',
-            'resolucion',
+            ['Línea','linea'],
 
-            v => {
+            ['Interno','interno'],
 
-              if (
-                v &&
-                String(v).trim()
-              ) {
+            ['Falla','falla'],
 
-                const pendiente =
-                  normalizeGuardText(
-                    v
-                  )
-                  .includes(
-                    'PENDIENTE'
-                  );
+            [
+              'Intervención',
+              'intervencion',
+
+              v =>
+                esc(
+                  v ||
+                  '-'
+                )
+            ],
+
+            [
+              'Resolución',
+              'resolucion',
+
+              v => {
+
+                if (
+                  v &&
+                  String(v).trim()
+                ) {
+
+                  const pendiente =
+                    normalizeGuardText(
+                      v
+                    )
+                    .includes(
+                      'PENDIENTE'
+                    );
+
+
+                  return `
+
+                    <span class="${
+                      pendiente
+                        ? 'pending-pill'
+                        : 'resolved-pill'
+                    }">
+
+                      ${esc(v)}
+
+                    </span>
+                  `;
+                }
 
 
                 return `
 
-                  <span class="${
-                    pendiente
-                      ? 'pending-pill'
-                      : 'resolved-pill'
-                  }">
-
-                    ${esc(v)}
-
+                  <span class="pending-pill">
+                    Pendiente
                   </span>
                 `;
               }
+            ]
+          ],
+          inc
+        )}
+
+      </article>
 
 
-              return `
-
-                <span class="pending-pill">
-                  Pendiente
-                </span>
-              `;
-            }
-          ]
-        ],
-        inc
-      )}
-
-    </article>
+    </div>
 
 
     <!-- =================================================
-         3. CAMBIOS DE CONDUCTOR
+         CAMBIOS DE CONDUCTOR
     ================================================== -->
 
     <article class="panel driver-panel">
@@ -2653,7 +2855,7 @@ function renderGuardia(){
 
 
     <!-- =================================================
-         4. DESVIOS
+         DESVIOS
     ================================================== -->
 
     <div class="grid2">
@@ -2681,9 +2883,8 @@ function renderGuardia(){
         </h3>
 
         ${bars(
-          countBy(
-            det,
-            'linea'
+          countByNormalizedLine(
+            det
           )
         )}
 
@@ -2721,7 +2922,7 @@ function renderGuardia(){
 
 
     <!-- =================================================
-         5. PARTE DE NOVEDADES
+         PARTE DE NOVEDADES
     ================================================== -->
 
     <article class="panel">
@@ -3946,6 +4147,7 @@ $('#datePicker')
 
 
 /* Botón: lectura nueva de Drive */
+
 $('#refreshBtn')
   .addEventListener(
     'click',
@@ -3953,11 +4155,13 @@ $('#refreshBtn')
   );
 
 
-/* Carga inicial cacheada */
+/* Carga inicial con caché */
+
 loadLive(false);
 
 
 /* Actualización automática cada 5 minutos */
+
 setInterval(
   () => loadLive(false),
   300000
