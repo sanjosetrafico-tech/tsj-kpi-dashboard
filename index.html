@@ -748,6 +748,38 @@ th{
   font-size:11px;
 }
 
+.alert-additional-btn{
+  appearance:none;
+  border:0;
+  background:transparent;
+  padding:0;
+  margin:2px 0 0;
+  color:var(--muted);
+  font:inherit;
+  font-size:11px;
+  text-align:left;
+  cursor:pointer;
+}
+
+.alert-additional-btn:hover{
+  color:var(--ink);
+  text-decoration:underline;
+}
+
+.alert-extra-list{
+  display:none;
+  flex-direction:column;
+  gap:8px;
+}
+
+.alert-card.expanded .alert-extra-list{
+  display:flex;
+}
+
+.alert-card.expanded{
+  min-height:auto;
+}
+
 .alert-none{
   margin-top:18px;
   color:var(--good);
@@ -1441,6 +1473,11 @@ th{
   body.print-summary .alert-card-detail{
     gap:1.3mm !important;
     margin-top:2.5mm !important;
+  }
+
+  body.print-summary .alert-extra-list,
+  body.print-summary .alert-additional-btn{
+    display:none !important;
   }
 
   body.print-summary .alert-detail-row,
@@ -2905,35 +2942,42 @@ function renderAlertCases(
       3
     );
 
+  const hidden =
+    rows.slice(
+      3
+    );
+
   const more =
-    rows.length -
-    visible.length;
+    hidden.length;
+
+  const renderRow =
+    r => `
+      <div class="alert-detail-row">
+
+        <span class="alert-detail-dot"></span>
+
+        <span>
+          ${esc(
+            normalizeMechanicalCategory(
+              r.falla
+            )
+          )}
+          · Int.
+          ${esc(
+            r.interno ||
+            '-'
+          )}
+        </span>
+
+      </div>
+    `;
 
   return `
     <div class="alert-card-detail">
 
-      ${
-        visible.map(
-          r => `
-            <div class="alert-detail-row">
-
-              <span class="alert-detail-dot"></span>
-
-              <span>
-                ${esc(
-                  normalizeMechanicalCategory(
-                    r.falla
-                  )
-                )}
-                · Int.
-                ${esc(
-                  r.interno ||
-                  '-'
-                )}
-              </span>
-
-            </div>
-          `
+      ${visible
+        .map(
+          renderRow
         )
         .join('')
       }
@@ -2941,20 +2985,75 @@ function renderAlertCases(
       ${
         more > 0
           ? `
-            <div class="alert-additional">
+            <div class="alert-extra-list">
+              ${hidden
+                .map(
+                  renderRow
+                )
+                .join('')
+              }
+            </div>
+
+            <button
+              type="button"
+              class="alert-additional-btn"
+              data-count="${more}"
+              aria-expanded="false"
+              onclick="toggleAlertCard(this)"
+            >
               +${more}
               ${
                 more === 1
                   ? 'adicional'
                   : 'adicionales'
               }
-            </div>
+            </button>
           `
           : ''
       }
 
     </div>
   `;
+}
+
+
+function toggleAlertCard(button){
+  const card =
+    button.closest(
+      '.alert-card'
+    );
+
+  if(!card){
+    return;
+  }
+
+  const expanded =
+    card.classList
+      .toggle(
+        'expanded'
+      );
+
+  const count =
+    Number(
+      button.dataset.count ||
+      0
+    );
+
+  button.setAttribute(
+    'aria-expanded',
+    expanded
+      ? 'true'
+      : 'false'
+  );
+
+  button.textContent =
+    expanded
+      ? 'Ver menos'
+      : `+${count} ${
+          count === 1
+            ? 'adicional'
+            : 'adicionales'
+        }`;
 }
 
 
