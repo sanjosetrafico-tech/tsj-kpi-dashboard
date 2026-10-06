@@ -34,6 +34,7 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--ink);
+
   font-family:
     Inter,
     ui-sans-serif,
@@ -41,6 +42,7 @@ body{
     -apple-system,
     "Segoe UI",
     sans-serif;
+
   font-size:15px;
 }
 
@@ -54,11 +56,6 @@ input{
   margin:auto;
   padding:24px 28px 48px;
 }
-
-
-/* =========================================================
-   CABECERA
-========================================================= */
 
 .top{
   display:flex;
@@ -126,11 +123,6 @@ input{
   border-color:var(--ink);
 }
 
-
-/* =========================================================
-   TITULO
-========================================================= */
-
 .hero{
   display:flex;
   justify-content:space-between;
@@ -166,11 +158,6 @@ input{
   display:none;
 }
 
-
-/* =========================================================
-   SOLAPAS
-========================================================= */
-
 .tabs{
   display:flex;
   gap:7px;
@@ -204,11 +191,6 @@ input{
 .tab-panel.active{
   display:block;
 }
-
-
-/* =========================================================
-   GENERALES
-========================================================= */
 
 .section-head{
   display:flex;
@@ -349,10 +331,7 @@ input{
   color:var(--pink-dark);
 }
 
-
-/* =========================================================
-   PLANILLERIA
-========================================================= */
+/* PLANILLERIA */
 
 .planillaria-board{
   display:grid;
@@ -385,15 +364,7 @@ input{
   height:100%;
 }
 
-.planillaria-driver-table th,
-.planillaria-driver-table td{
-  padding:8px 7px;
-}
-
-
-/* =========================================================
-   BARRAS
-========================================================= */
+/* BARRAS */
 
 .bars{
   display:flex;
@@ -434,10 +405,7 @@ input{
   font-weight:800;
 }
 
-
-/* =========================================================
-   TABLAS
-========================================================= */
+/* TABLAS */
 
 .table-wrap{
   border:1px solid var(--line);
@@ -509,10 +477,7 @@ th{
   border-radius:12px;
 }
 
-
-/* =========================================================
-   RESUMEN
-========================================================= */
+/* RESUMEN */
 
 .summary-actions{
   display:flex;
@@ -854,10 +819,7 @@ th{
   color:var(--muted);
 }
 
-
-/* =========================================================
-   PLAN SERV
-========================================================= */
+/* PLAN SERV */
 
 .plan-hero{
   display:grid;
@@ -988,10 +950,7 @@ th{
   font-weight:750;
 }
 
-
-/* =========================================================
-   GUARDIA
-========================================================= */
+/* GUARDIA */
 
 #guardia .kpi{
   padding:17px;
@@ -1081,10 +1040,13 @@ th{
   background:var(--pink);
 }
 
+.shift-empty{
+  color:var(--muted);
+  font-size:12px;
+  padding:3px 0;
+}
 
-/* =========================================================
-   KPI
-========================================================= */
+/* KPI */
 
 .kpi-dashboard{
   display:grid;
@@ -1133,6 +1095,18 @@ th{
   background:var(--good);
 }
 
+.status-bad .metric-fill{
+  background:var(--bad);
+}
+
+.status-bad .metric-sub{
+  color:var(--bad);
+}
+
+.status-good .metric-sub{
+  color:var(--good);
+}
+
 .kpi-month-panel{
   padding:22px 24px;
 }
@@ -1156,10 +1130,17 @@ th{
   font-weight:900;
 }
 
+.kpi-badge.bad{
+  background:#fde7ee;
+  color:var(--bad);
+}
 
-/* =========================================================
-   PIE
-========================================================= */
+.kpi-badge.neutral{
+  background:#f0edef;
+  color:#6d656a;
+}
+
+/* ESTADO / PIE */
 
 .error{
   display:none;
@@ -1182,11 +1163,6 @@ th{
   color:var(--muted);
   font-size:11px;
 }
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
 
 @media(max-width:1100px){
 
@@ -1238,7 +1214,6 @@ th{
 </style>
 
 </head>
-
 
 <body>
 
@@ -1354,9 +1329,48 @@ const API_URL =
 'https://script.google.com/macros/s/AKfycbxzu1Mob_Z7E0-33nMXmFDk1zsaOWnUyzb1s58z1NH_2qDK4utHfvtO9-N31GtMuYwyEA/exec';
 
 
-let DATA = {};
-let ACTIVE_TAB = 'resumen';
+/* =========================================================
+   ESTADO / CACHE LOCAL
+========================================================= */
 
+const LOCAL_CACHE_KEY =
+  'TSJ_DASHBOARD_CACHE_V9';
+
+const LOCAL_CACHE_MAX_AGE =
+  12 * 60 * 60 * 1000;
+
+const REQUEST_TIMEOUT =
+  12000;
+
+let DATA = {};
+
+let ACTIVE_TAB =
+  'resumen';
+
+const READY = {
+  planServ:false,
+  salidas:false,
+  guardia:false,
+  os:false,
+  kpi:false
+};
+
+const VERSION = {
+  planServ:0,
+  salidas:0,
+  guardia:0,
+  os:0,
+  kpi:0
+};
+
+const LAST_RENDER = {
+  resumen:'',
+  plan:'',
+  salidas:'',
+  guardia:'',
+  os:'',
+  kpi:''
+};
 
 const DATE_BY_TAB = {
   resumen:'',
@@ -1365,9 +1379,16 @@ const DATE_BY_TAB = {
   kpi:''
 };
 
+const INFLIGHT = {};
+
+
+/* =========================================================
+   GENERALES
+========================================================= */
 
 const $ =
-  s => document.querySelector(s);
+  s =>
+    document.querySelector(s);
 
 
 const esc =
@@ -1388,12 +1409,160 @@ const esc =
 const num =
   v =>
     Number(v || 0)
-      .toLocaleString('es-AR');
+      .toLocaleString(
+        'es-AR'
+      );
 
 
 const pad2 =
   v =>
-    String(v).padStart(2,'0');
+    String(v)
+      .padStart(
+        2,
+        '0'
+      );
+
+
+function sourceLabel(src){
+  return src?.name
+    ? `Fuente: ${esc(src.name)}`
+    : 'Fuente no disponible';
+}
+
+
+function setStatus(ok,text){
+  $('#statusDot')
+    .classList
+    .toggle(
+      'ok',
+      ok
+    );
+
+  $('#statusText')
+    .textContent =
+      text;
+}
+
+
+function showError(message){
+  const box =
+    $('#errorBox');
+
+  if (!message) {
+    box.classList
+      .remove('show');
+
+    box.textContent = '';
+
+    return;
+  }
+
+  box.textContent =
+    message;
+
+  box.classList
+    .add('show');
+}
+
+
+function updateLastUpdate(){
+  if (!DATA.generatedAt) {
+    return;
+  }
+
+  $('#updatedAt')
+    .textContent =
+      'Última actualización: '
+      +
+      new Date(
+        DATA.generatedAt
+      )
+      .toLocaleString(
+        'es-AR'
+      );
+}
+
+
+/* =========================================================
+   CACHE DEL NAVEGADOR
+========================================================= */
+
+function restoreLocalSnapshot(){
+  try {
+    const raw =
+      localStorage.getItem(
+        LOCAL_CACHE_KEY
+      );
+
+    if (!raw) {
+      return false;
+    }
+
+    const snapshot =
+      JSON.parse(raw);
+
+    const age =
+      Date.now()
+      -
+      Number(
+        snapshot.savedAt ||
+        0
+      );
+
+    if (
+      !snapshot.data ||
+      age >
+      LOCAL_CACHE_MAX_AGE
+    ) {
+      return false;
+    }
+
+    DATA =
+      snapshot.data;
+
+    [
+      'planServ',
+      'salidas',
+      'guardia',
+      'os',
+      'kpi'
+    ].forEach(
+      section => {
+        if (
+          DATA[section]
+        ) {
+          READY[section] =
+            true;
+
+          VERSION[section] =
+            1;
+        }
+      }
+    );
+
+    return true;
+
+  } catch (err) {
+    return false;
+  }
+}
+
+
+function saveLocalSnapshot(){
+  try {
+    localStorage.setItem(
+      LOCAL_CACHE_KEY,
+      JSON.stringify({
+        savedAt:
+          Date.now(),
+
+        data:
+          DATA
+      })
+    );
+
+  } catch (err) {}
+}
 
 
 /* =========================================================
@@ -1411,7 +1580,6 @@ function svgIcon(type){
 
 
   if(type === 'check'){
-
     return `
       <svg viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="9" ${common}></circle>
@@ -1422,7 +1590,6 @@ function svgIcon(type){
 
 
   if(type === 'bus'){
-
     return `
       <svg viewBox="0 0 24 24">
         <rect x="5" y="3" width="14" height="16" rx="3" ${common}></rect>
@@ -1435,7 +1602,6 @@ function svgIcon(type){
 
 
   if(type === 'users'){
-
     return `
       <svg viewBox="0 0 24 24">
         <circle cx="9" cy="8" r="3" ${common}></circle>
@@ -1447,7 +1613,6 @@ function svgIcon(type){
 
 
   if(type === 'clock'){
-
     return `
       <svg viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="8" ${common}></circle>
@@ -1458,7 +1623,6 @@ function svgIcon(type){
 
 
   if(type === 'gear'){
-
     return `
       <svg viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="4" ${common}></circle>
@@ -1469,7 +1633,6 @@ function svgIcon(type){
 
 
   if(type === 'wrench'){
-
     return `
       <svg viewBox="0 0 24 24">
         <path
@@ -1482,7 +1645,6 @@ function svgIcon(type){
 
 
   if(type === 'road'){
-
     return `
       <svg viewBox="0 0 24 24">
         <path d="M8 3 5 21M16 3l3 18" ${common}></path>
@@ -1491,22 +1653,13 @@ function svgIcon(type){
     `;
   }
 
-
   return '';
 }
 
 
 /* =========================================================
-   UTILIDADES
+   COMPONENTES
 ========================================================= */
-
-function sourceLabel(src){
-
-  return src?.name
-    ? `Fuente: ${esc(src.name)}`
-    : 'Fuente no disponible';
-}
-
 
 function kpi(
   label,
@@ -1514,12 +1667,17 @@ function kpi(
   sub='',
   tone=''
 ){
-
   return `
     <article class="kpi ${tone}">
-      <div class="label">${esc(label)}</div>
-      <div class="value">${esc(value)}</div>
-      <div class="sub">${esc(sub)}</div>
+      <div class="label">
+        ${esc(label)}
+      </div>
+      <div class="value">
+        ${esc(value)}
+      </div>
+      <div class="sub">
+        ${esc(sub)}
+      </div>
     </article>
   `;
 }
@@ -1530,11 +1688,14 @@ function mini(
   value,
   tone=''
 ){
-
   return `
     <article class="mini ${tone}">
-      <div class="t">${esc(title)}</div>
-      <div class="n">${esc(value)}</div>
+      <div class="t">
+        ${esc(title)}
+      </div>
+      <div class="n">
+        ${esc(value)}
+      </div>
     </article>
   `;
 }
@@ -1543,7 +1704,6 @@ function mini(
 function table(headers,rows){
 
   if(!rows?.length){
-
     return `
       <div class="empty">
         Sin registros.
@@ -1551,10 +1711,8 @@ function table(headers,rows){
     `;
   }
 
-
   return `
     <div class="table-wrap">
-
       <table>
 
         <thead>
@@ -1571,41 +1729,41 @@ function table(headers,rows){
         </thead>
 
         <tbody>
-
           ${
             rows
               .map(
                 r => `
                   <tr>
-
                     ${
                       headers
                         .map(
                           h => `
                             <td>
-
                               ${
                                 h[2]
-                                  ? h[2](r[h[1]],r)
-                                  : esc(r[h[1]] ?? '')
+                                  ? h[2](
+                                      r[h[1]],
+                                      r
+                                    )
+                                  : esc(
+                                      r[h[1]]
+                                      ??
+                                      ''
+                                    )
                               }
-
                             </td>
                           `
                         )
                         .join('')
                     }
-
                   </tr>
                 `
               )
               .join('')
           }
-
         </tbody>
 
       </table>
-
     </div>
   `;
 }
@@ -1614,11 +1772,13 @@ function table(headers,rows){
 function bars(items,limit=12){
 
   const a =
-    (items || []).slice(0,limit);
-
+    (items || [])
+      .slice(
+        0,
+        limit
+      );
 
   if(!a.length){
-
     return `
       <div class="empty">
         Sin datos para mostrar.
@@ -1626,13 +1786,15 @@ function bars(items,limit=12){
     `;
   }
 
-
   const max =
     Math.max(
-      ...a.map(x => +x.value || 0),
+      ...a.map(
+        x =>
+          +x.value ||
+          0
+      ),
       1
     );
-
 
   return `
     <div class="bars">
@@ -1640,7 +1802,6 @@ function bars(items,limit=12){
       ${
         a.map(
           x => `
-
             <div class="bar-row">
 
               <div class="bar-label">
@@ -1648,19 +1809,21 @@ function bars(items,limit=12){
               </div>
 
               <div class="track">
-
                 <div
                   class="fill"
                   style="
                     width:${
                       Math.max(
                         3,
-                        (+x.value || 0) / max * 100
+                        (+x.value || 0)
+                        /
+                        max
+                        *
+                        100
                       )
                     }%
                   "
                 ></div>
-
               </div>
 
               <div class="bar-value">
@@ -1668,9 +1831,9 @@ function bars(items,limit=12){
               </div>
 
             </div>
-
           `
-        ).join('')
+        )
+        .join('')
       }
 
     </div>
@@ -1683,10 +1846,9 @@ function bars(items,limit=12){
 ========================================================= */
 
 function todayISO(){
-
   const p =
-    DATA.period || {};
-
+    DATA.period ||
+    {};
 
   return (
     p.year &&
@@ -1699,7 +1861,6 @@ function todayISO(){
 
 
 function selectedISO(tab=ACTIVE_TAB){
-
   return (
     DATE_BY_TAB[tab]
     ||
@@ -1709,13 +1870,11 @@ function selectedISO(tab=ACTIVE_TAB){
 
 
 function selectedDDMM(tab=ACTIVE_TAB){
-
   const m =
     selectedISO(tab)
       .match(
         /^(\d{4})-(\d{2})-(\d{2})$/
       );
-
 
   return m
     ? `${m[3]}/${m[2]}`
@@ -1724,14 +1883,13 @@ function selectedDDMM(tab=ACTIVE_TAB){
 
 
 function selectedLabel(tab=ACTIVE_TAB){
-
   const v =
     selectedISO(tab);
 
-
   return v
     ? new Date(
-        v + 'T12:00:00'
+        v +
+        'T12:00:00'
       )
       .toLocaleDateString(
         'es-AR',
@@ -1746,13 +1904,14 @@ function selectedLabel(tab=ACTIVE_TAB){
 
 
 function sameDay(value,key){
-
   const m =
-    String(value || '')
-      .match(
-        /^(\d{1,2})[\/-](\d{1,2})/
-      );
-
+    String(
+      value ||
+      ''
+    )
+    .match(
+      /^(\d{1,2})[\/-](\d{1,2})/
+    );
 
   return (
     !!m
@@ -1765,26 +1924,27 @@ function sameDay(value,key){
 
 
 function kpiDefaultISO(){
-
   const p =
-    DATA.period || {};
-
+    DATA.period ||
+    {};
 
   const days =
     (DATA.kpi?.daily || [])
       .map(
         x => {
-
           const m =
-            String(x.date || '')
-              .match(
-                /^(\d{1,2})[\/-](\d{1,2})/
-              );
-
+            String(
+              x.date ||
+              ''
+            )
+            .match(
+              /^(\d{1,2})[\/-](\d{1,2})/
+            );
 
           return (
             m &&
-            +m[2] === +p.month
+            +m[2] ===
+            +p.month
           )
             ? +m[1]
             : 0;
@@ -1800,7 +1960,6 @@ function kpiDefaultISO(){
           b-a
       );
 
-
   const d =
     days[0]
     ||
@@ -1809,7 +1968,6 @@ function kpiDefaultISO(){
       (+p.day || 1)-1
     );
 
-
   return p.year
     ? `${p.year}-${pad2(p.month)}-${pad2(d)}`
     : '';
@@ -1817,10 +1975,9 @@ function kpiDefaultISO(){
 
 
 function monthLabel(){
-
   const p =
-    DATA.period || {};
-
+    DATA.period ||
+    {};
 
   return (
     p.month &&
@@ -1843,18 +2000,18 @@ function monthLabel(){
 
 
 function shortDateLabel(ddmm){
-
   const m =
-    String(ddmm || '')
-      .match(
-        /^(\d{1,2})[\/-](\d{1,2})/
-      );
-
+    String(
+      ddmm ||
+      ''
+    )
+    .match(
+      /^(\d{1,2})[\/-](\d{1,2})/
+    );
 
   if(!m){
     return ddmm || '';
   }
-
 
   const mon = [
     'ene','feb','mar','abr',
@@ -1862,24 +2019,20 @@ function shortDateLabel(ddmm){
     'sep','oct','nov','dic'
   ][+m[2]-1];
 
-
   return `${+m[1]}-${mon}`;
 }
 
 
 /* =========================================================
-   AGRUPACION
+   DATOS / ORDEN
 ========================================================= */
 
 function countBy(rows,field){
-
   const out = {};
-
 
   (rows || [])
     .forEach(
       r => {
-
         const k =
           String(
             r[field] ||
@@ -1889,14 +2042,12 @@ function countBy(rows,field){
           ||
           'Sin dato';
 
-
         out[k] =
           (out[k] || 0)
           +
           1;
       }
     );
-
 
   return Object
     .entries(out)
@@ -1911,42 +2062,58 @@ function countBy(rows,field){
         b.value -
         a.value
         ||
-        a.label.localeCompare(b.label)
+        a.label.localeCompare(
+          b.label
+        )
     );
 }
 
 
 function sortByLine(rows){
-
   return [
     ...(rows || [])
   ]
   .sort(
     (a,b) =>
-      String(a.linea || '')
-        .localeCompare(
-          String(b.linea || ''),
-          'es',
-          {numeric:true}
-        )
+      String(
+        a.linea ||
+        ''
+      )
+      .localeCompare(
+        String(
+          b.linea ||
+          ''
+        ),
+        'es',
+        {
+          numeric:true
+        }
+      )
   );
 }
 
 
 function sortByLineAndService(rows){
-
   return [
     ...(rows || [])
   ]
   .sort(
     (a,b) =>
 
-      String(a.linea || '')
-        .localeCompare(
-          String(b.linea || ''),
-          'es',
-          {numeric:true}
-        )
+      String(
+        a.linea ||
+        ''
+      )
+      .localeCompare(
+        String(
+          b.linea ||
+          ''
+        ),
+        'es',
+        {
+          numeric:true
+        }
+      )
 
       ||
 
@@ -1962,29 +2129,30 @@ function sortByLineAndService(rows){
           ''
         ),
         'es',
-        {numeric:true}
+        {
+          numeric:true
+        }
       )
   );
 }
 
 
-/* =========================================================
-   LINEAS
-========================================================= */
-
 function normalizeBaseLine(value){
-
   let line =
-    String(value || '')
-      .trim()
-      .toUpperCase()
-      .replace(/\s+/g,'');
-
+    String(
+      value ||
+      ''
+    )
+    .trim()
+    .toUpperCase()
+    .replace(
+      /\s+/g,
+      ''
+    );
 
   if(!line){
     return '';
   }
-
 
   if(
     line === 'P'
@@ -1996,12 +2164,10 @@ function normalizeBaseLine(value){
     return line;
   }
 
-
   const match =
     line.match(
       /^([A-Z]+)(?:\/?\d+)?$/
     );
-
 
   return match
     ? match[1]
@@ -2010,24 +2176,19 @@ function normalizeBaseLine(value){
 
 
 function countByNormalizedLine(rows){
-
   const counts = {};
-
 
   (rows || [])
     .forEach(
       row => {
-
         const line =
           normalizeBaseLine(
             row.linea
           );
 
-
         if(!line){
           return;
         }
-
 
         counts[line] =
           (counts[line] || 0)
@@ -2035,7 +2196,6 @@ function countByNormalizedLine(rows){
           1;
       }
     );
-
 
   return Object
     .entries(counts)
@@ -2053,7 +2213,9 @@ function countByNormalizedLine(rows){
         a.label.localeCompare(
           b.label,
           'es',
-          {numeric:true}
+          {
+            numeric:true
+          }
         )
     );
 }
@@ -2064,37 +2226,42 @@ function countByNormalizedLine(rows){
 ========================================================= */
 
 function normalizeText(value){
-
-  return String(value || '')
-    .normalize('NFD')
-    .replace(
-      /[\u0300-\u036f]/g,
-      ''
-    )
-    .trim()
-    .toUpperCase();
+  return String(
+    value ||
+    ''
+  )
+  .normalize('NFD')
+  .replace(
+    /[\u0300-\u036f]/g,
+    ''
+  )
+  .trim()
+  .toUpperCase();
 }
 
 
 function normalizeMechanicalCategory(value){
-
   const original =
-    String(value || '').trim();
-
+    String(
+      value ||
+      ''
+    )
+    .trim();
 
   const v =
-    normalizeText(original);
-
+    normalizeText(
+      original
+    );
 
   if(!v){
     return 'Mecánica';
   }
 
-
-  if(v.includes('GPS')){
+  if(
+    v.includes('GPS')
+  ){
     return 'GPS';
   }
-
 
   if(
     v.includes('PINCH')
@@ -2110,7 +2277,6 @@ function normalizeMechanicalCategory(value){
     return 'Neumático';
   }
 
-
   if(
     v.includes('MOTOR')
     ||
@@ -2123,7 +2289,6 @@ function normalizeMechanicalCategory(value){
     return 'Motor';
   }
 
-
   if(
     v.includes('TRANSM')
     ||
@@ -2134,11 +2299,11 @@ function normalizeMechanicalCategory(value){
     return 'Transmisión';
   }
 
-
-  if(v.includes('FREN')){
+  if(
+    v.includes('FREN')
+  ){
     return 'Frenos';
   }
-
 
   if(
     v.includes('ELECTR')
@@ -2150,7 +2315,6 @@ function normalizeMechanicalCategory(value){
     return 'Electricidad';
   }
 
-
   if(
     v.includes('TABLERO')
     ||
@@ -2158,7 +2322,6 @@ function normalizeMechanicalCategory(value){
   ){
     return 'Instrumental';
   }
-
 
   if(
     v.includes('PUERTA')
@@ -2172,7 +2335,6 @@ function normalizeMechanicalCategory(value){
     return 'Accesorio';
   }
 
-
   return original;
 }
 
@@ -2182,44 +2344,43 @@ function normalizeMechanicalCategory(value){
 ========================================================= */
 
 function normalizePerson(value){
-
-  return String(value || '')
-    .normalize('NFD')
-    .replace(
-      /[\u0300-\u036f]/g,
-      ''
-    )
-    .toUpperCase()
-    .replace(
-      /[^A-Z0-9]/g,
-      ''
-    );
-}
-
-
-function normalizeTurn(value){
-
-  return String(value || '')
-    .trim()
-    .toUpperCase()
-    .replace(/\s+/g,'');
+  return String(
+    value ||
+    ''
+  )
+  .normalize('NFD')
+  .replace(
+    /[\u0300-\u036f]/g,
+    ''
+  )
+  .toUpperCase()
+  .replace(
+    /[^A-Z0-9]/g,
+    ''
+  );
 }
 
 
 function sameDriverReplacement(a,b){
-
   const titularA =
-    normalizePerson(a?.titular);
+    normalizePerson(
+      a?.titular
+    );
 
   const titularB =
-    normalizePerson(b?.titular);
+    normalizePerson(
+      b?.titular
+    );
 
   const replA =
-    normalizePerson(a?.reemplazo);
+    normalizePerson(
+      a?.reemplazo
+    );
 
   const replB =
-    normalizePerson(b?.reemplazo);
-
+    normalizePerson(
+      b?.reemplazo
+    );
 
   if(
     titularA &&
@@ -2232,19 +2393,20 @@ function sameDriverReplacement(a,b){
     return true;
   }
 
-
   if(
     replA &&
     replB &&
     replA === replB
   ){
-
     const lineA =
-      normalizeBaseLine(a?.linea);
+      normalizeBaseLine(
+        a?.linea
+      );
 
     const lineB =
-      normalizeBaseLine(b?.linea);
-
+      normalizeBaseLine(
+        b?.linea
+      );
 
     if(
       lineA &&
@@ -2255,7 +2417,6 @@ function sameDriverReplacement(a,b){
     }
   }
 
-
   return false;
 }
 
@@ -2264,17 +2425,13 @@ function mergeDriverReplacements(
   planRows,
   guardRows
 ){
-
-  const result =
-    [
-      ...(planRows || [])
-    ];
-
+  const result = [
+    ...(planRows || [])
+  ];
 
   (guardRows || [])
     .forEach(
       row => {
-
         if(
           !result.some(
             existing =>
@@ -2289,20 +2446,20 @@ function mergeDriverReplacements(
       }
     );
 
-
   return result;
 }
 
 
 function extractNumericPrefix(value){
-
   const match =
-    String(value || '')
-      .trim()
-      .match(
-        /^(\d{2,8})\s*[-–—]/
-      );
-
+    String(
+      value ||
+      ''
+    )
+    .trim()
+    .match(
+      /^(\d{2,8})\s*[-–—]/
+    );
 
   return match
     ? match[1]
@@ -2311,9 +2468,7 @@ function extractNumericPrefix(value){
 
 
 function getDriverLegajo(row){
-
   const values = [
-
     row?.legajo,
     row?.legajoTitular,
     row?.legajoConductor,
@@ -2321,12 +2476,9 @@ function getDriverLegajo(row){
     row?.numeroLegajo,
     row?.legajoReemplazo,
     row?.reemplazoLegajo
-
   ];
 
-
   for(const v of values){
-
     if(
       v !== undefined
       &&
@@ -2338,15 +2490,22 @@ function getDriverLegajo(row){
     }
   }
 
-
   return (
-    extractNumericPrefix(row?.titular)
+    extractNumericPrefix(
+      row?.titular
+    )
     ||
-    extractNumericPrefix(row?.conductor)
+    extractNumericPrefix(
+      row?.conductor
+    )
     ||
-    extractNumericPrefix(row?.chofer)
+    extractNumericPrefix(
+      row?.chofer
+    )
     ||
-    extractNumericPrefix(row?.reemplazo)
+    extractNumericPrefix(
+      row?.reemplazo
+    )
     ||
     ''
   );
@@ -2354,25 +2513,25 @@ function getDriverLegajo(row){
 
 
 function getDriverSurname(row){
-
   const values = [
-
     row?.apellido,
     row?.titular,
     row?.conductor,
     row?.chofer,
     row?.reemplazo,
     row?.nombre
-
   ];
 
-
   for(let value of values){
-
-    if(!String(value || '').trim()){
+    if(
+      !String(
+        value ||
+        ''
+      )
+      .trim()
+    ){
       continue;
     }
-
 
     let text =
       String(value)
@@ -2382,22 +2541,23 @@ function getDriverSurname(row){
         )
         .trim();
 
-
-    if(text.includes(',')){
-      return text.split(',')[0].trim();
+    if(
+      text.includes(',')
+    ){
+      return text
+        .split(',')[0]
+        .trim();
     }
 
-
-    return text.split(/\s+/)[0];
+    return text
+      .split(/\s+/)[0];
   }
-
 
   return '';
 }
 
 
 function getDriverReference(row){
-
   return (
     getDriverLegajo(row)
     ||
@@ -2409,45 +2569,50 @@ function getDriverReference(row){
 
 
 function uniqueDriverReferences(rows){
-
   return [
     ...new Set(
       (rows || [])
-        .map(getDriverReference)
+        .map(
+          getDriverReference
+        )
         .filter(Boolean)
     )
   ];
 }
 
 
-function compactList(values,limit=5){
-
-  const clean =
-    [
-      ...new Set(
-        (values || [])
-          .map(
-            x =>
-              String(x ?? '').trim()
-          )
-          .filter(Boolean)
-      )
-    ];
-
+function compactList(
+  values,
+  limit=5
+){
+  const clean = [
+    ...new Set(
+      (values || [])
+        .map(
+          x =>
+            String(
+              x ??
+              ''
+            )
+            .trim()
+        )
+        .filter(Boolean)
+    )
+  ];
 
   if(!clean.length){
     return '—';
   }
 
-
   const visible =
-    clean.slice(0,limit);
-
+    clean.slice(
+      0,
+      limit
+    );
 
   const more =
     clean.length -
     visible.length;
-
 
   return (
     visible.join(', ')
@@ -2462,16 +2627,14 @@ function compactList(values,limit=5){
 
 
 /* =========================================================
-   ALERTAS
+   RESUMEN
 ========================================================= */
 
 function renderAlertCases(
   rows,
   emptyText
 ){
-
   if(!rows.length){
-
     return `
       <div class="alert-none">
         ${esc(emptyText)}
@@ -2479,51 +2642,44 @@ function renderAlertCases(
     `;
   }
 
-
   const visible =
-    rows.slice(0,3);
-
+    rows.slice(
+      0,
+      3
+    );
 
   const more =
     rows.length -
     visible.length;
 
-
   return `
     <div class="alert-card-detail">
 
       ${
-        visible
-          .map(
-            r => `
+        visible.map(
+          r => `
+            <div class="alert-detail-row">
 
-              <div class="alert-detail-row">
+              <span class="alert-detail-dot"></span>
 
-                <span class="alert-detail-dot"></span>
+              <span>
+                ${esc(
+                  normalizeMechanicalCategory(
+                    r.falla
+                  )
+                )}
+                · Int.
+                ${esc(
+                  r.interno ||
+                  '-'
+                )}
+              </span>
 
-                <span>
-
-                  ${esc(
-                    normalizeMechanicalCategory(
-                      r.falla
-                    )
-                  )}
-
-                  · Int.
-                  ${esc(
-                    r.interno ||
-                    '-'
-                  )}
-
-                </span>
-
-              </div>
-
-            `
-          )
-          .join('')
+            </div>
+          `
+        )
+        .join('')
       }
-
 
       ${
         more > 0
@@ -2546,14 +2702,16 @@ function renderAlertCases(
 
 
 function renderImpactChart(detours){
-
   const rows =
-    countByNormalizedLine(detours)
-      .slice(0,5);
-
+    countByNormalizedLine(
+      detours
+    )
+    .slice(
+      0,
+      5
+    );
 
   if(!rows.length){
-
     return `
       <div class="impact-empty">
         Sin desvíos para la jornada.
@@ -2561,16 +2719,17 @@ function renderImpactChart(detours){
     `;
   }
 
-
   const max =
     Math.max(
       ...rows.map(
         x =>
-          Number(x.value || 0)
+          Number(
+            x.value ||
+            0
+          )
       ),
       1
     );
-
 
   return `
     <div class="impact-chart">
@@ -2578,7 +2737,6 @@ function renderImpactChart(detours){
       ${
         rows.map(
           row => `
-
             <div class="impact-row">
 
               <div class="impact-line">
@@ -2586,14 +2744,16 @@ function renderImpactChart(detours){
               </div>
 
               <div class="impact-track">
-
                 <div
                   class="impact-fill"
                   style="
                     width:${
                       Math.max(
                         7,
-                        Number(row.value || 0)
+                        Number(
+                          row.value ||
+                          0
+                        )
                         /
                         max
                         *
@@ -2602,7 +2762,6 @@ function renderImpactChart(detours){
                     }%
                   "
                 ></div>
-
               </div>
 
               <div class="impact-value">
@@ -2610,9 +2769,9 @@ function renderImpactChart(detours){
               </div>
 
             </div>
-
           `
-        ).join('')
+        )
+        .join('')
       }
 
     </div>
@@ -2620,25 +2779,23 @@ function renderImpactChart(detours){
 }
 
 
-/* =========================================================
-   RESUMEN
-========================================================= */
-
 function renderResumen(){
-
   const key =
-    selectedDDMM('resumen');
-
+    selectedDDMM(
+      'resumen'
+    );
 
   const plan =
-    DATA.planServ || {};
+    DATA.planServ ||
+    {};
 
   const salidas =
-    DATA.salidas || {};
+    DATA.salidas ||
+    {};
 
   const guardia =
-    DATA.guardia || {};
-
+    DATA.guardia ||
+    {};
 
   const units =
     sortByLineAndService(
@@ -2652,7 +2809,6 @@ function renderResumen(){
         )
     );
 
-
   const replacedUnitNumbers =
     units.map(
       r =>
@@ -2662,7 +2818,6 @@ function renderResumen(){
         ||
         ''
     );
-
 
   const planDrivers =
     (salidas.driverRows || [])
@@ -2674,7 +2829,6 @@ function renderResumen(){
           )
       );
 
-
   const guardDrivers =
     (guardia.driverRows || [])
       .filter(
@@ -2685,17 +2839,16 @@ function renderResumen(){
           )
       );
 
-
   const drivers =
     mergeDriverReplacements(
       planDrivers,
       guardDrivers
     );
 
-
   const driverReferences =
-    uniqueDriverReferences(drivers);
-
+    uniqueDriverReferences(
+      drivers
+    );
 
   const late =
     (salidas.lateRows || [])
@@ -2707,10 +2860,10 @@ function renderResumen(){
           )
       );
 
-
   const lateReferences =
-    uniqueDriverReferences(late);
-
+    uniqueDriverReferences(
+      late
+    );
 
   const mechanical =
     sortByLine(
@@ -2724,7 +2877,6 @@ function renderResumen(){
         )
     );
 
-
   const auxiliaries =
     sortByLine(
       (guardia.auxilios || [])
@@ -2736,7 +2888,6 @@ function renderResumen(){
             )
         )
     );
-
 
   const detours =
     sortByLine(
@@ -2750,29 +2901,32 @@ function renderResumen(){
         )
     );
 
-
   const detourLines =
     new Set(
       detours
         .map(
           r =>
-            normalizeBaseLine(r.linea)
+            normalizeBaseLine(
+              r.linea
+            )
         )
         .filter(Boolean)
     );
 
-
   const selectedIsToday =
-    selectedISO('resumen')
+    selectedISO(
+      'resumen'
+    )
     ===
     todayISO();
 
-
   const compliance =
     selectedIsToday
-      ? Number(plan.compliance || 0)
+      ? Number(
+          plan.compliance ||
+          0
+        )
       : null;
-
 
   const progress =
     compliance === null
@@ -2785,7 +2939,6 @@ function renderResumen(){
           )
         );
 
-
   $('#resumen').innerHTML = `
 
     <div class="section-head">
@@ -2797,7 +2950,9 @@ function renderResumen(){
       <div class="source">
 
         ${esc(
-          selectedLabel('resumen')
+          selectedLabel(
+            'resumen'
+          )
         )}
 
         <br>
@@ -2824,7 +2979,17 @@ function renderResumen(){
     <div class="summary-kpis">
 
 
-      <article class="summary-kpi good">
+      <article class="summary-kpi ${
+        compliance !== null &&
+        compliance >= 100
+          ? 'good'
+          : compliance !== null &&
+            compliance >= 95
+            ? 'warn'
+            : compliance !== null
+              ? 'bad'
+              : ''
+      }">
 
         <div class="summary-icon green">
           ${svgIcon('check')}
@@ -2835,15 +3000,12 @@ function renderResumen(){
         </div>
 
         <div class="summary-kpi-value">
-
           ${
             compliance === null
               ? '—'
               : `${num(compliance)}%`
           }
-
         </div>
-
 
         ${
           compliance !== null
@@ -2851,12 +3013,10 @@ function renderResumen(){
               <div class="summary-progress">
 
                 <div class="summary-progress-track">
-
                   <div
                     class="summary-progress-fill"
                     style="width:${progress}%"
                   ></div>
-
                 </div>
 
                 <div class="summary-progress-value">
@@ -2868,9 +3028,14 @@ function renderResumen(){
             : ''
         }
 
-
         <div class="summary-kpi-sub">
-          Plan de servicio TM
+
+          ${
+            selectedIsToday
+              ? 'Plan de servicio TM'
+              : 'Sin dato histórico de Plan Serv'
+          }
+
         </div>
 
       </article>
@@ -2982,8 +3147,6 @@ function renderResumen(){
         <div class="summary-alert-grid">
 
 
-          <!-- 1. AUXILIOS MECANICOS -->
-
           <article class="alert-card auxiliary ${
             auxiliaries.length
               ? ''
@@ -3002,11 +3165,9 @@ function renderResumen(){
 
             </div>
 
-
             <div class="alert-card-number">
               ${num(auxiliaries.length)}
             </div>
-
 
             ${renderAlertCases(
               auxiliaries,
@@ -3015,8 +3176,6 @@ function renderResumen(){
 
           </article>
 
-
-          <!-- 2. NOVEDADES MECANICAS -->
 
           <article class="alert-card mechanical ${
             mechanical.length
@@ -3036,11 +3195,9 @@ function renderResumen(){
 
             </div>
 
-
             <div class="alert-card-number">
               ${num(mechanical.length)}
             </div>
-
 
             ${renderAlertCases(
               mechanical,
@@ -3049,8 +3206,6 @@ function renderResumen(){
 
           </article>
 
-
-          <!-- 3. DESVIOS -->
 
           <article class="alert-card detours ${
             detours.length
@@ -3070,11 +3225,9 @@ function renderResumen(){
 
             </div>
 
-
             <div class="alert-card-number">
               ${num(detours.length)}
             </div>
-
 
             ${
               detours.length
@@ -3129,8 +3282,9 @@ function renderResumen(){
 
         </div>
 
-
-        ${renderImpactChart(detours)}
+        ${renderImpactChart(
+          detours
+        )}
 
       </section>
 
@@ -3144,26 +3298,24 @@ function renderResumen(){
 ========================================================= */
 
 function renderPlan(){
-
   const d =
-    DATA.planServ || {};
-
+    DATA.planServ ||
+    {};
 
   const comp =
     Math.max(
       0,
       Math.min(
         100,
-        +d.compliance || 0
+        +d.compliance ||
+        0
       )
     );
-
 
   const total =
     (+d.conductoresTM || 0)
     +
     (+d.conductoresTT || 0);
-
 
   const color =
     comp >= 100
@@ -3171,7 +3323,6 @@ function renderPlan(){
       : comp >= 95
         ? 'var(--warn)'
         : 'var(--bad)';
-
 
   $('#plan').innerHTML = `
 
@@ -3190,7 +3341,11 @@ function renderPlan(){
 
         <br>
 
-        Hoy · ${esc(d.date || '')}
+        Hoy ·
+        ${esc(
+          d.date ||
+          ''
+        )}
 
       </div>
 
@@ -3216,9 +3371,15 @@ function renderPlan(){
             </b>
 
             <span>
-              ${num(d.serviceDone)}
+
+              ${num(
+                d.serviceDone
+              )}
               /
-              ${num(d.servicePlanned)}
+              ${num(
+                d.servicePlanned
+              )}
+
             </span>
 
           </div>
@@ -3269,12 +3430,18 @@ function renderPlan(){
 
         ${mini(
           'Inasist. relevantes',
-          num(d.inasistenciaRelevantes)
+          num(d.inasistenciaRelevantes),
+          (+d.inasistenciaRelevantes || 0) > 0
+            ? 'bad'
+            : 'good'
         )}
 
         ${mini(
           'Inasistencias TM',
-          num(d.inasistenciasTM)
+          num(d.inasistenciasTM),
+          (+d.inasistenciasTM || 0) > 0
+            ? 'bad'
+            : 'good'
         )}
 
       </div>
@@ -3334,13 +3501,20 @@ function renderPlan(){
         </div>
 
         <div class="big">
-          ${esc(d.ultimaSalida || '-')} hs
+          ${esc(
+            d.ultimaSalida ||
+            '-'
+          )}
+          hs
         </div>
 
         <div class="small">
 
           Coche
-          ${esc(d.ultimoCoche || '-')}
+          ${esc(
+            d.ultimoCoche ||
+            '-'
+          )}
 
           · salida desde Base
 
@@ -3358,14 +3532,14 @@ function renderPlan(){
 ========================================================= */
 
 function renderSalidas(){
-
   const d =
-    DATA.salidas || {};
-
+    DATA.salidas ||
+    {};
 
   const key =
-    selectedDDMM('salidas');
-
+    selectedDDMM(
+      'salidas'
+    );
 
   const units =
     sortByLineAndService(
@@ -3379,7 +3553,6 @@ function renderSalidas(){
         )
     );
 
-
   const drivers =
     sortByLineAndService(
       (d.driverRows || [])
@@ -3392,7 +3565,6 @@ function renderSalidas(){
         )
     );
 
-
   const late =
     (d.lateRows || [])
       .filter(
@@ -3403,7 +3575,6 @@ function renderSalidas(){
           )
       );
 
-
   const day =
     (d.daily || [])
       .find(
@@ -3413,8 +3584,8 @@ function renderSalidas(){
             key
           )
       )
-    || {};
-
+    ||
+    {};
 
   $('#salidas').innerHTML = `
 
@@ -3434,7 +3605,9 @@ function renderSalidas(){
         <br>
 
         ${esc(
-          selectedLabel('salidas')
+          selectedLabel(
+            'salidas'
+          )
         )}
 
       </div>
@@ -3467,13 +3640,19 @@ function renderSalidas(){
 
       ${kpi(
         'Plan TM',
-        num(day.planTM || 0),
+        num(
+          day.planTM ||
+          0
+        ),
         'Día seleccionado'
       )}
 
       ${kpi(
         'Plan TT',
-        num(day.planTT || 0),
+        num(
+          day.planTT ||
+          0
+        ),
         'Día seleccionado'
       )}
 
@@ -3484,7 +3663,6 @@ function renderSalidas(){
 
 
       <div class="planillaria-left">
-
 
         <article class="panel">
 
@@ -3507,7 +3685,6 @@ function renderSalidas(){
           <h3>
             Unidades reemplazadas
           </h3>
-
 
           ${table(
             [
@@ -3536,7 +3713,6 @@ function renderSalidas(){
 
       <div class="planillaria-right">
 
-
         <article class="panel">
 
           <h3 class="panel-title">
@@ -3550,7 +3726,6 @@ function renderSalidas(){
             </span>
 
           </h3>
-
 
           ${table(
             [
@@ -3580,7 +3755,6 @@ function renderSalidas(){
 
           </h3>
 
-
           ${table(
             [
               ['Fecha','fecha'],
@@ -3591,6 +3765,7 @@ function renderSalidas(){
               [
                 'Demora',
                 'minutos',
+
                 v =>
                   `${num(v)} min`
               ]
@@ -3599,7 +3774,6 @@ function renderSalidas(){
           )}
 
         </article>
-
 
       </div>
 
@@ -3613,40 +3787,45 @@ function renderSalidas(){
 ========================================================= */
 
 function normalizeGuardText(value){
-
-  return normalizeText(value);
+  return normalizeText(
+    value
+  );
 }
 
 
 function splitGuardiaObservations(rows){
-
   const out = {
     manana:[],
     tarde:[]
   };
 
-
   (rows || [])
     .forEach(
       row => {
-
         const turno =
           normalizeGuardText(
             row.turno
           );
 
-
-        if(turno === 'MANANA'){
-          out.manana.push(row);
+        if(
+          turno ===
+          'MANANA'
+        ){
+          out.manana.push(
+            row
+          );
         }
 
-
-        if(turno === 'TARDE'){
-          out.tarde.push(row);
+        if(
+          turno ===
+          'TARDE'
+        ){
+          out.tarde.push(
+            row
+          );
         }
       }
     );
-
 
   return out;
 }
@@ -3656,16 +3835,13 @@ function renderGuardEvents(
   rows,
   emptyText
 ){
-
   if(!rows?.length){
-
     return `
       <div class="shift-empty">
         ${esc(emptyText)}
       </div>
     `;
   }
-
 
   return rows
     .map(
@@ -3686,14 +3862,14 @@ function renderGuardEvents(
 
 
 function renderGuardia(){
-
   const d =
-    DATA.guardia || {};
-
+    DATA.guardia ||
+    {};
 
   const key =
-    selectedDDMM('guardia');
-
+    selectedDDMM(
+      'guardia'
+    );
 
   const aux =
     sortByLine(
@@ -3707,7 +3883,6 @@ function renderGuardia(){
         )
     );
 
-
   const inc =
     sortByLine(
       (d.incidents || [])
@@ -3719,7 +3894,6 @@ function renderGuardia(){
             )
         )
     );
-
 
   const drv =
     sortByLineAndService(
@@ -3733,7 +3907,6 @@ function renderGuardia(){
         )
     );
 
-
   const det =
     sortByLine(
       (d.detours || [])
@@ -3746,7 +3919,6 @@ function renderGuardia(){
         )
     );
 
-
   const obs =
     (d.observations || [])
       .filter(
@@ -3757,10 +3929,10 @@ function renderGuardia(){
           )
       );
 
-
   const groupedObs =
-    splitGuardiaObservations(obs);
-
+    splitGuardiaObservations(
+      obs
+    );
 
   const lines =
     new Set(
@@ -3771,11 +3943,12 @@ function renderGuardia(){
       ]
       .map(
         r =>
-          normalizeBaseLine(r.linea)
+          normalizeBaseLine(
+            r.linea
+          )
       )
       .filter(Boolean)
     );
-
 
   $('#guardia').innerHTML = `
 
@@ -3795,7 +3968,9 @@ function renderGuardia(){
         <br>
 
         ${esc(
-          selectedLabel('guardia')
+          selectedLabel(
+            'guardia'
+          )
         )}
 
       </div>
@@ -3855,7 +4030,6 @@ function renderGuardia(){
 
         </h3>
 
-
         ${table(
           [
             ['Línea','linea'],
@@ -3867,12 +4041,23 @@ function renderGuardia(){
 
               v =>
                 esc(
-                  normalizeMechanicalCategory(v)
+                  normalizeMechanicalCategory(
+                    v
+                  )
                 )
             ],
 
             ['Hs solicitud','hsSolicitud'],
-            ['Hs resolución','hsResolucion']
+
+            [
+              'Hs resolución',
+              'hsResolucion',
+
+              v =>
+                v
+                  ? `<span class="resolved-pill">${esc(v)}</span>`
+                  : `<span class="pending-pill">Pendiente</span>`
+            ]
           ],
           aux
         )}
@@ -3894,7 +4079,6 @@ function renderGuardia(){
 
         </h3>
 
-
         ${table(
           [
             ['Línea','linea'],
@@ -3906,12 +4090,49 @@ function renderGuardia(){
 
               v =>
                 esc(
-                  normalizeMechanicalCategory(v)
+                  normalizeMechanicalCategory(
+                    v
+                  )
                 )
             ],
 
             ['Intervención','intervencion'],
-            ['Resolución','resolucion']
+
+            [
+              'Resolución',
+              'resolucion',
+
+              v => {
+                if(
+                  v &&
+                  String(v).trim()
+                ){
+                  const pending =
+                    normalizeGuardText(
+                      v
+                    )
+                    .includes(
+                      'PENDIENTE'
+                    );
+
+                  return `
+                    <span class="${
+                      pending
+                        ? 'pending-pill'
+                        : 'resolved-pill'
+                    }">
+                      ${esc(v)}
+                    </span>
+                  `;
+                }
+
+                return `
+                  <span class="pending-pill">
+                    Pendiente
+                  </span>
+                `;
+              }
+            ]
           ],
           inc
         )}
@@ -3934,7 +4155,6 @@ function renderGuardia(){
         </span>
 
       </h3>
-
 
       ${table(
         [
@@ -3975,7 +4195,9 @@ function renderGuardia(){
         </h3>
 
         ${bars(
-          countByNormalizedLine(det)
+          countByNormalizedLine(
+            det
+          )
         )}
 
       </article>
@@ -3996,7 +4218,6 @@ function renderGuardia(){
         </span>
 
       </h3>
-
 
       ${table(
         [
@@ -4027,12 +4248,24 @@ function renderGuardia(){
           </span>
 
           <span class="shift-count">
-            ${num(groupedObs.manana.length)}
-            novedades
+
+            ${num(
+              groupedObs
+                .manana
+                .length
+            )}
+
+            ${
+              groupedObs
+                .manana
+                .length === 1
+                ? 'novedad'
+                : 'novedades'
+            }
+
           </span>
 
         </div>
-
 
         <div class="shift-body">
 
@@ -4055,12 +4288,24 @@ function renderGuardia(){
           </span>
 
           <span class="shift-count">
-            ${num(groupedObs.tarde.length)}
-            novedades
+
+            ${num(
+              groupedObs
+                .tarde
+                .length
+            )}
+
+            ${
+              groupedObs
+                .tarde
+                .length === 1
+                ? 'novedad'
+                : 'novedades'
+            }
+
           </span>
 
         </div>
-
 
         <div class="shift-body">
 
@@ -4083,13 +4328,13 @@ function renderGuardia(){
 ========================================================= */
 
 function renderOS(){
-
   const d =
-    DATA.os || {};
+    DATA.os ||
+    {};
 
   const s =
-    d.summary || {};
-
+    d.summary ||
+    {};
 
   $('#os').innerHTML = `
 
@@ -4109,7 +4354,9 @@ function renderOS(){
         <br>
 
         Acumulado
-        ${esc(monthLabel())}
+        ${esc(
+          monthLabel()
+        )}
 
       </div>
 
@@ -4205,7 +4452,8 @@ function renderOS(){
           ['Observación','observacion'],
           ['Agente','agente']
         ],
-        d.rows || []
+        d.rows ||
+        []
       )}
 
     </article>
@@ -4218,21 +4466,17 @@ function renderOS(){
 ========================================================= */
 
 function fmtPct(v){
-
   if(
-    v === null
-    ||
-    v === undefined
-    ||
+    v === null ||
+    v === undefined ||
     v === ''
   ){
     return '-';
   }
 
-
   const s =
-    String(v).trim();
-
+    String(v)
+      .trim();
 
   return s.includes('%')
     ? s
@@ -4241,29 +4485,30 @@ function fmtPct(v){
 
 
 function rawNumber(v){
-
   if(
-    v === null
-    ||
-    v === undefined
-    ||
+    v === null ||
+    v === undefined ||
     v === ''
   ){
     return null;
   }
 
-
   const n =
     parseFloat(
       String(v)
-        .replace('%','')
-        .replace(',','.')
+        .replace(
+          '%',
+          ''
+        )
+        .replace(
+          ',',
+          '.'
+        )
         .replace(
           /[^0-9.\-]/g,
           ''
         )
     );
-
 
   return Number.isFinite(n)
     ? n
@@ -4271,16 +4516,73 @@ function rawNumber(v){
 }
 
 
-function metricProgress(value){
-
+/*
+ * Devuelve:
+ * true  = cumple meta
+ * false = no cumple
+ * null  = no se puede determinar
+ */
+function metricPass(
+  value,
+  meta
+){
   const n =
     rawNumber(value);
 
+  const t =
+    rawNumber(meta);
 
-  if(n === null){
-    return 0;
+  if(
+    n === null ||
+    t === null
+  ){
+    return null;
   }
 
+  const s =
+    String(
+      meta ||
+      ''
+    )
+    .replace(
+      /\s+/g,
+      ''
+    );
+
+  if(
+    s.includes('≤')
+    ||
+    s.includes('<=')
+  ){
+    return n <= t;
+  }
+
+  if(
+    s.includes('≥')
+    ||
+    s.includes('>=')
+  ){
+    return n >= t;
+  }
+
+  /*
+   * Metas sin símbolo:
+   * IPK 2.00 -> debe ser >= 2.00
+   * Estética 100% -> debe ser >= 100%
+   */
+  return n >= t;
+}
+
+
+function metricProgress(value){
+  const n =
+    rawNumber(value);
+
+  if(
+    n === null
+  ){
+    return 0;
+  }
 
   return Math.max(
     0,
@@ -4292,11 +4594,27 @@ function metricProgress(value){
 }
 
 
-function kpiCard(metric,dateLabel){
+function kpiCard(
+  metric,
+  dateLabel
+){
+  const pass =
+    metric.meta
+      ? metricPass(
+          metric.raw,
+          metric.meta
+        )
+      : null;
+
+  const status =
+    pass === true
+      ? 'status-good'
+      : pass === false
+        ? 'status-bad'
+        : '';
 
   return `
-
-    <article class="kpi-ref-card">
+    <article class="kpi-ref-card ${status}">
 
       <div class="metric-label">
         ${esc(metric.label)}
@@ -4307,7 +4625,8 @@ function kpiCard(metric,dateLabel){
       </div>
 
       <div class="metric-sub">
-        Dato del día · ${esc(dateLabel)}
+        Dato del día ·
+        ${esc(dateLabel)}
       </div>
 
       <div class="metric-track">
@@ -4327,14 +4646,18 @@ function kpiCard(metric,dateLabel){
 
 
 function renderKPI(){
-
   const d =
-    DATA.kpi || {};
-
+    DATA.kpi ||
+    {};
 
   const key =
-    selectedDDMM('kpi');
+    selectedDDMM(
+      'kpi'
+    );
 
+  const metas =
+    d.metas ||
+    {};
 
   const r =
     (d.daily || [])
@@ -4346,85 +4669,188 @@ function renderKPI(){
           )
       );
 
-
   if(!r){
-
     $('#kpi').innerHTML = `
+
+      <div class="section-head">
+
+        <h2>
+          KPI
+        </h2>
+
+      </div>
+
       <div class="panel">
+
         <div class="empty">
           Sin datos KPI para el día seleccionado.
         </div>
+
       </div>
     `;
 
     return;
   }
 
-
   const metrics = [
 
     {
-      label:'Cumplimiento plan de servicio',
-      display:fmtPct(r.planCumplimiento),
-      raw:r.planCumplimiento
+      label:
+        'Cumplimiento plan de servicio',
+
+      display:
+        fmtPct(
+          r.planCumplimiento
+        ),
+
+      raw:
+        r.planCumplimiento,
+
+      meta:
+        metas.planCumplimiento
     },
 
     {
-      label:'Cumplimiento plan de kms',
-      display:fmtPct(r.kmCumplimiento),
-      raw:r.kmCumplimiento
+      label:
+        'Cumplimiento plan de kms',
+
+      display:
+        fmtPct(
+          r.kmCumplimiento
+        ),
+
+      raw:
+        r.kmCumplimiento,
+
+      meta:
+        metas.kmCumplimiento
     },
 
     {
-      label:'Cumplimiento plan Hs Extras Conducción',
-      display:fmtPct(r.hsCumplimiento),
-      raw:r.hsCumplimiento
+      label:
+        'Cumplimiento plan Hs Extras Conducción',
+
+      display:
+        fmtPct(
+          r.hsCumplimiento
+        ),
+
+      raw:
+        r.hsCumplimiento,
+
+      meta:
+        metas.hsCumplimiento
     },
 
     {
-      label:'Titularidad',
-      display:r.titularidad || '-',
-      raw:r.titularidad
+      label:
+        'Titularidad',
+
+      display:
+        r.titularidad ||
+        '-',
+
+      raw:
+        r.titularidad,
+
+      meta:
+        metas.titularidad
     },
 
     {
-      label:'Siniestros',
-      display:String(r.siniestros || 0),
-      raw:r.siniestros
+      label:
+        'Siniestros',
+
+      display:
+        String(
+          r.siniestros ||
+          0
+        ),
+
+      raw:
+        r.siniestros ||
+        0
     },
 
     {
-      label:'Cumplimiento Horario',
-      display:r.horarioGeneral || '-',
-      raw:r.horarioGeneral
+      label:
+        'Cumplimiento Horario',
+
+      display:
+        r.horarioGeneral ||
+        '-',
+
+      raw:
+        r.horarioGeneral,
+
+      meta:
+        metas.horarioGeneral
     },
 
     {
-      label:'Cumplimiento Cabecera',
-      display:r.horarioCab || '-',
-      raw:r.horarioCab
+      label:
+        'Cumplimiento Cabecera',
+
+      display:
+        r.horarioCab ||
+        '-',
+
+      raw:
+        r.horarioCab,
+
+      meta:
+        metas.horarioCab
     },
 
     {
-      label:'Cumplimiento Portón',
-      display:r.horarioPorton || '-',
-      raw:r.horarioPorton
+      label:
+        'Cumplimiento Portón',
+
+      display:
+        r.horarioPorton ||
+        '-',
+
+      raw:
+        r.horarioPorton,
+
+      meta:
+        metas.horarioPorton
     },
 
     {
-      label:'IPK',
-      display:String(r.ipk || '-'),
-      raw:r.ipk
+      label:
+        'IPK',
+
+      display:
+        String(
+          r.ipk ||
+          '-'
+        ),
+
+      raw:
+        r.ipk,
+
+      meta:
+        metas.ipk
     },
 
     {
-      label:'Estética',
-      display:fmtPct(r.estetica),
-      raw:r.estetica
+      label:
+        'Estética',
+
+      display:
+        fmtPct(
+          r.estetica
+        ),
+
+      raw:
+        r.estetica,
+
+      meta:
+        metas.estetica
     }
 
   ];
-
 
   $('#kpi').innerHTML = `
 
@@ -4445,7 +4871,9 @@ function renderKPI(){
 
         Día anterior ·
         ${esc(
-          selectedLabel('kpi')
+          selectedLabel(
+            'kpi'
+          )
         )}
 
       </div>
@@ -4463,7 +4891,9 @@ function renderKPI(){
               x =>
                 kpiCard(
                   x,
-                  shortDateLabel(key)
+                  shortDateLabel(
+                    key
+                  )
                 )
             )
             .join('')
@@ -4481,25 +4911,45 @@ function renderKPI(){
         ${
           (d.indicators || [])
             .map(
-              x => `
+              x => {
+                const pass =
+                  metricPass(
+                    x.accumulated,
+                    x.meta
+                  );
 
-                <div class="kpi-month-row">
+                const cls =
+                  pass === false
+                    ? 'bad'
+                    : pass === null
+                      ? 'neutral'
+                      : '';
 
-                  <div>
-                    ${esc(x.label)}
+                return `
+                  <div class="kpi-month-row">
+
+                    <div>
+                      ${esc(x.label)}
+                    </div>
+
+                    <div>
+                      Meta
+                      ${esc(
+                        x.meta ||
+                        '-'
+                      )}
+                    </div>
+
+                    <div class="kpi-badge ${cls}">
+                      ${esc(
+                        x.accumulated ||
+                        '-'
+                      )}
+                    </div>
+
                   </div>
-
-                  <div>
-                    Meta ${esc(x.meta || '-')}
-                  </div>
-
-                  <div class="kpi-badge">
-                    ${esc(x.accumulated || '-')}
-                  </div>
-
-                </div>
-
-              `
+                `;
+              }
             )
             .join('')
         }
@@ -4512,54 +4962,163 @@ function renderKPI(){
 
 
 /* =========================================================
+   RENDER OPTIMIZADO
+========================================================= */
+
+function renderSignature(tab){
+  switch(tab){
+
+    case 'resumen':
+      return [
+        VERSION.planServ,
+        VERSION.salidas,
+        VERSION.guardia,
+        DATE_BY_TAB.resumen
+      ].join('|');
+
+    case 'plan':
+      return String(
+        VERSION.planServ
+      );
+
+    case 'salidas':
+      return [
+        VERSION.salidas,
+        DATE_BY_TAB.salidas
+      ].join('|');
+
+    case 'guardia':
+      return [
+        VERSION.guardia,
+        DATE_BY_TAB.guardia
+      ].join('|');
+
+    case 'os':
+      return String(
+        VERSION.os
+      );
+
+    case 'kpi':
+      return [
+        VERSION.kpi,
+        DATE_BY_TAB.kpi
+      ].join('|');
+
+    default:
+      return '';
+  }
+}
+
+
+function renderActiveTab(force=false){
+  configureDatePicker();
+
+  const signature =
+    renderSignature(
+      ACTIVE_TAB
+    );
+
+  if(
+    !force
+    &&
+    LAST_RENDER[
+      ACTIVE_TAB
+    ] === signature
+  ){
+    return;
+  }
+
+  switch(ACTIVE_TAB){
+
+    case 'resumen':
+      renderResumen();
+      break;
+
+    case 'plan':
+      renderPlan();
+      break;
+
+    case 'salidas':
+      renderSalidas();
+      break;
+
+    case 'guardia':
+      renderGuardia();
+      break;
+
+    case 'os':
+      renderOS();
+      break;
+
+    case 'kpi':
+      renderKPI();
+      break;
+  }
+
+  LAST_RENDER[
+    ACTIVE_TAB
+  ] = signature;
+
+  updateLastUpdate();
+}
+
+
+/* =========================================================
    FECHA
 ========================================================= */
 
 function configureDatePicker(){
-
   const p =
-    DATA.period || {};
-
+    DATA.period ||
+    {};
 
   const el =
     $('#datePicker');
 
-
   if(
-    !p.year
-    ||
+    !p.year ||
     !p.month
   ){
     return;
   }
 
-
   const today =
     todayISO();
 
-
-  if(!DATE_BY_TAB.resumen){
-    DATE_BY_TAB.resumen = today;
+  if(
+    !DATE_BY_TAB.resumen
+  ){
+    DATE_BY_TAB.resumen =
+      today;
   }
 
-  if(!DATE_BY_TAB.salidas){
-    DATE_BY_TAB.salidas = today;
+  if(
+    !DATE_BY_TAB.salidas
+  ){
+    DATE_BY_TAB.salidas =
+      today;
   }
 
-  if(!DATE_BY_TAB.guardia){
-    DATE_BY_TAB.guardia = today;
+  if(
+    !DATE_BY_TAB.guardia
+  ){
+    DATE_BY_TAB.guardia =
+      today;
   }
 
-  if(!DATE_BY_TAB.kpi){
-    DATE_BY_TAB.kpi = kpiDefaultISO();
+  if(
+    !DATE_BY_TAB.kpi
+  ){
+    DATE_BY_TAB.kpi =
+      kpiDefaultISO();
   }
-
 
   const hide =
-    ACTIVE_TAB === 'plan'
+    ACTIVE_TAB ===
+    'plan'
     ||
-    ACTIVE_TAB === 'os';
-
+    ACTIVE_TAB ===
+    'os';
 
   el.parentElement
     .classList
@@ -4568,244 +5127,631 @@ function configureDatePicker(){
       hide
     );
 
-
   if(hide){
     return;
   }
 
-
   el.min =
     `${p.year}-${pad2(p.month)}-01`;
 
-
   el.max =
-    ACTIVE_TAB === 'kpi'
+    ACTIVE_TAB ===
+    'kpi'
       ? kpiDefaultISO()
       : today;
 
-
   el.value =
-    DATE_BY_TAB[ACTIVE_TAB];
+    DATE_BY_TAB[
+      ACTIVE_TAB
+    ];
 }
 
 
 /* =========================================================
-   PDF
+   MERGE DE RESPUESTAS
 ========================================================= */
 
-function exportSummaryPDF(){
+function mergePayload(payload){
+  if(!payload){
+    return;
+  }
 
-  const previousTitle =
-    document.title;
+  if(
+    payload.period
+  ){
+    DATA.period =
+      payload.period;
+  }
 
+  if(
+    payload.generatedAt
+  ){
+    DATA.generatedAt =
+      payload.generatedAt;
+  }
 
-  const date =
-    selectedISO('resumen')
-    ||
-    'jornada';
+  DATA.sources = {
+    ...(DATA.sources || {}),
+    ...(payload.sources || {})
+  };
 
+  [
+    'planServ',
+    'salidas',
+    'guardia',
+    'os',
+    'kpi'
+  ].forEach(
+    section => {
 
-  document.title =
-    `TSJ_Resumen_Jornada_${date}`;
+      if(
+        payload[section] ===
+        undefined
+      ){
+        return;
+      }
 
+      /*
+       * Si ya existe un dato válido local
+       * y el servidor respondió con error,
+       * no borrar el dato anterior.
+       */
+      if(
+        payload.ok === false
+        &&
+        READY[section]
+      ){
+        return;
+      }
 
-  document.body
-    .classList
-    .add(
-      'print-summary'
-    );
+      DATA[section] =
+        payload[section];
 
+      READY[section] =
+        true;
 
-  window.print();
-
-
-  setTimeout(
-    () => {
-
-      document.body
-        .classList
-        .remove(
-          'print-summary'
-        );
-
-      document.title =
-        previousTitle;
-
-    },
-    1500
+      VERSION[section]++;
+    }
   );
-}
 
-
-/* =========================================================
-   RENDER
-========================================================= */
-
-function renderAll(){
+  saveLocalSnapshot();
 
   configureDatePicker();
 
+  renderActiveTab();
 
-  if(DATA.generatedAt){
-
-    $('#updatedAt')
-      .textContent =
-        'Última actualización: '
-        +
-        new Date(
-          DATA.generatedAt
-        )
-        .toLocaleString(
-          'es-AR'
-        );
-  }
-
-
-  renderResumen();
-  renderPlan();
-  renderSalidas();
-  renderGuardia();
-  renderOS();
-  renderKPI();
-
-
-  const errs =
-    DATA.errors || [];
-
-
-  $('#errorBox')
-    .classList
-    .toggle(
-      'show',
-      !!errs.length
-    );
-
-
-  $('#errorBox')
-    .textContent =
-      errs.length
-        ? 'Algunas fuentes no pudieron leerse: '
-          +
-          errs.join(' · ')
-        : '';
+  updateLastUpdate();
 }
 
 
 /* =========================================================
-   CONEXION
+   JSONP CON TIMEOUT Y REINTENTO
 ========================================================= */
 
-function setStatus(ok,text){
-
-  $('#statusDot')
-    .classList
-    .toggle(
-      'ok',
-      ok
+function requestSection(
+  section,
+  force=false,
+  retry=1
+){
+  const requestKey =
+    section +
+    '|' +
+    (
+      force
+        ? '1'
+        : '0'
     );
 
+  if(
+    INFLIGHT[
+      requestKey
+    ]
+  ){
+    return INFLIGHT[
+      requestKey
+    ];
+  }
 
-  $('#statusText')
-    .textContent =
-      text;
+  const promise =
+    new Promise(
+      (resolve,reject) => {
+
+        const cb =
+          'tsj_cb_' +
+          Date.now() +
+          '_' +
+          Math.random()
+            .toString(36)
+            .slice(2);
+
+        const script =
+          document.createElement(
+            'script'
+          );
+
+        let finished =
+          false;
+
+        const cleanup =
+          () => {
+            clearTimeout(
+              timer
+            );
+
+            try {
+              delete window[cb];
+            } catch(err) {}
+
+            script.remove();
+          };
+
+        const fail =
+          reason => {
+            if(finished){
+              return;
+            }
+
+            finished =
+              true;
+
+            cleanup();
+
+            reject(
+              new Error(reason)
+            );
+          };
+
+        window[cb] =
+          payload => {
+            if(finished){
+              return;
+            }
+
+            finished =
+              true;
+
+            cleanup();
+
+            mergePayload(
+              payload
+            );
+
+            if(
+              payload?.ok === false
+            ){
+              reject(
+                new Error(
+                  (
+                    payload.errors ||
+                    []
+                  )
+                  .join(' · ')
+                  ||
+                  'Respuesta parcial'
+                )
+              );
+
+              return;
+            }
+
+            resolve(
+              payload
+            );
+          };
+
+        script.onerror =
+          () =>
+            fail(
+              'No se pudo conectar con la fuente de datos.'
+            );
+
+        const timer =
+          setTimeout(
+            () =>
+              fail(
+                'La fuente de datos demoró demasiado.'
+              ),
+            REQUEST_TIMEOUT
+          );
+
+        let url =
+          API_URL
+          +
+          '?section='
+          +
+          encodeURIComponent(
+            section
+          )
+          +
+          '&callback='
+          +
+          encodeURIComponent(
+            cb
+          )
+          +
+          '&_='
+          +
+          Date.now();
+
+        if(force){
+          url +=
+            '&force=1';
+        }
+
+        script.src =
+          url;
+
+        document.body
+          .appendChild(
+            script
+          );
+      }
+    )
+    .catch(
+      err => {
+        if(
+          retry > 0
+          &&
+          !force
+        ){
+          return new Promise(
+            resolve =>
+              setTimeout(
+                resolve,
+                900
+              )
+          )
+          .then(
+            () =>
+              requestSection(
+                section,
+                false,
+                retry - 1
+              )
+          );
+        }
+
+        throw err;
+      }
+    )
+    .finally(
+      () => {
+        delete INFLIGHT[
+          requestKey
+        ];
+      }
+    );
+
+  INFLIGHT[
+    requestKey
+  ] = promise;
+
+  return promise;
 }
 
 
-function loadLive(force=false){
+/* =========================================================
+   CARGA POR SOLAPA
+========================================================= */
+
+function sectionForTab(tab){
+  const map = {
+    plan:'planServ',
+    salidas:'salidas',
+    guardia:'guardia',
+    os:'os',
+    kpi:'kpi'
+  };
+
+  return map[tab] || '';
+}
+
+
+function ensureTabData(tab){
+  if(
+    tab ===
+    'resumen'
+  ){
+    return Promise.allSettled([
+      READY.planServ
+        ? Promise.resolve()
+        : requestSection(
+            'planServ'
+          ),
+
+      READY.salidas
+        ? Promise.resolve()
+        : requestSection(
+            'salidas'
+          ),
+
+      READY.guardia
+        ? Promise.resolve()
+        : requestSection(
+            'guardia'
+          )
+    ]);
+  }
+
+  const section =
+    sectionForTab(
+      tab
+    );
+
+  if(
+    !section
+    ||
+    READY[section]
+  ){
+    return Promise.resolve();
+  }
 
   setStatus(
     false,
-    force
-      ? 'Actualizando datos…'
-      : 'Actualizando…'
+    'Actualizando…'
   );
 
-
-  const cb =
-    'tsj_cb_'
-    +
-    Date.now();
-
-
-  const script =
-    document.createElement('script');
-
-
-  window[cb] =
-    payload => {
-
-      try{
-
-        DATA =
-          payload || {};
-
-
-        setStatus(
-          !!payload?.ok,
-          payload?.ok
-            ? 'Datos en vivo'
-            : 'Datos parciales'
-        );
-
-
-        renderAll();
-
-      }finally{
-
-        delete window[cb];
-        script.remove();
-      }
-    };
-
-
-  script.onerror =
+  return requestSection(
+    section
+  )
+  .then(
     () => {
-
       setStatus(
-        false,
-        'Sin conexión'
+        true,
+        'Datos en vivo'
       );
 
+      showError('');
+    }
+  )
+  .catch(
+    () => {
+      if(
+        READY[section]
+      ){
+        setStatus(
+          false,
+          'Último dato disponible'
+        );
 
-      $('#errorBox')
-        .classList
-        .add('show');
+        showError(
+          'No se pudo actualizar. Se muestra el último dato disponible.'
+        );
+      }else{
+        setStatus(
+          false,
+          'Sin conexión'
+        );
+
+        showError(
+          'No se pudo conectar con la fuente de datos.'
+        );
+      }
+    }
+  );
+}
 
 
-      $('#errorBox')
-        .textContent =
-          'No se pudo conectar con la fuente de datos.';
+/* =========================================================
+   CARGA INICIAL
+========================================================= */
 
+function loadInitial(){
+  const restored =
+    restoreLocalSnapshot();
 
-      delete window[cb];
+  if(restored){
+    configureDatePicker();
 
-      script.remove();
-    };
+    renderActiveTab(
+      true
+    );
 
-
-  let url =
-    API_URL
-    +
-    '?callback='
-    +
-    cb
-    +
-    '&_='
-    +
-    Date.now();
-
-
-  if(force){
-    url += '&force=1';
+    updateLastUpdate();
   }
 
+  setStatus(
+    false,
+    'Actualizando…'
+  );
 
-  script.src =
-    url;
+  /*
+   * Las 3 fuentes del Resumen se solicitan
+   * en paralelo.
+   *
+   * Además dejan Plan Serv, Planillería
+   * y Guardia listas para el cambio de solapa.
+   */
+  Promise.allSettled([
+    requestSection(
+      'planServ'
+    ),
+
+    requestSection(
+      'salidas'
+    ),
+
+    requestSection(
+      'guardia'
+    )
+  ])
+  .then(
+    results => {
+      const failures =
+        results.filter(
+          x =>
+            x.status ===
+            'rejected'
+        );
+
+      if(
+        failures.length === 0
+      ){
+        setStatus(
+          true,
+          'Datos en vivo'
+        );
+
+        showError('');
+
+      }else if(
+        READY.planServ
+        ||
+        READY.salidas
+        ||
+        READY.guardia
+      ){
+        setStatus(
+          false,
+          'Último dato disponible'
+        );
+
+        showError(
+          'No se pudieron actualizar todas las fuentes. Se muestra el último dato disponible.'
+        );
+
+      }else{
+        setStatus(
+          false,
+          'Sin conexión'
+        );
+
+        showError(
+          'No se pudo conectar con la fuente de datos.'
+        );
+      }
+
+      renderActiveTab(
+        true
+      );
+
+      /*
+       * OS y KPI se precargan después.
+       * No frenan la apertura inicial.
+       */
+      setTimeout(
+        () => {
+          if(!READY.os){
+            requestSection(
+              'os'
+            )
+            .catch(
+              () => {}
+            );
+          }
+        },
+        300
+      );
+
+      setTimeout(
+        () => {
+          if(!READY.kpi){
+            requestSection(
+              'kpi'
+            )
+            .catch(
+              () => {}
+            );
+          }
+        },
+        700
+      );
+    }
+  );
+}
 
 
-  document.body
-    .appendChild(script);
+/* =========================================================
+   ACTUALIZAR
+========================================================= */
+
+function refreshActive(force=true){
+  setStatus(
+    false,
+    'Actualizando datos…'
+  );
+
+  showError('');
+
+  let requests = [];
+
+  if(
+    ACTIVE_TAB ===
+    'resumen'
+  ){
+    requests = [
+      requestSection(
+        'planServ',
+        force,
+        0
+      ),
+
+      requestSection(
+        'salidas',
+        force,
+        0
+      ),
+
+      requestSection(
+        'guardia',
+        force,
+        0
+      )
+    ];
+
+  }else{
+    const section =
+      sectionForTab(
+        ACTIVE_TAB
+      );
+
+    if(section){
+      requests = [
+        requestSection(
+          section,
+          force,
+          0
+        )
+      ];
+    }
+  }
+
+  return Promise.allSettled(
+    requests
+  )
+  .then(
+    results => {
+      const failed =
+        results.some(
+          x =>
+            x.status ===
+            'rejected'
+        );
+
+      if(!failed){
+        setStatus(
+          true,
+          'Datos en vivo'
+        );
+
+        showError('');
+
+      }else{
+        setStatus(
+          false,
+          'Último dato disponible'
+        );
+
+        showError(
+          'No se pudo actualizar la información. Se mantiene el último dato disponible.'
+        );
+      }
+
+      renderActiveTab(
+        true
+      );
+    }
+  );
 }
 
 
@@ -4814,44 +5760,57 @@ function loadLive(force=false){
 ========================================================= */
 
 function activateTab(tabName){
-
   ACTIVE_TAB =
     tabName;
 
-
   document
-    .querySelectorAll('.tab')
+    .querySelectorAll(
+      '.tab'
+    )
     .forEach(
       x =>
         x.classList
           .toggle(
             'active',
-            x.dataset.tab === tabName
+            x.dataset.tab ===
+            tabName
           )
     );
 
-
   document
-    .querySelectorAll('.tab-panel')
+    .querySelectorAll(
+      '.tab-panel'
+    )
     .forEach(
       x =>
         x.classList
           .toggle(
             'active',
-            x.id === tabName
+            x.id ===
+            tabName
           )
     );
 
+  configureDatePicker();
 
-  renderAll();
+  /*
+   * Si la sección ya está cargada,
+   * el cambio es inmediato.
+   */
+  renderActiveTab();
+
+  ensureTabData(
+    tabName
+  );
 }
 
 
 document
-  .querySelectorAll('.tab')
+  .querySelectorAll(
+    '.tab'
+  )
   .forEach(
     btn => {
-
       btn.addEventListener(
         'click',
         () =>
@@ -4859,7 +5818,6 @@ document
             btn.dataset.tab
           )
       );
-
     }
   );
 
@@ -4876,17 +5834,26 @@ $('#datePicker')
           'guardia',
           'kpi'
         ]
-        .includes(ACTIVE_TAB)
+        .includes(
+          ACTIVE_TAB
+        )
       ){
-
         DATE_BY_TAB[
           ACTIVE_TAB
         ] =
           e.target.value;
       }
 
+      /*
+       * Solo invalida la solapa abierta.
+       */
+      LAST_RENDER[
+        ACTIVE_TAB
+      ] = '';
 
-      renderAll();
+      renderActiveTab(
+        true
+      );
     }
   );
 
@@ -4895,21 +5862,65 @@ $('#refreshBtn')
   .addEventListener(
     'click',
     () =>
-      loadLive(true)
+      refreshActive(
+        true
+      )
   );
 
 
-loadLive(false);
+/* =========================================================
+   PDF
+========================================================= */
+
+function exportSummaryPDF(){
+  const previousTitle =
+    document.title;
+
+  const date =
+    selectedISO(
+      'resumen'
+    )
+    ||
+    'jornada';
+
+  document.title =
+    `TSJ_Resumen_Jornada_${date}`;
+
+  window.print();
+
+  setTimeout(
+    () => {
+      document.title =
+        previousTitle;
+    },
+    1500
+  );
+}
 
 
+/* =========================================================
+   INICIO
+========================================================= */
+
+loadInitial();
+
+
+/*
+ * Cada 5 minutos:
+ * actualizar solamente lo que el usuario
+ * está viendo.
+ *
+ * El resto ya queda cargado en memoria/cache.
+ */
 setInterval(
   () =>
-    loadLive(false),
+    refreshActive(
+      false
+    ),
   300000
 );
 
 </script>
 
 </body>
-
 </html>
