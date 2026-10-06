@@ -4918,6 +4918,54 @@ function renderKPI(){
     return;
   }
 
+  const indicators =
+    d.indicators ||
+    [];
+
+  const findIndicator =
+    function(matchers){
+
+      return indicators.find(
+        function(item){
+
+          const label =
+            normalizeText(
+              item.label ||
+              ''
+            );
+
+          return matchers.some(
+            function(matcher){
+
+              return label.includes(
+                matcher
+              );
+            }
+          );
+        }
+      ) || {};
+    };
+
+
+  const siniestrosConResponsabilidad =
+    findIndicator([
+      'SINIESTROS CON RESPONSABILIDAD'
+    ]);
+
+
+  const siniestrosSinResponsabilidad =
+    findIndicator([
+      'SINIESTROS SIN RESPONSABILIDAD',
+      'SINIESTROS SIN RESPONABILIDAD'
+    ]);
+
+
+  const vueltasPerdidasIndicador =
+    findIndicator([
+      'VUELTAS PERDIDAS'
+    ]);
+
+
   const metrics = [
 
     {
@@ -4985,17 +5033,42 @@ function renderKPI(){
 
     {
       label:
-        'Siniestros',
+        'Siniestros con responsabilidad',
 
       display:
         String(
-          r.siniestros ||
+          siniestrosConResponsabilidad.dayValue ??
+          r.siniestros ??
           0
         ),
 
       raw:
-        r.siniestros ||
-        0
+        siniestrosConResponsabilidad.dayValue ??
+        r.siniestros ??
+        0,
+
+      meta:
+        siniestrosConResponsabilidad.meta ||
+        '≤10'
+    },
+
+    {
+      label:
+        'Siniestros sin responsabilidad',
+
+      display:
+        String(
+          siniestrosSinResponsabilidad.dayValue ??
+          0
+        ),
+
+      raw:
+        siniestrosSinResponsabilidad.dayValue ??
+        0,
+
+      meta:
+        siniestrosSinResponsabilidad.meta ||
+        '≤6'
     },
 
     {
@@ -5074,8 +5147,29 @@ function renderKPI(){
 
       meta:
         metas.estetica
-    }
+    },
 
+    {
+      label:
+        'Vueltas Perdidas (Cantidad)',
+
+      display:
+        String(
+          vueltasPerdidasIndicador.dayValue ??
+          r.vueltasPerdidas ??
+          0
+        ),
+
+      raw:
+        vueltasPerdidasIndicador.dayValue ??
+        r.vueltasPerdidas ??
+        0,
+
+      meta:
+        vueltasPerdidasIndicador.meta ||
+        metas.vueltasPerdidaPct ||
+        '≤5%'
+    }
   ];
 
   $('#kpi').innerHTML = `
