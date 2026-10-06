@@ -1211,6 +1211,303 @@ th{
 
 }
 
+
+/* =========================================================
+   PDF RESUMEN - A4 VERTICAL / 1 HOJA
+   Solo afecta la exportación. No modifica la vista web.
+========================================================= */
+
+@page{
+  size:A4 portrait;
+  margin:8mm;
+}
+
+@media print{
+
+  html,
+  body{
+    width:210mm;
+    min-height:297mm;
+    margin:0 !important;
+    padding:0 !important;
+    background:#fff !important;
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+  }
+
+  body.print-summary{
+    background:#fff !important;
+  }
+
+  body.print-summary .shell{
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  body.print-summary .hero,
+  body.print-summary .tabs,
+  body.print-summary .foot,
+  body.print-summary #errorBox,
+  body.print-summary .summary-actions{
+    display:none !important;
+  }
+
+  body.print-summary .top{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    margin:0 0 4mm 0 !important;
+    padding:0 0 3mm 0 !important;
+    border-bottom:1px solid #ded8dc;
+  }
+
+  body.print-summary .top .status-wrap{
+    display:none !important;
+  }
+
+  body.print-summary .brand{
+    display:flex !important;
+    align-items:center !important;
+    gap:4mm !important;
+  }
+
+  body.print-summary .brand-logo{
+    width:27mm !important;
+    height:auto !important;
+  }
+
+  body.print-summary .brand-name{
+    font-size:11pt !important;
+    letter-spacing:.08em !important;
+  }
+
+  body.print-summary main > .tab-panel{
+    display:none !important;
+  }
+
+  body.print-summary #resumen{
+    display:block !important;
+    width:100% !important;
+    zoom:.90;
+  }
+
+  body.print-summary #resumen .section-head{
+    display:flex !important;
+    flex-direction:row !important;
+    align-items:flex-end !important;
+    justify-content:space-between !important;
+    margin:0 0 3mm 0 !important;
+  }
+
+  body.print-summary #resumen .section-head h2{
+    margin:0 !important;
+    font-size:15pt !important;
+    line-height:1.1 !important;
+  }
+
+  body.print-summary #resumen .source{
+    font-size:8pt !important;
+    line-height:1.25 !important;
+  }
+
+  body.print-summary .summary-kpis{
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:3mm !important;
+    margin:0 0 3mm 0 !important;
+  }
+
+  body.print-summary .summary-kpi{
+    min-height:30mm !important;
+    padding:4mm !important;
+    border-radius:3mm !important;
+    box-shadow:none !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+
+  body.print-summary .summary-kpi-label{
+    max-width:78% !important;
+    font-size:7.5pt !important;
+    line-height:1.2 !important;
+  }
+
+  body.print-summary .summary-kpi-value{
+    margin-top:2mm !important;
+    font-size:22pt !important;
+    line-height:1 !important;
+  }
+
+  body.print-summary .summary-kpi-sub{
+    margin-top:2mm !important;
+    font-size:8pt !important;
+    line-height:1.2 !important;
+  }
+
+  body.print-summary .summary-icon{
+    top:4mm !important;
+    right:4mm !important;
+    width:10mm !important;
+    height:10mm !important;
+  }
+
+  body.print-summary .summary-icon svg{
+    width:5mm !important;
+    height:5mm !important;
+  }
+
+  body.print-summary .summary-progress{
+    gap:2mm !important;
+    margin-top:2mm !important;
+  }
+
+  body.print-summary .summary-progress-track{
+    height:2mm !important;
+  }
+
+  body.print-summary .summary-progress-value{
+    min-width:10mm !important;
+    font-size:7pt !important;
+  }
+
+  body.print-summary .summary-lower-grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:3mm !important;
+  }
+
+  body.print-summary .summary-alert-area,
+  body.print-summary .impact-panel{
+    padding:3.5mm !important;
+    border-radius:3mm !important;
+    box-shadow:none !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+
+  body.print-summary .summary-title{
+    margin:0 0 2.5mm 0 !important;
+    font-size:11pt !important;
+  }
+
+  body.print-summary .summary-alert-grid{
+    display:grid !important;
+    grid-template-columns:repeat(3,1fr) !important;
+    gap:2.5mm !important;
+  }
+
+  body.print-summary .alert-card{
+    min-height:39mm !important;
+    padding:3.5mm !important;
+    border-radius:3mm !important;
+    box-shadow:none !important;
+    break-inside:avoid !important;
+    page-break-inside:avoid !important;
+  }
+
+  body.print-summary .alert-card:before{
+    height:1.2mm !important;
+  }
+
+  body.print-summary .alert-head{
+    min-height:8mm !important;
+    gap:2mm !important;
+  }
+
+  body.print-summary .alert-icon{
+    width:8mm !important;
+    height:8mm !important;
+    flex-basis:8mm !important;
+  }
+
+  body.print-summary .alert-icon svg{
+    width:4mm !important;
+    height:4mm !important;
+  }
+
+  body.print-summary .alert-card-title{
+    font-size:7pt !important;
+    line-height:1.15 !important;
+  }
+
+  body.print-summary .alert-card-number{
+    margin-top:2mm !important;
+    font-size:20pt !important;
+    line-height:1 !important;
+  }
+
+  body.print-summary .alert-card-detail{
+    gap:1.3mm !important;
+    margin-top:2.5mm !important;
+  }
+
+  body.print-summary .alert-detail-row,
+  body.print-summary .alert-none,
+  body.print-summary .alert-additional{
+    font-size:7.5pt !important;
+    line-height:1.2 !important;
+  }
+
+  body.print-summary .alert-none{
+    margin-top:3mm !important;
+  }
+
+  body.print-summary .alert-detail-dot{
+    width:1.5mm !important;
+    height:1.5mm !important;
+    flex-basis:1.5mm !important;
+    margin-top:1.2mm !important;
+  }
+
+  body.print-summary .impact-panel{
+    padding-bottom:3mm !important;
+  }
+
+  body.print-summary .impact-head{
+    align-items:flex-start !important;
+    margin-bottom:3mm !important;
+  }
+
+  body.print-summary .impact-head h3{
+    font-size:11pt !important;
+    line-height:1.2 !important;
+  }
+
+  body.print-summary .impact-head span{
+    font-size:7pt !important;
+  }
+
+  body.print-summary .impact-chart{
+    gap:2.2mm !important;
+  }
+
+  body.print-summary .impact-row{
+    grid-template-columns:9mm minmax(0,1fr) 7mm !important;
+    gap:2mm !important;
+  }
+
+  body.print-summary .impact-line,
+  body.print-summary .impact-value{
+    font-size:7.5pt !important;
+  }
+
+  body.print-summary .impact-track{
+    height:2.5mm !important;
+  }
+
+  body.print-summary .impact-empty{
+    padding:5mm 2mm !important;
+    font-size:8pt !important;
+  }
+
+  body.print-summary *{
+    orphans:2;
+    widows:2;
+  }
+}
+
 </style>
 
 </head>
@@ -1329,10 +1626,6 @@ const API_URL =
 'https://script.google.com/macros/s/AKfycbxzu1Mob_Z7E0-33nMXmFDk1zsaOWnUyzb1s58z1NH_2qDK4utHfvtO9-N31GtMuYwyEA/exec';
 
 
-/* =========================================================
-   ESTADO / CACHE LOCAL
-========================================================= */
-
 const LOCAL_CACHE_KEY =
   'TSJ_DASHBOARD_CACHE_V9';
 
@@ -1381,10 +1674,6 @@ const DATE_BY_TAB = {
 
 const INFLIGHT = {};
 
-
-/* =========================================================
-   GENERALES
-========================================================= */
 
 const $ =
   s =>
@@ -1483,10 +1772,6 @@ function updateLastUpdate(){
 }
 
 
-/* =========================================================
-   CACHE DEL NAVEGADOR
-========================================================= */
-
 function restoreLocalSnapshot(){
   try {
     const raw =
@@ -1564,10 +1849,6 @@ function saveLocalSnapshot(){
   } catch (err) {}
 }
 
-
-/* =========================================================
-   ICONOS
-========================================================= */
 
 function svgIcon(type){
 
@@ -1656,10 +1937,6 @@ function svgIcon(type){
   return '';
 }
 
-
-/* =========================================================
-   COMPONENTES
-========================================================= */
 
 function kpi(
   label,
@@ -1841,10 +2118,6 @@ function bars(items,limit=12){
 }
 
 
-/* =========================================================
-   FECHAS
-========================================================= */
-
 function todayISO(){
   const p =
     DATA.period ||
@@ -2022,10 +2295,6 @@ function shortDateLabel(ddmm){
   return `${+m[1]}-${mon}`;
 }
 
-
-/* =========================================================
-   DATOS / ORDEN
-========================================================= */
 
 function countBy(rows,field){
   const out = {};
@@ -2221,10 +2490,6 @@ function countByNormalizedLine(rows){
 }
 
 
-/* =========================================================
-   MECANICA
-========================================================= */
-
 function normalizeText(value){
   return String(
     value ||
@@ -2338,10 +2603,6 @@ function normalizeMechanicalCategory(value){
   return original;
 }
 
-
-/* =========================================================
-   CONDUCTORES
-========================================================= */
 
 function normalizePerson(value){
   return String(
@@ -2625,10 +2886,6 @@ function compactList(
   );
 }
 
-
-/* =========================================================
-   RESUMEN
-========================================================= */
 
 function renderAlertCases(
   rows,
@@ -3293,10 +3550,6 @@ function renderResumen(){
 }
 
 
-/* =========================================================
-   PLAN SERV
-========================================================= */
-
 function renderPlan(){
   const d =
     DATA.planServ ||
@@ -3526,10 +3779,6 @@ function renderPlan(){
   `;
 }
 
-
-/* =========================================================
-   PLANILLERIA
-========================================================= */
 
 function renderSalidas(){
   const d =
@@ -3781,10 +4030,6 @@ function renderSalidas(){
   `;
 }
 
-
-/* =========================================================
-   GUARDIA
-========================================================= */
 
 function normalizeGuardText(value){
   return normalizeText(
@@ -4323,10 +4568,6 @@ function renderGuardia(){
 }
 
 
-/* =========================================================
-   OS
-========================================================= */
-
 function renderOS(){
   const d =
     DATA.os ||
@@ -4461,10 +4702,6 @@ function renderOS(){
 }
 
 
-/* =========================================================
-   KPI
-========================================================= */
-
 function fmtPct(v){
   if(
     v === null ||
@@ -4516,12 +4753,6 @@ function rawNumber(v){
 }
 
 
-/*
- * Devuelve:
- * true  = cumple meta
- * false = no cumple
- * null  = no se puede determinar
- */
 function metricPass(
   value,
   meta
@@ -4565,11 +4796,6 @@ function metricPass(
     return n >= t;
   }
 
-  /*
-   * Metas sin símbolo:
-   * IPK 2.00 -> debe ser >= 2.00
-   * Estética 100% -> debe ser >= 100%
-   */
   return n >= t;
 }
 
@@ -4961,10 +5187,6 @@ function renderKPI(){
 }
 
 
-/* =========================================================
-   RENDER OPTIMIZADO
-========================================================= */
-
 function renderSignature(tab){
   switch(tab){
 
@@ -5063,10 +5285,6 @@ function renderActiveTab(force=false){
 }
 
 
-/* =========================================================
-   FECHA
-========================================================= */
-
 function configureDatePicker(){
   const p =
     DATA.period ||
@@ -5147,10 +5365,6 @@ function configureDatePicker(){
 }
 
 
-/* =========================================================
-   MERGE DE RESPUESTAS
-========================================================= */
-
 function mergePayload(payload){
   if(!payload){
     return;
@@ -5191,11 +5405,6 @@ function mergePayload(payload){
         return;
       }
 
-      /*
-       * Si ya existe un dato válido local
-       * y el servidor respondió con error,
-       * no borrar el dato anterior.
-       */
       if(
         payload.ok === false
         &&
@@ -5223,10 +5432,6 @@ function mergePayload(payload){
   updateLastUpdate();
 }
 
-
-/* =========================================================
-   JSONP CON TIMEOUT Y REINTENTO
-========================================================= */
 
 function requestSection(
   section,
@@ -5430,10 +5635,6 @@ function requestSection(
 }
 
 
-/* =========================================================
-   CARGA POR SOLAPA
-========================================================= */
-
 function sectionForTab(tab){
   const map = {
     plan:'planServ',
@@ -5532,10 +5733,6 @@ function ensureTabData(tab){
 }
 
 
-/* =========================================================
-   CARGA INICIAL
-========================================================= */
-
 function loadInitial(){
   const restored =
     restoreLocalSnapshot();
@@ -5555,13 +5752,6 @@ function loadInitial(){
     'Actualizando…'
   );
 
-  /*
-   * Las 3 fuentes del Resumen se solicitan
-   * en paralelo.
-   *
-   * Además dejan Plan Serv, Planillería
-   * y Guardia listas para el cambio de solapa.
-   */
   Promise.allSettled([
     requestSection(
       'planServ'
@@ -5625,10 +5815,6 @@ function loadInitial(){
         true
       );
 
-      /*
-       * OS y KPI se precargan después.
-       * No frenan la apertura inicial.
-       */
       setTimeout(
         () => {
           if(!READY.os){
@@ -5660,10 +5846,6 @@ function loadInitial(){
   );
 }
 
-
-/* =========================================================
-   ACTUALIZAR
-========================================================= */
 
 function refreshActive(force=true){
   setStatus(
@@ -5755,10 +5937,6 @@ function refreshActive(force=true){
 }
 
 
-/* =========================================================
-   NAVEGACION
-========================================================= */
-
 function activateTab(tabName){
   ACTIVE_TAB =
     tabName;
@@ -5793,10 +5971,6 @@ function activateTab(tabName){
 
   configureDatePicker();
 
-  /*
-   * Si la sección ya está cargada,
-   * el cambio es inmediato.
-   */
   renderActiveTab();
 
   ensureTabData(
@@ -5844,9 +6018,6 @@ $('#datePicker')
           e.target.value;
       }
 
-      /*
-       * Solo invalida la solapa abierta.
-       */
       LAST_RENDER[
         ACTIVE_TAB
       ] = '';
@@ -5868,10 +6039,6 @@ $('#refreshBtn')
   );
 
 
-/* =========================================================
-   PDF
-========================================================= */
-
 function exportSummaryPDF(){
   const previousTitle =
     document.title;
@@ -5886,32 +6053,44 @@ function exportSummaryPDF(){
   document.title =
     `TSJ_Resumen_Jornada_${date}`;
 
+  document.body
+    .classList
+    .add(
+      'print-summary'
+    );
+
+  const cleanup =
+    () => {
+      document.body
+        .classList
+        .remove(
+          'print-summary'
+        );
+
+      document.title =
+        previousTitle;
+    };
+
+  window.addEventListener(
+    'afterprint',
+    cleanup,
+    {
+      once:true
+    }
+  );
+
   window.print();
 
   setTimeout(
-    () => {
-      document.title =
-        previousTitle;
-    },
-    1500
+    cleanup,
+    2500
   );
 }
 
 
-/* =========================================================
-   INICIO
-========================================================= */
-
 loadInitial();
 
 
-/*
- * Cada 5 minutos:
- * actualizar solamente lo que el usuario
- * está viendo.
- *
- * El resto ya queda cargado en memoria/cache.
- */
 setInterval(
   () =>
     refreshActive(
