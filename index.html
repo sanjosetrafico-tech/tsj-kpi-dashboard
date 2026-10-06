@@ -13,20 +13,16 @@
 :root{
   --ink:#181416;
   --muted:#746d72;
-
   --pink:#ed2e91;
   --pink-dark:#be176d;
   --pink-pale:#fff0f8;
-
   --line:#e9e4e7;
   --paper:#ffffff;
   --bg:#f6f4f5;
-
   --good:#0b9b73;
   --warn:#d77817;
   --bad:#c43351;
   --blue:#2f80d0;
-
   --shadow:0 10px 30px rgba(44,30,39,.07);
 }
 
@@ -38,7 +34,6 @@ body{
   margin:0;
   background:var(--bg);
   color:var(--ink);
-
   font-family:
     Inter,
     ui-sans-serif,
@@ -46,7 +41,6 @@ body{
     -apple-system,
     "Segoe UI",
     sans-serif;
-
   font-size:15px;
 }
 
@@ -357,6 +351,47 @@ input{
 
 
 /* =========================================================
+   PLANILLERIA NUEVA DISTRIBUCION
+========================================================= */
+
+.planillaria-board{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:14px;
+  align-items:stretch;
+  margin-bottom:14px;
+}
+
+.planillaria-left{
+  display:grid;
+  grid-template-rows:auto 1fr;
+  gap:14px;
+  min-width:0;
+}
+
+.planillaria-right{
+  display:grid;
+  grid-template-rows:repeat(2,1fr);
+  gap:14px;
+  min-width:0;
+}
+
+.planillaria-board .panel{
+  margin-bottom:0;
+  min-width:0;
+}
+
+.planillaria-right .panel{
+  height:100%;
+}
+
+.planillaria-driver-table th,
+.planillaria-driver-table td{
+  padding:8px 7px;
+}
+
+
+/* =========================================================
    BARRAS
 ========================================================= */
 
@@ -540,14 +575,11 @@ th{
   position:absolute;
   top:25px;
   right:20px;
-
   width:52px;
   height:52px;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   border-radius:50%;
 }
 
@@ -683,11 +715,9 @@ th{
   width:42px;
   height:42px;
   flex:0 0 42px;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   border-radius:50%;
 }
 
@@ -739,7 +769,6 @@ th{
   display:flex;
   align-items:flex-start;
   gap:8px;
-
   color:#29242a;
   font-size:12px;
   line-height:1.35;
@@ -874,19 +903,16 @@ th{
 .gauge{
   --p:0;
   --gauge-color:var(--pink);
-
   position:relative;
   width:154px;
   height:154px;
   border-radius:50%;
-
   background:
     conic-gradient(
       var(--gauge-color)
       calc(var(--p)*1%),
       #eee8eb 0
     );
-
   display:grid;
   place-items:center;
 }
@@ -1306,6 +1332,14 @@ th{
     grid-template-columns:1fr;
   }
 
+  .planillaria-board{
+    grid-template-columns:1fr;
+  }
+
+  .planillaria-right{
+    grid-template-rows:auto auto;
+  }
+
   .grid2,
   .plan-hero,
   .kpi-dashboard,
@@ -1535,10 +1569,7 @@ th{
 
     <div class="live">
 
-      <span
-        id="statusDot"
-        class="dot"
-      ></span>
+      <span id="statusDot" class="dot"></span>
 
       <span id="statusText">
         Actualizando…
@@ -1547,10 +1578,7 @@ th{
     </div>
 
 
-    <button
-      id="refreshBtn"
-      class="refresh"
-    >
+    <button id="refreshBtn" class="refresh">
       Actualizar
     </button>
 
@@ -1586,45 +1614,27 @@ th{
 
 <nav class="tabs">
 
-  <button
-    class="tab active"
-    data-tab="resumen"
-  >
+  <button class="tab active" data-tab="resumen">
     Resumen Jornada
   </button>
 
-  <button
-    class="tab"
-    data-tab="plan"
-  >
+  <button class="tab" data-tab="plan">
     Plan Serv
   </button>
 
-  <button
-    class="tab"
-    data-tab="salidas"
-  >
+  <button class="tab" data-tab="salidas">
     Planillería
   </button>
 
-  <button
-    class="tab"
-    data-tab="guardia"
-  >
+  <button class="tab" data-tab="guardia">
     Guardia
   </button>
 
-  <button
-    class="tab"
-    data-tab="os"
-  >
+  <button class="tab" data-tab="os">
     OS
   </button>
 
-  <button
-    class="tab"
-    data-tab="kpi"
-  >
+  <button class="tab" data-tab="kpi">
     KPI
   </button>
 
@@ -1633,35 +1643,17 @@ th{
 
 <main>
 
-  <section
-    id="resumen"
-    class="tab-panel active"
-  ></section>
+  <section id="resumen" class="tab-panel active"></section>
 
-  <section
-    id="plan"
-    class="tab-panel"
-  ></section>
+  <section id="plan" class="tab-panel"></section>
 
-  <section
-    id="salidas"
-    class="tab-panel"
-  ></section>
+  <section id="salidas" class="tab-panel"></section>
 
-  <section
-    id="guardia"
-    class="tab-panel"
-  ></section>
+  <section id="guardia" class="tab-panel"></section>
 
-  <section
-    id="os"
-    class="tab-panel"
-  ></section>
+  <section id="os" class="tab-panel"></section>
 
-  <section
-    id="kpi"
-    class="tab-panel"
-  ></section>
+  <section id="kpi" class="tab-panel"></section>
 
 </main>
 
@@ -1684,15 +1676,13 @@ th{
 
 <script>
 
-
 const API_URL =
 'https://script.google.com/macros/s/AKfycbxzu1Mob_Z7E0-33nMXmFDk1zsaOWnUyzb1s58z1NH_2qDK4utHfvtO9-N31GtMuYwyEA/exec';
 
 
 let DATA = {};
 
-let ACTIVE_TAB =
-  'resumen';
+let ACTIVE_TAB = 'resumen';
 
 
 const DATE_BY_TAB = {
@@ -1726,18 +1716,12 @@ const esc =
 const num =
   v =>
     Number(v || 0)
-      .toLocaleString(
-        'es-AR'
-      );
+      .toLocaleString('es-AR');
 
 
 const pad2 =
   v =>
-    String(v)
-      .padStart(
-        2,
-        '0'
-      );
+    String(v).padStart(2,'0');
 
 
 /* =========================================================
@@ -1754,12 +1738,10 @@ function svgIcon(type){
      stroke-linejoin="round"`;
 
 
-  if (
-    type === 'check'
-  ){
+  if(type === 'check'){
 
     return `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="9" ${common}></circle>
         <path d="m8 12 2.5 2.5L16 9" ${common}></path>
       </svg>
@@ -1767,12 +1749,10 @@ function svgIcon(type){
   }
 
 
-  if (
-    type === 'bus'
-  ){
+  if(type === 'bus'){
 
     return `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
         <rect x="5" y="3" width="14" height="16" rx="3" ${common}></rect>
         <path d="M7 7h10M7 14h10" ${common}></path>
         <circle cx="8" cy="17" r="1" fill="currentColor"></circle>
@@ -1783,12 +1763,10 @@ function svgIcon(type){
   }
 
 
-  if (
-    type === 'users'
-  ){
+  if(type === 'users'){
 
     return `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
         <circle cx="9" cy="8" r="3" ${common}></circle>
         <path d="M3.5 19c.4-4 2.4-6 5.5-6s5.1 2 5.5 6" ${common}></path>
         <circle cx="17" cy="9" r="2.2" ${common}></circle>
@@ -1798,12 +1776,10 @@ function svgIcon(type){
   }
 
 
-  if (
-    type === 'clock'
-  ){
+  if(type === 'clock'){
 
     return `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="8" ${common}></circle>
         <path d="M12 7v5l3 2" ${common}></path>
       </svg>
@@ -1811,12 +1787,10 @@ function svgIcon(type){
   }
 
 
-  if (
-    type === 'gear'
-  ){
+  if(type === 'gear'){
 
     return `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="3" ${common}></circle>
         <path
           d="M19 13.5v-3l-2-.7a6.8 6.8 0 0 0-.8-1.8l.9-1.9-2.2-2.1-1.8.9a7 7 0 0 0-2-.8L10.5 2h-3L7 4.1a7 7 0 0 0-2 .8L3.2 4 1 6.1 2 8a7 7 0 0 0-.8 1.8L-1 10.5v3l2.2.7A7 7 0 0 0 2 16l-1 1.9L3.2 20 5 19.1a7 7 0 0 0 2 .8l.5 2.1h3l.6-2.1a7 7 0 0 0 2-.8l1.8.9 2.2-2.1-.9-1.9a7 7 0 0 0 .8-1.8Z"
@@ -1828,12 +1802,10 @@ function svgIcon(type){
   }
 
 
-  if (
-    type === 'wrench'
-  ){
+  if(type === 'wrench'){
 
     return `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
         <path
           d="M14.5 6.5a5 5 0 0 0-6.8 6.1L3 17.3A2.6 2.6 0 0 0 6.7 21l4.7-4.7a5 5 0 0 0 6.1-6.8l-3 3-3-3Z"
           ${common}
@@ -1843,12 +1815,10 @@ function svgIcon(type){
   }
 
 
-  if (
-    type === 'road'
-  ){
+  if(type === 'road'){
 
     return `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
         <path d="M8 3 5 21M16 3l3 18" ${common}></path>
         <path d="M12 4v3M12 10v4M12 17v3" ${common}></path>
       </svg>
@@ -1927,14 +1897,10 @@ function bars(
 ){
 
   const a =
-    (items || [])
-      .slice(
-        0,
-        limit
-      );
+    (items || []).slice(0,limit);
 
 
-  if (!a.length){
+  if(!a.length){
 
     return `
       <div class="empty">
@@ -1946,11 +1912,7 @@ function bars(
 
   const max =
     Math.max(
-      ...a.map(
-        x =>
-          +x.value ||
-          0
-      ),
+      ...a.map(x => +x.value || 0),
       1
     );
 
@@ -1975,11 +1937,7 @@ function bars(
                     width:${
                       Math.max(
                         3,
-                        (+x.value || 0)
-                        /
-                        max
-                        *
-                        100
+                        (+x.value || 0) / max * 100
                       )
                     }%
                   "
@@ -1993,8 +1951,7 @@ function bars(
 
             </div>
           `
-        )
-        .join('')
+        ).join('')
       }
 
     </div>
@@ -2007,7 +1964,7 @@ function table(
   rows
 ){
 
-  if (!rows?.length){
+  if(!rows?.length){
 
     return `
       <div class="empty">
@@ -2023,19 +1980,16 @@ function table(
       <table>
 
         <thead>
-
           <tr>
 
             ${
               headers.map(
                 h =>
                   `<th>${esc(h[0])}</th>`
-              )
-              .join('')
+              ).join('')
             }
 
           </tr>
-
         </thead>
 
         <tbody>
@@ -2052,27 +2006,18 @@ function table(
 
                           ${
                             h[2]
-                              ? h[2](
-                                  r[h[1]],
-                                  r
-                                )
-                              : esc(
-                                  r[h[1]]
-                                  ??
-                                  ''
-                                )
+                              ? h[2](r[h[1]],r)
+                              : esc(r[h[1]] ?? '')
                           }
 
                         </td>
                       `
-                    )
-                    .join('')
+                    ).join('')
                   }
 
                 </tr>
               `
-            )
-            .join('')
+            ).join('')
           }
 
         </tbody>
@@ -2090,10 +2035,7 @@ function table(
 
 function todayISO(){
 
-  const p =
-    DATA.period ||
-    {};
-
+  const p = DATA.period || {};
 
   return (
     p.year &&
@@ -2107,9 +2049,7 @@ function todayISO(){
 
 function kpiDefaultISO(){
 
-  const p =
-    DATA.period ||
-    {};
+  const p = DATA.period || {};
 
 
   const days =
@@ -2118,19 +2058,14 @@ function kpiDefaultISO(){
         x => {
 
           const m =
-            String(
-              x.date ||
-              ''
-            )
-            .match(
-              /^(\d{1,2})[\/-](\d{1,2})/
-            );
-
+            String(x.date || '')
+              .match(
+                /^(\d{1,2})[\/-](\d{1,2})/
+              );
 
           return (
             m &&
-            +m[2] ===
-            +p.month
+            +m[2] === +p.month
           )
             ? +m[1]
             : 0;
@@ -2162,9 +2097,7 @@ function kpiDefaultISO(){
 }
 
 
-function selectedISO(
-  tab=ACTIVE_TAB
-){
+function selectedISO(tab=ACTIVE_TAB){
 
   return (
     DATE_BY_TAB[tab]
@@ -2174,9 +2107,7 @@ function selectedISO(
 }
 
 
-function selectedDDMM(
-  tab=ACTIVE_TAB
-){
+function selectedDDMM(tab=ACTIVE_TAB){
 
   const m =
     selectedISO(tab)
@@ -2184,25 +2115,20 @@ function selectedDDMM(
         /^(\d{4})-(\d{2})-(\d{2})$/
       );
 
-
   return m
     ? `${m[3]}/${m[2]}`
     : '';
 }
 
 
-function selectedLabel(
-  tab=ACTIVE_TAB
-){
+function selectedLabel(tab=ACTIVE_TAB){
 
   const v =
     selectedISO(tab);
 
-
   return v
     ? new Date(
-        v +
-        'T12:00:00'
+        v + 'T12:00:00'
       )
       .toLocaleDateString(
         'es-AR',
@@ -2219,9 +2145,7 @@ function selectedLabel(
 function monthLabel(){
 
   const p =
-    DATA.period ||
-    {};
-
+    DATA.period || {};
 
   return (
     p.month &&
@@ -2243,24 +2167,17 @@ function monthLabel(){
 }
 
 
-function shortDateLabel(
-  ddmm
-){
+function shortDateLabel(ddmm){
 
   const m =
-    String(
-      ddmm ||
-      ''
-    )
-    .match(
-      /^(\d{1,2})[\/-](\d{1,2})/
-    );
+    String(ddmm || '')
+      .match(
+        /^(\d{1,2})[\/-](\d{1,2})/
+      );
 
-
-  if (!m){
+  if(!m){
     return ddmm || '';
   }
-
 
   const mon = [
     'ene',
@@ -2277,25 +2194,17 @@ function shortDateLabel(
     'dic'
   ][+m[2]-1];
 
-
   return `${+m[1]}-${mon}`;
 }
 
 
-function sameDay(
-  value,
-  key
-){
+function sameDay(value,key){
 
   const m =
-    String(
-      value ||
-      ''
-    )
-    .match(
-      /^(\d{1,2})[\/-](\d{1,2})/
-    );
-
+    String(value || '')
+      .match(
+        /^(\d{1,2})[\/-](\d{1,2})/
+      );
 
   return (
     !!m
@@ -2311,13 +2220,9 @@ function sameDay(
    AGRUPACION
 ========================================================= */
 
-function countBy(
-  rows,
-  field
-){
+function countBy(rows,field){
 
   const o = {};
-
 
   (rows || [])
     .forEach(
@@ -2331,7 +2236,6 @@ function countBy(
           .trim()
           ||
           'Sin dato';
-
 
         o[k] =
           (o[k] || 0)
@@ -2354,16 +2258,12 @@ function countBy(
         b.value -
         a.value
         ||
-        a.label.localeCompare(
-          b.label
-        )
+        a.label.localeCompare(b.label)
     );
 }
 
 
-function sortByLineAndService(
-  rows
-){
+function sortByLineAndService(rows){
 
   return [
     ...(rows || [])
@@ -2371,20 +2271,12 @@ function sortByLineAndService(
   .sort(
     (a,b) =>
 
-      String(
-        a.linea ||
-        ''
-      )
-      .localeCompare(
-        String(
-          b.linea ||
-          ''
-        ),
-        'es',
-        {
-          numeric:true
-        }
-      )
+      String(a.linea || '')
+        .localeCompare(
+          String(b.linea || ''),
+          'es',
+          {numeric:true}
+        )
 
       ||
 
@@ -2400,38 +2292,25 @@ function sortByLineAndService(
           ''
         ),
         'es',
-        {
-          numeric:true
-        }
+        {numeric:true}
       )
   );
 }
 
 
-function sortByLine(
-  rows
-){
+function sortByLine(rows){
 
   return [
     ...(rows || [])
   ]
   .sort(
     (a,b) =>
-
-      String(
-        a.linea ||
-        ''
-      )
-      .localeCompare(
-        String(
-          b.linea ||
-          ''
-        ),
-        'es',
-        {
-          numeric:true
-        }
-      )
+      String(a.linea || '')
+        .localeCompare(
+          String(b.linea || ''),
+          'es',
+          {numeric:true}
+        )
   );
 }
 
@@ -2443,24 +2322,18 @@ function sortByLine(
 function normalizeBaseLine(value){
 
   let line =
-    String(
-      value ||
-      ''
-    )
-    .trim()
-    .toUpperCase()
-    .replace(
-      /\s+/g,
-      ''
-    );
+    String(value || '')
+      .trim()
+      .toUpperCase()
+      .replace(/\s+/g,'');
 
 
-  if (!line){
+  if(!line){
     return '';
   }
 
 
-  if (
+  if(
     line === 'P'
     ||
     line === 'P1'
@@ -2497,28 +2370,18 @@ function countByNormalizedLine(rows){
             row.linea
           );
 
-
-        if (!line){
+        if(!line){
           return;
         }
 
-
         counts[line] =
-          (
-            counts[line]
-            ||
-            0
-          )
-          +
-          1;
+          (counts[line] || 0) + 1;
       }
     );
 
 
   return Object
-    .entries(
-      counts
-    )
+    .entries(counts)
     .map(
       ([label,value]) => ({
         label,
@@ -2533,9 +2396,7 @@ function countByNormalizedLine(rows){
         a.label.localeCompare(
           b.label,
           'es',
-          {
-            numeric:true
-          }
+          {numeric:true}
         )
     );
 }
@@ -2547,51 +2408,37 @@ function countByNormalizedLine(rows){
 
 function normalizeText(value){
 
-  return String(
-    value ||
-    ''
-  )
-  .normalize(
-    'NFD'
-  )
-  .replace(
-    /[\u0300-\u036f]/g,
-    ''
-  )
-  .trim()
-  .toUpperCase();
+  return String(value || '')
+    .normalize('NFD')
+    .replace(
+      /[\u0300-\u036f]/g,
+      ''
+    )
+    .trim()
+    .toUpperCase();
 }
 
 
 function normalizeMechanicalCategory(value){
 
   const original =
-    String(
-      value ||
-      ''
-    )
-    .trim();
-
+    String(value || '').trim();
 
   const v =
-    normalizeText(
-      original
-    );
+    normalizeText(original);
 
 
-  if (!v){
+  if(!v){
     return 'Mecánica';
   }
 
 
-  if (
-    v.includes('GPS')
-  ){
+  if(v.includes('GPS')){
     return 'GPS';
   }
 
 
-  if (
+  if(
     v.includes('PINCH')
     ||
     v.includes('NEUM')
@@ -2606,7 +2453,7 @@ function normalizeMechanicalCategory(value){
   }
 
 
-  if (
+  if(
     v.includes('MOTOR')
     ||
     v.includes('ACEITE')
@@ -2621,7 +2468,7 @@ function normalizeMechanicalCategory(value){
   }
 
 
-  if (
+  if(
     v.includes('TRANSM')
     ||
     v.includes('CAJA')
@@ -2634,7 +2481,7 @@ function normalizeMechanicalCategory(value){
   }
 
 
-  if (
+  if(
     v.includes('FRENO')
     ||
     v.includes('FREN')
@@ -2643,7 +2490,7 @@ function normalizeMechanicalCategory(value){
   }
 
 
-  if (
+  if(
     v.includes('ELECTR')
     ||
     v.includes('BATERIA')
@@ -2658,7 +2505,7 @@ function normalizeMechanicalCategory(value){
   }
 
 
-  if (
+  if(
     v.includes('TABLERO')
     ||
     v.includes('INSTRUMENT')
@@ -2673,7 +2520,7 @@ function normalizeMechanicalCategory(value){
   }
 
 
-  if (
+  if(
     v.includes('PUERTA')
     ||
     v.includes('RAMPA')
@@ -2704,64 +2551,45 @@ function normalizeMechanicalCategory(value){
 
 function normalizePerson(value){
 
-  return String(
-    value ||
-    ''
-  )
-  .normalize(
-    'NFD'
-  )
-  .replace(
-    /[\u0300-\u036f]/g,
-    ''
-  )
-  .toUpperCase()
-  .replace(
-    /[^A-Z0-9]/g,
-    ''
-  );
+  return String(value || '')
+    .normalize('NFD')
+    .replace(
+      /[\u0300-\u036f]/g,
+      ''
+    )
+    .toUpperCase()
+    .replace(
+      /[^A-Z0-9]/g,
+      ''
+    );
 }
 
 
 function normalizeTurn(value){
 
-  return String(
-    value ||
-    ''
-  )
-  .trim()
-  .toUpperCase()
-  .replace(
-    /\s+/g,
-    ''
-  );
+  return String(value || '')
+    .trim()
+    .toUpperCase()
+    .replace(/\s+/g,'');
 }
 
 
 function sameDriverReplacement(a,b){
 
   const titularA =
-    normalizePerson(
-      a?.titular
-    );
+    normalizePerson(a?.titular);
 
   const titularB =
-    normalizePerson(
-      b?.titular
-    );
+    normalizePerson(b?.titular);
 
   const replA =
-    normalizePerson(
-      a?.reemplazo
-    );
+    normalizePerson(a?.reemplazo);
 
   const replB =
-    normalizePerson(
-      b?.reemplazo
-    );
+    normalizePerson(b?.reemplazo);
 
 
-  if (
+  if(
     titularA &&
     titularB &&
     replA &&
@@ -2773,34 +2601,26 @@ function sameDriverReplacement(a,b){
   }
 
 
-  if (
+  if(
     replA &&
     replB &&
     replA === replB
   ){
 
     const lineA =
-      normalizeBaseLine(
-        a?.linea
-      );
+      normalizeBaseLine(a?.linea);
 
     const lineB =
-      normalizeBaseLine(
-        b?.linea
-      );
+      normalizeBaseLine(b?.linea);
 
     const turnoA =
-      normalizeTurn(
-        a?.turno
-      );
+      normalizeTurn(a?.turno);
 
     const turnoB =
-      normalizeTurn(
-        b?.turno
-      );
+      normalizeTurn(b?.turno);
 
 
-    if (
+    if(
       lineA &&
       lineB &&
       lineA === lineB &&
@@ -2844,11 +2664,8 @@ function mergeDriverReplacements(
           );
 
 
-        if (!duplicated){
-
-          result.push(
-            guardRow
-          );
+        if(!duplicated){
+          result.push(guardRow);
         }
       }
     );
@@ -2859,17 +2676,13 @@ function mergeDriverReplacements(
 
 
 /* =========================================================
-   LEGAJOS
+   LEGAJOS / APELLIDOS
 ========================================================= */
 
 function extractNumericPrefix(value){
 
   const text =
-    String(
-      value ||
-      ''
-    )
-    .trim();
+    String(value || '').trim();
 
 
   const match =
@@ -2886,7 +2699,7 @@ function extractNumericPrefix(value){
 
 function getDriverLegajo(row){
 
-  if (!row){
+  if(!row){
     return '';
   }
 
@@ -2904,12 +2717,9 @@ function getDriverLegajo(row){
   ];
 
 
-  for (
-    const value
-    of candidates
-  ){
+  for(const value of candidates){
 
-    if (
+    if(
       value !== undefined
       &&
       value !== null
@@ -2917,40 +2727,133 @@ function getDriverLegajo(row){
       String(value).trim()
     ){
 
-      return String(
-        value
-      )
-      .trim();
+      return String(value).trim();
     }
   }
 
 
   return (
-    extractNumericPrefix(
-      row.titular
-    )
+    extractNumericPrefix(row.titular)
     ||
-    extractNumericPrefix(
-      row.conductor
-    )
+    extractNumericPrefix(row.conductor)
     ||
-    extractNumericPrefix(
-      row.chofer
-    )
+    extractNumericPrefix(row.chofer)
+    ||
+    extractNumericPrefix(row.reemplazo)
     ||
     ''
   );
 }
 
 
-function uniqueLegajos(rows){
+function getDriverSurname(row){
+
+  if(!row){
+    return '';
+  }
+
+
+  if(
+    row.apellido !== undefined
+    &&
+    row.apellido !== null
+    &&
+    String(row.apellido).trim()
+  ){
+
+    return String(row.apellido).trim();
+  }
+
+
+  const candidates = [
+
+    row.titular,
+    row.conductor,
+    row.chofer,
+    row.reemplazo,
+    row.nombre
+
+  ];
+
+
+  for(let value of candidates){
+
+    if(
+      value === undefined
+      ||
+      value === null
+      ||
+      !String(value).trim()
+    ){
+      continue;
+    }
+
+
+    let text =
+      String(value).trim();
+
+
+    text =
+      text
+        .replace(
+          /^\d{2,8}\s*[-–—]\s*/,
+          ''
+        )
+        .trim();
+
+
+    if(!text){
+      continue;
+    }
+
+
+    if(text.includes(',')){
+
+      const surname =
+        text
+          .split(',')[0]
+          .trim();
+
+      if(surname){
+        return surname;
+      }
+    }
+
+
+    const first =
+      text
+        .split(/\s+/)[0]
+        .trim();
+
+
+    if(first){
+      return first;
+    }
+  }
+
+
+  return '';
+}
+
+
+function getDriverReference(row){
+
+  return (
+    getDriverLegajo(row)
+    ||
+    getDriverSurname(row)
+    ||
+    ''
+  );
+}
+
+
+function uniqueDriverReferences(rows){
 
   return [
     ...new Set(
       (rows || [])
-        .map(
-          getDriverLegajo
-        )
+        .map(getDriverReference)
         .filter(Boolean)
     )
   ];
@@ -2968,27 +2871,21 @@ function compactList(
         (values || [])
           .map(
             x =>
-              String(
-                x ??
-                ''
-              )
-              .trim()
+              String(x ?? '')
+                .trim()
           )
           .filter(Boolean)
       )
     ];
 
 
-  if (!clean.length){
+  if(!clean.length){
     return '—';
   }
 
 
   const visible =
-    clean.slice(
-      0,
-      limit
-    );
+    clean.slice(0,limit);
 
 
   const more =
@@ -3017,7 +2914,7 @@ function renderAlertCases(
   emptyText
 ){
 
-  if (!rows.length){
+  if(!rows.length){
 
     return `
       <div class="alert-none">
@@ -3028,10 +2925,7 @@ function renderAlertCases(
 
 
   const visible =
-    rows.slice(
-      0,
-      3
-    );
+    rows.slice(0,3);
 
 
   const more =
@@ -3069,8 +2963,7 @@ function renderAlertCases(
             </div>
 
           `
-        )
-        .join('')
+        ).join('')
       }
 
 
@@ -3106,16 +2999,11 @@ function renderAlertCases(
 function renderImpactChart(detours){
 
   const rows =
-    countByNormalizedLine(
-      detours
-    )
-    .slice(
-      0,
-      5
-    );
+    countByNormalizedLine(detours)
+      .slice(0,5);
 
 
-  if (!rows.length){
+  if(!rows.length){
 
     return `
       <div class="impact-empty">
@@ -3129,10 +3017,7 @@ function renderImpactChart(detours){
     Math.max(
       ...rows.map(
         x =>
-          Number(
-            x.value ||
-            0
-          )
+          Number(x.value || 0)
       ),
       1
     );
@@ -3148,10 +3033,7 @@ function renderImpactChart(detours){
             const width =
               Math.max(
                 7,
-                Number(
-                  row.value ||
-                  0
-                )
+                Number(row.value || 0)
                 /
                 max
                 *
@@ -3187,8 +3069,7 @@ function renderImpactChart(detours){
               </div>
             `;
           }
-        )
-        .join('')
+        ).join('')
       }
 
     </div>
@@ -3203,24 +3084,19 @@ function renderImpactChart(detours){
 function renderResumen(){
 
   const key =
-    selectedDDMM(
-      'resumen'
-    );
+    selectedDDMM('resumen');
 
 
   const plan =
-    DATA.planServ ||
-    {};
+    DATA.planServ || {};
 
 
   const salidas =
-    DATA.salidas ||
-    {};
+    DATA.salidas || {};
 
 
   const guardia =
-    DATA.guardia ||
-    {};
+    DATA.guardia || {};
 
 
   const units =
@@ -3276,8 +3152,8 @@ function renderResumen(){
     );
 
 
-  const legajos =
-    uniqueLegajos(
+  const driverReferences =
+    uniqueDriverReferences(
       drivers
     );
 
@@ -3291,6 +3167,12 @@ function renderResumen(){
             key
           )
       );
+
+
+  const lateReferences =
+    uniqueDriverReferences(
+      late
+    );
 
 
   const mechanical =
@@ -3346,9 +3228,7 @@ function renderResumen(){
 
 
   const selectedIsToday =
-    selectedISO(
-      'resumen'
-    )
+    selectedISO('resumen')
     ===
     todayISO();
 
@@ -3356,8 +3236,7 @@ function renderResumen(){
   const compliance =
     selectedIsToday
       ? Number(
-          plan.compliance ||
-          0
+          plan.compliance || 0
         )
       : null;
 
@@ -3412,9 +3291,7 @@ function renderResumen(){
         <br>
 
         ${esc(
-          selectedLabel(
-            'resumen'
-          )
+          selectedLabel('resumen')
         )}
 
       </div>
@@ -3432,9 +3309,7 @@ function renderResumen(){
       <div class="source">
 
         ${esc(
-          selectedLabel(
-            'resumen'
-          )
+          selectedLabel('resumen')
         )}
 
         <br>
@@ -3458,12 +3333,8 @@ function renderResumen(){
     </div>
 
 
-    <!-- KPI PRINCIPALES -->
-
     <div class="summary-kpis">
 
-
-      <!-- CUMPLIMIENTO -->
 
       <article class="summary-kpi ${complianceTone}">
 
@@ -3492,9 +3363,7 @@ function renderResumen(){
 
                   <div
                     class="summary-progress-fill"
-                    style="
-                      width:${progress}%
-                    "
+                    style="width:${progress}%"
                   ></div>
 
                 </div>
@@ -3523,8 +3392,6 @@ function renderResumen(){
 
       </article>
 
-
-      <!-- UNIDADES -->
 
       <article class="summary-kpi">
 
@@ -3558,8 +3425,6 @@ function renderResumen(){
       </article>
 
 
-      <!-- CONDUCTORES -->
-
       <article class="summary-kpi">
 
         <div class="summary-icon pink">
@@ -3582,7 +3447,7 @@ function renderResumen(){
           Legajos:
           ${esc(
             compactList(
-              legajos,
+              driverReferences,
               5
             )
           )}
@@ -3591,8 +3456,6 @@ function renderResumen(){
 
       </article>
 
-
-      <!-- LLEGADAS TARDE -->
 
       <article class="summary-kpi ${
         late.length
@@ -3616,7 +3479,15 @@ function renderResumen(){
 
 
         <div class="summary-kpi-sub">
-          Conductores
+
+          Legajos:
+          ${esc(
+            compactList(
+              lateReferences,
+              5
+            )
+          )}
+
         </div>
 
       </article>
@@ -3624,12 +3495,8 @@ function renderResumen(){
     </div>
 
 
-    <!-- PARTE INFERIOR -->
-
     <div class="summary-lower-grid">
 
-
-      <!-- ALERTAS -->
 
       <section class="summary-alert-area">
 
@@ -3640,8 +3507,6 @@ function renderResumen(){
 
         <div class="summary-alert-grid">
 
-
-          <!-- NOVEDADES -->
 
           <article class="alert-card mechanical ${
             mechanical.length
@@ -3675,8 +3540,6 @@ function renderResumen(){
           </article>
 
 
-          <!-- AUXILIOS -->
-
           <article class="alert-card auxiliary ${
             auxiliaries.length
               ? ''
@@ -3708,8 +3571,6 @@ function renderResumen(){
 
           </article>
 
-
-          <!-- DESVIOS -->
 
           <article class="alert-card detours ${
             detours.length
@@ -3747,9 +3608,7 @@ function renderResumen(){
 
                       <span>
 
-                        ${num(
-                          detourLines.size
-                        )}
+                        ${num(detourLines.size)}
 
                         ${
                           detourLines.size === 1
@@ -3778,8 +3637,6 @@ function renderResumen(){
       </section>
 
 
-      <!-- GRAFICO -->
-
       <section class="impact-panel">
 
         <div class="impact-head">
@@ -3796,9 +3653,7 @@ function renderResumen(){
         </div>
 
 
-        ${renderImpactChart(
-          detours
-        )}
+        ${renderImpactChart(detours)}
 
       </section>
 
@@ -3814,8 +3669,7 @@ function renderResumen(){
 function renderPlan(){
 
   const d =
-    DATA.planServ ||
-    {};
+    DATA.planServ || {};
 
 
   const comp =
@@ -3823,8 +3677,7 @@ function renderPlan(){
       0,
       Math.min(
         100,
-        +d.compliance ||
-        0
+        +d.compliance || 0
       )
     );
 
@@ -3875,11 +3728,7 @@ function renderPlan(){
 
         <br>
 
-        Hoy ·
-        ${esc(
-          d.date ||
-          ''
-        )}
+        Hoy · ${esc(d.date || '')}
 
       </div>
 
@@ -3905,17 +3754,9 @@ function renderPlan(){
             </b>
 
             <span>
-
-              ${num(
-                d.serviceDone
-              )}
-
+              ${num(d.serviceDone)}
               /
-
-              ${num(
-                d.servicePlanned
-              )}
-
+              ${num(d.servicePlanned)}
             </span>
 
           </div>
@@ -4065,14 +3906,11 @@ function renderPlan(){
 function renderSalidas(){
 
   const d =
-    DATA.salidas ||
-    {};
+    DATA.salidas || {};
 
 
   const key =
-    selectedDDMM(
-      'salidas'
-    );
+    selectedDDMM('salidas');
 
 
   const units =
@@ -4144,9 +3982,7 @@ function renderSalidas(){
         <br>
 
         ${esc(
-          selectedLabel(
-            'salidas'
-          )
+          selectedLabel('salidas')
         )}
 
       </div>
@@ -4179,117 +4015,203 @@ function renderSalidas(){
 
       ${kpi(
         'Plan TM',
-        num(
-          day.planTM ||
-          0
-        ),
+        num(day.planTM || 0),
         'Día seleccionado'
       )}
 
       ${kpi(
         'Plan TT',
-        num(
-          day.planTT ||
-          0
-        ),
+        num(day.planTT || 0),
         'Día seleccionado'
       )}
 
     </div>
 
 
-    <div class="grid2">
-
-      <article class="panel">
-
-        <h3>
-          Motivos de reemplazo
-        </h3>
-
-        ${bars(
-          countBy(
-            units,
-            'motivo'
-          )
-        )}
-
-      </article>
+    <div class="planillaria-board">
 
 
-      <article class="panel">
+      <!-- COLUMNA IZQUIERDA -->
 
-        <h3>
-          Reemplazos por línea
-        </h3>
-
-        ${bars(
-          countBy(
-            units,
-            'linea'
-          )
-        )}
-
-      </article>
-
-    </div>
+      <div class="planillaria-left">
 
 
-    <div class="grid2">
+        <article class="panel">
 
-      <article class="panel">
+          <h3>
+            Motivos de reemplazo
+          </h3>
 
-        <h3>
-          Unidades reemplazadas
-        </h3>
+          ${bars(
+            countBy(
+              units,
+              'motivo'
+            )
+          )}
 
-        ${table(
-          [
-            ['Fecha','fecha'],
-            ['Avería','averia'],
-            ['Reemplazo','reemplazo'],
+        </article>
 
+
+        <article class="panel">
+
+          <h3>
+            Unidades reemplazadas
+          </h3>
+
+          ${table(
             [
-              'Motivo',
-              'motivo',
+              ['Fecha','fecha'],
+              ['Avería','averia'],
+              ['Reemplazo','reemplazo'],
 
-              v =>
-                `<span class="pill">${esc(v)}</span>`
+              [
+                'Motivo',
+                'motivo',
+
+                v =>
+                  `<span class="pill">${esc(v)}</span>`
+              ],
+
+              ['Línea','linea'],
+              ['Servicio','turno']
             ],
+            units
+          )}
 
-            ['Línea','linea'],
-            ['Servicio','turno']
-          ],
-          units
-        )}
+        </article>
 
-      </article>
+      </div>
 
 
-      <article class="panel">
+      <!-- COLUMNA DERECHA 50 / 50 -->
 
-        <h3>
-          Llegadas tarde
-        </h3>
+      <div class="planillaria-right">
 
-        ${table(
-          [
-            ['Fecha','fecha'],
-            ['Conductor','chofer'],
-            ['Prevista','prevista'],
-            ['Real','real'],
 
+        <article class="panel">
+
+          <h3 class="panel-title">
+
+            <span>
+              Reemplazos de conductores
+            </span>
+
+            <span class="count-badge pink">
+              ${num(drivers.length)}
+            </span>
+
+          </h3>
+
+
+          <div class="planillaria-driver-table">
+
+            ${table(
+              [
+
+                [
+                  'Titular',
+                  'titular',
+
+                  (v,r) =>
+                    esc(
+                      v
+                      ||
+                      r.chofer
+                      ||
+                      r.conductor
+                      ||
+                      '-'
+                    )
+                ],
+
+                [
+                  'Reemplazo',
+                  'reemplazo',
+
+                  v =>
+                    esc(
+                      v ||
+                      '-'
+                    )
+                ],
+
+                [
+                  'Motivo',
+                  'motivo',
+
+                  v =>
+                    v
+                      ? `<span class="pill">${esc(v)}</span>`
+                      : '-'
+                ],
+
+                ['Línea','linea'],
+
+                [
+                  'Servicio',
+                  'turno',
+
+                  (v,r) =>
+                    esc(
+                      v
+                      ||
+                      r.servicio
+                      ||
+                      '-'
+                    )
+                ]
+
+              ],
+
+              drivers
+            )}
+
+          </div>
+
+        </article>
+
+
+        <article class="panel">
+
+          <h3 class="panel-title">
+
+            <span>
+              Llegadas tarde
+            </span>
+
+            <span class="count-badge ${
+              late.length
+                ? 'orange'
+                : ''
+            }">
+              ${num(late.length)}
+            </span>
+
+          </h3>
+
+
+          ${table(
             [
-              'Demora',
-              'minutos',
+              ['Fecha','fecha'],
+              ['Conductor','chofer'],
+              ['Prevista','prevista'],
+              ['Real','real'],
 
-              v =>
-                `${num(v)} min`
-            ]
-          ],
-          late
-        )}
+              [
+                'Demora',
+                'minutos',
 
-      </article>
+                v =>
+                  `${num(v)} min`
+              ]
+            ],
+            late
+          )}
+
+        </article>
+
+
+      </div>
 
     </div>
   `;
@@ -4302,9 +4224,7 @@ function renderSalidas(){
 
 function normalizeGuardText(value){
 
-  return normalizeText(
-    value
-  );
+  return normalizeText(value);
 }
 
 
@@ -4326,27 +4246,17 @@ function splitGuardiaObservations(rows){
           );
 
 
-        if (
-          turno ===
-          'MANANA'
-        ){
+        if(turno === 'MANANA'){
 
-          out.manana.push(
-            row
-          );
+          out.manana.push(row);
 
           return;
         }
 
 
-        if (
-          turno ===
-          'TARDE'
-        ){
+        if(turno === 'TARDE'){
 
-          out.tarde.push(
-            row
-          );
+          out.tarde.push(row);
         }
       }
     );
@@ -4361,7 +4271,7 @@ function renderGuardEvents(
   emptyText
 ){
 
-  if (!rows?.length){
+  if(!rows?.length){
 
     return `
       <div class="shift-empty">
@@ -4377,14 +4287,10 @@ function renderGuardEvents(
 
         <div class="guard-event">
 
-          <span
-            class="guard-event-dot"
-          ></span>
+          <span class="guard-event-dot"></span>
 
           <div>
-            ${esc(
-              row.texto
-            )}
+            ${esc(row.texto)}
           </div>
 
         </div>
@@ -4397,14 +4303,11 @@ function renderGuardEvents(
 function renderGuardia(){
 
   const d =
-    DATA.guardia ||
-    {};
+    DATA.guardia || {};
 
 
   const key =
-    selectedDDMM(
-      'guardia'
-    );
+    selectedDDMM('guardia');
 
 
   const aux =
@@ -4471,9 +4374,7 @@ function renderGuardia(){
 
 
   const groupedObs =
-    splitGuardiaObservations(
-      obs
-    );
+    splitGuardiaObservations(obs);
 
 
   const lines =
@@ -4499,8 +4400,8 @@ function renderGuardia(){
               r.linea
             )
         )
-      ]
-      .filter(Boolean)
+
+      ].filter(Boolean)
     );
 
 
@@ -4523,9 +4424,7 @@ function renderGuardia(){
         <br>
 
         ${esc(
-          selectedLabel(
-            'guardia'
-          )
+          selectedLabel('guardia')
         )}
 
       </div>
@@ -4606,9 +4505,7 @@ function renderGuardia(){
 
               v =>
                 esc(
-                  normalizeMechanicalCategory(
-                    v
-                  )
+                  normalizeMechanicalCategory(v)
                 )
             ],
 
@@ -4620,7 +4517,7 @@ function renderGuardia(){
 
               v => {
 
-                if (
+                if(
                   v &&
                   String(v).trim()
                 ){
@@ -4673,9 +4570,7 @@ function renderGuardia(){
 
               v =>
                 esc(
-                  normalizeMechanicalCategory(
-                    v
-                  )
+                  normalizeMechanicalCategory(v)
                 )
             ],
 
@@ -4684,10 +4579,7 @@ function renderGuardia(){
               'intervencion',
 
               v =>
-                esc(
-                  v ||
-                  '-'
-                )
+                esc(v || '-')
             ],
 
             [
@@ -4696,18 +4588,14 @@ function renderGuardia(){
 
               v => {
 
-                if (
+                if(
                   v &&
                   String(v).trim()
                 ){
 
                   const pendiente =
-                    normalizeGuardText(
-                      v
-                    )
-                    .includes(
-                      'PENDIENTE'
-                    );
+                    normalizeGuardText(v)
+                      .includes('PENDIENTE');
 
 
                   return `
@@ -4747,7 +4635,6 @@ function renderGuardia(){
         <span>
           Reemplazos de conductores
         </span>
-
 
         <span class="count-badge pink">
           ${num(drv.length)}
@@ -4795,9 +4682,7 @@ function renderGuardia(){
         </h3>
 
         ${bars(
-          countByNormalizedLine(
-            det
-          )
+          countByNormalizedLine(det)
         )}
 
       </article>
@@ -4812,7 +4697,6 @@ function renderGuardia(){
         <span>
           Desvíos
         </span>
-
 
         <span class="count-badge">
           ${num(det.length)}
@@ -4936,13 +4820,10 @@ function renderGuardia(){
 function renderOS(){
 
   const d =
-    DATA.os ||
-    {};
-
+    DATA.os || {};
 
   const s =
-    d.summary ||
-    {};
+    d.summary || {};
 
 
   $('#os').innerHTML = `
@@ -4964,9 +4845,7 @@ function renderOS(){
         <br>
 
         Acumulado
-        ${esc(
-          monthLabel()
-        )}
+        ${esc(monthLabel())}
 
       </div>
 
@@ -5016,9 +4895,7 @@ function renderOS(){
           OS por motivo
         </h3>
 
-        ${bars(
-          d.reasons
-        )}
+        ${bars(d.reasons)}
 
       </article>
 
@@ -5029,9 +4906,7 @@ function renderOS(){
           OS por línea
         </h3>
 
-        ${bars(
-          d.lines
-        )}
+        ${bars(d.lines)}
 
       </article>
 
@@ -5042,9 +4917,7 @@ function renderOS(){
           Conductores con registros
         </h3>
 
-        ${bars(
-          d.topDrivers
-        )}
+        ${bars(d.topDrivers)}
 
       </article>
 
@@ -5069,8 +4942,7 @@ function renderOS(){
           ['Observación','observacion'],
           ['Agente','agente']
         ],
-        d.rows ||
-        []
+        d.rows || []
       )}
 
     </article>
@@ -5084,7 +4956,7 @@ function renderOS(){
 
 function fmtPct(v){
 
-  if (
+  if(
     v === null ||
     v === undefined ||
     v === ''
@@ -5105,7 +4977,7 @@ function fmtPct(v){
 
 function fmtNumRaw(v){
 
-  if (
+  if(
     v === null ||
     v === undefined ||
     v === ''
@@ -5120,7 +4992,7 @@ function fmtNumRaw(v){
 
 function rawNumber(v){
 
-  if (
+  if(
     v === null ||
     v === undefined ||
     v === ''
@@ -5132,14 +5004,8 @@ function rawNumber(v){
   const n =
     parseFloat(
       String(v)
-        .replace(
-          '%',
-          ''
-        )
-        .replace(
-          ',',
-          '.'
-        )
+        .replace('%','')
+        .replace(',','.')
         .replace(
           /[^0-9.\-]/g,
           ''
@@ -5153,24 +5019,16 @@ function rawNumber(v){
 }
 
 
-function metricPass(
-  value,
-  meta
-){
+function metricPass(value,meta){
 
   const n =
-    rawNumber(
-      value
-    );
-
+    rawNumber(value);
 
   const t =
-    rawNumber(
-      meta
-    );
+    rawNumber(meta);
 
 
-  if (
+  if(
     n === null ||
     t === null
   ){
@@ -5179,21 +5037,15 @@ function metricPass(
 
 
   const s =
-    String(
-      meta
-    );
+    String(meta);
 
 
-  if (
-    s.includes('≤')
-  ){
+  if(s.includes('≤')){
     return n <= t;
   }
 
 
-  if (
-    s.includes('≥')
-  ){
+  if(s.includes('≥')){
     return n >= t;
   }
 
@@ -5205,14 +5057,10 @@ function metricPass(
 function metricProgress(value){
 
   const n =
-    rawNumber(
-      value
-    );
+    rawNumber(value);
 
 
-  if (
-    n === null
-  ){
+  if(n === null){
     return 0;
   }
 
@@ -5254,25 +5102,19 @@ function kpiCard(
     <article class="kpi-ref-card ${status}">
 
       <div class="metric-label">
-        ${esc(
-          metric.label
-        )}
+        ${esc(metric.label)}
       </div>
 
 
       <div class="metric-value">
-        ${esc(
-          metric.display
-        )}
+        ${esc(metric.display)}
       </div>
 
 
       <div class="metric-sub">
 
         Dato del día ·
-        ${esc(
-          dateLabel
-        )}
+        ${esc(dateLabel)}
 
       </div>
 
@@ -5296,19 +5138,15 @@ function kpiCard(
 function renderKPI(){
 
   const d =
-    DATA.kpi ||
-    {};
+    DATA.kpi || {};
 
 
   const key =
-    selectedDDMM(
-      'kpi'
-    );
+    selectedDDMM('kpi');
 
 
   const m =
-    d.metas ||
-    {};
+    d.metas || {};
 
 
   const r =
@@ -5322,7 +5160,7 @@ function renderKPI(){
       );
 
 
-  if (!r){
+  if(!r){
 
     $('#kpi').innerHTML = `
 
@@ -5331,7 +5169,6 @@ function renderKPI(){
           KPI
         </h2>
       </div>
-
 
       <div class="panel">
 
@@ -5349,186 +5186,83 @@ function renderKPI(){
   const metrics = [
 
     {
-      label:
-        'Cumplimiento plan de servicio',
-
-      display:
-        fmtPct(
-          r.planCumplimiento
-        ),
-
-      raw:
-        r.planCumplimiento,
-
-      meta:
-        m.planCumplimiento
+      label:'Cumplimiento plan de servicio',
+      display:fmtPct(r.planCumplimiento),
+      raw:r.planCumplimiento,
+      meta:m.planCumplimiento
     },
 
-
     {
-      label:
-        'Cumplimiento plan de kms',
-
-      display:
-        fmtPct(
-          r.kmCumplimiento
-        ),
-
-      raw:
-        r.kmCumplimiento,
-
-      meta:
-        m.kmCumplimiento
+      label:'Cumplimiento plan de kms',
+      display:fmtPct(r.kmCumplimiento),
+      raw:r.kmCumplimiento,
+      meta:m.kmCumplimiento
     },
 
-
     {
-      label:
-        'Cumplimiento plan Hs Extras Conducción',
-
-      display:
-        fmtPct(
-          r.hsCumplimiento
-        ),
-
-      raw:
-        r.hsCumplimiento,
-
-      meta:
-        m.hsCumplimiento
+      label:'Cumplimiento plan Hs Extras Conducción',
+      display:fmtPct(r.hsCumplimiento),
+      raw:r.hsCumplimiento,
+      meta:m.hsCumplimiento
     },
 
-
     {
-      label:
-        'Titularidad',
-
-      display:
-        r.titularidad ||
-        '-',
-
-      raw:
-        r.titularidad,
-
-      meta:
-        m.titularidad
+      label:'Titularidad',
+      display:r.titularidad || '-',
+      raw:r.titularidad,
+      meta:m.titularidad
     },
 
-
     {
-      label:
-        'Siniestros',
-
-      display:
-        fmtNumRaw(
-          r.siniestros ||
-          0
-        ),
-
-      raw:
-        r.siniestros ||
-        0
+      label:'Siniestros',
+      display:fmtNumRaw(r.siniestros || 0),
+      raw:r.siniestros || 0
     },
 
-
     {
-      label:
-        'Cumplimiento Horario',
-
-      display:
-        r.horarioGeneral ||
-        '-',
-
-      raw:
-        r.horarioGeneral,
-
-      meta:
-        m.horarioGeneral
+      label:'Cumplimiento Horario',
+      display:r.horarioGeneral || '-',
+      raw:r.horarioGeneral,
+      meta:m.horarioGeneral
     },
 
-
     {
-      label:
-        'Cumplimiento Cabecera',
-
-      display:
-        r.horarioCab ||
-        '-',
-
-      raw:
-        r.horarioCab,
-
-      meta:
-        m.horarioCab
+      label:'Cumplimiento Cabecera',
+      display:r.horarioCab || '-',
+      raw:r.horarioCab,
+      meta:m.horarioCab
     },
 
-
     {
-      label:
-        'Cumplimiento Portón',
-
-      display:
-        r.horarioPorton ||
-        '-',
-
-      raw:
-        r.horarioPorton,
-
-      meta:
-        m.horarioPorton
+      label:'Cumplimiento Portón',
+      display:r.horarioPorton || '-',
+      raw:r.horarioPorton,
+      meta:m.horarioPorton
     },
 
-
     {
-      label:
-        'IPK',
-
-      display:
-        fmtNumRaw(
-          r.ipk
-        ),
-
-      raw:
-        r.ipk,
-
-      meta:
-        m.ipk
+      label:'IPK',
+      display:fmtNumRaw(r.ipk),
+      raw:r.ipk,
+      meta:m.ipk
     },
 
-
     {
-      label:
-        'Estética',
-
-      display:
-        fmtPct(
-          r.estetica
-        ),
-
-      raw:
-        r.estetica,
-
-      meta:
-        m.estetica
+      label:'Estética',
+      display:fmtPct(r.estetica),
+      raw:r.estetica,
+      meta:m.estetica
     },
 
-
     {
-      label:
-        'Vueltas Perdidas (Cantidad)',
-
-      display:
-        fmtNumRaw(
-          r.vueltasPerdidas ||
-          0
-        ),
-
-      raw:
-        r.vueltasPerdidaPct,
-
-      meta:
-        m.vueltasPerdidaPct
+      label:'Vueltas Perdidas (Cantidad)',
+      display:fmtNumRaw(
+        r.vueltasPerdidas || 0
+      ),
+      raw:r.vueltasPerdidaPct,
+      meta:m.vueltasPerdidaPct
     }
+
   ];
 
 
@@ -5624,9 +5358,7 @@ function renderKPI(){
 
         Día anterior ·
         ${esc(
-          selectedLabel(
-            'kpi'
-          )
+          selectedLabel('kpi')
         )}
 
       </div>
@@ -5644,9 +5376,7 @@ function renderKPI(){
               x =>
                 kpiCard(
                   x,
-                  shortDateLabel(
-                    key
-                  )
+                  shortDateLabel(key)
                 )
             )
             .join('')
@@ -5692,15 +5422,14 @@ function renderKPI(){
 function configureDatePicker(){
 
   const p =
-    DATA.period ||
-    {};
+    DATA.period || {};
 
 
   const el =
     $('#datePicker');
 
 
-  if (
+  if(
     !p.year ||
     !p.month
   ){
@@ -5712,44 +5441,30 @@ function configureDatePicker(){
     todayISO();
 
 
-  if (
-    !DATE_BY_TAB.resumen
-  ){
-    DATE_BY_TAB.resumen =
-      today;
+  if(!DATE_BY_TAB.resumen){
+    DATE_BY_TAB.resumen = today;
   }
 
 
-  if (
-    !DATE_BY_TAB.salidas
-  ){
-    DATE_BY_TAB.salidas =
-      today;
+  if(!DATE_BY_TAB.salidas){
+    DATE_BY_TAB.salidas = today;
   }
 
 
-  if (
-    !DATE_BY_TAB.guardia
-  ){
-    DATE_BY_TAB.guardia =
-      today;
+  if(!DATE_BY_TAB.guardia){
+    DATE_BY_TAB.guardia = today;
   }
 
 
-  if (
-    !DATE_BY_TAB.kpi
-  ){
-    DATE_BY_TAB.kpi =
-      kpiDefaultISO();
+  if(!DATE_BY_TAB.kpi){
+    DATE_BY_TAB.kpi = kpiDefaultISO();
   }
 
 
   const hide =
-    ACTIVE_TAB ===
-    'plan'
+    ACTIVE_TAB === 'plan'
     ||
-    ACTIVE_TAB ===
-    'os';
+    ACTIVE_TAB === 'os';
 
 
   el.parentElement
@@ -5760,7 +5475,7 @@ function configureDatePicker(){
     );
 
 
-  if (hide){
+  if(hide){
     return;
   }
 
@@ -5770,8 +5485,7 @@ function configureDatePicker(){
 
 
   el.max =
-    ACTIVE_TAB ===
-    'kpi'
+    ACTIVE_TAB === 'kpi'
       ? kpiDefaultISO()
       : today;
 
@@ -5794,9 +5508,7 @@ function exportSummaryPDF(){
 
 
   const date =
-    selectedISO(
-      'resumen'
-    )
+    selectedISO('resumen')
     ||
     'jornada';
 
@@ -5821,7 +5533,6 @@ function exportSummaryPDF(){
           'print-summary'
         );
 
-
       document.title =
         previousTitle;
     };
@@ -5830,9 +5541,7 @@ function exportSummaryPDF(){
   window.addEventListener(
     'afterprint',
     cleanup,
-    {
-      once:true
-    }
+    {once:true}
   );
 
 
@@ -5855,9 +5564,7 @@ function renderAll(){
   configureDatePicker();
 
 
-  if (
-    DATA.generatedAt
-  ){
+  if(DATA.generatedAt){
 
     $('#updatedAt')
       .textContent =
@@ -5873,21 +5580,15 @@ function renderAll(){
 
 
   renderResumen();
-
   renderPlan();
-
   renderSalidas();
-
   renderGuardia();
-
   renderOS();
-
   renderKPI();
 
 
   const errs =
-    DATA.errors ||
-    [];
+    DATA.errors || [];
 
 
   $('#errorBox')
@@ -5912,10 +5613,7 @@ function renderAll(){
    CONEXION
 ========================================================= */
 
-function setStatus(
-  ok,
-  text
-){
+function setStatus(ok,text){
 
   $('#statusDot')
     .classList
@@ -5931,7 +5629,7 @@ function setStatus(
 }
 
 
-function loadLive(force = false){
+function loadLive(force=false){
 
   setStatus(
     false,
@@ -5948,9 +5646,7 @@ function loadLive(force = false){
 
 
   const script =
-    document.createElement(
-      'script'
-    );
+    document.createElement('script');
 
 
   window[cb] =
@@ -5959,13 +5655,11 @@ function loadLive(force = false){
       try{
 
         DATA =
-          payload ||
-          {};
+          payload || {};
 
 
         setStatus(
           !!payload?.ok,
-
           payload?.ok
             ? 'Datos en vivo'
             : 'Datos parciales'
@@ -5977,7 +5671,6 @@ function loadLive(force = false){
       }finally{
 
         delete window[cb];
-
         script.remove();
       }
     };
@@ -5994,9 +5687,7 @@ function loadLive(force = false){
 
       $('#errorBox')
         .classList
-        .add(
-          'show'
-        );
+        .add('show');
 
 
       $('#errorBox')
@@ -6022,7 +5713,7 @@ function loadLive(force = false){
     Date.now();
 
 
-  if (force){
+  if(force){
     url += '&force=1';
   }
 
@@ -6032,9 +5723,7 @@ function loadLive(force = false){
 
 
   document.body
-    .appendChild(
-      script
-    );
+    .appendChild(script);
 }
 
 
@@ -6049,31 +5738,25 @@ function activateTab(tabName){
 
 
   document
-    .querySelectorAll(
-      '.tab'
-    )
+    .querySelectorAll('.tab')
     .forEach(
       x =>
         x.classList
           .toggle(
             'active',
-            x.dataset.tab ===
-            tabName
+            x.dataset.tab === tabName
           )
     );
 
 
   document
-    .querySelectorAll(
-      '.tab-panel'
-    )
+    .querySelectorAll('.tab-panel')
     .forEach(
       x =>
         x.classList
           .toggle(
             'active',
-            x.id ===
-            tabName
+            x.id === tabName
           )
     );
 
@@ -6083,9 +5766,7 @@ function activateTab(tabName){
 
 
 document
-  .querySelectorAll(
-    '.tab'
-  )
+  .querySelectorAll('.tab')
   .forEach(
     btn => {
 
@@ -6105,16 +5786,14 @@ $('#datePicker')
     'change',
     e => {
 
-      if (
+      if(
         [
           'resumen',
           'salidas',
           'guardia',
           'kpi'
         ]
-        .includes(
-          ACTIVE_TAB
-        )
+        .includes(ACTIVE_TAB)
       ){
 
         DATE_BY_TAB[
@@ -6133,26 +5812,20 @@ $('#refreshBtn')
   .addEventListener(
     'click',
     () =>
-      loadLive(
-        true
-      )
+      loadLive(true)
   );
 
 
 /* Carga inicial */
 
-loadLive(
-  false
-);
+loadLive(false);
 
 
 /* Refresco automático cada 5 minutos */
 
 setInterval(
   () =>
-    loadLive(
-      false
-    ),
+    loadLive(false),
   300000
 );
 
