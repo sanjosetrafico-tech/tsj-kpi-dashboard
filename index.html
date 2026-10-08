@@ -192,6 +192,11 @@ input{
   display:block;
 }
 
+body.profile-guardia .tab[data-tab="kpi"],
+body.profile-guardia #kpi{
+  display:none !important;
+}
+
 .section-head{
   display:flex;
   justify-content:space-between;
@@ -1700,6 +1705,7 @@ th{
   <div class="status-wrap">
 
     <div class="live">
+
       <span
         id="statusDot"
         class="dot"
@@ -1708,6 +1714,7 @@ th{
       <span id="statusText">
         Actualizando…
       </span>
+
     </div>
 
     <button
@@ -1849,6 +1856,111 @@ const API_URL =
 'https://script.google.com/macros/s/AKfycbxzu1Mob_Z7E0-33nMXmFDk1zsaOWnUyzb1s58z1NH_2qDK4utHfvtO9-N31GtMuYwyEA/exec';
 
 
+/* =========================================================
+   PERFIL / ACCESO
+========================================================= */
+
+const URL_PARAMS =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const PROFILE =
+  String(
+    URL_PARAMS.get(
+      'perfil'
+    )
+    ||
+    ''
+  )
+  .trim()
+  .toLowerCase();
+
+
+const IS_GUARD_PROFILE =
+  PROFILE ===
+  'guardia';
+
+
+const ALLOWED_TABS =
+  IS_GUARD_PROFILE
+
+    ? [
+        'resumen',
+        'plan',
+        'salidas',
+        'guardia',
+        'os'
+      ]
+
+    : [
+        'resumen',
+        'plan',
+        'salidas',
+        'guardia',
+        'os',
+        'kpi'
+      ];
+
+
+const REQUESTED_TAB =
+  String(
+    URL_PARAMS.get(
+      'tab'
+    )
+    ||
+    ''
+  )
+  .trim()
+  .toLowerCase();
+
+
+function sanitizeTab(tab){
+
+  const value =
+    String(
+      tab ||
+      ''
+    )
+    .trim()
+    .toLowerCase();
+
+
+  if (
+    ALLOWED_TABS.includes(
+      value
+    )
+  ) {
+
+    return value;
+  }
+
+
+  return IS_GUARD_PROFILE
+
+    ? 'guardia'
+
+    : 'resumen';
+}
+
+
+if (
+  IS_GUARD_PROFILE
+) {
+
+  document.body
+    .classList
+    .add(
+      'profile-guardia'
+    );
+}
+
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
 const LOCAL_CACHE_KEY =
   'TSJ_DASHBOARD_CACHE_V11';
 
@@ -1861,8 +1973,11 @@ const REQUEST_TIMEOUT =
 
 let DATA = {};
 
+
 let ACTIVE_TAB =
-  'resumen';
+  sanitizeTab(
+    REQUESTED_TAB
+  );
 
 
 const READY = {
@@ -1913,6 +2028,7 @@ const INFLIGHT = {};
 
 const SILENT_RETRY_TIMERS = {};
 const SILENT_RETRY_ATTEMPTS = {};
+
 const SILENT_RETRY_DELAYS = [
   10000,
   30000,
@@ -2009,6 +2125,7 @@ function updateLastUpdate(){
     return;
   }
 
+
   $('#updatedAt')
     .textContent =
       'Última actualización: '
@@ -2031,6 +2148,7 @@ function restoreLocalSnapshot(){
         LOCAL_CACHE_KEY
       );
 
+
     if (
       !raw
     ) {
@@ -2038,10 +2156,12 @@ function restoreLocalSnapshot(){
       return false;
     }
 
+
     const snapshot =
       JSON.parse(
         raw
       );
+
 
     const age =
       Date.now()
@@ -2050,6 +2170,7 @@ function restoreLocalSnapshot(){
         snapshot.savedAt ||
         0
       );
+
 
     if (
       !snapshot.data
@@ -2061,8 +2182,10 @@ function restoreLocalSnapshot(){
       return false;
     }
 
+
     DATA =
       snapshot.data;
+
 
     [
       'planServ',
@@ -2085,6 +2208,7 @@ function restoreLocalSnapshot(){
           ] =
             true;
 
+
           VERSION[
             section
           ] =
@@ -2092,6 +2216,7 @@ function restoreLocalSnapshot(){
         }
       }
     );
+
 
     return true;
 
@@ -2143,6 +2268,7 @@ function svgIcon(type){
 
     return `
       <svg viewBox="0 0 24 24">
+
         <circle
           cx="12"
           cy="12"
@@ -2154,6 +2280,7 @@ function svgIcon(type){
           d="m8 12 2.5 2.5L16 9"
           ${common}
         ></path>
+
       </svg>
     `;
   }
@@ -2400,6 +2527,7 @@ function table(
     `;
   }
 
+
   return `
 
     <div class="table-wrap">
@@ -2494,6 +2622,7 @@ function bars(
       limit
     );
 
+
   if (
     !a.length
   ) {
@@ -2505,6 +2634,7 @@ function bars(
     `;
   }
 
+
   const max =
     Math.max(
       ...a.map(
@@ -2514,6 +2644,7 @@ function bars(
       ),
       1
     );
+
 
   return `
 
@@ -2577,6 +2708,7 @@ function todayISO(){
     DATA.period ||
     {};
 
+
   return (
     p.year
     &&
@@ -2617,6 +2749,7 @@ function selectedDDMM(
       /^(\d{4})-(\d{2})-(\d{2})$/
     );
 
+
   return m
 
     ? `${m[3]}/${m[2]}`
@@ -2633,6 +2766,7 @@ function selectedLabel(
     selectedISO(
       tab
     );
+
 
   return v
 
@@ -2667,6 +2801,7 @@ function sameDay(
       /^(\d{1,2})[\/-](\d{1,2})/
     );
 
+
   return (
     !!m
     &&
@@ -2682,6 +2817,7 @@ function kpiDefaultISO(){
   const p =
     DATA.period ||
     {};
+
 
   const days =
     (
@@ -2699,6 +2835,7 @@ function kpiDefaultISO(){
           .match(
             /^(\d{1,2})[\/-](\d{1,2})/
           );
+
 
         return (
           m
@@ -2726,6 +2863,7 @@ function kpiDefaultISO(){
         b-a
     );
 
+
   const d =
     days[0]
     ||
@@ -2738,6 +2876,7 @@ function kpiDefaultISO(){
       -
       1
     );
+
 
   return p.year
 
@@ -2752,6 +2891,7 @@ function monthLabel(){
   const p =
     DATA.period ||
     {};
+
 
   return (
     p.month
@@ -2789,6 +2929,7 @@ function shortDateLabel(
       /^(\d{1,2})[\/-](\d{1,2})/
     );
 
+
   if (
     !m
   ) {
@@ -2796,6 +2937,7 @@ function shortDateLabel(
     return ddmm ||
       '';
   }
+
 
   const mon = [
 
@@ -2816,6 +2958,7 @@ function shortDateLabel(
     +m[2]-1
   ];
 
+
   return (
     `${+m[1]}-${mon}`
   );
@@ -2832,6 +2975,7 @@ function countBy(
 ){
 
   const out = {};
+
 
   (
     rows ||
@@ -2852,6 +2996,7 @@ function countBy(
         ||
         'Sin dato';
 
+
       out[k] =
         (
           out[k] ||
@@ -2861,6 +3006,7 @@ function countBy(
         1;
     }
   );
+
 
   return Object
     .entries(
@@ -2988,12 +3134,14 @@ function normalizeBaseLine(value){
       ''
     );
 
+
   if (
     !line
   ) {
 
     return '';
   }
+
 
   if (
     line === 'P'
@@ -3006,10 +3154,12 @@ function normalizeBaseLine(value){
     return line;
   }
 
+
   const match =
     line.match(
       /^([A-Z]+)(?:\/?\d+)?$/
     );
+
 
   return match
 
@@ -3023,6 +3173,7 @@ function countByNormalizedLine(rows){
 
   const counts = {};
 
+
   (
     rows ||
     []
@@ -3035,12 +3186,14 @@ function countByNormalizedLine(rows){
           row.linea
         );
 
+
       if (
         !line
       ) {
 
         return;
       }
+
 
       counts[
         line
@@ -3056,6 +3209,7 @@ function countByNormalizedLine(rows){
         1;
     }
   );
+
 
   return Object
     .entries(
@@ -3118,10 +3272,12 @@ function normalizeMechanicalCategory(value){
     )
     .trim();
 
+
   const v =
     normalizeText(
       original
     );
+
 
   if (
     !v
@@ -3129,6 +3285,7 @@ function normalizeMechanicalCategory(value){
 
     return 'Mecánica';
   }
+
 
   if (
     v.includes(
@@ -3138,6 +3295,7 @@ function normalizeMechanicalCategory(value){
 
     return 'GPS';
   }
+
 
   if (
     v.includes('PINCH')
@@ -3154,6 +3312,7 @@ function normalizeMechanicalCategory(value){
     return 'Neumático';
   }
 
+
   if (
     v.includes('MOTOR')
     ||
@@ -3167,6 +3326,7 @@ function normalizeMechanicalCategory(value){
     return 'Motor';
   }
 
+
   if (
     v.includes('TRANSM')
     ||
@@ -3178,6 +3338,7 @@ function normalizeMechanicalCategory(value){
     return 'Transmisión';
   }
 
+
   if (
     v.includes(
       'FREN'
@@ -3186,6 +3347,7 @@ function normalizeMechanicalCategory(value){
 
     return 'Frenos';
   }
+
 
   if (
     v.includes('ELECTR')
@@ -3198,6 +3360,7 @@ function normalizeMechanicalCategory(value){
     return 'Electricidad';
   }
 
+
   if (
     v.includes('TABLERO')
     ||
@@ -3206,6 +3369,7 @@ function normalizeMechanicalCategory(value){
 
     return 'Instrumental';
   }
+
 
   if (
     v.includes('PUERTA')
@@ -3219,6 +3383,7 @@ function normalizeMechanicalCategory(value){
 
     return 'Accesorio';
   }
+
 
   return original;
 }
@@ -3255,20 +3420,24 @@ function sameDriverReplacement(
       a?.titular
     );
 
+
   const titularB =
     normalizePerson(
       b?.titular
     );
+
 
   const replA =
     normalizePerson(
       a?.reemplazo
     );
 
+
   const replB =
     normalizePerson(
       b?.reemplazo
     );
+
 
   if (
     titularA
@@ -3289,6 +3458,7 @@ function sameDriverReplacement(
     return true;
   }
 
+
   if (
     replA
     &&
@@ -3303,10 +3473,12 @@ function sameDriverReplacement(
         a?.linea
       );
 
+
     const lineB =
       normalizeBaseLine(
         b?.linea
       );
+
 
     if (
       lineA
@@ -3320,6 +3492,7 @@ function sameDriverReplacement(
       return true;
     }
   }
+
 
   return false;
 }
@@ -3336,6 +3509,7 @@ function mergeDriverReplacements(
       []
     )
   ];
+
 
   (
     guardRows ||
@@ -3361,6 +3535,7 @@ function mergeDriverReplacements(
     }
   );
 
+
   return result;
 }
 
@@ -3376,6 +3551,7 @@ function extractNumericPrefix(value){
     .match(
       /^(\d{2,8})\s*[-–—]/
     );
+
 
   return match
 
@@ -3399,6 +3575,7 @@ function getDriverLegajo(row){
 
   ];
 
+
   for (
     const v of values
   ) {
@@ -3417,6 +3594,7 @@ function getDriverLegajo(row){
       .trim();
     }
   }
+
 
   return (
 
@@ -3462,6 +3640,7 @@ function getDriverSurname(row){
 
   ];
 
+
   for (
     let value of values
   ) {
@@ -3477,6 +3656,7 @@ function getDriverSurname(row){
       continue;
     }
 
+
     let text =
       String(
         value
@@ -3486,6 +3666,7 @@ function getDriverSurname(row){
         ''
       )
       .trim();
+
 
     if (
       text.includes(
@@ -3500,11 +3681,13 @@ function getDriverSurname(row){
         .trim();
     }
 
+
     return text
       .split(
         /\s+/
       )[0];
   }
+
 
   return '';
 }
@@ -3571,6 +3754,7 @@ function compactList(
     )
   ];
 
+
   if (
     !clean.length
   ) {
@@ -3578,15 +3762,18 @@ function compactList(
     return '—';
   }
 
+
   const visible =
     clean.slice(
       0,
       limit
     );
 
+
   const more =
     clean.length -
     visible.length;
+
 
   return (
     visible.join(
@@ -3624,16 +3811,19 @@ function renderAlertCases(
     `;
   }
 
+
   const visible =
     rows.slice(
       0,
       3
     );
 
+
   const hidden =
     rows.slice(
       3
     );
+
 
   const more =
     hidden.length;
@@ -3734,6 +3924,7 @@ function toggleAlertCard(button){
       '.alert-card'
     );
 
+
   if (
     !card
   ) {
@@ -3741,11 +3932,13 @@ function toggleAlertCard(button){
     return;
   }
 
+
   const expanded =
     card.classList
       .toggle(
         'expanded'
       );
+
 
   const count =
     Number(
@@ -3753,12 +3946,14 @@ function toggleAlertCard(button){
       0
     );
 
+
   button.setAttribute(
     'aria-expanded',
     expanded
       ? 'true'
       : 'false'
   );
+
 
   button.textContent =
     expanded
@@ -3784,6 +3979,7 @@ function renderImpactChart(detours){
       5
     );
 
+
   if (
     !rows.length
   ) {
@@ -3794,6 +3990,7 @@ function renderImpactChart(detours){
       </div>
     `;
   }
+
 
   const max =
     Math.max(
@@ -3806,6 +4003,7 @@ function renderImpactChart(detours){
       ),
       1
     );
+
 
   return `
 
@@ -3870,17 +4068,21 @@ function renderResumen(){
       'resumen'
     );
 
+
   const plan =
     DATA.planServ ||
     {};
+
 
   const salidas =
     DATA.salidas ||
     {};
 
+
   const guardia =
     DATA.guardia ||
     {};
+
 
   const units =
     sortByLineAndService(
@@ -3897,6 +4099,7 @@ function renderResumen(){
       )
     );
 
+
   const replacedUnitNumbers =
     units.map(
       r =>
@@ -3906,6 +4109,7 @@ function renderResumen(){
         ||
         ''
     );
+
 
   const planDrivers =
     (
@@ -3920,6 +4124,7 @@ function renderResumen(){
         )
     );
 
+
   const guardDrivers =
     (
       guardia.driverRows ||
@@ -3933,16 +4138,19 @@ function renderResumen(){
         )
     );
 
+
   const drivers =
     mergeDriverReplacements(
       planDrivers,
       guardDrivers
     );
 
+
   const driverReferences =
     uniqueDriverReferences(
       drivers
     );
+
 
   const late =
     (
@@ -3957,10 +4165,12 @@ function renderResumen(){
         )
     );
 
+
   const lateReferences =
     uniqueDriverReferences(
       late
     );
+
 
   const mechanical =
     sortByLine(
@@ -3977,6 +4187,7 @@ function renderResumen(){
       )
     );
 
+
   const auxiliaries =
     sortByLine(
       (
@@ -3991,6 +4202,7 @@ function renderResumen(){
           )
       )
     );
+
 
   const detours =
     sortByLine(
@@ -4007,6 +4219,7 @@ function renderResumen(){
       )
     );
 
+
   const detourLines =
     new Set(
       detours
@@ -4021,12 +4234,14 @@ function renderResumen(){
         )
     );
 
+
   const selectedIsToday =
     selectedISO(
       'resumen'
     )
     ===
     todayISO();
+
 
   const compliance =
     selectedIsToday
@@ -4037,6 +4252,7 @@ function renderResumen(){
         )
 
       : null;
+
 
   const progress =
     compliance === null
@@ -4472,6 +4688,7 @@ function renderPlan(){
     DATA.planServ ||
     {};
 
+
   const comp =
     Math.max(
       0,
@@ -4481,6 +4698,7 @@ function renderPlan(){
         0
       )
     );
+
 
   const total =
     (
@@ -4492,6 +4710,7 @@ function renderPlan(){
       +d.conductoresTT ||
       0
     );
+
 
   const color =
     comp >= 100
@@ -4744,6 +4963,7 @@ function renderSalidas(){
   const d =
     DATA.salidas ||
     {};
+
 
   const key =
     selectedDDMM(
@@ -5286,6 +5506,7 @@ function splitGuardiaObservations(rows){
 
   };
 
+
   (
     rows ||
     []
@@ -5298,6 +5519,7 @@ function splitGuardiaObservations(rows){
           row.turno
         );
 
+
       if (
         turno ===
         'MANANA'
@@ -5307,6 +5529,7 @@ function splitGuardiaObservations(rows){
           row
         );
       }
+
 
       if (
         turno ===
@@ -5319,6 +5542,7 @@ function splitGuardiaObservations(rows){
       }
     }
   );
+
 
   return out;
 }
@@ -5339,6 +5563,7 @@ function renderGuardEvents(
       </div>
     `;
   }
+
 
   return rows
     .map(
@@ -5365,10 +5590,12 @@ function renderGuardia(){
     DATA.guardia ||
     {};
 
+
   const key =
     selectedDDMM(
       'guardia'
     );
+
 
   const aux =
     sortByLine(
@@ -5385,6 +5612,7 @@ function renderGuardia(){
       )
     );
 
+
   const inc =
     sortByLine(
       (
@@ -5399,6 +5627,7 @@ function renderGuardia(){
           )
       )
     );
+
 
   const drv =
     sortByLineAndService(
@@ -5415,6 +5644,7 @@ function renderGuardia(){
       )
     );
 
+
   const det =
     sortByLine(
       (
@@ -5430,6 +5660,7 @@ function renderGuardia(){
       )
     );
 
+
   const obs =
     (
       d.observations ||
@@ -5443,10 +5674,12 @@ function renderGuardia(){
         )
     );
 
+
   const groupedObs =
     splitGuardiaObservations(
       obs
     );
+
 
   const lines =
     new Set(
@@ -5662,6 +5895,7 @@ function renderGuardia(){
                       'PENDIENTE'
                     );
 
+
                   return `
 
                     <span
@@ -5677,6 +5911,7 @@ function renderGuardia(){
                     </span>
                   `;
                 }
+
 
                 return `
 
@@ -5933,6 +6168,7 @@ function renderOS(){
     DATA.os ||
     {};
 
+
   const s =
     d.summary ||
     {};
@@ -6121,11 +6357,13 @@ function fmtPct(v){
     return '-';
   }
 
+
   const s =
     String(
       v
     )
     .trim();
+
 
   return s.includes(
     '%'
@@ -6151,6 +6389,7 @@ function rawNumber(v){
     return null;
   }
 
+
   const n =
     parseFloat(
       String(
@@ -6169,6 +6408,7 @@ function rawNumber(v){
         ''
       )
     );
+
 
   return Number.isFinite(
     n
@@ -6190,10 +6430,12 @@ function metricPass(
       value
     );
 
+
   const t =
     rawNumber(
       meta
     );
+
 
   if (
     n === null
@@ -6204,6 +6446,7 @@ function metricPass(
     return null;
   }
 
+
   const s =
     String(
       meta ||
@@ -6213,6 +6456,7 @@ function metricPass(
       /\s+/g,
       ''
     );
+
 
   if (
     s.includes(
@@ -6228,6 +6472,7 @@ function metricPass(
       t;
   }
 
+
   if (
     s.includes(
       '≥'
@@ -6242,6 +6487,7 @@ function metricPass(
       t;
   }
 
+
   return n >=
     t;
 }
@@ -6254,12 +6500,14 @@ function metricProgress(value){
       value
     );
 
+
   if (
     n === null
   ) {
 
     return 0;
   }
+
 
   return Math.max(
     0,
@@ -6286,6 +6534,7 @@ function kpiCard(
 
       : null;
 
+
   const status =
     pass === true
 
@@ -6296,6 +6545,7 @@ function kpiCard(
         ? 'status-bad'
 
         : '';
+
 
   return `
 
@@ -6345,14 +6595,17 @@ function renderKPI(){
     DATA.kpi ||
     {};
 
+
   const key =
     selectedDDMM(
       'kpi'
     );
 
+
   const metas =
     d.metas ||
     {};
+
 
   const r =
     (
@@ -6391,6 +6644,7 @@ function renderKPI(){
       </div>
     `;
 
+
     return;
   }
 
@@ -6411,6 +6665,7 @@ function renderKPI(){
               item.label ||
               ''
             );
+
 
           return matchers.some(
             function(matcher){
@@ -6761,6 +7016,7 @@ function renderKPI(){
                   x.meta
                 );
 
+
               const cls =
                 pass === false
 
@@ -6771,6 +7027,7 @@ function renderKPI(){
                     ? 'neutral'
 
                     : '';
+
 
               return `
 
@@ -6901,10 +7158,12 @@ function renderActiveTab(
 
   configureDatePicker();
 
+
   const signature =
     renderSignature(
       ACTIVE_TAB
     );
+
 
   if (
     !force
@@ -6917,6 +7176,7 @@ function renderActiveTab(
 
     return;
   }
+
 
   switch(
     ACTIVE_TAB
@@ -6959,7 +7219,12 @@ function renderActiveTab(
 
     case 'kpi':
 
-      renderKPI();
+      if (
+        !IS_GUARD_PROFILE
+      ) {
+
+        renderKPI();
+      }
 
       break;
   }
@@ -6985,8 +7250,10 @@ function configureDatePicker(){
     DATA.period ||
     {};
 
+
   const el =
     $('#datePicker');
+
 
   if (
     !p.year
@@ -6996,6 +7263,7 @@ function configureDatePicker(){
 
     return;
   }
+
 
   const today =
     todayISO();
@@ -7029,6 +7297,8 @@ function configureDatePicker(){
 
 
   if (
+    !IS_GUARD_PROFILE
+    &&
     !DATE_BY_TAB.kpi
   ) {
 
@@ -7077,7 +7347,9 @@ function configureDatePicker(){
   el.value =
     DATE_BY_TAB[
       ACTIVE_TAB
-    ];
+    ]
+    ||
+    today;
 }
 
 
@@ -7149,6 +7421,17 @@ function mergePayload(payload){
 
 
       if (
+        IS_GUARD_PROFILE
+        &&
+        section ===
+        'kpi'
+      ) {
+
+        return;
+      }
+
+
+      if (
         payload.ok ===
         false
         &&
@@ -7197,6 +7480,19 @@ function requestSection(
   force=false,
   retry=1
 ){
+
+  if (
+    IS_GUARD_PROFILE
+    &&
+    section ===
+    'kpi'
+  ) {
+
+    return Promise.resolve(
+      null
+    );
+  }
+
 
   const requestKey =
     section +
@@ -7259,6 +7555,7 @@ function requestSection(
             clearTimeout(
               timer
             );
+
 
             try {
 
@@ -7342,6 +7639,7 @@ function requestSection(
                   'Respuesta parcial'
                 )
               );
+
 
               return;
             }
@@ -7464,6 +7762,7 @@ function requestSection(
 ========================================================= */
 
 function hasAnyVisibleData(){
+
   return (
     READY.planServ
     ||
@@ -7473,27 +7772,35 @@ function hasAnyVisibleData(){
     ||
     READY.os
     ||
-    READY.kpi
+    (
+      !IS_GUARD_PROFILE
+      &&
+      READY.kpi
+    )
   );
 }
 
 
 function clearSilentRetry(section){
+
   if(
     SILENT_RETRY_TIMERS[
       section
     ]
   ){
+
     clearTimeout(
       SILENT_RETRY_TIMERS[
         section
       ]
     );
 
+
     delete SILENT_RETRY_TIMERS[
       section
     ];
   }
+
 
   SILENT_RETRY_ATTEMPTS[
     section
@@ -7502,15 +7809,25 @@ function clearSilentRetry(section){
 
 
 function scheduleSilentRetry(section){
+
   if(
     !section
+    ||
+    (
+      IS_GUARD_PROFILE
+      &&
+      section ===
+      'kpi'
+    )
     ||
     SILENT_RETRY_TIMERS[
       section
     ]
   ){
+
     return;
   }
+
 
   const attempt =
     Number(
@@ -7521,17 +7838,21 @@ function scheduleSilentRetry(section){
       0
     );
 
+
   if(
     attempt >=
     SILENT_RETRY_DELAYS.length
   ){
+
     return;
   }
+
 
   const delay =
     SILENT_RETRY_DELAYS[
       attempt
     ];
+
 
   SILENT_RETRY_ATTEMPTS[
     section
@@ -7539,14 +7860,17 @@ function scheduleSilentRetry(section){
     attempt +
     1;
 
+
   SILENT_RETRY_TIMERS[
     section
   ] =
     setTimeout(
       () => {
+
         delete SILENT_RETRY_TIMERS[
           section
         ];
+
 
         requestSection(
           section,
@@ -7555,9 +7879,11 @@ function scheduleSilentRetry(section){
         )
         .then(
           () => {
+
             clearSilentRetry(
               section
             );
+
 
             setStatus(
               true,
@@ -7567,14 +7893,17 @@ function scheduleSilentRetry(section){
         )
         .catch(
           () => {
+
             if(
               hasAnyVisibleData()
             ){
+
               setStatus(
                 true,
                 'Datos disponibles'
               );
             }
+
 
             scheduleSilentRetry(
               section
@@ -7609,18 +7938,137 @@ function sectionForTab(tab){
   };
 
 
-  return map[
-    tab
-  ]
-  ||
-  '';
+  const section =
+    map[
+      tab
+    ]
+    ||
+    '';
+
+
+  if (
+    IS_GUARD_PROFILE
+    &&
+    section ===
+    'kpi'
+  ) {
+
+    return '';
+  }
+
+
+  return section;
+}
+
+
+function applyProfileUI(){
+
+  if (
+    IS_GUARD_PROFILE
+  ) {
+
+    const kpiTab =
+      document.querySelector(
+        '.tab[data-tab="kpi"]'
+      );
+
+
+    const kpiPanel =
+      document.querySelector(
+        '#kpi'
+      );
+
+
+    if (
+      kpiTab
+    ) {
+
+      kpiTab.style.display =
+        'none';
+
+
+      kpiTab.classList
+        .remove(
+          'active'
+        );
+    }
+
+
+    if (
+      kpiPanel
+    ) {
+
+      kpiPanel.style.display =
+        'none';
+
+
+      kpiPanel.classList
+        .remove(
+          'active'
+        );
+    }
+  }
+
+
+  document
+    .querySelectorAll(
+      '.tab'
+    )
+    .forEach(
+      tab => {
+
+        const allowed =
+          ALLOWED_TABS.includes(
+            tab.dataset.tab
+          );
+
+
+        tab.classList.toggle(
+          'active',
+          allowed
+          &&
+          tab.dataset.tab ===
+          ACTIVE_TAB
+        );
+      }
+    );
+
+
+  document
+    .querySelectorAll(
+      '.tab-panel'
+    )
+    .forEach(
+      panel => {
+
+        const allowed =
+          ALLOWED_TABS.includes(
+            panel.id
+          );
+
+
+        panel.classList.toggle(
+          'active',
+          allowed
+          &&
+          panel.id ===
+          ACTIVE_TAB
+        );
+      }
+    );
 }
 
 
 function ensureTabData(tab){
 
+  const safeTab =
+    sanitizeTab(
+      tab
+    );
+
+
   if (
-    tab ===
+    safeTab ===
     'resumen'
   ) {
 
@@ -7630,13 +8078,16 @@ function ensureTabData(tab){
       'guardia'
     ];
 
+
     return Promise.allSettled(
       sections.map(
         section =>
           READY[
             section
           ]
+
             ? Promise.resolve()
+
             : requestSection(
                 section
               )
@@ -7656,14 +8107,18 @@ function ensureTabData(tab){
                 index
               ];
 
+
             if(
               result.status ===
               'fulfilled'
             ){
+
               clearSilentRetry(
                 section
               );
-            }else{
+
+            } else {
+
               scheduleSilentRetry(
                 section
               );
@@ -7671,14 +8126,17 @@ function ensureTabData(tab){
           }
         );
 
+
         if(
           hasAnyVisibleData()
         ){
+
           setStatus(
             true,
             'Datos disponibles'
           );
         }
+
 
         return results;
       }
@@ -7688,7 +8146,7 @@ function ensureTabData(tab){
 
   const section =
     sectionForTab(
-      tab
+      safeTab
     );
 
 
@@ -7711,6 +8169,7 @@ function ensureTabData(tab){
       'Datos disponibles'
     );
 
+
     return Promise.resolve();
   }
 
@@ -7731,10 +8190,12 @@ function ensureTabData(tab){
         section
       );
 
+
       setStatus(
         true,
         'Datos disponibles'
       );
+
 
       return payload;
     }
@@ -7745,6 +8206,7 @@ function ensureTabData(tab){
       scheduleSilentRetry(
         section
       );
+
 
       if (
         hasAnyVisibleData()
@@ -7785,10 +8247,12 @@ function loadInitial(){
 
     updateLastUpdate();
 
+
     setStatus(
       true,
       'Datos disponibles'
     );
+
   } else {
 
     setStatus(
@@ -7827,14 +8291,18 @@ function loadInitial(){
               index
             ];
 
+
           if(
             result.status ===
             'fulfilled'
           ){
+
             clearSilentRetry(
               section
             );
-          }else{
+
+          } else {
+
             scheduleSilentRetry(
               section
             );
@@ -7895,33 +8363,38 @@ function loadInitial(){
       );
 
 
-      setTimeout(
-        () => {
+      if (
+        !IS_GUARD_PROFILE
+      ) {
 
-          if (
-            !READY.kpi
-          ) {
+        setTimeout(
+          () => {
 
-            requestSection(
-              'kpi'
-            )
-            .then(
-              () =>
-                clearSilentRetry(
-                  'kpi'
-                )
-            )
-            .catch(
-              () =>
-                scheduleSilentRetry(
-                  'kpi'
-                )
-            );
-          }
+            if (
+              !READY.kpi
+            ) {
 
-        },
-        700
-      );
+              requestSection(
+                'kpi'
+              )
+              .then(
+                () =>
+                  clearSilentRetry(
+                    'kpi'
+                  )
+              )
+              .catch(
+                () =>
+                  scheduleSilentRetry(
+                    'kpi'
+                  )
+              );
+            }
+
+          },
+          700
+        );
+      }
     }
   );
 }
@@ -7998,14 +8471,18 @@ function refreshActive(
               index
             ];
 
+
           if(
             result.status ===
             'fulfilled'
           ){
+
             clearSilentRetry(
               section
             );
-          }else{
+
+          } else {
+
             scheduleSilentRetry(
               section
             );
@@ -8036,6 +8513,7 @@ function refreshActive(
         true
       );
 
+
       return results;
     }
   );
@@ -8048,8 +8526,24 @@ function refreshActive(
 
 function activateTab(tabName){
 
+  const safeTab =
+    sanitizeTab(
+      tabName
+    );
+
+
+  if (
+    !ALLOWED_TABS.includes(
+      safeTab
+    )
+  ) {
+
+    return;
+  }
+
+
   ACTIVE_TAB =
-    tabName;
+    safeTab;
 
 
   document
@@ -8057,13 +8551,22 @@ function activateTab(tabName){
       '.tab'
     )
     .forEach(
-      x =>
-        x.classList
-          .toggle(
-            'active',
-            x.dataset.tab ===
-            tabName
-          )
+      x => {
+
+        const allowed =
+          ALLOWED_TABS.includes(
+            x.dataset.tab
+          );
+
+
+        x.classList.toggle(
+          'active',
+          allowed
+          &&
+          x.dataset.tab ===
+          safeTab
+        );
+      }
     );
 
 
@@ -8072,22 +8575,33 @@ function activateTab(tabName){
       '.tab-panel'
     )
     .forEach(
-      x =>
-        x.classList
-          .toggle(
-            'active',
-            x.id ===
-            tabName
-          )
+      x => {
+
+        const allowed =
+          ALLOWED_TABS.includes(
+            x.id
+          );
+
+
+        x.classList.toggle(
+          'active',
+          allowed
+          &&
+          x.id ===
+          safeTab
+        );
+      }
     );
 
 
   configureDatePicker();
 
+
   renderActiveTab();
 
+
   ensureTabData(
-    tabName
+    safeTab
   );
 }
 
@@ -8223,6 +8737,9 @@ function exportSummaryPDF(){
 /* =========================================================
    INICIO
 ========================================================= */
+
+applyProfileUI();
+
 
 loadInitial();
 
