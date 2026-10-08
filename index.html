@@ -1276,17 +1276,11 @@ th{
 ========================================================= */
 
 .error{
-  display:none;
-  background:#fff5f2;
-  border:1px solid #f1cfc4;
-  color:#8c3825;
-  border-radius:12px;
-  padding:11px 14px;
-  margin-bottom:14px;
+  display:none !important;
 }
 
 .error.show{
-  display:block;
+  display:none !important;
 }
 
 .foot{
@@ -1917,6 +1911,14 @@ const DATE_BY_TAB = {
 
 const INFLIGHT = {};
 
+const SILENT_RETRY_TIMERS = {};
+const SILENT_RETRY_ATTEMPTS = {};
+const SILENT_RETRY_DELAYS = [
+  10000,
+  30000,
+  60000
+];
+
 
 const $ =
   s =>
@@ -1994,32 +1996,7 @@ function setStatus(
 
 
 function showError(message){
-
-  const box =
-    $('#errorBox');
-
-  if (
-    !message
-  ) {
-
-    box.classList
-      .remove(
-        'show'
-      );
-
-    box.textContent =
-      '';
-
-    return;
-  }
-
-  box.textContent =
-    message;
-
-  box.classList
-    .add(
-      'show'
-    );
+  return;
 }
 
 
@@ -7486,6 +7463,130 @@ function requestSection(
    CARGA DE SOLAPAS
 ========================================================= */
 
+function hasAnyVisibleData(){
+  return (
+    READY.planServ
+    ||
+    READY.salidas
+    ||
+    READY.guardia
+    ||
+    READY.os
+    ||
+    READY.kpi
+  );
+}
+
+
+function clearSilentRetry(section){
+  if(
+    SILENT_RETRY_TIMERS[
+      section
+    ]
+  ){
+    clearTimeout(
+      SILENT_RETRY_TIMERS[
+        section
+      ]
+    );
+
+    delete SILENT_RETRY_TIMERS[
+      section
+    ];
+  }
+
+  SILENT_RETRY_ATTEMPTS[
+    section
+  ] = 0;
+}
+
+
+function scheduleSilentRetry(section){
+  if(
+    !section
+    ||
+    SILENT_RETRY_TIMERS[
+      section
+    ]
+  ){
+    return;
+  }
+
+  const attempt =
+    Number(
+      SILENT_RETRY_ATTEMPTS[
+        section
+      ]
+      ||
+      0
+    );
+
+  if(
+    attempt >=
+    SILENT_RETRY_DELAYS.length
+  ){
+    return;
+  }
+
+  const delay =
+    SILENT_RETRY_DELAYS[
+      attempt
+    ];
+
+  SILENT_RETRY_ATTEMPTS[
+    section
+  ] =
+    attempt +
+    1;
+
+  SILENT_RETRY_TIMERS[
+    section
+  ] =
+    setTimeout(
+      () => {
+        delete SILENT_RETRY_TIMERS[
+          section
+        ];
+
+        requestSection(
+          section,
+          false,
+          0
+        )
+        .then(
+          () => {
+            clearSilentRetry(
+              section
+            );
+
+            setStatus(
+              true,
+              'Datos disponibles'
+            );
+          }
+        )
+        .catch(
+          () => {
+            if(
+              hasAnyVisibleData()
+            ){
+              setStatus(
+                true,
+                'Datos disponibles'
+              );
+            }
+
+            scheduleSilentRetry(
+              section
+            );
+          }
+        );
+      },
+      delay
+    );
+}
+
+
 function sectionForTab(tab){
 
   const map = {
@@ -7523,35 +7624,65 @@ function ensureTabData(tab){
     'resumen'
   ) {
 
-    return Promise.allSettled([
+    const sections = [
+      'planServ',
+      'salidas',
+      'guardia'
+    ];
 
-      READY.planServ
+    return Promise.allSettled(
+      sections.map(
+        section =>
+          READY[
+            section
+          ]
+            ? Promise.resolve()
+            : requestSection(
+                section
+              )
+      )
+    )
+    .then(
+      results => {
 
-        ? Promise.resolve()
+        results.forEach(
+          (
+            result,
+            index
+          ) => {
 
-        : requestSection(
-            'planServ'
-          ),
+            const section =
+              sections[
+                index
+              ];
 
+            if(
+              result.status ===
+              'fulfilled'
+            ){
+              clearSilentRetry(
+                section
+              );
+            }else{
+              scheduleSilentRetry(
+                section
+              );
+            }
+          }
+        );
 
-      READY.salidas
+        if(
+          hasAnyVisibleData()
+        ){
+          setStatus(
+            true,
+            'Datos disponibles'
+          );
+        }
 
-        ? Promise.resolve()
-
-        : requestSection(
-            'salidas'
-          ),
-
-
-      READY.guardia
-
-        ? Promise.resolve()
-
-        : requestSection(
-            'guardia'
-          )
-
-    ]);
+        return results;
+      }
+    );
   }
 
 
@@ -7563,11 +7694,22 @@ function ensureTabData(tab){
 
   if (
     !section
-    ||
+  ) {
+
+    return Promise.resolve();
+  }
+
+
+  if (
     READY[
       section
     ]
   ) {
+
+    setStatus(
+      true,
+      'Datos disponibles'
+    );
 
     return Promise.resolve();
   }
@@ -7583,45 +7725,41 @@ function ensureTabData(tab){
     section
   )
   .then(
-    () => {
+    payload => {
+
+      clearSilentRetry(
+        section
+      );
 
       setStatus(
         true,
-        'Datos en vivo'
+        'Datos disponibles'
       );
 
-      showError(
-        ''
-      );
+      return payload;
     }
   )
   .catch(
     () => {
 
+      scheduleSilentRetry(
+        section
+      );
+
       if (
-        READY[
-          section
-        ]
+        hasAnyVisibleData()
       ) {
 
         setStatus(
-          false,
-          'Último dato disponible'
-        );
-
-        showError(
-          'No se pudo actualizar. Se muestra el último dato disponible.'
+          true,
+          'Datos disponibles'
         );
 
       } else {
 
         setStatus(
           false,
-          'Sin conexión'
-        );
-
-        showError(
-          'No se pudo conectar con la fuente de datos.'
+          'Actualizando…'
         );
       }
     }
@@ -7646,82 +7784,79 @@ function loadInitial(){
     );
 
     updateLastUpdate();
+
+    setStatus(
+      true,
+      'Datos disponibles'
+    );
+  } else {
+
+    setStatus(
+      false,
+      'Actualizando…'
+    );
   }
 
 
-  setStatus(
-    false,
-    'Actualizando…'
-  );
+  const initialSections = [
+    'planServ',
+    'salidas',
+    'guardia'
+  ];
 
 
-  Promise.allSettled([
-
-    requestSection(
-      'planServ'
-    ),
-
-    requestSection(
-      'salidas'
-    ),
-
-    requestSection(
-      'guardia'
+  Promise.allSettled(
+    initialSections.map(
+      section =>
+        requestSection(
+          section
+        )
     )
-
-  ])
+  )
   .then(
     results => {
 
+      results.forEach(
+        (
+          result,
+          index
+        ) => {
 
-      const failures =
-        results.filter(
-          x =>
-            x.status ===
-            'rejected'
-        );
+          const section =
+            initialSections[
+              index
+            ];
+
+          if(
+            result.status ===
+            'fulfilled'
+          ){
+            clearSilentRetry(
+              section
+            );
+          }else{
+            scheduleSilentRetry(
+              section
+            );
+          }
+        }
+      );
 
 
       if (
-        failures.length ===
-        0
+        hasAnyVisibleData()
       ) {
 
         setStatus(
           true,
-          'Datos en vivo'
-        );
-
-        showError(
-          ''
-        );
-
-      } else if (
-        READY.planServ
-        ||
-        READY.salidas
-        ||
-        READY.guardia
-      ) {
-
-        setStatus(
-          false,
-          'Último dato disponible'
-        );
-
-        showError(
-          'No se pudieron actualizar todas las fuentes. Se muestra el último dato disponible.'
+          'Datos disponibles'
         );
 
       } else {
 
         setStatus(
           false,
-          'Sin conexión'
-        );
-
-        showError(
-          'No se pudo conectar con la fuente de datos.'
+          'Actualizando…'
         );
       }
 
@@ -7741,8 +7876,17 @@ function loadInitial(){
             requestSection(
               'os'
             )
+            .then(
+              () =>
+                clearSilentRetry(
+                  'os'
+                )
+            )
             .catch(
-              () => {}
+              () =>
+                scheduleSilentRetry(
+                  'os'
+                )
             );
           }
 
@@ -7761,8 +7905,17 @@ function loadInitial(){
             requestSection(
               'kpi'
             )
+            .then(
+              () =>
+                clearSilentRetry(
+                  'kpi'
+                )
+            )
             .catch(
-              () => {}
+              () =>
+                scheduleSilentRetry(
+                  'kpi'
+                )
             );
           }
 
@@ -7780,16 +7933,11 @@ function refreshActive(
 
   setStatus(
     false,
-    'Actualizando datos…'
+    'Actualizando…'
   );
 
 
-  showError(
-    ''
-  );
-
-
-  let requests = [];
+  let sections = [];
 
 
   if (
@@ -7797,26 +7945,10 @@ function refreshActive(
     'resumen'
   ) {
 
-    requests = [
-
-      requestSection(
-        'planServ',
-        force,
-        0
-      ),
-
-      requestSection(
-        'salidas',
-        force,
-        0
-      ),
-
-      requestSection(
-        'guardia',
-        force,
-        0
-      )
-
+    sections = [
+      'planServ',
+      'salidas',
+      'guardia'
     ];
 
   } else {
@@ -7831,17 +7963,22 @@ function refreshActive(
       section
     ) {
 
-      requests = [
+      sections = [
+        section
+      ];
+    }
+  }
 
+
+  const requests =
+    sections.map(
+      section =>
         requestSection(
           section,
           force,
           0
         )
-
-      ];
-    }
-  }
+    );
 
 
   return Promise.allSettled(
@@ -7850,37 +7987,47 @@ function refreshActive(
   .then(
     results => {
 
+      results.forEach(
+        (
+          result,
+          index
+        ) => {
 
-      const failed =
-        results.some(
-          x =>
-            x.status ===
-            'rejected'
-        );
+          const section =
+            sections[
+              index
+            ];
+
+          if(
+            result.status ===
+            'fulfilled'
+          ){
+            clearSilentRetry(
+              section
+            );
+          }else{
+            scheduleSilentRetry(
+              section
+            );
+          }
+        }
+      );
 
 
       if (
-        !failed
+        hasAnyVisibleData()
       ) {
 
         setStatus(
           true,
-          'Datos en vivo'
-        );
-
-        showError(
-          ''
+          'Datos disponibles'
         );
 
       } else {
 
         setStatus(
           false,
-          'Último dato disponible'
-        );
-
-        showError(
-          'No se pudo actualizar la información. Se mantiene el último dato disponible.'
+          'Actualizando…'
         );
       }
 
@@ -7888,6 +8035,8 @@ function refreshActive(
       renderActiveTab(
         true
       );
+
+      return results;
     }
   );
 }
