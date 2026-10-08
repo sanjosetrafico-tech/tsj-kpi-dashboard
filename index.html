@@ -331,7 +331,10 @@ input{
   color:var(--pink-dark);
 }
 
-/* PLANILLERIA */
+
+/* =========================================================
+   PLANILLERIA
+========================================================= */
 
 .planillaria-board{
   display:grid;
@@ -364,7 +367,66 @@ input{
   height:100%;
 }
 
-/* BARRAS */
+#salidas .kpis.has-six{
+  grid-template-columns:
+    repeat(
+      6,
+      minmax(0,1fr)
+    );
+}
+
+.kpi.absence-alert{
+  background:#fff4f7;
+}
+
+.kpi.absence-alert .value{
+  color:var(--bad);
+}
+
+.planillaria-right.has-absence{
+  grid-template-rows:
+    auto 1fr 1fr;
+}
+
+.planillaria-right.has-observations{
+  grid-template-rows:
+    1fr 1fr auto;
+}
+
+.planillaria-right.has-absence.has-observations{
+  grid-template-rows:
+    auto 1fr 1fr auto;
+}
+
+.absence-panel{
+  border-top:
+    5px solid var(--bad);
+}
+
+.observation-panel{
+  border-top:
+    5px solid #746d72;
+}
+
+.plan-observations{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.plan-observation-item{
+  padding:9px 10px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#faf9fa;
+  font-size:12px;
+  line-height:1.4;
+}
+
+
+/* =========================================================
+   BARRAS
+========================================================= */
 
 .bars{
   display:flex;
@@ -405,7 +467,10 @@ input{
   font-weight:800;
 }
 
-/* TABLAS */
+
+/* =========================================================
+   TABLAS
+========================================================= */
 
 .table-wrap{
   border:1px solid var(--line);
@@ -477,7 +542,10 @@ th{
   border-radius:12px;
 }
 
-/* RESUMEN */
+
+/* =========================================================
+   RESUMEN
+========================================================= */
 
 .summary-actions{
   display:flex;
@@ -487,7 +555,11 @@ th{
 
 .summary-kpis{
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0,1fr)
+    );
   gap:14px;
   margin-bottom:18px;
 }
@@ -591,7 +663,9 @@ th{
 
 .summary-lower-grid{
   display:grid;
-  grid-template-columns:minmax(0,1.27fr) minmax(0,.98fr);
+  grid-template-columns:
+    minmax(0,1.27fr)
+    minmax(0,.98fr);
   gap:14px;
   align-items:stretch;
 }
@@ -607,7 +681,11 @@ th{
 
 .summary-alert-grid{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0,1fr)
+    );
   gap:12px;
 }
 
@@ -742,12 +820,6 @@ th{
   background:#9e5591;
 }
 
-.alert-additional{
-  margin-top:2px;
-  color:var(--muted);
-  font-size:11px;
-}
-
 .alert-additional-btn{
   appearance:none;
   border:0;
@@ -816,7 +888,10 @@ th{
 
 .impact-row{
   display:grid;
-  grid-template-columns:42px minmax(0,1fr) 28px;
+  grid-template-columns:
+    42px
+    minmax(0,1fr)
+    28px;
   align-items:center;
   gap:10px;
 }
@@ -851,11 +926,15 @@ th{
   color:var(--muted);
 }
 
-/* PLAN SERV */
+
+/* =========================================================
+   PLAN SERV
+========================================================= */
 
 .plan-hero{
   display:grid;
-  grid-template-columns:260px 1fr;
+  grid-template-columns:
+    260px 1fr;
   gap:16px;
   margin-bottom:14px;
 }
@@ -917,7 +996,11 @@ th{
 
 .plan-main{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:
+    repeat(
+      4,
+      1fr
+    );
   gap:12px;
 }
 
@@ -941,7 +1024,8 @@ th{
 
 .plan-detail{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:
+    1fr 1fr;
   gap:14px;
 }
 
@@ -982,7 +1066,10 @@ th{
   font-weight:750;
 }
 
-/* GUARDIA */
+
+/* =========================================================
+   GUARDIA
+========================================================= */
 
 #guardia .kpi{
   padding:17px;
@@ -991,7 +1078,8 @@ th{
 
 .guard-mechanical-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:
+    1fr 1fr;
   gap:14px;
   margin-bottom:14px;
 }
@@ -1058,7 +1146,8 @@ th{
 
 .guard-event{
   display:grid;
-  grid-template-columns:8px 1fr;
+  grid-template-columns:
+    8px 1fr;
   gap:10px;
   font-size:12px;
   line-height:1.5;
@@ -1078,17 +1167,25 @@ th{
   padding:3px 0;
 }
 
-/* KPI */
+
+/* =========================================================
+   KPI
+========================================================= */
 
 .kpi-dashboard{
   display:grid;
-  grid-template-columns:1.8fr 1fr;
+  grid-template-columns:
+    1.8fr 1fr;
   gap:18px;
 }
 
 .kpi-card-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:
+    repeat(
+      3,
+      1fr
+    );
   gap:14px;
 }
 
@@ -1145,7 +1242,8 @@ th{
 
 .kpi-month-row{
   display:grid;
-  grid-template-columns:1fr auto 86px;
+  grid-template-columns:
+    1fr auto 86px;
   gap:12px;
   padding:13px 0;
   border-bottom:1px solid #ece7ea;
@@ -1172,7 +1270,10 @@ th{
   color:#6d656a;
 }
 
-/* ESTADO / PIE */
+
+/* =========================================================
+   ESTADO / PIE
+========================================================= */
 
 .error{
   display:none;
@@ -1196,14 +1297,35 @@ th{
   font-size:11px;
 }
 
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
 @media(max-width:1100px){
 
   .kpis{
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:
+      repeat(
+        3,
+        1fr
+      );
+  }
+
+  #salidas .kpis.has-six{
+    grid-template-columns:
+      repeat(
+        3,
+        1fr
+      );
   }
 
   .summary-kpis{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+      repeat(
+        2,
+        1fr
+      );
   }
 
   .summary-lower-grid,
@@ -1214,12 +1336,19 @@ th{
     grid-template-columns:1fr;
   }
 
-  .planillaria-right{
-    grid-template-rows:auto auto;
+  .planillaria-right,
+  .planillaria-right.has-absence,
+  .planillaria-right.has-observations,
+  .planillaria-right.has-absence.has-observations{
+    grid-template-rows:auto;
   }
 
   .plan-main{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+      repeat(
+        2,
+        1fr
+      );
   }
 
 }
@@ -1246,7 +1375,6 @@ th{
 
 /* =========================================================
    PDF RESUMEN - A4 VERTICAL / 1 HOJA
-   Solo afecta la exportación. No modifica la vista web.
 ========================================================= */
 
 @page{
@@ -1263,8 +1391,10 @@ th{
     margin:0 !important;
     padding:0 !important;
     background:#fff !important;
-    -webkit-print-color-adjust:exact !important;
-    print-color-adjust:exact !important;
+    -webkit-print-color-adjust:
+      exact !important;
+    print-color-adjust:
+      exact !important;
   }
 
   body.print-summary{
@@ -1292,7 +1422,8 @@ th{
     justify-content:flex-start !important;
     margin:0 0 4mm 0 !important;
     padding:0 0 3mm 0 !important;
-    border-bottom:1px solid #ded8dc;
+    border-bottom:
+      1px solid #ded8dc;
   }
 
   body.print-summary .top .status-wrap{
@@ -1346,7 +1477,8 @@ th{
 
   body.print-summary .summary-kpis{
     display:grid !important;
-    grid-template-columns:1fr 1fr !important;
+    grid-template-columns:
+      1fr 1fr !important;
     gap:3mm !important;
     margin:0 0 3mm 0 !important;
   }
@@ -1406,7 +1538,8 @@ th{
 
   body.print-summary .summary-lower-grid{
     display:grid !important;
-    grid-template-columns:1fr !important;
+    grid-template-columns:
+      1fr !important;
     gap:3mm !important;
   }
 
@@ -1426,7 +1559,12 @@ th{
 
   body.print-summary .summary-alert-grid{
     display:grid !important;
-    grid-template-columns:repeat(3,1fr) !important;
+    grid-template-columns:
+      repeat(
+        3,
+        1fr
+      )
+      !important;
     gap:2.5mm !important;
   }
 
@@ -1481,8 +1619,7 @@ th{
   }
 
   body.print-summary .alert-detail-row,
-  body.print-summary .alert-none,
-  body.print-summary .alert-additional{
+  body.print-summary .alert-none{
     font-size:7.5pt !important;
     line-height:1.2 !important;
   }
@@ -1521,7 +1658,8 @@ th{
   }
 
   body.print-summary .impact-row{
-    grid-template-columns:9mm minmax(0,1fr) 7mm !important;
+    grid-template-columns:
+      9mm minmax(0,1fr) 7mm !important;
     gap:2mm !important;
   }
 
@@ -1534,16 +1672,12 @@ th{
     height:2.5mm !important;
   }
 
-  body.print-summary .impact-empty{
-    padding:5mm 2mm !important;
-    font-size:8pt !important;
-  }
-
-  body.print-summary *{
-    orphans:2;
-    widows:2;
-  }
 }
+
+
+/* =========================================================
+   FIN CSS
+========================================================= */
 
 </style>
 
@@ -1572,11 +1706,20 @@ th{
   <div class="status-wrap">
 
     <div class="live">
-      <span id="statusDot" class="dot"></span>
-      <span id="statusText">Actualizando…</span>
+      <span
+        id="statusDot"
+        class="dot"
+      ></span>
+
+      <span id="statusText">
+        Actualizando…
+      </span>
     </div>
 
-    <button id="refreshBtn" class="refresh">
+    <button
+      id="refreshBtn"
+      class="refresh"
+    >
       Actualizar
     </button>
 
@@ -1592,38 +1735,64 @@ th{
   </h1>
 
   <div class="date-control">
-    <input id="datePicker" type="date">
+
+    <input
+      id="datePicker"
+      type="date"
+    >
+
   </div>
 
 </section>
 
 
-<div id="errorBox" class="error"></div>
+<div
+  id="errorBox"
+  class="error"
+></div>
 
 
 <nav class="tabs">
 
-  <button class="tab active" data-tab="resumen">
+  <button
+    class="tab active"
+    data-tab="resumen"
+  >
     Resumen Jornada
   </button>
 
-  <button class="tab" data-tab="plan">
+  <button
+    class="tab"
+    data-tab="plan"
+  >
     Plan Serv
   </button>
 
-  <button class="tab" data-tab="salidas">
+  <button
+    class="tab"
+    data-tab="salidas"
+  >
     Planillería
   </button>
 
-  <button class="tab" data-tab="guardia">
+  <button
+    class="tab"
+    data-tab="guardia"
+  >
     Guardia
   </button>
 
-  <button class="tab" data-tab="os">
+  <button
+    class="tab"
+    data-tab="os"
+  >
     OS
   </button>
 
-  <button class="tab" data-tab="kpi">
+  <button
+    class="tab"
+    data-tab="kpi"
+  >
     KPI
   </button>
 
@@ -1632,12 +1801,35 @@ th{
 
 <main>
 
-  <section id="resumen" class="tab-panel active"></section>
-  <section id="plan" class="tab-panel"></section>
-  <section id="salidas" class="tab-panel"></section>
-  <section id="guardia" class="tab-panel"></section>
-  <section id="os" class="tab-panel"></section>
-  <section id="kpi" class="tab-panel"></section>
+  <section
+    id="resumen"
+    class="tab-panel active"
+  ></section>
+
+  <section
+    id="plan"
+    class="tab-panel"
+  ></section>
+
+  <section
+    id="salidas"
+    class="tab-panel"
+  ></section>
+
+  <section
+    id="guardia"
+    class="tab-panel"
+  ></section>
+
+  <section
+    id="os"
+    class="tab-panel"
+  ></section>
+
+  <section
+    id="kpi"
+    class="tab-panel"
+  ></section>
 
 </main>
 
@@ -1664,7 +1856,7 @@ const API_URL =
 
 
 const LOCAL_CACHE_KEY =
-  'TSJ_DASHBOARD_CACHE_V9';
+  'TSJ_DASHBOARD_CACHE_V11';
 
 const LOCAL_CACHE_MAX_AGE =
   12 * 60 * 60 * 1000;
@@ -1672,91 +1864,122 @@ const LOCAL_CACHE_MAX_AGE =
 const REQUEST_TIMEOUT =
   45000;
 
+
 let DATA = {};
 
 let ACTIVE_TAB =
   'resumen';
 
+
 const READY = {
+
   planServ:false,
   salidas:false,
   guardia:false,
   os:false,
   kpi:false
+
 };
 
+
 const VERSION = {
+
   planServ:0,
   salidas:0,
   guardia:0,
   os:0,
   kpi:0
+
 };
 
+
 const LAST_RENDER = {
+
   resumen:'',
   plan:'',
   salidas:'',
   guardia:'',
   os:'',
   kpi:''
+
 };
 
+
 const DATE_BY_TAB = {
+
   resumen:'',
   salidas:'',
   guardia:'',
   kpi:''
+
 };
+
 
 const INFLIGHT = {};
 
 
 const $ =
   s =>
-    document.querySelector(s);
+    document.querySelector(
+      s
+    );
 
 
 const esc =
   v =>
-    String(v ?? '')
-      .replace(
-        /[&<>"']/g,
-        m => ({
-          '&':'&amp;',
-          '<':'&lt;',
-          '>':'&gt;',
-          '"':'&quot;',
-          "'":'&#039;'
-        }[m])
-      );
+    String(
+      v ??
+      ''
+    )
+    .replace(
+      /[&<>"']/g,
+      m => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;',
+        "'":'&#039;'
+      }[m])
+    );
 
 
 const num =
   v =>
-    Number(v || 0)
-      .toLocaleString(
-        'es-AR'
-      );
+    Number(
+      v ||
+      0
+    )
+    .toLocaleString(
+      'es-AR'
+    );
 
 
 const pad2 =
   v =>
-    String(v)
-      .padStart(
-        2,
-        '0'
-      );
+    String(
+      v
+    )
+    .padStart(
+      2,
+      '0'
+    );
 
 
 function sourceLabel(src){
+
   return src?.name
+
     ? `Fuente: ${esc(src.name)}`
+
     : 'Fuente no disponible';
 }
 
 
-function setStatus(ok,text){
+function setStatus(
+  ok,
+  text
+){
+
   $('#statusDot')
     .classList
     .toggle(
@@ -1771,14 +1994,21 @@ function setStatus(ok,text){
 
 
 function showError(message){
+
   const box =
     $('#errorBox');
 
-  if (!message) {
-    box.classList
-      .remove('show');
+  if (
+    !message
+  ) {
 
-    box.textContent = '';
+    box.classList
+      .remove(
+        'show'
+      );
+
+    box.textContent =
+      '';
 
     return;
   }
@@ -1787,12 +2017,18 @@ function showError(message){
     message;
 
   box.classList
-    .add('show');
+    .add(
+      'show'
+    );
 }
 
 
 function updateLastUpdate(){
-  if (!DATA.generatedAt) {
+
+  if (
+    !DATA.generatedAt
+  ) {
+
     return;
   }
 
@@ -1810,18 +2046,25 @@ function updateLastUpdate(){
 
 
 function restoreLocalSnapshot(){
+
   try {
+
     const raw =
       localStorage.getItem(
         LOCAL_CACHE_KEY
       );
 
-    if (!raw) {
+    if (
+      !raw
+    ) {
+
       return false;
     }
 
     const snapshot =
-      JSON.parse(raw);
+      JSON.parse(
+        raw
+      );
 
     const age =
       Date.now()
@@ -1832,10 +2075,12 @@ function restoreLocalSnapshot(){
       );
 
     if (
-      !snapshot.data ||
+      !snapshot.data
+      ||
       age >
       LOCAL_CACHE_MAX_AGE
     ) {
+
       return false;
     }
 
@@ -1848,15 +2093,24 @@ function restoreLocalSnapshot(){
       'guardia',
       'os',
       'kpi'
-    ].forEach(
+    ]
+    .forEach(
       section => {
+
         if (
-          DATA[section]
+          DATA[
+            section
+          ]
         ) {
-          READY[section] =
+
+          READY[
+            section
+          ] =
             true;
 
-          VERSION[section] =
+          VERSION[
+            section
+          ] =
             1;
         }
       }
@@ -1865,16 +2119,20 @@ function restoreLocalSnapshot(){
     return true;
 
   } catch (err) {
+
     return false;
   }
 }
 
 
 function saveLocalSnapshot(){
+
   try {
+
     localStorage.setItem(
       LOCAL_CACHE_KEY,
       JSON.stringify({
+
         savedAt:
           Date.now(),
 
@@ -1887,6 +2145,10 @@ function saveLocalSnapshot(){
 }
 
 
+/* =========================================================
+   ICONOS
+========================================================= */
+
 function svgIcon(type){
 
   const common =
@@ -1897,64 +2159,22 @@ function svgIcon(type){
      stroke-linejoin="round"`;
 
 
-  if(type === 'check'){
+  if (
+    type ===
+    'check'
+  ) {
+
     return `
       <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="9" ${common}></circle>
-        <path d="m8 12 2.5 2.5L16 9" ${common}></path>
-      </svg>
-    `;
-  }
+        <circle
+          cx="12"
+          cy="12"
+          r="9"
+          ${common}
+        ></circle>
 
-
-  if(type === 'bus'){
-    return `
-      <svg viewBox="0 0 24 24">
-        <rect x="5" y="3" width="14" height="16" rx="3" ${common}></rect>
-        <path d="M7 7h10M7 14h10" ${common}></path>
-        <circle cx="8" cy="17" r="1" fill="currentColor"></circle>
-        <circle cx="16" cy="17" r="1" fill="currentColor"></circle>
-      </svg>
-    `;
-  }
-
-
-  if(type === 'users'){
-    return `
-      <svg viewBox="0 0 24 24">
-        <circle cx="9" cy="8" r="3" ${common}></circle>
-        <path d="M3.5 19c.4-4 2.4-6 5.5-6s5.1 2 5.5 6" ${common}></path>
-        <circle cx="17" cy="9" r="2.2" ${common}></circle>
-      </svg>
-    `;
-  }
-
-
-  if(type === 'clock'){
-    return `
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="8" ${common}></circle>
-        <path d="M12 7v5l3 2" ${common}></path>
-      </svg>
-    `;
-  }
-
-
-  if(type === 'gear'){
-    return `
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="4" ${common}></circle>
-        <circle cx="12" cy="12" r="8" ${common}></circle>
-      </svg>
-    `;
-  }
-
-
-  if(type === 'wrench'){
-    return `
-      <svg viewBox="0 0 24 24">
         <path
-          d="M14.5 6.5a5 5 0 0 0-6.8 6.1L3 17.3A2.6 2.6 0 0 0 6.7 21l4.7-4.7a5 5 0 0 0 6.1-6.8l-3 3-3-3Z"
+          d="m8 12 2.5 2.5L16 9"
           ${common}
         ></path>
       </svg>
@@ -1962,18 +2182,179 @@ function svgIcon(type){
   }
 
 
-  if(type === 'road'){
+  if (
+    type ===
+    'bus'
+  ) {
+
     return `
       <svg viewBox="0 0 24 24">
-        <path d="M8 3 5 21M16 3l3 18" ${common}></path>
-        <path d="M12 4v3M12 10v4M12 17v3" ${common}></path>
+
+        <rect
+          x="5"
+          y="3"
+          width="14"
+          height="16"
+          rx="3"
+          ${common}
+        ></rect>
+
+        <path
+          d="M7 7h10M7 14h10"
+          ${common}
+        ></path>
+
+        <circle
+          cx="8"
+          cy="17"
+          r="1"
+          fill="currentColor"
+        ></circle>
+
+        <circle
+          cx="16"
+          cy="17"
+          r="1"
+          fill="currentColor"
+        ></circle>
+
       </svg>
     `;
   }
 
+
+  if (
+    type ===
+    'users'
+  ) {
+
+    return `
+      <svg viewBox="0 0 24 24">
+
+        <circle
+          cx="9"
+          cy="8"
+          r="3"
+          ${common}
+        ></circle>
+
+        <path
+          d="M3.5 19c.4-4 2.4-6 5.5-6s5.1 2 5.5 6"
+          ${common}
+        ></path>
+
+        <circle
+          cx="17"
+          cy="9"
+          r="2.2"
+          ${common}
+        ></circle>
+
+      </svg>
+    `;
+  }
+
+
+  if (
+    type ===
+    'clock'
+  ) {
+
+    return `
+      <svg viewBox="0 0 24 24">
+
+        <circle
+          cx="12"
+          cy="12"
+          r="8"
+          ${common}
+        ></circle>
+
+        <path
+          d="M12 7v5l3 2"
+          ${common}
+        ></path>
+
+      </svg>
+    `;
+  }
+
+
+  if (
+    type ===
+    'gear'
+  ) {
+
+    return `
+      <svg viewBox="0 0 24 24">
+
+        <circle
+          cx="12"
+          cy="12"
+          r="4"
+          ${common}
+        ></circle>
+
+        <circle
+          cx="12"
+          cy="12"
+          r="8"
+          ${common}
+        ></circle>
+
+      </svg>
+    `;
+  }
+
+
+  if (
+    type ===
+    'wrench'
+  ) {
+
+    return `
+      <svg viewBox="0 0 24 24">
+
+        <path
+          d="M14.5 6.5a5 5 0 0 0-6.8 6.1L3 17.3A2.6 2.6 0 0 0 6.7 21l4.7-4.7a5 5 0 0 0 6.1-6.8l-3 3-3-3Z"
+          ${common}
+        ></path>
+
+      </svg>
+    `;
+  }
+
+
+  if (
+    type ===
+    'road'
+  ) {
+
+    return `
+      <svg viewBox="0 0 24 24">
+
+        <path
+          d="M8 3 5 21M16 3l3 18"
+          ${common}
+        ></path>
+
+        <path
+          d="M12 4v3M12 10v4M12 17v3"
+          ${common}
+        ></path>
+
+      </svg>
+    `;
+  }
+
+
   return '';
 }
 
+
+/* =========================================================
+   COMPONENTES GENERALES
+========================================================= */
 
 function kpi(
   label,
@@ -1981,17 +2362,23 @@ function kpi(
   sub='',
   tone=''
 ){
+
   return `
+
     <article class="kpi ${tone}">
+
       <div class="label">
         ${esc(label)}
       </div>
+
       <div class="value">
         ${esc(value)}
       </div>
+
       <div class="sub">
         ${esc(sub)}
       </div>
+
     </article>
   `;
 }
@@ -2002,22 +2389,33 @@ function mini(
   value,
   tone=''
 ){
+
   return `
+
     <article class="mini ${tone}">
+
       <div class="t">
         ${esc(title)}
       </div>
+
       <div class="n">
         ${esc(value)}
       </div>
+
     </article>
   `;
 }
 
 
-function table(headers,rows){
+function table(
+  headers,
+  rows
+){
 
-  if(!rows?.length){
+  if (
+    !rows?.length
+  ) {
+
     return `
       <div class="empty">
         Sin registros.
@@ -2026,11 +2424,15 @@ function table(headers,rows){
   }
 
   return `
+
     <div class="table-wrap">
+
       <table>
 
         <thead>
+
           <tr>
+
             ${
               headers
                 .map(
@@ -2039,60 +2441,86 @@ function table(headers,rows){
                 )
                 .join('')
             }
+
           </tr>
+
         </thead>
 
         <tbody>
+
           ${
             rows
               .map(
                 r => `
+
                   <tr>
+
                     ${
                       headers
                         .map(
                           h => `
+
                             <td>
+
                               ${
                                 h[2]
+
                                   ? h[2](
-                                      r[h[1]],
+                                      r[
+                                        h[1]
+                                      ],
                                       r
                                     )
+
                                   : esc(
-                                      r[h[1]]
+                                      r[
+                                        h[1]
+                                      ]
                                       ??
                                       ''
                                     )
                               }
+
                             </td>
                           `
                         )
                         .join('')
                     }
+
                   </tr>
                 `
               )
               .join('')
           }
+
         </tbody>
 
       </table>
+
     </div>
   `;
 }
 
 
-function bars(items,limit=12){
+function bars(
+  items,
+  limit=12
+){
 
   const a =
-    (items || [])
-      .slice(
-        0,
-        limit
-      );
+    (
+      items ||
+      []
+    )
+    .slice(
+      0,
+      limit
+    );
 
-  if(!a.length){
+  if (
+    !a.length
+  ) {
+
     return `
       <div class="empty">
         Sin datos para mostrar.
@@ -2111,11 +2539,13 @@ function bars(items,limit=12){
     );
 
   return `
+
     <div class="bars">
 
       ${
         a.map(
           x => `
+
             <div class="bar-row">
 
               <div class="bar-label">
@@ -2123,13 +2553,17 @@ function bars(items,limit=12){
               </div>
 
               <div class="track">
+
                 <div
                   class="fill"
                   style="
                     width:${
                       Math.max(
                         3,
-                        (+x.value || 0)
+                        (
+                          +x.value ||
+                          0
+                        )
                         /
                         max
                         *
@@ -2138,6 +2572,7 @@ function bars(items,limit=12){
                     }%
                   "
                 ></div>
+
               </div>
 
               <div class="bar-value">
@@ -2155,48 +2590,75 @@ function bars(items,limit=12){
 }
 
 
+/* =========================================================
+   FECHAS FRONTEND
+========================================================= */
+
 function todayISO(){
+
   const p =
     DATA.period ||
     {};
 
   return (
-    p.year &&
-    p.month &&
+    p.year
+    &&
+    p.month
+    &&
     p.day
   )
+
     ? `${p.year}-${pad2(p.month)}-${pad2(p.day)}`
+
     : '';
 }
 
 
-function selectedISO(tab=ACTIVE_TAB){
+function selectedISO(
+  tab=ACTIVE_TAB
+){
+
   return (
-    DATE_BY_TAB[tab]
+    DATE_BY_TAB[
+      tab
+    ]
     ||
     todayISO()
   );
 }
 
 
-function selectedDDMM(tab=ACTIVE_TAB){
+function selectedDDMM(
+  tab=ACTIVE_TAB
+){
+
   const m =
-    selectedISO(tab)
-      .match(
-        /^(\d{4})-(\d{2})-(\d{2})$/
-      );
+    selectedISO(
+      tab
+    )
+    .match(
+      /^(\d{4})-(\d{2})-(\d{2})$/
+    );
 
   return m
+
     ? `${m[3]}/${m[2]}`
+
     : '';
 }
 
 
-function selectedLabel(tab=ACTIVE_TAB){
+function selectedLabel(
+  tab=ACTIVE_TAB
+){
+
   const v =
-    selectedISO(tab);
+    selectedISO(
+      tab
+    );
 
   return v
+
     ? new Date(
         v +
         'T12:00:00'
@@ -2209,11 +2671,16 @@ function selectedLabel(tab=ACTIVE_TAB){
           year:'numeric'
         }
       )
+
     : '';
 }
 
 
-function sameDay(value,key){
+function sameDay(
+  value,
+  key
+){
+
   const m =
     String(
       value ||
@@ -2234,65 +2701,87 @@ function sameDay(value,key){
 
 
 function kpiDefaultISO(){
+
   const p =
     DATA.period ||
     {};
 
   const days =
-    (DATA.kpi?.daily || [])
-      .map(
-        x => {
-          const m =
-            String(
-              x.date ||
-              ''
-            )
-            .match(
-              /^(\d{1,2})[\/-](\d{1,2})/
-            );
+    (
+      DATA.kpi?.daily ||
+      []
+    )
+    .map(
+      x => {
 
-          return (
-            m &&
-            +m[2] ===
-            +p.month
+        const m =
+          String(
+            x.date ||
+            ''
           )
-            ? +m[1]
-            : 0;
-        }
-      )
-      .filter(
-        d =>
-          d > 0 &&
-          d < +p.day
-      )
-      .sort(
-        (a,b) =>
-          b-a
-      );
+          .match(
+            /^(\d{1,2})[\/-](\d{1,2})/
+          );
+
+        return (
+          m
+          &&
+          +m[2] ===
+          +p.month
+        )
+
+          ? +m[1]
+
+          : 0;
+      }
+    )
+    .filter(
+      d =>
+        d > 0
+        &&
+        d < +p.day
+    )
+    .sort(
+      (
+        a,
+        b
+      ) =>
+        b-a
+    );
 
   const d =
     days[0]
     ||
     Math.max(
       1,
-      (+p.day || 1)-1
+      (
+        +p.day ||
+        1
+      )
+      -
+      1
     );
 
   return p.year
+
     ? `${p.year}-${pad2(p.month)}-${pad2(d)}`
+
     : '';
 }
 
 
 function monthLabel(){
+
   const p =
     DATA.period ||
     {};
 
   return (
-    p.month &&
+    p.month
+    &&
     p.year
   )
+
     ? new Date(
         p.year,
         p.month-1,
@@ -2305,11 +2794,15 @@ function monthLabel(){
           year:'numeric'
         }
       )
+
     : '';
 }
 
 
-function shortDateLabel(ddmm){
+function shortDateLabel(
+  ddmm
+){
+
   const m =
     String(
       ddmm ||
@@ -2319,52 +2812,99 @@ function shortDateLabel(ddmm){
       /^(\d{1,2})[\/-](\d{1,2})/
     );
 
-  if(!m){
-    return ddmm || '';
+  if (
+    !m
+  ) {
+
+    return ddmm ||
+      '';
   }
 
   const mon = [
-    'ene','feb','mar','abr',
-    'may','jun','jul','ago',
-    'sep','oct','nov','dic'
-  ][+m[2]-1];
 
-  return `${+m[1]}-${mon}`;
+    'ene',
+    'feb',
+    'mar',
+    'abr',
+    'may',
+    'jun',
+    'jul',
+    'ago',
+    'sep',
+    'oct',
+    'nov',
+    'dic'
+
+  ][
+    +m[2]-1
+  ];
+
+  return (
+    `${+m[1]}-${mon}`
+  );
 }
 
 
-function countBy(rows,field){
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function countBy(
+  rows,
+  field
+){
+
   const out = {};
 
-  (rows || [])
-    .forEach(
-      r => {
-        const k =
-          String(
-            r[field] ||
-            'Sin dato'
-          )
-          .trim()
-          ||
-          'Sin dato';
+  (
+    rows ||
+    []
+  )
+  .forEach(
+    r => {
 
-        out[k] =
-          (out[k] || 0)
-          +
-          1;
-      }
-    );
+      const k =
+        String(
+          r[
+            field
+          ]
+          ||
+          'Sin dato'
+        )
+        .trim()
+        ||
+        'Sin dato';
+
+      out[k] =
+        (
+          out[k] ||
+          0
+        )
+        +
+        1;
+    }
+  );
 
   return Object
-    .entries(out)
+    .entries(
+      out
+    )
     .map(
-      ([label,value]) => ({
+      (
+        [
+          label,
+          value
+        ]
+      ) => ({
         label,
         value
       })
     )
     .sort(
-      (a,b) =>
+      (
+        a,
+        b
+      ) =>
         b.value -
         a.value
         ||
@@ -2376,11 +2916,18 @@ function countBy(rows,field){
 
 
 function sortByLine(rows){
+
   return [
-    ...(rows || [])
+    ...(
+      rows ||
+      []
+    )
   ]
   .sort(
-    (a,b) =>
+    (
+      a,
+      b
+    ) =>
       String(
         a.linea ||
         ''
@@ -2400,11 +2947,18 @@ function sortByLine(rows){
 
 
 function sortByLineAndService(rows){
+
   return [
-    ...(rows || [])
+    ...(
+      rows ||
+      []
+    )
   ]
   .sort(
-    (a,b) =>
+    (
+      a,
+      b
+    ) =>
 
       String(
         a.linea ||
@@ -2444,6 +2998,7 @@ function sortByLineAndService(rows){
 
 
 function normalizeBaseLine(value){
+
   let line =
     String(
       value ||
@@ -2456,17 +3011,21 @@ function normalizeBaseLine(value){
       ''
     );
 
-  if(!line){
+  if (
+    !line
+  ) {
+
     return '';
   }
 
-  if(
+  if (
     line === 'P'
     ||
     line === 'P1'
     ||
     line === 'P2'
-  ){
+  ) {
+
     return line;
   }
 
@@ -2476,43 +3035,71 @@ function normalizeBaseLine(value){
     );
 
   return match
+
     ? match[1]
+
     : line;
 }
 
 
 function countByNormalizedLine(rows){
+
   const counts = {};
 
-  (rows || [])
-    .forEach(
-      row => {
-        const line =
-          normalizeBaseLine(
-            row.linea
-          );
+  (
+    rows ||
+    []
+  )
+  .forEach(
+    row => {
 
-        if(!line){
-          return;
-        }
+      const line =
+        normalizeBaseLine(
+          row.linea
+        );
 
-        counts[line] =
-          (counts[line] || 0)
-          +
-          1;
+      if (
+        !line
+      ) {
+
+        return;
       }
-    );
+
+      counts[
+        line
+      ] =
+        (
+          counts[
+            line
+          ]
+          ||
+          0
+        )
+        +
+        1;
+    }
+  );
 
   return Object
-    .entries(counts)
+    .entries(
+      counts
+    )
     .map(
-      ([label,value]) => ({
+      (
+        [
+          label,
+          value
+        ]
+      ) => ({
         label,
         value
       })
     )
     .sort(
-      (a,b) =>
+      (
+        a,
+        b
+      ) =>
         b.value -
         a.value
         ||
@@ -2528,11 +3115,14 @@ function countByNormalizedLine(rows){
 
 
 function normalizeText(value){
+
   return String(
     value ||
     ''
   )
-  .normalize('NFD')
+  .normalize(
+    'NFD'
+  )
   .replace(
     /[\u0300-\u036f]/g,
     ''
@@ -2543,6 +3133,7 @@ function normalizeText(value){
 
 
 function normalizeMechanicalCategory(value){
+
   const original =
     String(
       value ||
@@ -2555,17 +3146,23 @@ function normalizeMechanicalCategory(value){
       original
     );
 
-  if(!v){
+  if (
+    !v
+  ) {
+
     return 'Mecánica';
   }
 
-  if(
-    v.includes('GPS')
-  ){
+  if (
+    v.includes(
+      'GPS'
+    )
+  ) {
+
     return 'GPS';
   }
 
-  if(
+  if (
     v.includes('PINCH')
     ||
     v.includes('NEUM')
@@ -2575,11 +3172,12 @@ function normalizeMechanicalCategory(value){
     v.includes('RUEDA')
     ||
     v.includes('GOMA')
-  ){
+  ) {
+
     return 'Neumático';
   }
 
-  if(
+  if (
     v.includes('MOTOR')
     ||
     v.includes('ACEITE')
@@ -2587,45 +3185,52 @@ function normalizeMechanicalCategory(value){
     v.includes('RADIADOR')
     ||
     v.includes('TEMPERAT')
-  ){
+  ) {
+
     return 'Motor';
   }
 
-  if(
+  if (
     v.includes('TRANSM')
     ||
     v.includes('CAJA')
     ||
     v.includes('EMBRAG')
-  ){
+  ) {
+
     return 'Transmisión';
   }
 
-  if(
-    v.includes('FREN')
-  ){
+  if (
+    v.includes(
+      'FREN'
+    )
+  ) {
+
     return 'Frenos';
   }
 
-  if(
+  if (
     v.includes('ELECTR')
     ||
     v.includes('BATERIA')
     ||
     v.includes('ALTERNADOR')
-  ){
+  ) {
+
     return 'Electricidad';
   }
 
-  if(
+  if (
     v.includes('TABLERO')
     ||
     v.includes('INSTRUMENT')
-  ){
+  ) {
+
     return 'Instrumental';
   }
 
-  if(
+  if (
     v.includes('PUERTA')
     ||
     v.includes('RAMPA')
@@ -2633,7 +3238,8 @@ function normalizeMechanicalCategory(value){
     v.includes('ESPEJO')
     ||
     v.includes('ASIENTO')
-  ){
+  ) {
+
     return 'Accesorio';
   }
 
@@ -2642,11 +3248,14 @@ function normalizeMechanicalCategory(value){
 
 
 function normalizePerson(value){
+
   return String(
     value ||
     ''
   )
-  .normalize('NFD')
+  .normalize(
+    'NFD'
+  )
   .replace(
     /[\u0300-\u036f]/g,
     ''
@@ -2659,7 +3268,11 @@ function normalizePerson(value){
 }
 
 
-function sameDriverReplacement(a,b){
+function sameDriverReplacement(
+  a,
+  b
+){
+
   const titularA =
     normalizePerson(
       a?.titular
@@ -2680,22 +3293,34 @@ function sameDriverReplacement(a,b){
       b?.reemplazo
     );
 
-  if(
-    titularA &&
-    titularB &&
-    replA &&
-    replB &&
-    titularA === titularB &&
-    replA === replB
-  ){
+  if (
+    titularA
+    &&
+    titularB
+    &&
+    replA
+    &&
+    replB
+    &&
+    titularA ===
+    titularB
+    &&
+    replA ===
+    replB
+  ) {
+
     return true;
   }
 
-  if(
-    replA &&
-    replB &&
-    replA === replB
-  ){
+  if (
+    replA
+    &&
+    replB
+    &&
+    replA ===
+    replB
+  ) {
+
     const lineA =
       normalizeBaseLine(
         a?.linea
@@ -2706,11 +3331,15 @@ function sameDriverReplacement(a,b){
         b?.linea
       );
 
-    if(
-      lineA &&
-      lineB &&
-      lineA === lineB
-    ){
+    if (
+      lineA
+      &&
+      lineB
+      &&
+      lineA ===
+      lineB
+    ) {
+
       return true;
     }
   }
@@ -2723,32 +3352,44 @@ function mergeDriverReplacements(
   planRows,
   guardRows
 ){
+
   const result = [
-    ...(planRows || [])
+    ...(
+      planRows ||
+      []
+    )
   ];
 
-  (guardRows || [])
-    .forEach(
-      row => {
-        if(
-          !result.some(
-            existing =>
-              sameDriverReplacement(
-                existing,
-                row
-              )
-          )
-        ){
-          result.push(row);
-        }
+  (
+    guardRows ||
+    []
+  )
+  .forEach(
+    row => {
+
+      if (
+        !result.some(
+          existing =>
+            sameDriverReplacement(
+              existing,
+              row
+            )
+        )
+      ) {
+
+        result.push(
+          row
+        );
       }
-    );
+    }
+  );
 
   return result;
 }
 
 
 function extractNumericPrefix(value){
+
   const match =
     String(
       value ||
@@ -2760,13 +3401,17 @@ function extractNumericPrefix(value){
     );
 
   return match
+
     ? match[1]
+
     : '';
 }
 
 
 function getDriverLegajo(row){
+
   const values = [
+
     row?.legajo,
     row?.legajoTitular,
     row?.legajoConductor,
@@ -2774,81 +3419,114 @@ function getDriverLegajo(row){
     row?.numeroLegajo,
     row?.legajoReemplazo,
     row?.reemplazoLegajo
+
   ];
 
-  for(const v of values){
-    if(
+  for (
+    const v of values
+  ) {
+
+    if (
       v !== undefined
       &&
       v !== null
       &&
       String(v).trim()
-    ){
-      return String(v).trim();
+    ) {
+
+      return String(
+        v
+      )
+      .trim();
     }
   }
 
   return (
+
     extractNumericPrefix(
       row?.titular
     )
+
     ||
+
     extractNumericPrefix(
       row?.conductor
     )
+
     ||
+
     extractNumericPrefix(
       row?.chofer
     )
+
     ||
+
     extractNumericPrefix(
       row?.reemplazo
     )
+
     ||
+
     ''
   );
 }
 
 
 function getDriverSurname(row){
+
   const values = [
+
     row?.apellido,
     row?.titular,
     row?.conductor,
     row?.chofer,
     row?.reemplazo,
     row?.nombre
+
   ];
 
-  for(let value of values){
-    if(
+  for (
+    let value of values
+  ) {
+
+    if (
       !String(
         value ||
         ''
       )
       .trim()
-    ){
+    ) {
+
       continue;
     }
 
     let text =
-      String(value)
-        .replace(
-          /^\d{2,8}\s*[-–—]\s*/,
-          ''
-        )
-        .trim();
+      String(
+        value
+      )
+      .replace(
+        /^\d{2,8}\s*[-–—]\s*/,
+        ''
+      )
+      .trim();
 
-    if(
-      text.includes(',')
-    ){
+    if (
+      text.includes(
+        ','
+      )
+    ) {
+
       return text
-        .split(',')[0]
+        .split(
+          ','
+        )[0]
         .trim();
     }
 
     return text
-      .split(/\s+/)[0];
+      .split(
+        /\s+/
+      )[0];
   }
 
   return '';
@@ -2856,10 +3534,15 @@ function getDriverSurname(row){
 
 
 function getDriverReference(row){
+
   return (
-    getDriverLegajo(row)
+    getDriverLegajo(
+      row
+    )
     ||
-    getDriverSurname(row)
+    getDriverSurname(
+      row
+    )
     ||
     ''
   );
@@ -2867,13 +3550,19 @@ function getDriverReference(row){
 
 
 function uniqueDriverReferences(rows){
+
   return [
     ...new Set(
-      (rows || [])
-        .map(
-          getDriverReference
-        )
-        .filter(Boolean)
+      (
+        rows ||
+        []
+      )
+      .map(
+        getDriverReference
+      )
+      .filter(
+        Boolean
+      )
     )
   ];
 }
@@ -2883,22 +3572,32 @@ function compactList(
   values,
   limit=5
 ){
+
   const clean = [
+
     ...new Set(
-      (values || [])
-        .map(
-          x =>
-            String(
-              x ??
-              ''
-            )
-            .trim()
-        )
-        .filter(Boolean)
+      (
+        values ||
+        []
+      )
+      .map(
+        x =>
+          String(
+            x ??
+            ''
+          )
+          .trim()
+      )
+      .filter(
+        Boolean
+      )
     )
   ];
 
-  if(!clean.length){
+  if (
+    !clean.length
+  ) {
+
     return '—';
   }
 
@@ -2913,22 +3612,34 @@ function compactList(
     visible.length;
 
   return (
-    visible.join(', ')
+    visible.join(
+      ', '
+    )
     +
     (
       more > 0
+
         ? ` +${more}`
+
         : ''
     )
   );
 }
 
 
+/* =========================================================
+   ALERTAS RESUMEN
+========================================================= */
+
 function renderAlertCases(
   rows,
   emptyText
 ){
-  if(!rows.length){
+
+  if (
+    !rows.length
+  ) {
+
     return `
       <div class="alert-none">
         ${esc(emptyText)}
@@ -2950,49 +3661,65 @@ function renderAlertCases(
   const more =
     hidden.length;
 
+
   const renderRow =
     r => `
+
       <div class="alert-detail-row">
 
         <span class="alert-detail-dot"></span>
 
         <span>
+
           ${esc(
             normalizeMechanicalCategory(
               r.falla
             )
           )}
+
           · Int.
+
           ${esc(
             r.interno ||
             '-'
           )}
+
         </span>
 
       </div>
     `;
 
+
   return `
+
     <div class="alert-card-detail">
 
-      ${visible
-        .map(
-          renderRow
-        )
-        .join('')
+      ${
+        visible
+          .map(
+            renderRow
+          )
+          .join('')
       }
+
 
       ${
         more > 0
+
           ? `
+
             <div class="alert-extra-list">
-              ${hidden
-                .map(
-                  renderRow
-                )
-                .join('')
+
+              ${
+                hidden
+                  .map(
+                    renderRow
+                  )
+                  .join('')
               }
+
             </div>
+
 
             <button
               type="button"
@@ -3001,14 +3728,20 @@ function renderAlertCases(
               aria-expanded="false"
               onclick="toggleAlertCard(this)"
             >
+
               +${more}
+
               ${
                 more === 1
+
                   ? 'adicional'
+
                   : 'adicionales'
               }
+
             </button>
           `
+
           : ''
       }
 
@@ -3018,12 +3751,16 @@ function renderAlertCases(
 
 
 function toggleAlertCard(button){
+
   const card =
     button.closest(
       '.alert-card'
     );
 
-  if(!card){
+  if (
+    !card
+  ) {
+
     return;
   }
 
@@ -3048,7 +3785,9 @@ function toggleAlertCard(button){
 
   button.textContent =
     expanded
+
       ? 'Ver menos'
+
       : `+${count} ${
           count === 1
             ? 'adicional'
@@ -3058,6 +3797,7 @@ function toggleAlertCard(button){
 
 
 function renderImpactChart(detours){
+
   const rows =
     countByNormalizedLine(
       detours
@@ -3067,7 +3807,10 @@ function renderImpactChart(detours){
       5
     );
 
-  if(!rows.length){
+  if (
+    !rows.length
+  ) {
+
     return `
       <div class="impact-empty">
         Sin desvíos para la jornada.
@@ -3088,11 +3831,13 @@ function renderImpactChart(detours){
     );
 
   return `
+
     <div class="impact-chart">
 
       ${
         rows.map(
           row => `
+
             <div class="impact-row">
 
               <div class="impact-line">
@@ -3100,6 +3845,7 @@ function renderImpactChart(detours){
               </div>
 
               <div class="impact-track">
+
                 <div
                   class="impact-fill"
                   style="
@@ -3118,6 +3864,7 @@ function renderImpactChart(detours){
                     }%
                   "
                 ></div>
+
               </div>
 
               <div class="impact-value">
@@ -3135,7 +3882,12 @@ function renderImpactChart(detours){
 }
 
 
+/* =========================================================
+   RESUMEN JORNADA
+========================================================= */
+
 function renderResumen(){
+
   const key =
     selectedDDMM(
       'resumen'
@@ -3155,14 +3907,17 @@ function renderResumen(){
 
   const units =
     sortByLineAndService(
-      (salidas.unitRows || [])
-        .filter(
-          r =>
-            sameDay(
-              r.fecha,
-              key
-            )
-        )
+      (
+        salidas.unitRows ||
+        []
+      )
+      .filter(
+        r =>
+          sameDay(
+            r.fecha,
+            key
+          )
+      )
     );
 
   const replacedUnitNumbers =
@@ -3176,24 +3931,30 @@ function renderResumen(){
     );
 
   const planDrivers =
-    (salidas.driverRows || [])
-      .filter(
-        r =>
-          sameDay(
-            r.fecha,
-            key
-          )
-      );
+    (
+      salidas.driverRows ||
+      []
+    )
+    .filter(
+      r =>
+        sameDay(
+          r.fecha,
+          key
+        )
+    );
 
   const guardDrivers =
-    (guardia.driverRows || [])
-      .filter(
-        r =>
-          sameDay(
-            r.fecha,
-            key
-          )
-      );
+    (
+      guardia.driverRows ||
+      []
+    )
+    .filter(
+      r =>
+        sameDay(
+          r.fecha,
+          key
+        )
+    );
 
   const drivers =
     mergeDriverReplacements(
@@ -3207,14 +3968,17 @@ function renderResumen(){
     );
 
   const late =
-    (salidas.lateRows || [])
-      .filter(
-        r =>
-          sameDay(
-            r.fecha,
-            key
-          )
-      );
+    (
+      salidas.lateRows ||
+      []
+    )
+    .filter(
+      r =>
+        sameDay(
+          r.fecha,
+          key
+        )
+    );
 
   const lateReferences =
     uniqueDriverReferences(
@@ -3223,38 +3987,47 @@ function renderResumen(){
 
   const mechanical =
     sortByLine(
-      (guardia.incidents || [])
-        .filter(
-          r =>
-            sameDay(
-              r.fecha,
-              key
-            )
-        )
+      (
+        guardia.incidents ||
+        []
+      )
+      .filter(
+        r =>
+          sameDay(
+            r.fecha,
+            key
+          )
+      )
     );
 
   const auxiliaries =
     sortByLine(
-      (guardia.auxilios || [])
-        .filter(
-          r =>
-            sameDay(
-              r.fecha,
-              key
-            )
-        )
+      (
+        guardia.auxilios ||
+        []
+      )
+      .filter(
+        r =>
+          sameDay(
+            r.fecha,
+            key
+          )
+      )
     );
 
   const detours =
     sortByLine(
-      (guardia.detours || [])
-        .filter(
-          r =>
-            sameDay(
-              r.fecha,
-              key
-            )
-        )
+      (
+        guardia.detours ||
+        []
+      )
+      .filter(
+        r =>
+          sameDay(
+            r.fecha,
+            key
+          )
+      )
     );
 
   const detourLines =
@@ -3266,7 +4039,9 @@ function renderResumen(){
               r.linea
             )
         )
-        .filter(Boolean)
+        .filter(
+          Boolean
+        )
     );
 
   const selectedIsToday =
@@ -3278,15 +4053,19 @@ function renderResumen(){
 
   const compliance =
     selectedIsToday
+
       ? Number(
           plan.compliance ||
           0
         )
+
       : null;
 
   const progress =
     compliance === null
+
       ? 0
+
       : Math.max(
           0,
           Math.min(
@@ -3294,6 +4073,7 @@ function renderResumen(){
             compliance
           )
         );
+
 
   $('#resumen').innerHTML = `
 
@@ -3334,18 +4114,28 @@ function renderResumen(){
 
     <div class="summary-kpis">
 
+      <article
+        class="
+          summary-kpi
+          ${
+            compliance !== null
+            &&
+            compliance >= 100
 
-      <article class="summary-kpi ${
-        compliance !== null &&
-        compliance >= 100
-          ? 'good'
-          : compliance !== null &&
-            compliance >= 95
-            ? 'warn'
-            : compliance !== null
-              ? 'bad'
-              : ''
-      }">
+              ? 'good'
+
+              : compliance !== null
+                &&
+                compliance >= 95
+
+                  ? 'warn'
+
+                  : compliance !== null
+                    ? 'bad'
+                    : ''
+          }
+        "
+      >
 
         <div class="summary-icon green">
           ${svgIcon('check')}
@@ -3356,23 +4146,33 @@ function renderResumen(){
         </div>
 
         <div class="summary-kpi-value">
+
           ${
             compliance === null
+
               ? '—'
+
               : `${num(compliance)}%`
           }
+
         </div>
 
         ${
           compliance !== null
+
             ? `
+
               <div class="summary-progress">
 
                 <div class="summary-progress-track">
+
                   <div
                     class="summary-progress-fill"
-                    style="width:${progress}%"
+                    style="
+                      width:${progress}%
+                    "
                   ></div>
+
                 </div>
 
                 <div class="summary-progress-value">
@@ -3381,6 +4181,7 @@ function renderResumen(){
 
               </div>
             `
+
             : ''
         }
 
@@ -3388,7 +4189,9 @@ function renderResumen(){
 
           ${
             selectedIsToday
+
               ? 'Plan de servicio TM'
+
               : 'Sin dato histórico de Plan Serv'
           }
 
@@ -3414,6 +4217,7 @@ function renderResumen(){
         <div class="summary-kpi-sub">
 
           Internos:
+
           ${esc(
             compactList(
               replacedUnitNumbers,
@@ -3443,6 +4247,7 @@ function renderResumen(){
         <div class="summary-kpi-sub">
 
           Legajos:
+
           ${esc(
             compactList(
               driverReferences,
@@ -3455,11 +4260,16 @@ function renderResumen(){
       </article>
 
 
-      <article class="summary-kpi ${
-        late.length
-          ? 'warn'
-          : 'good'
-      }">
+      <article
+        class="
+          summary-kpi
+          ${
+            late.length
+              ? 'warn'
+              : 'good'
+          }
+        "
+      >
 
         <div class="summary-icon green">
           ${svgIcon('clock')}
@@ -3476,6 +4286,7 @@ function renderResumen(){
         <div class="summary-kpi-sub">
 
           Legajos:
+
           ${esc(
             compactList(
               lateReferences,
@@ -3492,22 +4303,26 @@ function renderResumen(){
 
     <div class="summary-lower-grid">
 
-
       <section class="summary-alert-area">
 
         <h3 class="summary-title">
           Alertas de la jornada
         </h3>
 
-
         <div class="summary-alert-grid">
 
 
-          <article class="alert-card auxiliary ${
-            auxiliaries.length
-              ? ''
-              : 'good'
-          }">
+          <article
+            class="
+              alert-card
+              auxiliary
+              ${
+                auxiliaries.length
+                  ? ''
+                  : 'good'
+              }
+            "
+          >
 
             <div class="alert-head">
 
@@ -3533,11 +4348,17 @@ function renderResumen(){
           </article>
 
 
-          <article class="alert-card mechanical ${
-            mechanical.length
-              ? ''
-              : 'good'
-          }">
+          <article
+            class="
+              alert-card
+              mechanical
+              ${
+                mechanical.length
+                  ? ''
+                  : 'good'
+              }
+            "
+          >
 
             <div class="alert-head">
 
@@ -3563,11 +4384,17 @@ function renderResumen(){
           </article>
 
 
-          <article class="alert-card detours ${
-            detours.length
-              ? ''
-              : 'good'
-          }">
+          <article
+            class="
+              alert-card
+              detours
+              ${
+                detours.length
+                  ? ''
+                  : 'good'
+              }
+            "
+          >
 
             <div class="alert-head">
 
@@ -3587,7 +4414,9 @@ function renderResumen(){
 
             ${
               detours.length
+
                 ? `
+
                   <div class="alert-card-detail">
 
                     <div class="alert-detail-row">
@@ -3596,11 +4425,16 @@ function renderResumen(){
 
                       <span>
 
-                        ${num(detourLines.size)}
+                        ${num(
+                          detourLines.size
+                        )}
 
                         ${
-                          detourLines.size === 1
+                          detourLines.size ===
+                          1
+
                             ? 'línea afectada'
+
                             : 'líneas afectadas'
                         }
 
@@ -3610,7 +4444,9 @@ function renderResumen(){
 
                   </div>
                 `
+
                 : `
+
                   <div class="alert-none">
                     Sin desvíos
                   </div>
@@ -3649,7 +4485,12 @@ function renderResumen(){
 }
 
 
+/* =========================================================
+   PLAN SERV
+========================================================= */
+
 function renderPlan(){
+
   const d =
     DATA.planServ ||
     {};
@@ -3665,16 +4506,27 @@ function renderPlan(){
     );
 
   const total =
-    (+d.conductoresTM || 0)
+    (
+      +d.conductoresTM ||
+      0
+    )
     +
-    (+d.conductoresTT || 0);
+    (
+      +d.conductoresTT ||
+      0
+    );
 
   const color =
     comp >= 100
+
       ? 'var(--good)'
+
       : comp >= 95
+
         ? 'var(--warn)'
+
         : 'var(--bad)';
+
 
   $('#plan').innerHTML = `
 
@@ -3694,6 +4546,7 @@ function renderPlan(){
         <br>
 
         Hoy ·
+
         ${esc(
           d.date ||
           ''
@@ -3727,7 +4580,9 @@ function renderPlan(){
               ${num(
                 d.serviceDone
               )}
+
               /
+
               ${num(
                 d.servicePlanned
               )}
@@ -3783,16 +4638,26 @@ function renderPlan(){
         ${mini(
           'Inasist. relevantes',
           num(d.inasistenciaRelevantes),
-          (+d.inasistenciaRelevantes || 0) > 0
+          (
+            +d.inasistenciaRelevantes ||
+            0
+          ) > 0
+
             ? 'bad'
+
             : 'good'
         )}
 
         ${mini(
           'Inasistencias TM',
           num(d.inasistenciasTM),
-          (+d.inasistenciasTM || 0) > 0
+          (
+            +d.inasistenciasTM ||
+            0
+          ) > 0
+
             ? 'bad'
+
             : 'good'
         )}
 
@@ -3802,11 +4667,15 @@ function renderPlan(){
 
 
     ${
-      (+d.inasistenciasTM || 0) > 0
+      (
+        +d.inasistenciasTM ||
+        0
+      ) > 0
       &&
       comp >= 100
 
         ? `
+
           <div class="service-note">
             Se cambia franco para cumplir con el servicio.
           </div>
@@ -3828,17 +4697,23 @@ function renderPlan(){
 
           ${mini(
             'Conductores TM',
-            num(d.conductoresTM)
+            num(
+              d.conductoresTM
+            )
           )}
 
           ${mini(
             'Conductores TT',
-            num(d.conductoresTT)
+            num(
+              d.conductoresTT
+            )
           )}
 
           ${mini(
             'Total citados',
-            num(total)
+            num(
+              total
+            )
           )}
 
         </div>
@@ -3853,16 +4728,20 @@ function renderPlan(){
         </div>
 
         <div class="big">
+
           ${esc(
             d.ultimaSalida ||
             '-'
           )}
+
           hs
+
         </div>
 
         <div class="small">
 
           Coche
+
           ${esc(
             d.ultimoCoche ||
             '-'
@@ -3879,7 +4758,12 @@ function renderPlan(){
 }
 
 
+/* =========================================================
+   PLANILLERIA
+========================================================= */
+
 function renderSalidas(){
+
   const d =
     DATA.salidas ||
     {};
@@ -3889,51 +4773,106 @@ function renderSalidas(){
       'salidas'
     );
 
+
   const units =
     sortByLineAndService(
-      (d.unitRows || [])
-        .filter(
-          r =>
-            sameDay(
-              r.fecha,
-              key
-            )
-        )
-    );
-
-  const drivers =
-    sortByLineAndService(
-      (d.driverRows || [])
-        .filter(
-          r =>
-            sameDay(
-              r.fecha,
-              key
-            )
-        )
-    );
-
-  const late =
-    (d.lateRows || [])
+      (
+        d.unitRows ||
+        []
+      )
       .filter(
         r =>
           sameDay(
             r.fecha,
             key
           )
-      );
+      )
+    );
 
-  const day =
-    (d.daily || [])
-      .find(
-        x =>
+
+  const drivers =
+    sortByLineAndService(
+      (
+        d.driverRows ||
+        []
+      )
+      .filter(
+        r =>
           sameDay(
-            x.day,
+            r.fecha,
             key
           )
       )
+    );
+
+
+  const late =
+    (
+      d.lateRows ||
+      []
+    )
+    .filter(
+      r =>
+        sameDay(
+          r.fecha,
+          key
+        )
+    );
+
+
+  const absences =
+    (
+      d.absenceRows ||
+      []
+    )
+    .filter(
+      r =>
+        sameDay(
+          r.fecha,
+          key
+        )
+    );
+
+
+  const observations =
+    (
+      d.observations ||
+      []
+    )
+    .filter(
+      r =>
+        sameDay(
+          r.fecha,
+          key
+        )
+    );
+
+
+  const day =
+    (
+      d.daily ||
+      []
+    )
+    .find(
+      x =>
+        sameDay(
+          x.day,
+          key
+        )
+    )
     ||
     {};
+
+
+  const hasAbsences =
+    absences.length >
+    0;
+
+
+  const hasObservations =
+    observations.length >
+    0;
+
 
   $('#salidas').innerHTML = `
 
@@ -3963,28 +4902,62 @@ function renderSalidas(){
     </div>
 
 
-    <div class="kpis">
+    <div
+      class="
+        kpis
+        ${
+          hasAbsences
+            ? 'has-six'
+            : ''
+        }
+      "
+    >
 
       ${kpi(
         'Reemplazos de unidades',
-        num(units.length),
+        num(
+          units.length
+        ),
         key
       )}
+
 
       ${kpi(
         'Reemplazos de conductores',
-        num(drivers.length),
+        num(
+          drivers.length
+        ),
         key
       )}
 
+
       ${kpi(
         'Llegadas tarde',
-        num(late.length),
+        num(
+          late.length
+        ),
         key,
         late.length
           ? 'warn'
           : 'good'
       )}
+
+
+      ${
+        hasAbsences
+
+          ? kpi(
+              'Inasist. relevantes',
+              num(
+                absences.length
+              ),
+              key,
+              'absence-alert'
+            )
+
+          : ''
+      }
+
 
       ${kpi(
         'Plan TM',
@@ -3994,6 +4967,7 @@ function renderSalidas(){
         ),
         'Día seleccionado'
       )}
+
 
       ${kpi(
         'Plan TT',
@@ -4011,6 +4985,7 @@ function renderSalidas(){
 
 
       <div class="planillaria-left">
+
 
         <article class="panel">
 
@@ -4036,9 +5011,21 @@ function renderSalidas(){
 
           ${table(
             [
-              ['Fecha','fecha'],
-              ['Avería','averia'],
-              ['Reemplazo','reemplazo'],
+
+              [
+                'Fecha',
+                'fecha'
+              ],
+
+              [
+                'Avería',
+                'averia'
+              ],
+
+              [
+                'Reemplazo',
+                'reemplazo'
+              ],
 
               [
                 'Motivo',
@@ -4048,9 +5035,17 @@ function renderSalidas(){
                   `<span class="pill">${esc(v)}</span>`
               ],
 
-              ['Línea','linea'],
-              ['Servicio','turno']
+              [
+                'Línea',
+                'linea'
+              ],
+
+              [
+                'Servicio',
+                'turno'
+              ]
             ],
+
             units
           )}
 
@@ -4059,7 +5054,79 @@ function renderSalidas(){
       </div>
 
 
-      <div class="planillaria-right">
+      <div
+        class="
+          planillaria-right
+          ${
+            hasAbsences
+              ? 'has-absence'
+              : ''
+          }
+          ${
+            hasObservations
+              ? 'has-observations'
+              : ''
+          }
+        "
+      >
+
+
+        ${
+          hasAbsences
+
+            ? `
+
+              <article class="panel absence-panel">
+
+                <h3 class="panel-title">
+
+                  <span>
+                    Inasistencias relevantes
+                  </span>
+
+                  <span class="count-badge pink">
+                    ${num(absences.length)}
+                  </span>
+
+                </h3>
+
+
+                ${table(
+                  [
+
+                    [
+                      'Fecha',
+                      'fecha'
+                    ],
+
+                    [
+                      'Conductor',
+                      'conductor'
+                    ],
+
+                    [
+                      'Estado',
+                      'estado',
+
+                      v =>
+                        `<span class="pill">${esc(v)}</span>`
+                    ],
+
+                    [
+                      'Turno',
+                      'turno'
+                    ]
+                  ],
+
+                  absences
+                )}
+
+              </article>
+            `
+
+            : ''
+        }
+
 
         <article class="panel">
 
@@ -4075,14 +5142,36 @@ function renderSalidas(){
 
           </h3>
 
+
           ${table(
             [
-              ['Titular','titular'],
-              ['Reemplazo','reemplazo'],
-              ['Motivo','motivo'],
-              ['Línea','linea'],
-              ['Servicio','turno']
+
+              [
+                'Titular',
+                'titular'
+              ],
+
+              [
+                'Reemplazo',
+                'reemplazo'
+              ],
+
+              [
+                'Motivo',
+                'motivo'
+              ],
+
+              [
+                'Línea',
+                'linea'
+              ],
+
+              [
+                'Turno',
+                'turno'
+              ]
             ],
+
             drivers
           )}
 
@@ -4103,12 +5192,29 @@ function renderSalidas(){
 
           </h3>
 
+
           ${table(
             [
-              ['Fecha','fecha'],
-              ['Conductor','chofer'],
-              ['Prevista','prevista'],
-              ['Real','real'],
+
+              [
+                'Fecha',
+                'fecha'
+              ],
+
+              [
+                'Conductor',
+                'chofer'
+              ],
+
+              [
+                'Prevista',
+                'prevista'
+              ],
+
+              [
+                'Real',
+                'real'
+              ],
 
               [
                 'Demora',
@@ -4118,10 +5224,62 @@ function renderSalidas(){
                   `${num(v)} min`
               ]
             ],
+
             late
           )}
 
         </article>
+
+
+        ${
+          hasObservations
+
+            ? `
+
+              <article class="panel observation-panel">
+
+                <h3 class="panel-title">
+
+                  <span>
+                    Observaciones
+                  </span>
+
+                  <span class="count-badge">
+                    ${num(
+                      observations.length
+                    )}
+                  </span>
+
+                </h3>
+
+
+                <div class="plan-observations">
+
+                  ${
+                    observations
+                      .map(
+                        row => `
+
+                          <div class="plan-observation-item">
+
+                            ${esc(
+                              row.texto ||
+                              ''
+                            )}
+
+                          </div>
+                        `
+                      )
+                      .join('')
+                  }
+
+                </div>
+
+              </article>
+            `
+
+            : ''
+        }
 
       </div>
 
@@ -4130,7 +5288,12 @@ function renderSalidas(){
 }
 
 
+/* =========================================================
+   GUARDIA
+========================================================= */
+
 function normalizeGuardText(value){
+
   return normalizeText(
     value
   );
@@ -4138,38 +5301,47 @@ function normalizeGuardText(value){
 
 
 function splitGuardiaObservations(rows){
+
   const out = {
+
     manana:[],
     tarde:[]
+
   };
 
-  (rows || [])
-    .forEach(
-      row => {
-        const turno =
-          normalizeGuardText(
-            row.turno
-          );
+  (
+    rows ||
+    []
+  )
+  .forEach(
+    row => {
 
-        if(
-          turno ===
-          'MANANA'
-        ){
-          out.manana.push(
-            row
-          );
-        }
+      const turno =
+        normalizeGuardText(
+          row.turno
+        );
 
-        if(
-          turno ===
-          'TARDE'
-        ){
-          out.tarde.push(
-            row
-          );
-        }
+      if (
+        turno ===
+        'MANANA'
+      ) {
+
+        out.manana.push(
+          row
+        );
       }
-    );
+
+      if (
+        turno ===
+        'TARDE'
+      ) {
+
+        out.tarde.push(
+          row
+        );
+      }
+    }
+  );
 
   return out;
 }
@@ -4179,7 +5351,11 @@ function renderGuardEvents(
   rows,
   emptyText
 ){
-  if(!rows?.length){
+
+  if (
+    !rows?.length
+  ) {
+
     return `
       <div class="shift-empty">
         ${esc(emptyText)}
@@ -4190,6 +5366,7 @@ function renderGuardEvents(
   return rows
     .map(
       row => `
+
         <div class="guard-event">
 
           <span class="guard-event-dot"></span>
@@ -4206,6 +5383,7 @@ function renderGuardEvents(
 
 
 function renderGuardia(){
+
   const d =
     DATA.guardia ||
     {};
@@ -4217,61 +5395,76 @@ function renderGuardia(){
 
   const aux =
     sortByLine(
-      (d.auxilios || [])
-        .filter(
-          r =>
-            sameDay(
-              r.fecha,
-              key
-            )
-        )
-    );
-
-  const inc =
-    sortByLine(
-      (d.incidents || [])
-        .filter(
-          r =>
-            sameDay(
-              r.fecha,
-              key
-            )
-        )
-    );
-
-  const drv =
-    sortByLineAndService(
-      (d.driverRows || [])
-        .filter(
-          r =>
-            sameDay(
-              r.fecha,
-              key
-            )
-        )
-    );
-
-  const det =
-    sortByLine(
-      (d.detours || [])
-        .filter(
-          r =>
-            sameDay(
-              r.fecha,
-              key
-            )
-        )
-    );
-
-  const obs =
-    (d.observations || [])
+      (
+        d.auxilios ||
+        []
+      )
       .filter(
         r =>
           sameDay(
             r.fecha,
             key
           )
-      );
+      )
+    );
+
+  const inc =
+    sortByLine(
+      (
+        d.incidents ||
+        []
+      )
+      .filter(
+        r =>
+          sameDay(
+            r.fecha,
+            key
+          )
+      )
+    );
+
+  const drv =
+    sortByLineAndService(
+      (
+        d.driverRows ||
+        []
+      )
+      .filter(
+        r =>
+          sameDay(
+            r.fecha,
+            key
+          )
+      )
+    );
+
+  const det =
+    sortByLine(
+      (
+        d.detours ||
+        []
+      )
+      .filter(
+        r =>
+          sameDay(
+            r.fecha,
+            key
+          )
+      )
+    );
+
+  const obs =
+    (
+      d.observations ||
+      []
+    )
+    .filter(
+      r =>
+        sameDay(
+          r.fecha,
+          key
+        )
+    );
 
   const groupedObs =
     splitGuardiaObservations(
@@ -4291,8 +5484,11 @@ function renderGuardia(){
             r.linea
           )
       )
-      .filter(Boolean)
+      .filter(
+        Boolean
+      )
     );
+
 
   $('#guardia').innerHTML = `
 
@@ -4374,10 +5570,19 @@ function renderGuardia(){
 
         </h3>
 
+
         ${table(
           [
-            ['Línea','linea'],
-            ['Interno','interno'],
+
+            [
+              'Línea',
+              'linea'
+            ],
+
+            [
+              'Interno',
+              'interno'
+            ],
 
             [
               'Falla',
@@ -4391,7 +5596,10 @@ function renderGuardia(){
                 )
             ],
 
-            ['Hs solicitud','hsSolicitud'],
+            [
+              'Hs solicitud',
+              'hsSolicitud'
+            ],
 
             [
               'Hs resolución',
@@ -4399,10 +5607,13 @@ function renderGuardia(){
 
               v =>
                 v
+
                   ? `<span class="resolved-pill">${esc(v)}</span>`
+
                   : `<span class="pending-pill">Pendiente</span>`
             ]
           ],
+
           aux
         )}
 
@@ -4423,10 +5634,19 @@ function renderGuardia(){
 
         </h3>
 
+
         ${table(
           [
-            ['Línea','linea'],
-            ['Interno','interno'],
+
+            [
+              'Línea',
+              'linea'
+            ],
+
+            [
+              'Interno',
+              'interno'
+            ],
 
             [
               'Falla',
@@ -4440,17 +5660,23 @@ function renderGuardia(){
                 )
             ],
 
-            ['Intervención','intervencion'],
+            [
+              'Intervención',
+              'intervencion'
+            ],
 
             [
               'Resolución',
               'resolucion',
 
               v => {
-                if(
-                  v &&
+
+                if (
+                  v
+                  &&
                   String(v).trim()
-                ){
+                ) {
+
                   const pending =
                     normalizeGuardText(
                       v
@@ -4460,17 +5686,23 @@ function renderGuardia(){
                     );
 
                   return `
-                    <span class="${
-                      pending
-                        ? 'pending-pill'
-                        : 'resolved-pill'
-                    }">
+
+                    <span
+                      class="${
+                        pending
+
+                          ? 'pending-pill'
+
+                          : 'resolved-pill'
+                      }"
+                    >
                       ${esc(v)}
                     </span>
                   `;
                 }
 
                 return `
+
                   <span class="pending-pill">
                     Pendiente
                   </span>
@@ -4478,6 +5710,7 @@ function renderGuardia(){
               }
             ]
           ],
+
           inc
         )}
 
@@ -4500,14 +5733,36 @@ function renderGuardia(){
 
       </h3>
 
+
       ${table(
         [
-          ['Titular','titular'],
-          ['Reemplazo','reemplazo'],
-          ['Motivo','motivo'],
-          ['Línea','linea'],
-          ['Turno','turno']
+
+          [
+            'Titular',
+            'titular'
+          ],
+
+          [
+            'Reemplazo',
+            'reemplazo'
+          ],
+
+          [
+            'Motivo',
+            'motivo'
+          ],
+
+          [
+            'Línea',
+            'linea'
+          ],
+
+          [
+            'Turno',
+            'turno'
+          ]
         ],
+
         drv
       )}
 
@@ -4563,13 +5818,31 @@ function renderGuardia(){
 
       </h3>
 
+
       ${table(
         [
-          ['Línea','linea'],
-          ['Ubicación','ubicacion'],
-          ['Motivo','motivo'],
-          ['Desvío','desvio']
+
+          [
+            'Línea',
+            'linea'
+          ],
+
+          [
+            'Ubicación',
+            'ubicacion'
+          ],
+
+          [
+            'Motivo',
+            'motivo'
+          ],
+
+          [
+            'Desvío',
+            'desvio'
+          ]
         ],
+
         det
       )}
 
@@ -4602,8 +5875,11 @@ function renderGuardia(){
             ${
               groupedObs
                 .manana
-                .length === 1
+                .length ===
+              1
+
                 ? 'novedad'
+
                 : 'novedades'
             }
 
@@ -4642,8 +5918,11 @@ function renderGuardia(){
             ${
               groupedObs
                 .tarde
-                .length === 1
+                .length ===
+              1
+
                 ? 'novedad'
+
                 : 'novedades'
             }
 
@@ -4667,7 +5946,12 @@ function renderGuardia(){
 }
 
 
+/* =========================================================
+   OS
+========================================================= */
+
 function renderOS(){
+
   const d =
     DATA.os ||
     {};
@@ -4675,6 +5959,7 @@ function renderOS(){
   const s =
     d.summary ||
     {};
+
 
   $('#os').innerHTML = `
 
@@ -4694,6 +5979,7 @@ function renderOS(){
         <br>
 
         Acumulado
+
         ${esc(
           monthLabel()
         )}
@@ -4746,7 +6032,9 @@ function renderOS(){
           OS por motivo
         </h3>
 
-        ${bars(d.reasons)}
+        ${bars(
+          d.reasons
+        )}
 
       </article>
 
@@ -4757,7 +6045,9 @@ function renderOS(){
           OS por línea
         </h3>
 
-        ${bars(d.lines)}
+        ${bars(
+          d.lines
+        )}
 
       </article>
 
@@ -4768,7 +6058,9 @@ function renderOS(){
           Conductores con registros
         </h3>
 
-        ${bars(d.topDrivers)}
+        ${bars(
+          d.topDrivers
+        )}
 
       </article>
 
@@ -4781,17 +6073,51 @@ function renderOS(){
         Detalle de solicitudes OS · mes
       </h3>
 
+
       ${table(
         [
-          ['Fecha','fecha'],
-          ['Legajo','legajo'],
-          ['Conductor','nombre'],
-          ['Línea','linea'],
-          ['Interno','interno'],
-          ['Motivo','motivo'],
-          ['Observación','observacion'],
-          ['Agente','agente']
+
+          [
+            'Fecha',
+            'fecha'
+          ],
+
+          [
+            'Legajo',
+            'legajo'
+          ],
+
+          [
+            'Conductor',
+            'nombre'
+          ],
+
+          [
+            'Línea',
+            'linea'
+          ],
+
+          [
+            'Interno',
+            'interno'
+          ],
+
+          [
+            'Motivo',
+            'motivo'
+          ],
+
+          [
+            'Observación',
+            'observacion'
+          ],
+
+          [
+            'Agente',
+            'agente'
+          ]
         ],
+
         d.rows ||
         []
       )}
@@ -4801,53 +6127,78 @@ function renderOS(){
 }
 
 
+/* =========================================================
+   KPI
+========================================================= */
+
 function fmtPct(v){
-  if(
-    v === null ||
-    v === undefined ||
+
+  if (
+    v === null
+    ||
+    v === undefined
+    ||
     v === ''
-  ){
+  ) {
+
     return '-';
   }
 
   const s =
-    String(v)
-      .trim();
+    String(
+      v
+    )
+    .trim();
 
-  return s.includes('%')
+  return s.includes(
+    '%'
+  )
+
     ? s
-    : s + '%';
+
+    : s +
+      '%';
 }
 
 
 function rawNumber(v){
-  if(
-    v === null ||
-    v === undefined ||
+
+  if (
+    v === null
+    ||
+    v === undefined
+    ||
     v === ''
-  ){
+  ) {
+
     return null;
   }
 
   const n =
     parseFloat(
-      String(v)
-        .replace(
-          '%',
-          ''
-        )
-        .replace(
-          ',',
-          '.'
-        )
-        .replace(
-          /[^0-9.\-]/g,
-          ''
-        )
+      String(
+        v
+      )
+      .replace(
+        '%',
+        ''
+      )
+      .replace(
+        ',',
+        '.'
+      )
+      .replace(
+        /[^0-9.\-]/g,
+        ''
+      )
     );
 
-  return Number.isFinite(n)
+  return Number.isFinite(
+    n
+  )
+
     ? n
+
     : null;
 }
 
@@ -4856,16 +6207,23 @@ function metricPass(
   value,
   meta
 ){
+
   const n =
-    rawNumber(value);
+    rawNumber(
+      value
+    );
 
   const t =
-    rawNumber(meta);
+    rawNumber(
+      meta
+    );
 
-  if(
-    n === null ||
+  if (
+    n === null
+    ||
     t === null
-  ){
+  ) {
+
     return null;
   }
 
@@ -4879,33 +6237,50 @@ function metricPass(
       ''
     );
 
-  if(
-    s.includes('≤')
+  if (
+    s.includes(
+      '≤'
+    )
     ||
-    s.includes('<=')
-  ){
-    return n <= t;
+    s.includes(
+      '<='
+    )
+  ) {
+
+    return n <=
+      t;
   }
 
-  if(
-    s.includes('≥')
+  if (
+    s.includes(
+      '≥'
+    )
     ||
-    s.includes('>=')
-  ){
-    return n >= t;
+    s.includes(
+      '>='
+    )
+  ) {
+
+    return n >=
+      t;
   }
 
-  return n >= t;
+  return n >=
+    t;
 }
 
 
 function metricProgress(value){
-  const n =
-    rawNumber(value);
 
-  if(
+  const n =
+    rawNumber(
+      value
+    );
+
+  if (
     n === null
-  ){
+  ) {
+
     return 0;
   }
 
@@ -4923,22 +6298,30 @@ function kpiCard(
   metric,
   dateLabel
 ){
+
   const pass =
     metric.meta
+
       ? metricPass(
           metric.raw,
           metric.meta
         )
+
       : null;
 
   const status =
     pass === true
+
       ? 'status-good'
+
       : pass === false
+
         ? 'status-bad'
+
         : '';
 
   return `
+
     <article class="kpi-ref-card ${status}">
 
       <div class="metric-label">
@@ -4950,8 +6333,13 @@ function kpiCard(
       </div>
 
       <div class="metric-sub">
+
         Dato del día ·
-        ${esc(dateLabel)}
+
+        ${esc(
+          dateLabel
+        )}
+
       </div>
 
       <div class="metric-track">
@@ -4959,7 +6347,11 @@ function kpiCard(
         <div
           class="metric-fill"
           style="
-            width:${metricProgress(metric.raw)}%
+            width:${
+              metricProgress(
+                metric.raw
+              )
+            }%
           "
         ></div>
 
@@ -4971,6 +6363,7 @@ function kpiCard(
 
 
 function renderKPI(){
+
   const d =
     DATA.kpi ||
     {};
@@ -4985,16 +6378,23 @@ function renderKPI(){
     {};
 
   const r =
-    (d.daily || [])
-      .find(
-        x =>
-          sameDay(
-            x.date,
-            key
-          )
-      );
+    (
+      d.daily ||
+      []
+    )
+    .find(
+      x =>
+        sameDay(
+          x.date,
+          key
+        )
+    );
 
-  if(!r){
+
+  if (
+    !r
+  ) {
+
     $('#kpi').innerHTML = `
 
       <div class="section-head">
@@ -5017,9 +6417,11 @@ function renderKPI(){
     return;
   }
 
+
   const indicators =
     d.indicators ||
     [];
+
 
   const findIndicator =
     function(matchers){
@@ -5042,7 +6444,9 @@ function renderKPI(){
             }
           );
         }
-      ) || {};
+      )
+      ||
+      {};
     };
 
 
@@ -5068,6 +6472,7 @@ function renderKPI(){
   const metrics = [
 
     {
+
       label:
         'Cumplimiento plan de servicio',
 
@@ -5083,7 +6488,9 @@ function renderKPI(){
         metas.planCumplimiento
     },
 
+
     {
+
       label:
         'Cumplimiento plan de kms',
 
@@ -5099,7 +6506,9 @@ function renderKPI(){
         metas.kmCumplimiento
     },
 
+
     {
+
       label:
         'Cumplimiento plan Hs Extras Conducción',
 
@@ -5115,7 +6524,9 @@ function renderKPI(){
         metas.hsCumplimiento
     },
 
+
     {
+
       label:
         'Titularidad',
 
@@ -5130,47 +6541,61 @@ function renderKPI(){
         metas.titularidad
     },
 
+
     {
+
       label:
         'Siniestros con responsabilidad',
 
       display:
         String(
-          siniestrosConResponsabilidad.dayValue ??
-          r.siniestros ??
+          siniestrosConResponsabilidad.dayValue
+          ??
+          r.siniestros
+          ??
           0
         ),
 
       raw:
-        siniestrosConResponsabilidad.dayValue ??
-        r.siniestros ??
+        siniestrosConResponsabilidad.dayValue
+        ??
+        r.siniestros
+        ??
         0,
 
       meta:
-        siniestrosConResponsabilidad.meta ||
+        siniestrosConResponsabilidad.meta
+        ||
         '≤10'
     },
 
+
     {
+
       label:
         'Siniestros sin responsabilidad',
 
       display:
         String(
-          siniestrosSinResponsabilidad.dayValue ??
+          siniestrosSinResponsabilidad.dayValue
+          ??
           0
         ),
 
       raw:
-        siniestrosSinResponsabilidad.dayValue ??
+        siniestrosSinResponsabilidad.dayValue
+        ??
         0,
 
       meta:
-        siniestrosSinResponsabilidad.meta ||
+        siniestrosSinResponsabilidad.meta
+        ||
         '≤6'
     },
 
+
     {
+
       label:
         'Cumplimiento Horario',
 
@@ -5185,7 +6610,9 @@ function renderKPI(){
         metas.horarioGeneral
     },
 
+
     {
+
       label:
         'Cumplimiento Cabecera',
 
@@ -5200,7 +6627,9 @@ function renderKPI(){
         metas.horarioCab
     },
 
+
     {
+
       label:
         'Cumplimiento Portón',
 
@@ -5215,7 +6644,9 @@ function renderKPI(){
         metas.horarioPorton
     },
 
+
     {
+
       label:
         'IPK',
 
@@ -5232,7 +6663,9 @@ function renderKPI(){
         metas.ipk
     },
 
+
     {
+
       label:
         'Estética',
 
@@ -5248,28 +6681,37 @@ function renderKPI(){
         metas.estetica
     },
 
+
     {
+
       label:
         'Vueltas Perdidas (Cantidad)',
 
       display:
         String(
-          vueltasPerdidasIndicador.dayValue ??
-          r.vueltasPerdidas ??
+          vueltasPerdidasIndicador.dayValue
+          ??
+          r.vueltasPerdidas
+          ??
           0
         ),
 
       raw:
-        vueltasPerdidasIndicador.dayValue ??
-        r.vueltasPerdidas ??
+        vueltasPerdidasIndicador.dayValue
+        ??
+        r.vueltasPerdidas
+        ??
         0,
 
       meta:
-        vueltasPerdidasIndicador.meta ||
-        metas.vueltasPerdidaPct ||
+        vueltasPerdidasIndicador.meta
+        ||
+        metas.vueltasPerdidaPct
+        ||
         '≤5%'
     }
   ];
+
 
   $('#kpi').innerHTML = `
 
@@ -5289,6 +6731,7 @@ function renderKPI(){
         <br>
 
         Día anterior ·
+
         ${esc(
           selectedLabel(
             'kpi'
@@ -5328,49 +6771,63 @@ function renderKPI(){
         </h3>
 
         ${
-          (d.indicators || [])
-            .map(
-              x => {
-                const pass =
-                  metricPass(
-                    x.accumulated,
-                    x.meta
-                  );
+          (
+            d.indicators ||
+            []
+          )
+          .map(
+            x => {
 
-                const cls =
-                  pass === false
-                    ? 'bad'
-                    : pass === null
-                      ? 'neutral'
-                      : '';
+              const pass =
+                metricPass(
+                  x.accumulated,
+                  x.meta
+                );
 
-                return `
-                  <div class="kpi-month-row">
+              const cls =
+                pass === false
 
-                    <div>
-                      ${esc(x.label)}
-                    </div>
+                  ? 'bad'
 
-                    <div>
-                      Meta
-                      ${esc(
-                        x.meta ||
-                        '-'
-                      )}
-                    </div>
+                  : pass === null
 
-                    <div class="kpi-badge ${cls}">
-                      ${esc(
-                        x.accumulated ||
-                        '-'
-                      )}
-                    </div>
+                    ? 'neutral'
+
+                    : '';
+
+              return `
+
+                <div class="kpi-month-row">
+
+                  <div>
+                    ${esc(x.label)}
+                  </div>
+
+                  <div>
+
+                    Meta
+
+                    ${esc(
+                      x.meta ||
+                      '-'
+                    )}
 
                   </div>
-                `;
-              }
-            )
-            .join('')
+
+                  <div class="kpi-badge ${cls}">
+
+                    ${esc(
+                      x.accumulated ||
+                      '-'
+                    )}
+
+                  </div>
+
+                </div>
+              `;
+            }
+          )
+          .join('')
         }
 
       </aside>
@@ -5380,52 +6837,91 @@ function renderKPI(){
 }
 
 
+/* =========================================================
+   RENDER GENERAL
+========================================================= */
+
 function renderSignature(tab){
-  switch(tab){
+
+  switch(
+    tab
+  ) {
 
     case 'resumen':
+
       return [
+
         VERSION.planServ,
         VERSION.salidas,
         VERSION.guardia,
         DATE_BY_TAB.resumen
-      ].join('|');
+
+      ].join(
+        '|'
+      );
+
 
     case 'plan':
+
       return String(
         VERSION.planServ
       );
 
+
     case 'salidas':
+
       return [
+
         VERSION.salidas,
         DATE_BY_TAB.salidas
-      ].join('|');
+
+      ].join(
+        '|'
+      );
+
 
     case 'guardia':
+
       return [
+
         VERSION.guardia,
         DATE_BY_TAB.guardia
-      ].join('|');
+
+      ].join(
+        '|'
+      );
+
 
     case 'os':
+
       return String(
         VERSION.os
       );
 
+
     case 'kpi':
+
       return [
+
         VERSION.kpi,
         DATE_BY_TAB.kpi
-      ].join('|');
+
+      ].join(
+        '|'
+      );
+
 
     default:
+
       return '';
   }
 }
 
 
-function renderActiveTab(force=false){
+function renderActiveTab(
+  force=false
+){
+
   configureDatePicker();
 
   const signature =
@@ -5433,52 +6929,81 @@ function renderActiveTab(force=false){
       ACTIVE_TAB
     );
 
-  if(
+  if (
     !force
     &&
     LAST_RENDER[
       ACTIVE_TAB
-    ] === signature
-  ){
+    ] ===
+    signature
+  ) {
+
     return;
   }
 
-  switch(ACTIVE_TAB){
+  switch(
+    ACTIVE_TAB
+  ) {
 
     case 'resumen':
+
       renderResumen();
+
       break;
+
 
     case 'plan':
+
       renderPlan();
+
       break;
+
 
     case 'salidas':
+
       renderSalidas();
+
       break;
+
 
     case 'guardia':
+
       renderGuardia();
+
       break;
+
 
     case 'os':
+
       renderOS();
+
       break;
 
+
     case 'kpi':
+
       renderKPI();
+
       break;
   }
 
+
   LAST_RENDER[
     ACTIVE_TAB
-  ] = signature;
+  ] =
+    signature;
+
 
   updateLastUpdate();
 }
 
 
+/* =========================================================
+   DATE PICKER
+========================================================= */
+
 function configureDatePicker(){
+
   const p =
     DATA.period ||
     {};
@@ -5486,43 +7011,54 @@ function configureDatePicker(){
   const el =
     $('#datePicker');
 
-  if(
-    !p.year ||
+  if (
+    !p.year
+    ||
     !p.month
-  ){
+  ) {
+
     return;
   }
 
   const today =
     todayISO();
 
-  if(
+
+  if (
     !DATE_BY_TAB.resumen
-  ){
+  ) {
+
     DATE_BY_TAB.resumen =
       today;
   }
 
-  if(
+
+  if (
     !DATE_BY_TAB.salidas
-  ){
+  ) {
+
     DATE_BY_TAB.salidas =
       today;
   }
 
-  if(
+
+  if (
     !DATE_BY_TAB.guardia
-  ){
+  ) {
+
     DATE_BY_TAB.guardia =
       today;
   }
 
-  if(
+
+  if (
     !DATE_BY_TAB.kpi
-  ){
+  ) {
+
     DATE_BY_TAB.kpi =
       kpiDefaultISO();
   }
+
 
   const hide =
     ACTIVE_TAB ===
@@ -5531,6 +7067,7 @@ function configureDatePicker(){
     ACTIVE_TAB ===
     'os';
 
+
   el.parentElement
     .classList
     .toggle(
@@ -5538,18 +7075,27 @@ function configureDatePicker(){
       hide
     );
 
-  if(hide){
+
+  if (
+    hide
+  ) {
+
     return;
   }
+
 
   el.min =
     `${p.year}-${pad2(p.month)}-01`;
 
+
   el.max =
     ACTIVE_TAB ===
     'kpi'
+
       ? kpiDefaultISO()
+
       : today;
+
 
   el.value =
     DATE_BY_TAB[
@@ -5558,29 +7104,51 @@ function configureDatePicker(){
 }
 
 
+/* =========================================================
+   API / CACHE LOCAL
+========================================================= */
+
 function mergePayload(payload){
-  if(!payload){
+
+  if (
+    !payload
+  ) {
+
     return;
   }
 
-  if(
+
+  if (
     payload.period
-  ){
+  ) {
+
     DATA.period =
       payload.period;
   }
 
-  if(
+
+  if (
     payload.generatedAt
-  ){
+  ) {
+
     DATA.generatedAt =
       payload.generatedAt;
   }
 
+
   DATA.sources = {
-    ...(DATA.sources || {}),
-    ...(payload.sources || {})
+
+    ...(
+      DATA.sources ||
+      {}
+    ),
+
+    ...(
+      payload.sources ||
+      {}
+    )
   };
+
 
   [
     'planServ',
@@ -5588,33 +7156,54 @@ function mergePayload(payload){
     'guardia',
     'os',
     'kpi'
-  ].forEach(
+  ]
+  .forEach(
     section => {
 
-      if(
-        payload[section] ===
+      if (
+        payload[
+          section
+        ] ===
         undefined
-      ){
+      ) {
+
         return;
       }
 
-      if(
-        payload.ok === false
+
+      if (
+        payload.ok ===
+        false
         &&
-        READY[section]
-      ){
+        READY[
+          section
+        ]
+      ) {
+
         return;
       }
 
-      DATA[section] =
-        payload[section];
 
-      READY[section] =
+      DATA[
+        section
+      ] =
+        payload[
+          section
+        ];
+
+
+      READY[
+        section
+      ] =
         true;
 
-      VERSION[section]++;
+
+      VERSION[
+        section
+      ]++;
     }
   );
+
 
   saveLocalSnapshot();
 
@@ -5631,99 +7220,147 @@ function requestSection(
   force=false,
   retry=1
 ){
+
   const requestKey =
     section +
     '|' +
     (
       force
+
         ? '1'
+
         : '0'
     );
 
-  if(
+
+  if (
     INFLIGHT[
       requestKey
     ]
-  ){
+  ) {
+
     return INFLIGHT[
       requestKey
     ];
   }
 
+
   const promise =
     new Promise(
-      (resolve,reject) => {
+      (
+        resolve,
+        reject
+      ) => {
+
 
         const cb =
           'tsj_cb_' +
           Date.now() +
           '_' +
           Math.random()
-            .toString(36)
-            .slice(2);
+            .toString(
+              36
+            )
+            .slice(
+              2
+            );
+
 
         const script =
           document.createElement(
             'script'
           );
 
+
         let finished =
           false;
 
+
         const cleanup =
           () => {
+
             clearTimeout(
               timer
             );
 
             try {
-              delete window[cb];
+
+              delete window[
+                cb
+              ];
+
             } catch(err) {}
+
 
             script.remove();
           };
 
+
         const fail =
           reason => {
-            if(finished){
+
+            if (
+              finished
+            ) {
+
               return;
             }
+
 
             finished =
               true;
 
+
             cleanup();
 
+
             reject(
-              new Error(reason)
+              new Error(
+                reason
+              )
             );
           };
 
-        window[cb] =
+
+        window[
+          cb
+        ] =
           payload => {
-            if(finished){
+
+            if (
+              finished
+            ) {
+
               return;
             }
+
 
             finished =
               true;
 
+
             cleanup();
+
 
             mergePayload(
               payload
             );
 
-            if(
-              payload?.ok === false
-            ){
+
+            if (
+              payload?.ok ===
+              false
+            ) {
+
               reject(
                 new Error(
                   (
                     payload.errors ||
                     []
                   )
-                  .join(' · ')
+                  .join(
+                    ' · '
+                  )
                   ||
                   'Respuesta parcial'
                 )
@@ -5732,16 +7369,19 @@ function requestSection(
               return;
             }
 
+
             resolve(
               payload
             );
           };
+
 
         script.onerror =
           () =>
             fail(
               'No se pudo conectar con la fuente de datos.'
             );
+
 
         const timer =
           setTimeout(
@@ -5751,6 +7391,7 @@ function requestSection(
               ),
             REQUEST_TIMEOUT
           );
+
 
         let url =
           API_URL
@@ -5771,13 +7412,19 @@ function requestSection(
           +
           Date.now();
 
-        if(force){
+
+        if (
+          force
+        ) {
+
           url +=
             '&force=1';
         }
 
+
         script.src =
           url;
+
 
         document.body
           .appendChild(
@@ -5787,11 +7434,13 @@ function requestSection(
     )
     .catch(
       err => {
-        if(
+
+        if (
           retry > 0
           &&
           !force
-        ){
+        ) {
+
           return new Promise(
             resolve =>
               setTimeout(
@@ -5809,100 +7458,152 @@ function requestSection(
           );
         }
 
+
         throw err;
       }
     )
     .finally(
       () => {
+
         delete INFLIGHT[
           requestKey
         ];
       }
     );
 
+
   INFLIGHT[
     requestKey
-  ] = promise;
+  ] =
+    promise;
+
 
   return promise;
 }
 
 
+/* =========================================================
+   CARGA DE SOLAPAS
+========================================================= */
+
 function sectionForTab(tab){
+
   const map = {
-    plan:'planServ',
-    salidas:'salidas',
-    guardia:'guardia',
-    os:'os',
-    kpi:'kpi'
+
+    plan:
+      'planServ',
+
+    salidas:
+      'salidas',
+
+    guardia:
+      'guardia',
+
+    os:
+      'os',
+
+    kpi:
+      'kpi'
+
   };
 
-  return map[tab] || '';
+
+  return map[
+    tab
+  ]
+  ||
+  '';
 }
 
 
 function ensureTabData(tab){
-  if(
+
+  if (
     tab ===
     'resumen'
-  ){
+  ) {
+
     return Promise.allSettled([
+
       READY.planServ
+
         ? Promise.resolve()
+
         : requestSection(
             'planServ'
           ),
 
+
       READY.salidas
+
         ? Promise.resolve()
+
         : requestSection(
             'salidas'
           ),
 
+
       READY.guardia
+
         ? Promise.resolve()
+
         : requestSection(
             'guardia'
           )
+
     ]);
   }
+
 
   const section =
     sectionForTab(
       tab
     );
 
-  if(
+
+  if (
     !section
     ||
-    READY[section]
-  ){
+    READY[
+      section
+    ]
+  ) {
+
     return Promise.resolve();
   }
+
 
   setStatus(
     false,
     'Actualizando…'
   );
 
+
   return requestSection(
     section
   )
   .then(
     () => {
+
       setStatus(
         true,
         'Datos en vivo'
       );
 
-      showError('');
+      showError(
+        ''
+      );
     }
   )
   .catch(
     () => {
-      if(
-        READY[section]
-      ){
+
+      if (
+        READY[
+          section
+        ]
+      ) {
+
         setStatus(
           false,
           'Último dato disponible'
@@ -5911,7 +7612,9 @@ function ensureTabData(tab){
         showError(
           'No se pudo actualizar. Se muestra el último dato disponible.'
         );
-      }else{
+
+      } else {
+
         setStatus(
           false,
           'Sin conexión'
@@ -5927,10 +7630,15 @@ function ensureTabData(tab){
 
 
 function loadInitial(){
+
   const restored =
     restoreLocalSnapshot();
 
-  if(restored){
+
+  if (
+    restored
+  ) {
+
     configureDatePicker();
 
     renderActiveTab(
@@ -5940,12 +7648,15 @@ function loadInitial(){
     updateLastUpdate();
   }
 
+
   setStatus(
     false,
     'Actualizando…'
   );
 
+
   Promise.allSettled([
+
     requestSection(
       'planServ'
     ),
@@ -5957,9 +7668,12 @@ function loadInitial(){
     requestSection(
       'guardia'
     )
+
   ])
   .then(
     results => {
+
+
       const failures =
         results.filter(
           x =>
@@ -5967,23 +7681,29 @@ function loadInitial(){
             'rejected'
         );
 
-      if(
-        failures.length === 0
-      ){
+
+      if (
+        failures.length ===
+        0
+      ) {
+
         setStatus(
           true,
           'Datos en vivo'
         );
 
-        showError('');
+        showError(
+          ''
+        );
 
-      }else if(
+      } else if (
         READY.planServ
         ||
         READY.salidas
         ||
         READY.guardia
-      ){
+      ) {
+
         setStatus(
           false,
           'Último dato disponible'
@@ -5993,7 +7713,8 @@ function loadInitial(){
           'No se pudieron actualizar todas las fuentes. Se muestra el último dato disponible.'
         );
 
-      }else{
+      } else {
+
         setStatus(
           false,
           'Sin conexión'
@@ -6004,13 +7725,19 @@ function loadInitial(){
         );
       }
 
+
       renderActiveTab(
         true
       );
 
+
       setTimeout(
         () => {
-          if(!READY.os){
+
+          if (
+            !READY.os
+          ) {
+
             requestSection(
               'os'
             )
@@ -6018,13 +7745,19 @@ function loadInitial(){
               () => {}
             );
           }
+
         },
         300
       );
 
+
       setTimeout(
         () => {
-          if(!READY.kpi){
+
+          if (
+            !READY.kpi
+          ) {
+
             requestSection(
               'kpi'
             )
@@ -6032,6 +7765,7 @@ function loadInitial(){
               () => {}
             );
           }
+
         },
         700
       );
@@ -6040,21 +7774,31 @@ function loadInitial(){
 }
 
 
-function refreshActive(force=true){
+function refreshActive(
+  force=true
+){
+
   setStatus(
     false,
     'Actualizando datos…'
   );
 
-  showError('');
+
+  showError(
+    ''
+  );
+
 
   let requests = [];
 
-  if(
+
+  if (
     ACTIVE_TAB ===
     'resumen'
-  ){
+  ) {
+
     requests = [
+
       requestSection(
         'planServ',
         force,
@@ -6072,30 +7816,41 @@ function refreshActive(force=true){
         force,
         0
       )
+
     ];
 
-  }else{
+  } else {
+
     const section =
       sectionForTab(
         ACTIVE_TAB
       );
 
-    if(section){
+
+    if (
+      section
+    ) {
+
       requests = [
+
         requestSection(
           section,
           force,
           0
         )
+
       ];
     }
   }
+
 
   return Promise.allSettled(
     requests
   )
   .then(
     results => {
+
+
       const failed =
         results.some(
           x =>
@@ -6103,15 +7858,22 @@ function refreshActive(force=true){
             'rejected'
         );
 
-      if(!failed){
+
+      if (
+        !failed
+      ) {
+
         setStatus(
           true,
           'Datos en vivo'
         );
 
-        showError('');
+        showError(
+          ''
+        );
 
-      }else{
+      } else {
+
         setStatus(
           false,
           'Último dato disponible'
@@ -6122,6 +7884,7 @@ function refreshActive(force=true){
         );
       }
 
+
       renderActiveTab(
         true
       );
@@ -6130,9 +7893,15 @@ function refreshActive(force=true){
 }
 
 
+/* =========================================================
+   NAVEGACION
+========================================================= */
+
 function activateTab(tabName){
+
   ACTIVE_TAB =
     tabName;
+
 
   document
     .querySelectorAll(
@@ -6148,6 +7917,7 @@ function activateTab(tabName){
           )
     );
 
+
   document
     .querySelectorAll(
       '.tab-panel'
@@ -6161,6 +7931,7 @@ function activateTab(tabName){
             tabName
           )
     );
+
 
   configureDatePicker();
 
@@ -6178,6 +7949,7 @@ document
   )
   .forEach(
     btn => {
+
       btn.addEventListener(
         'click',
         () =>
@@ -6194,7 +7966,7 @@ $('#datePicker')
     'change',
     e => {
 
-      if(
+      if (
         [
           'resumen',
           'salidas',
@@ -6204,16 +7976,20 @@ $('#datePicker')
         .includes(
           ACTIVE_TAB
         )
-      ){
+      ) {
+
         DATE_BY_TAB[
           ACTIVE_TAB
         ] =
           e.target.value;
       }
 
+
       LAST_RENDER[
         ACTIVE_TAB
-      ] = '';
+      ] =
+        '';
+
 
       renderActiveTab(
         true
@@ -6232,9 +8008,15 @@ $('#refreshBtn')
   );
 
 
+/* =========================================================
+   PDF
+========================================================= */
+
 function exportSummaryPDF(){
+
   const previousTitle =
     document.title;
+
 
   const date =
     selectedISO(
@@ -6243,8 +8025,10 @@ function exportSummaryPDF(){
     ||
     'jornada';
 
+
   document.title =
     `TSJ_Resumen_Jornada_${date}`;
+
 
   document.body
     .classList
@@ -6252,17 +8036,21 @@ function exportSummaryPDF(){
       'print-summary'
     );
 
+
   const cleanup =
     () => {
+
       document.body
         .classList
         .remove(
           'print-summary'
         );
 
+
       document.title =
         previousTitle;
     };
+
 
   window.addEventListener(
     'afterprint',
@@ -6272,7 +8060,9 @@ function exportSummaryPDF(){
     }
   );
 
+
   window.print();
+
 
   setTimeout(
     cleanup,
@@ -6280,6 +8070,10 @@ function exportSummaryPDF(){
   );
 }
 
+
+/* =========================================================
+   INICIO
+========================================================= */
 
 loadInitial();
 
@@ -6295,4 +8089,5 @@ setInterval(
 </script>
 
 </body>
+
 </html>
