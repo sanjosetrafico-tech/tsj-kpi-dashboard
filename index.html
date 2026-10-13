@@ -1278,7 +1278,6 @@ th{
   box-shadow:var(--shadow);
   padding:15px 15px 12px;
   min-width:0;
-
   cursor:zoom-in;
 
   transition:
@@ -1332,6 +1331,10 @@ th{
   fill:#4f494d;
   font-size:7px;
   font-weight:800;
+
+  paint-order:stroke;
+  stroke:#fff;
+  stroke-width:2px;
 }
 
 .chart-meta-label{
@@ -1362,7 +1365,7 @@ th{
 .chart-target{
   fill:none;
   stroke:var(--target);
-  stroke-width:2.8;
+  stroke-width:3;
   stroke-linecap:round;
   stroke-linejoin:round;
 }
@@ -1420,24 +1423,12 @@ th{
   position:fixed;
   inset:0;
   z-index:9999;
-
   display:none;
-
   align-items:center;
   justify-content:center;
-
   padding:22px;
-
-  background:
-    rgba(
-      24,
-      20,
-      22,
-      .78
-    );
-
-  backdrop-filter:
-    blur(3px);
+  background:rgba(24,20,22,.78);
+  backdrop-filter:blur(3px);
 }
 
 .chart-modal.open{
@@ -1446,73 +1437,34 @@ th{
 
 .chart-modal-dialog{
   position:relative;
-
-  width:
-    min(
-      94vw,
-      1500px
-    );
-
-  max-height:
-    94vh;
-
+  width:min(94vw,1500px);
+  max-height:94vh;
   overflow:auto;
-
-  padding:
-    28px;
-
+  padding:28px;
   background:#fff;
-
   border-radius:20px;
-
-  box-shadow:
-    0 24px 70px
-    rgba(
-      0,
-      0,
-      0,
-      .28
-    );
+  box-shadow:0 24px 70px rgba(0,0,0,.28);
 }
 
 .chart-modal-close{
   position:absolute;
-
   top:12px;
   right:14px;
-
   z-index:5;
-
   width:40px;
   height:40px;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   padding:0;
-
   border:1px solid var(--line);
-
   border-radius:50%;
-
   background:#fff;
-
   color:var(--ink);
-
   font-size:26px;
   line-height:1;
-
   cursor:pointer;
-
-  box-shadow:
-    0 5px 18px
-    rgba(
-      0,
-      0,
-      0,
-      .08
-    );
+  box-shadow:0 5px 18px rgba(0,0,0,.08);
 }
 
 .chart-modal-close:hover{
@@ -1525,20 +1477,12 @@ th{
 
 .chart-modal-body .chart-card{
   width:100%;
-
   margin:0;
-
-  padding:
-    18px 14px 8px;
-
+  padding:18px 14px 8px;
   border:0;
-
   border-radius:0;
-
   box-shadow:none;
-
   cursor:default;
-
   transform:none !important;
 }
 
@@ -1916,59 +1860,35 @@ th{
 
 <nav class="tabs">
 
-  <button
-    class="tab active"
-    data-tab="resumen"
-  >
+  <button class="tab active" data-tab="resumen">
     Resumen Jornada
   </button>
 
-  <button
-    class="tab"
-    data-tab="conduccion"
-  >
+  <button class="tab" data-tab="conduccion">
     Resumen conducción
   </button>
 
-  <button
-    class="tab"
-    data-tab="plan"
-  >
+  <button class="tab" data-tab="plan">
     Plan Serv
   </button>
 
-  <button
-    class="tab"
-    data-tab="salidas"
-  >
+  <button class="tab" data-tab="salidas">
     Planillería
   </button>
 
-  <button
-    class="tab"
-    data-tab="guardia"
-  >
+  <button class="tab" data-tab="guardia">
     Guardia
   </button>
 
-  <button
-    class="tab"
-    data-tab="os"
-  >
+  <button class="tab" data-tab="os">
     OS
   </button>
 
-  <button
-    class="tab"
-    data-tab="kpi"
-  >
+  <button class="tab" data-tab="kpi">
     KPI
   </button>
 
-  <button
-    class="tab"
-    data-tab="graficos"
-  >
+  <button class="tab" data-tab="graficos">
     Gráficos
   </button>
 
@@ -1977,45 +1897,21 @@ th{
 
 <main>
 
-  <section
-    id="resumen"
-    class="tab-panel active"
-  ></section>
+  <section id="resumen" class="tab-panel active"></section>
 
-  <section
-    id="conduccion"
-    class="tab-panel"
-  ></section>
+  <section id="conduccion" class="tab-panel"></section>
 
-  <section
-    id="plan"
-    class="tab-panel"
-  ></section>
+  <section id="plan" class="tab-panel"></section>
 
-  <section
-    id="salidas"
-    class="tab-panel"
-  ></section>
+  <section id="salidas" class="tab-panel"></section>
 
-  <section
-    id="guardia"
-    class="tab-panel"
-  ></section>
+  <section id="guardia" class="tab-panel"></section>
 
-  <section
-    id="os"
-    class="tab-panel"
-  ></section>
+  <section id="os" class="tab-panel"></section>
 
-  <section
-    id="kpi"
-    class="tab-panel"
-  ></section>
+  <section id="kpi" class="tab-panel"></section>
 
-  <section
-    id="graficos"
-    class="tab-panel"
-  ></section>
+  <section id="graficos" class="tab-panel"></section>
 
 </main>
 
@@ -2086,24 +1982,18 @@ const URL_PARAMS =
 
 const PROFILE =
   String(
-    URL_PARAMS.get(
-      'perfil'
-    )
-    ||
-    ''
+    URL_PARAMS.get('perfil') || ''
   )
   .trim()
   .toLowerCase();
 
 
 const IS_GUARD_PROFILE =
-  PROFILE ===
-  'guardia';
+  PROFILE === 'guardia';
 
 
 const IS_CONDUCTION_PROFILE =
-  PROFILE ===
-  'conduccion';
+  PROFILE === 'conduccion';
 
 
 const ALL_TABS = [
@@ -2121,9 +2011,7 @@ const ALL_TABS = [
 const ALLOWED_TABS =
   IS_CONDUCTION_PROFILE
 
-    ? [
-        'conduccion'
-      ]
+    ? ['conduccion']
 
     : IS_GUARD_PROFILE
 
@@ -2141,11 +2029,7 @@ const ALLOWED_TABS =
 
 const REQUESTED_TAB =
   String(
-    URL_PARAMS.get(
-      'tab'
-    )
-    ||
-    ''
+    URL_PARAMS.get('tab') || ''
   )
   .trim()
   .toLowerCase();
@@ -2154,18 +2038,13 @@ const REQUESTED_TAB =
 function sanitizeTab(tab){
 
   const value =
-    String(
-      tab ||
-      ''
-    )
-    .trim()
-    .toLowerCase();
+    String(tab || '')
+      .trim()
+      .toLowerCase();
 
 
   if (
-    ALLOWED_TABS.includes(
-      value
-    )
+    ALLOWED_TABS.includes(value)
   ) {
 
     return value;
@@ -2202,10 +2081,7 @@ function sectionAllowedForProfile(section){
       'planServ',
       'salidas',
       'guardia'
-    ]
-    .includes(
-      section
-    );
+    ].includes(section);
   }
 
 
@@ -2213,11 +2089,9 @@ function sectionAllowedForProfile(section){
     IS_GUARD_PROFILE
     &&
     (
-      section ===
-      'kpi'
+      section === 'kpi'
       ||
-      section ===
-      'graficos'
+      section === 'graficos'
     )
   ) {
 
@@ -2229,27 +2103,19 @@ function sectionAllowedForProfile(section){
 }
 
 
-if (
-  IS_GUARD_PROFILE
-) {
+if (IS_GUARD_PROFILE) {
 
   document.body
     .classList
-    .add(
-      'profile-guardia'
-    );
+    .add('profile-guardia');
 }
 
 
-if (
-  IS_CONDUCTION_PROFILE
-) {
+if (IS_CONDUCTION_PROFILE) {
 
   document.body
     .classList
-    .add(
-      'profile-conduccion'
-    );
+    .add('profile-conduccion');
 }
 
 
@@ -2258,7 +2124,7 @@ if (
 ========================================================= */
 
 const LOCAL_CACHE_KEY =
-  'TSJ_DASHBOARD_CACHE_V12';
+  'TSJ_DASHBOARD_CACHE_V13';
 
 
 const LOCAL_CACHE_MAX_AGE =
@@ -2343,17 +2209,12 @@ const SILENT_RETRY_DELAYS = [
 
 const $ =
   s =>
-    document.querySelector(
-      s
-    );
+    document.querySelector(s);
 
 
 const esc =
   v =>
-    String(
-      v ??
-      ''
-    )
+    String(v ?? '')
     .replace(
       /[&<>"']/g,
       m => ({
@@ -2368,51 +2229,32 @@ const esc =
 
 const num =
   v =>
-    Number(
-      v ||
-      0
-    )
-    .toLocaleString(
-      'es-AR'
-    );
+    Number(v || 0)
+      .toLocaleString('es-AR');
 
 
 const pad2 =
   v =>
-    String(
-      v
-    )
-    .padStart(
-      2,
-      '0'
-    );
+    String(v)
+      .padStart(2,'0');
 
 
 function sourceLabel(src){
 
   return src?.name
-
     ? `Fuente: ${esc(src.name)}`
-
     : 'Fuente no disponible';
 }
 
 
-function setStatus(
-  ok,
-  text
-){
+function setStatus(ok,text){
 
   $('#statusDot')
     .classList
-    .toggle(
-      'ok',
-      ok
-    );
+    .toggle('ok',ok);
 
   $('#statusText')
-    .textContent =
-      text;
+    .textContent = text;
 }
 
 
@@ -2423,10 +2265,7 @@ function showError(){
 
 function updateLastUpdate(){
 
-  if (
-    !DATA.generatedAt
-  ) {
-
+  if (!DATA.generatedAt) {
     return;
   }
 
@@ -2435,12 +2274,8 @@ function updateLastUpdate(){
     .textContent =
       'Última actualización: '
       +
-      new Date(
-        DATA.generatedAt
-      )
-      .toLocaleString(
-        'es-AR'
-      );
+      new Date(DATA.generatedAt)
+        .toLocaleString('es-AR');
 }
 
 
@@ -2454,34 +2289,25 @@ function restoreLocalSnapshot(){
       );
 
 
-    if (
-      !raw
-    ) {
-
+    if (!raw) {
       return false;
     }
 
 
     const snapshot =
-      JSON.parse(
-        raw
-      );
+      JSON.parse(raw);
 
 
     const age =
       Date.now()
       -
-      Number(
-        snapshot.savedAt ||
-        0
-      );
+      Number(snapshot.savedAt || 0);
 
 
     if (
       !snapshot.data
       ||
-      age >
-      LOCAL_CACHE_MAX_AGE
+      age > LOCAL_CACHE_MAX_AGE
     ) {
 
       return false;
@@ -2503,21 +2329,12 @@ function restoreLocalSnapshot(){
     .forEach(
       section => {
 
-        if (
-          DATA[
-            section
-          ]
-        ) {
+        if (DATA[section]) {
 
-          READY[
-            section
-          ] =
+          READY[section] =
             true;
 
-
-          VERSION[
-            section
-          ] =
+          VERSION[section] =
             1;
         }
       }
@@ -2526,7 +2343,7 @@ function restoreLocalSnapshot(){
 
     return true;
 
-  } catch (err) {
+  } catch(err) {
 
     return false;
   }
@@ -2546,10 +2363,11 @@ function saveLocalSnapshot(){
 
         data:
           DATA
+
       })
     );
 
-  } catch (err) {}
+  } catch(err) {}
 }
 
 
@@ -2567,10 +2385,7 @@ function svgIcon(type){
      stroke-linejoin="round"`;
 
 
-  if (
-    type ===
-    'check'
-  ) {
+  if (type === 'check') {
 
     return `
       <svg viewBox="0 0 24 24">
@@ -2592,10 +2407,7 @@ function svgIcon(type){
   }
 
 
-  if (
-    type ===
-    'bus'
-  ) {
+  if (type === 'bus') {
 
     return `
       <svg viewBox="0 0 24 24">
@@ -2633,10 +2445,7 @@ function svgIcon(type){
   }
 
 
-  if (
-    type ===
-    'users'
-  ) {
+  if (type === 'users') {
 
     return `
       <svg viewBox="0 0 24 24">
@@ -2665,10 +2474,7 @@ function svgIcon(type){
   }
 
 
-  if (
-    type ===
-    'clock'
-  ) {
+  if (type === 'clock') {
 
     return `
       <svg viewBox="0 0 24 24">
@@ -2690,10 +2496,7 @@ function svgIcon(type){
   }
 
 
-  if (
-    type ===
-    'gear'
-  ) {
+  if (type === 'gear') {
 
     return `
       <svg viewBox="0 0 24 24">
@@ -2717,10 +2520,7 @@ function svgIcon(type){
   }
 
 
-  if (
-    type ===
-    'wrench'
-  ) {
+  if (type === 'wrench') {
 
     return `
       <svg viewBox="0 0 24 24">
@@ -2735,10 +2535,7 @@ function svgIcon(type){
   }
 
 
-  if (
-    type ===
-    'road'
-  ) {
+  if (type === 'road') {
 
     return `
       <svg viewBox="0 0 24 24">
@@ -2822,9 +2619,7 @@ function table(
   rows
 ){
 
-  if (
-    !rows?.length
-  ) {
+  if (!rows?.length) {
 
     return `
       <div class="empty">
@@ -2877,16 +2672,12 @@ function table(
                                 h[2]
 
                                   ? h[2](
-                                      r[
-                                        h[1]
-                                      ],
+                                      r[h[1]],
                                       r
                                     )
 
                                   : esc(
-                                      r[
-                                        h[1]
-                                      ]
+                                      r[h[1]]
                                       ??
                                       ''
                                     )
@@ -2919,19 +2710,11 @@ function bars(
 ){
 
   const a =
-    (
-      items ||
-      []
-    )
-    .slice(
-      0,
-      limit
-    );
+    (items || [])
+      .slice(0,limit);
 
 
-  if (
-    !a.length
-  ) {
+  if (!a.length) {
 
     return `
       <div class="empty">
@@ -2944,9 +2727,7 @@ function bars(
   const max =
     Math.max(
       ...a.map(
-        x =>
-          +x.value ||
-          0
+        x => +x.value || 0
       ),
       1
     );
@@ -2974,10 +2755,7 @@ function bars(
                     width:${
                       Math.max(
                         3,
-                        (
-                          +x.value ||
-                          0
-                        )
+                        (+x.value || 0)
                         /
                         max
                         *
@@ -3011,15 +2789,12 @@ function bars(
 function todayISO(){
 
   const p =
-    DATA.period ||
-    {};
+    DATA.period || {};
 
 
   return (
-    p.year
-    &&
-    p.month
-    &&
+    p.year &&
+    p.month &&
     p.day
   )
 
@@ -3034,9 +2809,7 @@ function selectedISO(
 ){
 
   return (
-    DATE_BY_TAB[
-      tab
-    ]
+    DATE_BY_TAB[tab]
     ||
     todayISO()
   );
@@ -3048,18 +2821,14 @@ function selectedDDMM(
 ){
 
   const m =
-    selectedISO(
-      tab
-    )
-    .match(
-      /^(\d{4})-(\d{2})-(\d{2})$/
-    );
+    selectedISO(tab)
+      .match(
+        /^(\d{4})-(\d{2})-(\d{2})$/
+      );
 
 
   return m
-
     ? `${m[3]}/${m[2]}`
-
     : '';
 }
 
@@ -3069,9 +2838,7 @@ function selectedLabel(
 ){
 
   const v =
-    selectedISO(
-      tab
-    );
+    selectedISO(tab);
 
 
   return v
@@ -3099,13 +2866,10 @@ function sameDay(
 ){
 
   const m =
-    String(
-      value ||
-      ''
-    )
-    .match(
-      /^(\d{1,2})[\/-](\d{1,2})/
-    );
+    String(value || '')
+      .match(
+        /^(\d{1,2})[\/-](\d{1,2})/
+      );
 
 
   return (
@@ -3121,26 +2885,19 @@ function sameDay(
 function kpiDefaultISO(){
 
   const p =
-    DATA.period ||
-    {};
+    DATA.period || {};
 
 
   const days =
-    (
-      DATA.kpi?.daily ||
-      []
-    )
+    (DATA.kpi?.daily || [])
     .map(
       x => {
 
         const m =
-          String(
-            x.date ||
-            ''
-          )
-          .match(
-            /^(\d{1,2})[\/-](\d{1,2})/
-          );
+          String(x.date || '')
+            .match(
+              /^(\d{1,2})[\/-](\d{1,2})/
+            );
 
 
         return (
@@ -3162,10 +2919,7 @@ function kpiDefaultISO(){
         d < +p.day
     )
     .sort(
-      (
-        a,
-        b
-      ) =>
+      (a,b) =>
         b-a
     );
 
@@ -3175,19 +2929,12 @@ function kpiDefaultISO(){
     ||
     Math.max(
       1,
-      (
-        +p.day ||
-        1
-      )
-      -
-      1
+      (+p.day || 1) - 1
     );
 
 
   return p.year
-
     ? `${p.year}-${pad2(p.month)}-${pad2(d)}`
-
     : '';
 }
 
@@ -3195,13 +2942,11 @@ function kpiDefaultISO(){
 function monthLabel(){
 
   const p =
-    DATA.period ||
-    {};
+    DATA.period || {};
 
 
   return (
-    p.month
-    &&
+    p.month &&
     p.year
   )
 
@@ -3222,26 +2967,17 @@ function monthLabel(){
 }
 
 
-function shortDateLabel(
-  ddmm
-){
+function shortDateLabel(ddmm){
 
   const m =
-    String(
-      ddmm ||
-      ''
-    )
-    .match(
-      /^(\d{1,2})[\/-](\d{1,2})/
-    );
+    String(ddmm || '')
+      .match(
+        /^(\d{1,2})[\/-](\d{1,2})/
+      );
 
 
-  if (
-    !m
-  ) {
-
-    return ddmm ||
-      '';
+  if (!m) {
+    return ddmm || '';
   }
 
 
@@ -3260,14 +2996,10 @@ function shortDateLabel(
     'nov',
     'dic'
 
-  ][
-    +m[2]-1
-  ];
+  ][+m[2]-1];
 
 
-  return (
-    `${+m[1]}-${mon}`
-  );
+  return `${+m[1]}-${mon}`;
 }
 
 
@@ -3283,18 +3015,13 @@ function countBy(
   const out = {};
 
 
-  (
-    rows ||
-    []
-  )
+  (rows || [])
   .forEach(
     r => {
 
       const k =
         String(
-          r[
-            field
-          ]
+          r[field]
           ||
           'Sin dato'
         )
@@ -3304,42 +3031,24 @@ function countBy(
 
 
       out[k] =
-        (
-          out[k] ||
-          0
-        )
-        +
-        1;
+        (out[k] || 0) + 1;
     }
   );
 
 
   return Object
-    .entries(
-      out
-    )
+    .entries(out)
     .map(
-      (
-        [
-          label,
-          value
-        ]
-      ) => ({
+      ([label,value]) => ({
         label,
         value
       })
     )
     .sort(
-      (
-        a,
-        b
-      ) =>
-        b.value -
-        a.value
+      (a,b) =>
+        b.value - a.value
         ||
-        a.label.localeCompare(
-          b.label
-        )
+        a.label.localeCompare(b.label)
     );
 }
 
@@ -3347,30 +3056,16 @@ function countBy(
 function sortByLine(rows){
 
   return [
-    ...(
-      rows ||
-      []
-    )
+    ...(rows || [])
   ]
   .sort(
-    (
-      a,
-      b
-    ) =>
-      String(
-        a.linea ||
-        ''
-      )
-      .localeCompare(
-        String(
-          b.linea ||
-          ''
-        ),
-        'es',
-        {
-          numeric:true
-        }
-      )
+    (a,b) =>
+      String(a.linea || '')
+        .localeCompare(
+          String(b.linea || ''),
+          'es',
+          {numeric:true}
+        )
   );
 }
 
@@ -3378,31 +3073,17 @@ function sortByLine(rows){
 function sortByLineAndService(rows){
 
   return [
-    ...(
-      rows ||
-      []
-    )
+    ...(rows || [])
   ]
   .sort(
-    (
-      a,
-      b
-    ) =>
+    (a,b) =>
 
-      String(
-        a.linea ||
-        ''
-      )
-      .localeCompare(
-        String(
-          b.linea ||
-          ''
-        ),
-        'es',
-        {
-          numeric:true
-        }
-      )
+      String(a.linea || '')
+        .localeCompare(
+          String(b.linea || ''),
+          'es',
+          {numeric:true}
+        )
 
       ||
 
@@ -3418,9 +3099,7 @@ function sortByLineAndService(rows){
           ''
         ),
         'es',
-        {
-          numeric:true
-        }
+        {numeric:true}
       )
   );
 }
@@ -3429,22 +3108,13 @@ function sortByLineAndService(rows){
 function normalizeBaseLine(value){
 
   let line =
-    String(
-      value ||
-      ''
-    )
-    .trim()
-    .toUpperCase()
-    .replace(
-      /\s+/g,
-      ''
-    );
+    String(value || '')
+      .trim()
+      .toUpperCase()
+      .replace(/\s+/g,'');
 
 
-  if (
-    !line
-  ) {
-
+  if (!line) {
     return '';
   }
 
@@ -3468,9 +3138,7 @@ function normalizeBaseLine(value){
 
 
   return match
-
     ? match[1]
-
     : line;
 }
 
@@ -3480,10 +3148,7 @@ function countByNormalizedLine(rows){
   const counts = {};
 
 
-  (
-    rows ||
-    []
-  )
+  (rows || [])
   .forEach(
     row => {
 
@@ -3493,59 +3158,33 @@ function countByNormalizedLine(rows){
         );
 
 
-      if (
-        !line
-      ) {
-
+      if (!line) {
         return;
       }
 
 
-      counts[
-        line
-      ] =
-        (
-          counts[
-            line
-          ]
-          ||
-          0
-        )
-        +
-        1;
+      counts[line] =
+        (counts[line] || 0) + 1;
     }
   );
 
 
   return Object
-    .entries(
-      counts
-    )
+    .entries(counts)
     .map(
-      (
-        [
-          label,
-          value
-        ]
-      ) => ({
+      ([label,value]) => ({
         label,
         value
       })
     )
     .sort(
-      (
-        a,
-        b
-      ) =>
-        b.value -
-        a.value
+      (a,b) =>
+        b.value - a.value
         ||
         a.label.localeCompare(
           b.label,
           'es',
-          {
-            numeric:true
-          }
+          {numeric:true}
         )
     );
 }
@@ -3553,52 +3192,86 @@ function countByNormalizedLine(rows){
 
 function normalizeText(value){
 
-  return String(
-    value ||
-    ''
-  )
-  .normalize(
-    'NFD'
-  )
-  .replace(
-    /[\u0300-\u036f]/g,
-    ''
-  )
-  .trim()
-  .toUpperCase();
+  return String(value || '')
+    .normalize('NFD')
+    .replace(
+      /[\u0300-\u036f]/g,
+      ''
+    )
+    .trim()
+    .toUpperCase();
+}
+
+
+/* =========================================================
+   FILTRO INASISTENCIAS
+========================================================= */
+
+function isValidAbsenceRow(row){
+
+  const conductor =
+    normalizeText(
+      row?.conductor
+      ||
+      row?.chofer
+      ||
+      ''
+    );
+
+
+  if (!conductor) {
+    return false;
+  }
+
+
+  const invalid = [
+
+    'LLEGADAS TARDE',
+    'LLEGADA TARDE',
+    'OBSERVACIONES',
+    'PLAN DIARIO',
+    'REEMPLAZOS DE CONDUCTORES',
+    'REEMPLAZO DE CONDUCTORES',
+    'REEMPLAZOS DE UNIDADES',
+    'REEMPLAZO DE UNIDADES',
+    'INASISTENCIAS RELEVANTES',
+    'INASISTENCIAS RELEVANTE',
+    'CHOFER',
+    'CONDUCTOR',
+    'ESTADO',
+    'TURNO'
+
+  ];
+
+
+  return !invalid.some(
+    value =>
+      conductor === value
+      ||
+      conductor.startsWith(
+        value + ' '
+      )
+  );
 }
 
 
 function normalizeMechanicalCategory(value){
 
   const original =
-    String(
-      value ||
-      ''
-    )
-    .trim();
+    String(value || '')
+      .trim();
 
 
   const v =
-    normalizeText(
-      original
-    );
+    normalizeText(original);
 
 
-  if (
-    !v
-  ) {
-
+  if (!v) {
     return 'Mecánica';
   }
 
 
-  if (
-    v.includes(
-      'GPS'
-    )
-  ) {
-
+  if (v.includes('GPS')) {
     return 'GPS';
   }
 
@@ -3645,12 +3318,7 @@ function normalizeMechanicalCategory(value){
   }
 
 
-  if (
-    v.includes(
-      'FREN'
-    )
-  ) {
-
+  if (v.includes('FREN')) {
     return 'Frenos';
   }
 
@@ -3701,55 +3369,39 @@ function normalizeMechanicalCategory(value){
 
 function stripLeadingLegajo(value){
 
-  return String(
-    value ||
-    ''
-  )
-  .trim()
-  .replace(
-    /^\d{2,8}(?:\s*[-–—]\s*|\s+)/,
-    ''
-  )
-  .trim();
+  return String(value || '')
+    .trim()
+    .replace(
+      /^\d{2,8}(?:\s*[-–—]\s*|\s+)/,
+      ''
+    )
+    .trim();
 }
 
 
 function personWords(value){
 
   return normalizeText(
-    stripLeadingLegajo(
-      value
-    )
+    stripLeadingLegajo(value)
   )
   .replace(
     /[^A-Z0-9Ñ]+/g,
     ' '
   )
   .trim()
-  .split(
-    /\s+/
-  )
-  .filter(
-    Boolean
-  );
+  .split(/\s+/)
+  .filter(Boolean);
 }
 
 
-function personNamesMatch(
-  a,
-  b
-){
+function personNamesMatch(a,b){
 
   const aw =
-    personWords(
-      a
-    );
+    personWords(a);
 
 
   const bw =
-    personWords(
-      b
-    );
+    personWords(b);
 
 
   if (
@@ -3763,49 +3415,33 @@ function personNamesMatch(
 
 
   const as =
-    aw.join(
-      ' '
-    );
+    aw.join(' ');
 
 
   const bs =
-    bw.join(
-      ' '
-    );
+    bw.join(' ');
 
 
-  if (
-    as ===
-    bs
-  ) {
-
+  if (as === bs) {
     return true;
   }
 
 
   const shorter =
-    aw.length <=
-    bw.length
-
+    aw.length <= bw.length
       ? aw
-
       : bw;
 
 
   const longer =
-    aw.length <=
-    bw.length
-
+    aw.length <= bw.length
       ? bw
-
       : aw;
 
 
   return shorter.every(
     word =>
-      longer.includes(
-        word
-      )
+      longer.includes(word)
   );
 }
 
@@ -3823,22 +3459,15 @@ function getTitularLegajo(row){
   ];
 
 
-  for (
-    const value of candidates
-  ) {
+  for (const value of candidates) {
 
     const text =
-      String(
-        value ??
-        ''
-      )
-      .trim();
+      String(value ?? '')
+        .trim();
 
 
     if (
-      /^\d{2,8}$/.test(
-        text
-      )
+      /^\d{2,8}$/.test(text)
     ) {
 
       return text;
@@ -3857,19 +3486,15 @@ function getTitularLegajo(row){
 
 
   const match =
-    String(
-      source
-    )
-    .trim()
-    .match(
-      /^(\d{2,8})(?:\s|[-–—])/
-    );
+    String(source)
+      .trim()
+      .match(
+        /^(\d{2,8})(?:\s|[-–—])/
+      );
 
 
   return match
-
     ? match[1]
-
     : '';
 }
 
@@ -3883,26 +3508,18 @@ function replacementCompleteness(row){
     row?.motivo,
     row?.linea,
     row?.turno,
-    getTitularLegajo(
-      row
-    )
+    getTitularLegajo(row)
 
   ];
 
 
   return fields.reduce(
-    (
-      total,
-      value
-    ) =>
+    (total,value) =>
       total
       +
       (
-        String(
-          value ??
-          ''
-        )
-        .trim()
+        String(value ?? '')
+          .trim()
 
           ? 1
 
@@ -3913,21 +3530,14 @@ function replacementCompleteness(row){
 }
 
 
-function sameDriverReplacement(
-  a,
-  b
-){
+function sameDriverReplacement(a,b){
 
   const legajoA =
-    getTitularLegajo(
-      a
-    );
+    getTitularLegajo(a);
 
 
   const legajoB =
-    getTitularLegajo(
-      b
-    );
+    getTitularLegajo(b);
 
 
   let titularMatch =
@@ -3941,8 +3551,7 @@ function sameDriverReplacement(
   ) {
 
     titularMatch =
-      legajoA ===
-      legajoB;
+      legajoA === legajoB;
 
   } else {
 
@@ -3963,22 +3572,17 @@ function sameDriverReplacement(
   }
 
 
-  if (
-    !titularMatch
-  ) {
-
+  if (!titularMatch) {
     return false;
   }
 
 
   const reemplazoA =
-    a?.reemplazo ||
-    '';
+    a?.reemplazo || '';
 
 
   const reemplazoB =
-    b?.reemplazo ||
-    '';
+    b?.reemplazo || '';
 
 
   if (
@@ -4013,8 +3617,7 @@ function sameDriverReplacement(
     &&
     lineB
     &&
-    lineA !==
-    lineB
+    lineA !== lineB
   ) {
 
     return false;
@@ -4038,8 +3641,7 @@ function sameDriverReplacement(
     &&
     turnB
     &&
-    turnA !==
-    turnB
+    turnA !== turnB
   ) {
 
     return false;
@@ -4059,14 +3661,8 @@ function mergeDriverReplacements(
 
 
   [
-    ...(
-      planRows ||
-      []
-    ),
-    ...(
-      guardRows ||
-      []
-    )
+    ...(planRows || []),
+    ...(guardRows || [])
   ]
   .forEach(
     row => {
@@ -4081,34 +3677,23 @@ function mergeDriverReplacements(
         );
 
 
-      if (
-        index ===
-        -1
-      ) {
+      if (index === -1) {
 
-        result.push(
-          row
-        );
+        result.push(row);
 
         return;
       }
 
 
       if (
-        replacementCompleteness(
-          row
-        )
+        replacementCompleteness(row)
         >
         replacementCompleteness(
-          result[
-            index
-          ]
+          result[index]
         )
       ) {
 
-        result[
-          index
-        ] =
+        result[index] =
           row;
       }
     }
@@ -4122,20 +3707,15 @@ function mergeDriverReplacements(
 function extractNumericPrefix(value){
 
   const match =
-    String(
-      value ||
-      ''
-    )
-    .trim()
-    .match(
-      /^(\d{2,8})(?:\s+|\s*[-–—]\s*)/
-    );
+    String(value || '')
+      .trim()
+      .match(
+        /^(\d{2,8})(?:\s+|\s*[-–—]\s*)/
+      );
 
 
   return match
-
     ? match[1]
-
     : '';
 }
 
@@ -4155,9 +3735,7 @@ function getDriverLegajo(row){
   ];
 
 
-  for (
-    const v of values
-  ) {
+  for (const v of values) {
 
     if (
       v !== undefined
@@ -4167,10 +3745,7 @@ function getDriverLegajo(row){
       String(v).trim()
     ) {
 
-      return String(
-        v
-      )
-      .trim();
+      return String(v).trim();
     }
   }
 
@@ -4220,16 +3795,11 @@ function getDriverSurname(row){
   ];
 
 
-  for (
-    let value of values
-  ) {
+  for (let value of values) {
 
     if (
-      !String(
-        value ||
-        ''
-      )
-      .trim()
+      !String(value || '')
+        .trim()
     ) {
 
       continue;
@@ -4237,9 +3807,7 @@ function getDriverSurname(row){
 
 
     let text =
-      String(
-        value
-      )
+      String(value)
       .replace(
         /^\d{2,8}(?:\s*[-–—]\s*|\s+)/,
         ''
@@ -4247,24 +3815,16 @@ function getDriverSurname(row){
       .trim();
 
 
-    if (
-      text.includes(
-        ','
-      )
-    ) {
+    if (text.includes(',')) {
 
       return text
-        .split(
-          ','
-        )[0]
+        .split(',')[0]
         .trim();
     }
 
 
     return text
-      .split(
-        /\s+/
-      )[0];
+      .split(/\s+/)[0];
   }
 
 
@@ -4275,13 +3835,9 @@ function getDriverSurname(row){
 function getDriverReference(row){
 
   return (
-    getDriverLegajo(
-      row
-    )
+    getDriverLegajo(row)
     ||
-    getDriverSurname(
-      row
-    )
+    getDriverSurname(row)
     ||
     ''
   );
@@ -4292,16 +3848,11 @@ function uniqueDriverReferences(rows){
 
   return [
     ...new Set(
-      (
-        rows ||
-        []
-      )
+      (rows || [])
       .map(
         getDriverReference
       )
-      .filter(
-        Boolean
-      )
+      .filter(Boolean)
     )
   ];
 }
@@ -4316,17 +3867,12 @@ function dedupeDriverRecords(
     new Set();
 
 
-  return (
-    rows ||
-    []
-  )
+  return (rows || [])
   .filter(
     row => {
 
       const legajo =
-        getDriverLegajo(
-          row
-        );
+        getDriverLegajo(row);
 
 
       const person =
@@ -4352,21 +3898,15 @@ function dedupeDriverRecords(
           .map(
             field =>
               normalizeText(
-                row?.[
-                  field
-                ]
+                row?.[field]
               )
           )
-          .join(
-            '|'
-          );
+          .join('|');
 
 
       const key = [
 
-        legajo
-        ||
-        person,
+        legajo || person,
 
         normalizeText(
           row?.fecha
@@ -4379,25 +3919,15 @@ function dedupeDriverRecords(
         extras
 
       ]
-      .join(
-        '|'
-      );
+      .join('|');
 
 
-      if (
-        seen.has(
-          key
-        )
-      ) {
-
+      if (seen.has(key)) {
         return false;
       }
 
 
-      seen.add(
-        key
-      );
-
+      seen.add(key);
 
       return true;
     }
@@ -4413,38 +3943,24 @@ function compactList(
   const clean = [
 
     ...new Set(
-      (
-        values ||
-        []
-      )
+      (values || [])
       .map(
         x =>
-          String(
-            x ??
-            ''
-          )
-          .trim()
+          String(x ?? '')
+            .trim()
       )
-      .filter(
-        Boolean
-      )
+      .filter(Boolean)
     )
   ];
 
 
-  if (
-    !clean.length
-  ) {
-
+  if (!clean.length) {
     return '—';
   }
 
 
   const visible =
-    clean.slice(
-      0,
-      limit
-    );
+    clean.slice(0,limit);
 
 
   const more =
@@ -4453,15 +3969,11 @@ function compactList(
 
 
   return (
-    visible.join(
-      ', '
-    )
+    visible.join(', ')
     +
     (
       more > 0
-
         ? ` +${more}`
-
         : ''
     )
   );
@@ -4477,9 +3989,7 @@ function renderAlertCases(
   emptyText
 ){
 
-  if (
-    !rows.length
-  ) {
+  if (!rows.length) {
 
     return `
       <div class="alert-none">
@@ -4490,16 +4000,11 @@ function renderAlertCases(
 
 
   const visible =
-    rows.slice(
-      0,
-      3
-    );
+    rows.slice(0,3);
 
 
   const hidden =
-    rows.slice(
-      3
-    );
+    rows.slice(3);
 
 
   const more =
@@ -4540,9 +4045,7 @@ function renderAlertCases(
 
       ${
         visible
-          .map(
-            renderRow
-          )
+          .map(renderRow)
           .join('')
       }
 
@@ -4556,9 +4059,7 @@ function renderAlertCases(
 
               ${
                 hidden
-                  .map(
-                    renderRow
-                  )
+                  .map(renderRow)
                   .join('')
               }
 
@@ -4600,19 +4101,14 @@ function toggleAlertCard(button){
     );
 
 
-  if (
-    !card
-  ) {
-
+  if (!card) {
     return;
   }
 
 
   const expanded =
     card.classList
-      .toggle(
-        'expanded'
-      );
+      .toggle('expanded');
 
 
   const count =
@@ -4646,18 +4142,11 @@ function toggleAlertCard(button){
 function renderImpactChart(detours){
 
   const rows =
-    countByNormalizedLine(
-      detours
-    )
-    .slice(
-      0,
-      5
-    );
+    countByNormalizedLine(detours)
+      .slice(0,5);
 
 
-  if (
-    !rows.length
-  ) {
+  if (!rows.length) {
 
     return `
       <div class="impact-empty">
@@ -4672,8 +4161,7 @@ function renderImpactChart(detours){
       ...rows.map(
         x =>
           Number(
-            x.value ||
-            0
+            x.value || 0
           )
       ),
       1
@@ -4703,8 +4191,7 @@ function renderImpactChart(detours){
                       Math.max(
                         7,
                         Number(
-                          row.value ||
-                          0
+                          row.value || 0
                         )
                         /
                         max
@@ -4739,32 +4226,24 @@ function renderImpactChart(detours){
 function renderResumen(){
 
   const key =
-    selectedDDMM(
-      'resumen'
-    );
+    selectedDDMM('resumen');
 
 
   const plan =
-    DATA.planServ ||
-    {};
+    DATA.planServ || {};
 
 
   const salidas =
-    DATA.salidas ||
-    {};
+    DATA.salidas || {};
 
 
   const guardia =
-    DATA.guardia ||
-    {};
+    DATA.guardia || {};
 
 
   const units =
     sortByLineAndService(
-      (
-        salidas.unitRows ||
-        []
-      )
+      (salidas.unitRows || [])
       .filter(
         r =>
           sameDay(
@@ -4787,10 +4266,7 @@ function renderResumen(){
 
 
   const planDrivers =
-    (
-      salidas.driverRows ||
-      []
-    )
+    (salidas.driverRows || [])
     .filter(
       r =>
         sameDay(
@@ -4801,10 +4277,7 @@ function renderResumen(){
 
 
   const guardDrivers =
-    (
-      guardia.driverRows ||
-      []
-    )
+    (guardia.driverRows || [])
     .filter(
       r =>
         sameDay(
@@ -4829,10 +4302,7 @@ function renderResumen(){
 
   const late =
     dedupeDriverRecords(
-      (
-        salidas.lateRows ||
-        []
-      )
+      (salidas.lateRows || [])
       .filter(
         r =>
           sameDay(
@@ -4855,10 +4325,7 @@ function renderResumen(){
 
   const mechanical =
     sortByLine(
-      (
-        guardia.incidents ||
-        []
-      )
+      (guardia.incidents || [])
       .filter(
         r =>
           sameDay(
@@ -4871,10 +4338,7 @@ function renderResumen(){
 
   const auxiliaries =
     sortByLine(
-      (
-        guardia.auxilios ||
-        []
-      )
+      (guardia.auxilios || [])
       .filter(
         r =>
           sameDay(
@@ -4887,10 +4351,7 @@ function renderResumen(){
 
   const detours =
     sortByLine(
-      (
-        guardia.detours ||
-        []
-      )
+      (guardia.detours || [])
       .filter(
         r =>
           sameDay(
@@ -4910,16 +4371,12 @@ function renderResumen(){
               r.linea
             )
         )
-        .filter(
-          Boolean
-        )
+        .filter(Boolean)
     );
 
 
   const selectedIsToday =
-    selectedISO(
-      'resumen'
-    )
+    selectedISO('resumen')
     ===
     todayISO();
 
@@ -4928,8 +4385,7 @@ function renderResumen(){
     selectedIsToday
 
       ? Number(
-          plan.compliance ||
-          0
+          plan.compliance || 0
         )
 
       : null;
@@ -4960,9 +4416,7 @@ function renderResumen(){
       <div class="source">
 
         ${esc(
-          selectedLabel(
-            'resumen'
-          )
+          selectedLabel('resumen')
         )}
 
         <br>
@@ -5061,9 +4515,7 @@ function renderResumen(){
 
           ${
             selectedIsToday
-
               ? 'Plan de servicio TM'
-
               : 'Sin dato histórico de Plan Serv'
           }
 
@@ -5296,16 +4748,11 @@ function renderResumen(){
 
                       <span>
 
-                        ${num(
-                          detourLines.size
-                        )}
+                        ${num(detourLines.size)}
 
                         ${
-                          detourLines.size ===
-                          1
-
+                          detourLines.size === 1
                             ? 'línea afectada'
-
                             : 'líneas afectadas'
                         }
 
@@ -5345,9 +4792,7 @@ function renderResumen(){
 
         </div>
 
-        ${renderImpactChart(
-          detours
-        )}
+        ${renderImpactChart(detours)}
 
       </section>
 
@@ -5363,31 +4808,23 @@ function renderResumen(){
 function renderConduccion(){
 
   const key =
-    selectedDDMM(
-      'conduccion'
-    );
+    selectedDDMM('conduccion');
 
 
   const plan =
-    DATA.planServ ||
-    {};
+    DATA.planServ || {};
 
 
   const salidas =
-    DATA.salidas ||
-    {};
+    DATA.salidas || {};
 
 
   const guardia =
-    DATA.guardia ||
-    {};
+    DATA.guardia || {};
 
 
   const day =
-    (
-      salidas.daily ||
-      []
-    )
+    (salidas.daily || [])
     .find(
       x =>
         sameDay(
@@ -5400,9 +4837,7 @@ function renderConduccion(){
 
 
   const selectedIsToday =
-    selectedISO(
-      'conduccion'
-    )
+    selectedISO('conduccion')
     ===
     todayISO();
 
@@ -5413,9 +4848,7 @@ function renderConduccion(){
       ??
       (
         selectedIsToday
-
           ? plan.conductoresTM
-
           : 0
       )
       ??
@@ -5429,9 +4862,7 @@ function renderConduccion(){
       ??
       (
         selectedIsToday
-
           ? plan.conductoresTT
-
           : 0
       )
       ??
@@ -5447,16 +4878,15 @@ function renderConduccion(){
 
   const absences =
     dedupeDriverRecords(
-      (
-        salidas.absenceRows ||
-        []
-      )
+      (salidas.absenceRows || [])
       .filter(
         r =>
           sameDay(
             r.fecha,
             key
           )
+          &&
+          isValidAbsenceRow(r)
       ),
       [
         'estado'
@@ -5465,10 +4895,7 @@ function renderConduccion(){
 
 
   const planDrivers =
-    (
-      salidas.driverRows ||
-      []
-    )
+    (salidas.driverRows || [])
     .filter(
       r =>
         sameDay(
@@ -5479,10 +4906,7 @@ function renderConduccion(){
 
 
   const guardDrivers =
-    (
-      guardia.driverRows ||
-      []
-    )
+    (guardia.driverRows || [])
     .filter(
       r =>
         sameDay(
@@ -5503,10 +4927,7 @@ function renderConduccion(){
 
   const late =
     dedupeDriverRecords(
-      (
-        salidas.lateRows ||
-        []
-      )
+      (salidas.lateRows || [])
       .filter(
         r =>
           sameDay(
@@ -5532,9 +4953,7 @@ function renderConduccion(){
       <div class="source">
 
         ${esc(
-          selectedLabel(
-            'conduccion'
-          )
+          selectedLabel('conduccion')
         )}
 
         <br>
@@ -5556,23 +4975,17 @@ function renderConduccion(){
 
         ${mini(
           'Conductores TM',
-          num(
-            conductoresTM
-          )
+          num(conductoresTM)
         )}
 
         ${mini(
           'Conductores TT',
-          num(
-            conductoresTT
-          )
+          num(conductoresTT)
         )}
 
         ${mini(
           'Total citados',
-          num(
-            totalCitados
-          )
+          num(totalCitados)
         )}
 
       </div>
@@ -5589,9 +5002,7 @@ function renderConduccion(){
         </span>
 
         <span class="count-badge pink">
-          ${num(
-            absences.length
-          )}
+          ${num(absences.length)}
         </span>
 
       </h3>
@@ -5622,6 +5033,7 @@ function renderConduccion(){
             'Turno',
             'turno'
           ]
+
         ],
 
         absences
@@ -5639,9 +5051,7 @@ function renderConduccion(){
         </span>
 
         <span class="count-badge pink">
-          ${num(
-            drivers.length
-          )}
+          ${num(drivers.length)}
         </span>
 
       </h3>
@@ -5674,6 +5084,7 @@ function renderConduccion(){
             'Turno',
             'turno'
           ]
+
         ],
 
         drivers
@@ -5691,9 +5102,7 @@ function renderConduccion(){
         </span>
 
         <span class="count-badge">
-          ${num(
-            late.length
-          )}
+          ${num(late.length)}
         </span>
 
       </h3>
@@ -5724,6 +5133,7 @@ function renderConduccion(){
             v =>
               `${num(v)} min`
           ]
+
         ],
 
         late
@@ -5742,8 +5152,7 @@ function renderConduccion(){
 function renderPlan(){
 
   const d =
-    DATA.planServ ||
-    {};
+    DATA.planServ || {};
 
 
   const comp =
@@ -5751,22 +5160,15 @@ function renderPlan(){
       0,
       Math.min(
         100,
-        +d.compliance ||
-        0
+        +d.compliance || 0
       )
     );
 
 
   const total =
-    (
-      +d.conductoresTM ||
-      0
-    )
+    (+d.conductoresTM || 0)
     +
-    (
-      +d.conductoresTT ||
-      0
-    );
+    (+d.conductoresTT || 0);
 
 
   const color =
@@ -5800,10 +5202,7 @@ function renderPlan(){
 
         Hoy ·
 
-        ${esc(
-          d.date ||
-          ''
-        )}
+        ${esc(d.date || '')}
 
       </div>
 
@@ -5830,15 +5229,11 @@ function renderPlan(){
 
             <span>
 
-              ${num(
-                d.serviceDone
-              )}
+              ${num(d.serviceDone)}
 
               /
 
-              ${num(
-                d.servicePlanned
-              )}
+              ${num(d.servicePlanned)}
 
             </span>
 
@@ -5891,26 +5286,16 @@ function renderPlan(){
         ${mini(
           'Inasist. relevantes',
           num(d.inasistenciaRelevantes),
-          (
-            +d.inasistenciaRelevantes ||
-            0
-          ) > 0
-
+          (+d.inasistenciaRelevantes || 0) > 0
             ? 'bad'
-
             : 'good'
         )}
 
         ${mini(
           'Inasistencias TM',
           num(d.inasistenciasTM),
-          (
-            +d.inasistenciasTM ||
-            0
-          ) > 0
-
+          (+d.inasistenciasTM || 0) > 0
             ? 'bad'
-
             : 'good'
         )}
 
@@ -5920,10 +5305,7 @@ function renderPlan(){
 
 
     ${
-      (
-        +d.inasistenciasTM ||
-        0
-      ) > 0
+      (+d.inasistenciasTM || 0) > 0
       &&
       comp >= 100
 
@@ -5950,23 +5332,17 @@ function renderPlan(){
 
           ${mini(
             'Conductores TM',
-            num(
-              d.conductoresTM
-            )
+            num(d.conductoresTM)
           )}
 
           ${mini(
             'Conductores TT',
-            num(
-              d.conductoresTT
-            )
+            num(d.conductoresTT)
           )}
 
           ${mini(
             'Total citados',
-            num(
-              total
-            )
+            num(total)
           )}
 
         </div>
@@ -6018,22 +5394,16 @@ function renderPlan(){
 function renderSalidas(){
 
   const d =
-    DATA.salidas ||
-    {};
+    DATA.salidas || {};
 
 
   const key =
-    selectedDDMM(
-      'salidas'
-    );
+    selectedDDMM('salidas');
 
 
   const units =
     sortByLineAndService(
-      (
-        d.unitRows ||
-        []
-      )
+      (d.unitRows || [])
       .filter(
         r =>
           sameDay(
@@ -6046,10 +5416,7 @@ function renderSalidas(){
 
   const drivers =
     sortByLineAndService(
-      (
-        d.driverRows ||
-        []
-      )
+      (d.driverRows || [])
       .filter(
         r =>
           sameDay(
@@ -6061,10 +5428,7 @@ function renderSalidas(){
 
 
   const late =
-    (
-      d.lateRows ||
-      []
-    )
+    (d.lateRows || [])
     .filter(
       r =>
         sameDay(
@@ -6075,24 +5439,20 @@ function renderSalidas(){
 
 
   const absences =
-    (
-      d.absenceRows ||
-      []
-    )
+    (d.absenceRows || [])
     .filter(
       r =>
         sameDay(
           r.fecha,
           key
         )
+        &&
+        isValidAbsenceRow(r)
     );
 
 
   const observations =
-    (
-      d.observations ||
-      []
-    )
+    (d.observations || [])
     .filter(
       r =>
         sameDay(
@@ -6103,10 +5463,7 @@ function renderSalidas(){
 
 
   const day =
-    (
-      d.daily ||
-      []
-    )
+    (d.daily || [])
     .find(
       x =>
         sameDay(
@@ -6119,13 +5476,11 @@ function renderSalidas(){
 
 
   const hasAbsences =
-    absences.length >
-    0;
+    absences.length > 0;
 
 
   const hasObservations =
-    observations.length >
-    0;
+    observations.length > 0;
 
 
   $('#salidas').innerHTML = `
@@ -6146,9 +5501,7 @@ function renderSalidas(){
         <br>
 
         ${esc(
-          selectedLabel(
-            'salidas'
-          )
+          selectedLabel('salidas')
         )}
 
       </div>
@@ -6169,27 +5522,21 @@ function renderSalidas(){
 
       ${kpi(
         'Reemplazos de unidades',
-        num(
-          units.length
-        ),
+        num(units.length),
         key
       )}
 
 
       ${kpi(
         'Reemplazos de conductores',
-        num(
-          drivers.length
-        ),
+        num(drivers.length),
         key
       )}
 
 
       ${kpi(
         'Llegadas tarde',
-        num(
-          late.length
-        ),
+        num(late.length),
         key,
         late.length
           ? 'warn'
@@ -6202,9 +5549,7 @@ function renderSalidas(){
 
           ? kpi(
               'Inasist. relevantes',
-              num(
-                absences.length
-              ),
+              num(absences.length),
               key,
               'absence-alert'
             )
@@ -6215,20 +5560,14 @@ function renderSalidas(){
 
       ${kpi(
         'Plan TM',
-        num(
-          day.planTM ||
-          0
-        ),
+        num(day.planTM || 0),
         'Día seleccionado'
       )}
 
 
       ${kpi(
         'Plan TT',
-        num(
-          day.planTT ||
-          0
-        ),
+        num(day.planTT || 0),
         'Día seleccionado'
       )}
 
@@ -6298,6 +5637,7 @@ function renderSalidas(){
                 'Servicio',
                 'turno'
               ]
+
             ],
 
             units
@@ -6370,6 +5710,7 @@ function renderSalidas(){
                       'Turno',
                       'turno'
                     ]
+
                   ],
 
                   absences
@@ -6424,6 +5765,7 @@ function renderSalidas(){
                 'Turno',
                 'turno'
               ]
+
             ],
 
             drivers
@@ -6477,6 +5819,7 @@ function renderSalidas(){
                 v =>
                   `${num(v)} min`
               ]
+
             ],
 
             late
@@ -6548,9 +5891,7 @@ function renderSalidas(){
 
 function normalizeGuardText(value){
 
-  return normalizeText(
-    value
-  );
+  return normalizeText(value);
 }
 
 
@@ -6564,10 +5905,7 @@ function splitGuardiaObservations(rows){
   };
 
 
-  (
-    rows ||
-    []
-  )
+  (rows || [])
   .forEach(
     row => {
 
@@ -6577,25 +5915,15 @@ function splitGuardiaObservations(rows){
         );
 
 
-      if (
-        turno ===
-        'MANANA'
-      ) {
+      if (turno === 'MANANA') {
 
-        out.manana.push(
-          row
-        );
+        out.manana.push(row);
       }
 
 
-      if (
-        turno ===
-        'TARDE'
-      ) {
+      if (turno === 'TARDE') {
 
-        out.tarde.push(
-          row
-        );
+        out.tarde.push(row);
       }
     }
   );
@@ -6610,9 +5938,7 @@ function renderGuardEvents(
   emptyText
 ){
 
-  if (
-    !rows?.length
-  ) {
+  if (!rows?.length) {
 
     return `
       <div class="shift-empty">
@@ -6644,22 +5970,16 @@ function renderGuardEvents(
 function renderGuardia(){
 
   const d =
-    DATA.guardia ||
-    {};
+    DATA.guardia || {};
 
 
   const key =
-    selectedDDMM(
-      'guardia'
-    );
+    selectedDDMM('guardia');
 
 
   const aux =
     sortByLine(
-      (
-        d.auxilios ||
-        []
-      )
+      (d.auxilios || [])
       .filter(
         r =>
           sameDay(
@@ -6672,10 +5992,7 @@ function renderGuardia(){
 
   const inc =
     sortByLine(
-      (
-        d.incidents ||
-        []
-      )
+      (d.incidents || [])
       .filter(
         r =>
           sameDay(
@@ -6688,10 +6005,7 @@ function renderGuardia(){
 
   const drv =
     sortByLineAndService(
-      (
-        d.driverRows ||
-        []
-      )
+      (d.driverRows || [])
       .filter(
         r =>
           sameDay(
@@ -6704,10 +6018,7 @@ function renderGuardia(){
 
   const det =
     sortByLine(
-      (
-        d.detours ||
-        []
-      )
+      (d.detours || [])
       .filter(
         r =>
           sameDay(
@@ -6719,10 +6030,7 @@ function renderGuardia(){
 
 
   const obs =
-    (
-      d.observations ||
-      []
-    )
+    (d.observations || [])
     .filter(
       r =>
         sameDay(
@@ -6733,9 +6041,7 @@ function renderGuardia(){
 
 
   const groupedObs =
-    splitGuardiaObservations(
-      obs
-    );
+    splitGuardiaObservations(obs);
 
 
   const lines =
@@ -6751,9 +6057,7 @@ function renderGuardia(){
             r.linea
           )
       )
-      .filter(
-        Boolean
-      )
+      .filter(Boolean)
     );
 
 
@@ -6775,9 +6079,7 @@ function renderGuardia(){
         <br>
 
         ${esc(
-          selectedLabel(
-            'guardia'
-          )
+          selectedLabel('guardia')
         )}
 
       </div>
@@ -6856,9 +6158,7 @@ function renderGuardia(){
 
               v =>
                 esc(
-                  normalizeMechanicalCategory(
-                    v
-                  )
+                  normalizeMechanicalCategory(v)
                 )
             ],
 
@@ -6878,6 +6178,7 @@ function renderGuardia(){
 
                   : `<span class="pending-pill">Pendiente</span>`
             ]
+
           ],
 
           aux
@@ -6920,9 +6221,7 @@ function renderGuardia(){
 
               v =>
                 esc(
-                  normalizeMechanicalCategory(
-                    v
-                  )
+                  normalizeMechanicalCategory(v)
                 )
             ],
 
@@ -6944,12 +6243,8 @@ function renderGuardia(){
                 ) {
 
                   const pending =
-                    normalizeGuardText(
-                      v
-                    )
-                    .includes(
-                      'PENDIENTE'
-                    );
+                    normalizeGuardText(v)
+                      .includes('PENDIENTE');
 
 
                   return `
@@ -6975,6 +6270,7 @@ function renderGuardia(){
                 `;
               }
             ]
+
           ],
 
           inc
@@ -7027,6 +6323,7 @@ function renderGuardia(){
             'Turno',
             'turno'
           ]
+
         ],
 
         drv
@@ -7060,9 +6357,7 @@ function renderGuardia(){
         </h3>
 
         ${bars(
-          countByNormalizedLine(
-            det
-          )
+          countByNormalizedLine(det)
         )}
 
       </article>
@@ -7107,6 +6402,7 @@ function renderGuardia(){
             'Desvío',
             'desvio'
           ]
+
         ],
 
         det
@@ -7133,19 +6429,12 @@ function renderGuardia(){
           <span class="shift-count">
 
             ${num(
-              groupedObs
-                .manana
-                .length
+              groupedObs.manana.length
             )}
 
             ${
-              groupedObs
-                .manana
-                .length ===
-              1
-
+              groupedObs.manana.length === 1
                 ? 'novedad'
-
                 : 'novedades'
             }
 
@@ -7176,19 +6465,12 @@ function renderGuardia(){
           <span class="shift-count">
 
             ${num(
-              groupedObs
-                .tarde
-                .length
+              groupedObs.tarde.length
             )}
 
             ${
-              groupedObs
-                .tarde
-                .length ===
-              1
-
+              groupedObs.tarde.length === 1
                 ? 'novedad'
-
                 : 'novedades'
             }
 
@@ -7219,13 +6501,11 @@ function renderGuardia(){
 function renderOS(){
 
   const d =
-    DATA.os ||
-    {};
+    DATA.os || {};
 
 
   const s =
-    d.summary ||
-    {};
+    d.summary || {};
 
 
   $('#os').innerHTML = `
@@ -7247,9 +6527,7 @@ function renderOS(){
 
         Acumulado
 
-        ${esc(
-          monthLabel()
-        )}
+        ${esc(monthLabel())}
 
       </div>
 
@@ -7299,9 +6577,7 @@ function renderOS(){
           OS por motivo
         </h3>
 
-        ${bars(
-          d.reasons
-        )}
+        ${bars(d.reasons)}
 
       </article>
 
@@ -7312,9 +6588,7 @@ function renderOS(){
           OS por línea
         </h3>
 
-        ${bars(
-          d.lines
-        )}
+        ${bars(d.lines)}
 
       </article>
 
@@ -7325,9 +6599,7 @@ function renderOS(){
           Conductores con registros
         </h3>
 
-        ${bars(
-          d.topDrivers
-        )}
+        ${bars(d.topDrivers)}
 
       </article>
 
@@ -7383,10 +6655,10 @@ function renderOS(){
             'Agente',
             'agente'
           ]
+
         ],
 
-        d.rows ||
-        []
+        d.rows || []
       )}
 
     </article>
@@ -7413,20 +6685,12 @@ function fmtPct(v){
 
 
   const s =
-    String(
-      v
-    )
-    .trim();
+    String(v).trim();
 
 
-  return s.includes(
-    '%'
-  )
-
+  return s.includes('%')
     ? s
-
-    : s +
-      '%';
+    : s + '%';
 }
 
 
@@ -7445,18 +6709,10 @@ function rawNumber(v){
 
 
   let s =
-    String(
-      v
-    )
-    .trim()
-    .replace(
-      '%',
-      ''
-    )
-    .replace(
-      /\s/g,
-      ''
-    );
+    String(v)
+      .trim()
+      .replace('%','')
+      .replace(/\s/g,'');
 
 
   if (
@@ -7466,10 +6722,7 @@ function rawNumber(v){
   ) {
 
     s =
-      s.replace(
-        ',',
-        '.'
-      );
+      s.replace(',','.');
   }
 
 
@@ -7482,12 +6735,8 @@ function rawNumber(v){
     );
 
 
-  return Number.isFinite(
-    n
-  )
-
+  return Number.isFinite(n)
     ? n
-
     : null;
 }
 
@@ -7498,15 +6747,11 @@ function metricPass(
 ){
 
   const n =
-    rawNumber(
-      value
-    );
+    rawNumber(value);
 
 
   const t =
-    rawNumber(
-      meta
-    );
+    rawNumber(meta);
 
 
   if (
@@ -7520,63 +6765,41 @@ function metricPass(
 
 
   const s =
-    String(
-      meta ||
-      ''
-    )
-    .replace(
-      /\s+/g,
-      ''
-    );
+    String(meta || '')
+      .replace(/\s+/g,'');
 
 
   if (
-    s.includes(
-      '≤'
-    )
+    s.includes('≤')
     ||
-    s.includes(
-      '<='
-    )
+    s.includes('<=')
   ) {
 
-    return n <=
-      t;
+    return n <= t;
   }
 
 
   if (
-    s.includes(
-      '≥'
-    )
+    s.includes('≥')
     ||
-    s.includes(
-      '>='
-    )
+    s.includes('>=')
   ) {
 
-    return n >=
-      t;
+    return n >= t;
   }
 
 
-  return n >=
-    t;
+  return n >= t;
 }
 
 
 function metricProgress(value){
 
   const n =
-    rawNumber(
-      value
-    );
+    rawNumber(value);
 
 
-  if (
-    n === null
-  ) {
-
+  if (n === null) {
     return 0;
   }
 
@@ -7635,9 +6858,7 @@ function kpiCard(
 
         Dato del día ·
 
-        ${esc(
-          dateLabel
-        )}
+        ${esc(dateLabel)}
 
       </div>
 
@@ -7669,10 +6890,7 @@ function uniqueMonthlyIndicators(rows){
     new Map();
 
 
-  (
-    rows ||
-    []
-  )
+  (rows || [])
   .forEach(
     item => {
 
@@ -7683,30 +6901,19 @@ function uniqueMonthlyIndicators(rows){
         );
 
 
-      if (
-        !key
-      ) {
-
+      if (!key) {
         return;
       }
 
 
-      if (
-        !map.has(
-          key
-        )
-      ) {
+      if (!map.has(key)) {
 
-        order.push(
-          key
-        );
+        order.push(key);
 
 
         map.set(
           key,
-          {
-            ...item
-          }
+          {...item}
         );
 
 
@@ -7715,9 +6922,7 @@ function uniqueMonthlyIndicators(rows){
 
 
       const previous =
-        map.get(
-          key
-        );
+        map.get(key);
 
 
       const next = {
@@ -7726,35 +6931,19 @@ function uniqueMonthlyIndicators(rows){
 
 
       Object
-        .entries(
-          item ||
-          {}
-        )
+        .entries(item || {})
         .forEach(
-          (
-            [
-              field,
-              value
-            ]
-          ) => {
+          ([field,value]) => {
 
             if (
-              value !==
-              undefined
+              value !== undefined
               &&
-              value !==
-              null
+              value !== null
               &&
-              String(
-                value
-              )
-              .trim() !==
-              ''
+              String(value).trim() !== ''
             ) {
 
-              next[
-                field
-              ] =
+              next[field] =
                 value;
             }
           }
@@ -7771,9 +6960,7 @@ function uniqueMonthlyIndicators(rows){
 
   return order.map(
     key =>
-      map.get(
-        key
-      )
+      map.get(key)
   );
 }
 
@@ -7781,26 +6968,19 @@ function uniqueMonthlyIndicators(rows){
 function renderKPI(){
 
   const d =
-    DATA.kpi ||
-    {};
+    DATA.kpi || {};
 
 
   const key =
-    selectedDDMM(
-      'kpi'
-    );
+    selectedDDMM('kpi');
 
 
   const metas =
-    d.metas ||
-    {};
+    d.metas || {};
 
 
   const r =
-    (
-      d.daily ||
-      []
-    )
+    (d.daily || [])
     .find(
       x =>
         sameDay(
@@ -7810,9 +6990,7 @@ function renderKPI(){
     );
 
 
-  if (
-    !r
-  ) {
+  if (!r) {
 
     $('#kpi').innerHTML = `
 
@@ -7840,8 +7018,7 @@ function renderKPI(){
 
   const indicators =
     uniqueMonthlyIndicators(
-      d.indicators ||
-      []
+      d.indicators || []
     );
 
 
@@ -8133,6 +7310,7 @@ function renderKPI(){
         ||
         '≤5%'
     }
+
   ];
 
 
@@ -8156,9 +7334,7 @@ function renderKPI(){
         Día anterior ·
 
         ${esc(
-          selectedLabel(
-            'kpi'
-          )
+          selectedLabel('kpi')
         )}
 
       </div>
@@ -8176,9 +7352,7 @@ function renderKPI(){
               x =>
                 kpiCard(
                   x,
-                  shortDateLabel(
-                    key
-                  )
+                  shortDateLabel(key)
                 )
             )
             .join('')
@@ -8207,13 +7381,9 @@ function renderKPI(){
 
               const cls =
                 pass === false
-
                   ? 'bad'
-
                   : pass === null
-
                     ? 'neutral'
-
                     : '';
 
 
@@ -8260,8 +7430,124 @@ function renderKPI(){
 
 
 /* =========================================================
-   GRAFICOS
+   GRAFICOS - HISTORICO
 ========================================================= */
+
+const GRAPH_HISTORY = {
+
+  wara: {
+
+    values: {
+
+      '2025-11':0,
+      '2025-12':283767,
+      '2026-01':354302,
+      '2026-02':282795,
+      '2026-03':382407,
+      '2026-04':377551,
+      '2026-05':358811,
+      '2026-06':317283,
+      '2026-07':327343,
+      '2026-08':330150,
+      '2026-09':313903
+    },
+
+    budget: {
+
+      '2025-12':283767,
+      '2026-01':327000,
+      '2026-02':278000,
+      '2026-03':385000,
+      '2026-04':375500,
+      '2026-05':358800,
+      '2026-06':327000,
+      '2026-07':302000,
+      '2026-08':315000,
+      '2026-09':323000
+    }
+  },
+
+
+  horario: {
+
+    '2025-11':0,
+    '2025-12':52,
+    '2026-01':51,
+    '2026-02':48,
+    '2026-03':47,
+    '2026-04':63,
+    '2026-05':74,
+    '2026-06':80,
+    '2026-07':89,
+    '2026-08':89,
+    '2026-09':89
+  },
+
+
+  cabecera: {
+
+    '2025-11':0,
+    '2025-12':62,
+    '2026-01':60,
+    '2026-02':74,
+    '2026-03':79,
+    '2026-04':80,
+    '2026-05':84,
+    '2026-06':86,
+    '2026-07':89,
+    '2026-08':90,
+    '2026-09':90
+  },
+
+
+  ipk: {
+
+    '2025-11':0,
+    '2025-12':0.76,
+    '2026-01':0.85,
+    '2026-02':1.09,
+    '2026-03':1.49,
+    '2026-04':1.50,
+    '2026-05':1.82,
+    '2026-06':2.16,
+    '2026-07':1.55,
+    '2026-08':1.94,
+    '2026-09':2.11
+  },
+
+
+  siniestros: {
+
+    '2025-11':0,
+    '2025-12':0,
+    '2026-01':1,
+    '2026-02':24,
+    '2026-03':44,
+    '2026-04':22,
+    '2026-05':21,
+    '2026-06':18,
+    '2026-07':16,
+    '2026-08':16,
+    '2026-09':13
+  },
+
+
+  titularidad: {
+
+    '2025-11':0,
+    '2025-12':12,
+    '2026-01':71,
+    '2026-02':53,
+    '2026-03':47,
+    '2026-04':46,
+    '2026-05':63,
+    '2026-06':78,
+    '2026-07':76,
+    '2026-08':77,
+    '2026-09':62
+  }
+};
+
 
 function graphParseNumber(value){
 
@@ -8278,37 +7564,21 @@ function graphParseNumber(value){
 
 
   let s =
-    String(
-      value
-    )
-    .trim()
-    .replace(
-      '%',
-      ''
-    )
-    .replace(
-      /\s/g,
-      ''
-    );
+    String(value)
+      .trim()
+      .replace('%','')
+      .replace(/\s/g,'');
 
 
   if (
     /^-?\d{1,3}(?:\.\d{3})+(?:,\d+)?$/
-      .test(
-        s
-      )
+      .test(s)
   ) {
 
     s =
       s
-      .replace(
-        /\./g,
-        ''
-      )
-      .replace(
-        ',',
-        '.'
-      );
+      .replace(/\./g,'')
+      .replace(',','.');
 
   } else if (
     s.includes(',')
@@ -8324,22 +7594,13 @@ function graphParseNumber(value){
 
       s =
         s
-        .replace(
-          /\./g,
-          ''
-        )
-        .replace(
-          ',',
-          '.'
-        );
+        .replace(/\./g,'')
+        .replace(',','.');
 
     } else {
 
       s =
-        s.replace(
-          /,/g,
-          ''
-        );
+        s.replace(/,/g,'');
     }
 
   } else if (
@@ -8347,10 +7608,7 @@ function graphParseNumber(value){
   ) {
 
     s =
-      s.replace(
-        ',',
-        '.'
-      );
+      s.replace(',','.');
   }
 
 
@@ -8363,12 +7621,8 @@ function graphParseNumber(value){
     );
 
 
-  return Number.isFinite(
-    n
-  )
-
+  return Number.isFinite(n)
     ? n
-
     : null;
 }
 
@@ -8376,8 +7630,7 @@ function graphParseNumber(value){
 function graphMonthWindow(){
 
   const p =
-    DATA.period ||
-    {};
+    DATA.period || {};
 
 
   const now =
@@ -8385,26 +7638,19 @@ function graphMonthWindow(){
 
 
   const endYear =
-    Number(
-      p.year
-    )
+    Number(p.year)
     ||
     now.getFullYear();
 
 
   const endMonth =
-    Number(
-      p.month
-    )
+    Number(p.month)
     ||
-    (
-      now.getMonth()
-      +
-      1
-    );
+    (now.getMonth()+1);
 
 
   const monthNames = [
+
     'ene',
     'feb',
     'mar',
@@ -8417,6 +7663,7 @@ function graphMonthWindow(){
     'oct',
     'nov',
     'dic'
+
   ];
 
 
@@ -8424,15 +7671,15 @@ function graphMonthWindow(){
 
 
   for (
-    let offset = 11;
-    offset >= 0;
+    let offset=11;
+    offset>=0;
     offset--
   ) {
 
     const date =
       new Date(
         endYear,
-        endMonth - 1 - offset,
+        endMonth-1-offset,
         1
       );
 
@@ -8442,9 +7689,7 @@ function graphMonthWindow(){
 
 
     const month =
-      date.getMonth()
-      +
-      1;
+      date.getMonth()+1;
 
 
     out.push({
@@ -8453,18 +7698,13 @@ function graphMonthWindow(){
         `${year}-${pad2(month)}`,
 
       label:
-        monthNames[
-          month - 1
-        ]
+        monthNames[month-1]
         +
         '-'
         +
-        String(
-          year
-        )
-        .slice(
-          -2
-        )
+        String(year)
+          .slice(-2)
+
     });
   }
 
@@ -8473,236 +7713,288 @@ function graphMonthWindow(){
 }
 
 
-function graphRowPeriod(row){
-
-  const direct =
-    String(
-      row?.period
-      ||
-      row?.periodo
-      ||
-      row?.monthKey
-      ||
-      row?.mesKey
-      ||
-      ''
-    )
-    .trim();
-
-
-  const match =
-    direct.match(
-      /^(\d{4})[-\/](\d{1,2})$/
-    );
-
-
-  if (
-    match
-  ) {
-
-    return (
-      match[1]
-      +
-      '-'
-      +
-      pad2(
-        Number(
-          match[2]
-        )
-      )
-    );
-  }
-
-
-  const year =
-    Number(
-      row?.year
-      ||
-      row?.anio
-      ||
-      row?.año
-      ||
-      0
-    );
-
-
-  const month =
-    Number(
-      row?.month
-      ||
-      row?.mes
-      ||
-      0
-    );
-
-
-  if (
-    year
-    &&
-    month
-  ) {
-
-    return (
-      year
-      +
-      '-'
-      +
-      pad2(
-        month
-      )
-    );
-  }
-
-
-  return '';
-}
-
-
-function graphValue(
-  row,
-  fields
-){
-
-  for (
-    const field of fields
-  ) {
-
-    const value =
-      row?.[
-        field
-      ];
-
-
-    if (
-      value !==
-      undefined
-      &&
-      value !==
-      null
-      &&
-      String(
-        value
-      )
-      .trim() !==
-      ''
-    ) {
-
-      return graphParseNumber(
-        value
-      );
-    }
-  }
-
-
-  return null;
-}
-
-
-function graphSeries(){
-
-  const data =
-    DATA.graficos
-    ||
-    DATA.kpi?.graficos
-    ||
-    {};
-
+function latestGraphKpiRow(){
 
   const rows =
-    Array.isArray(
-      data.rows
-    )
-
-      ? data.rows
-
-      : Array.isArray(
-          data.monthly
-        )
-
-        ? data.monthly
-
-        : Array.isArray(
-            DATA.kpi?.history
-          )
-
-          ? DATA.kpi.history
-
-          : [];
+    [
+      ...(DATA.kpi?.daily || [])
+    ]
+    .filter(
+      row =>
+        row &&
+        row.date
+    );
 
 
-  const byPeriod =
-    new Map();
+  if (!rows.length) {
+    return {};
+  }
 
 
-  rows.forEach(
+  rows.sort(
+    (a,b) => {
+
+      const getDay =
+        value => {
+
+          const m =
+            String(value || '')
+              .match(
+                /^(\d{1,2})/
+              );
+
+
+          return m
+            ? Number(m[1])
+            : 0;
+        };
+
+
+      return (
+        getDay(a.date)
+        -
+        getDay(b.date)
+      );
+    }
+  );
+
+
+  return rows[
+    rows.length-1
+  ]
+  ||
+  {};
+}
+
+
+function currentGraphPeriodKey(){
+
+  const p =
+    DATA.period || {};
+
+
+  if (
+    !p.year
+    ||
+    !p.month
+  ) {
+
+    return '';
+  }
+
+
+  return (
+    p.year
+    +
+    '-'
+    +
+    pad2(p.month)
+  );
+}
+
+
+function graphHistoryValue(
+  map,
+  key
+){
+
+  if (
+    !map
+    ||
+    !Object.prototype
+      .hasOwnProperty
+      .call(
+        map,
+        key
+      )
+  ) {
+
+    return null;
+  }
+
+
+  const value =
+    Number(map[key]);
+
+
+  return Number.isFinite(value)
+    ? value
+    : null;
+}
+
+
+function graphSiniestrosLive(){
+
+  const latest =
+    latestGraphKpiRow();
+
+
+  const direct =
+    graphParseNumber(
+      latest.siniestros
+    );
+
+
+  if (direct !== null) {
+
+    return direct;
+  }
+
+
+  const indicators =
+    DATA.kpi?.indicators || [];
+
+
+  let total =
+    0;
+
+
+  let found =
+    false;
+
+
+  indicators.forEach(
     row => {
 
-      const key =
-        graphRowPeriod(
-          row
+      const label =
+        normalizeText(
+          row.label ||
+          ''
         );
 
 
       if (
-        key
+        label.includes(
+          'SINIESTROS CON RESPONSABILIDAD'
+        )
+        ||
+        label.includes(
+          'SINIESTROS SIN RESPONSABILIDAD'
+        )
+        ||
+        label.includes(
+          'SINIESTROS SIN RESPONABILIDAD'
+        )
       ) {
 
-        byPeriod.set(
-          key,
-          row
-        );
+        const value =
+          graphParseNumber(
+            row.dayValue
+          );
+
+
+        if (value !== null) {
+
+          total += value;
+
+          found = true;
+        }
       }
     }
   );
 
 
+  return found
+    ? total
+    : null;
+}
+
+
+function graphMetaIPK(key){
+
+  if (
+    key === '2026-07'
+  ) {
+
+    return 1.5;
+  }
+
+
+  return 2;
+}
+
+
+function graphMetaSiniestros(key){
+
+  return key >= '2026-07'
+    ? 16
+    : 0;
+}
+
+
+function graphSeries(){
+
   const months =
     graphMonthWindow();
 
 
-  const build =
+  const currentKey =
+    currentGraphPeriodKey();
+
+
+  const latest =
+    latestGraphKpiRow();
+
+
+  const live = {
+
+    wara:
+      graphParseNumber(
+        latest.wara
+      ),
+
+    waraBudget:
+      graphParseNumber(
+        latest.kmPresupuesto
+      ),
+
+    horario:
+      graphParseNumber(
+        latest.horarioGeneral
+      ),
+
+    cabecera:
+      graphParseNumber(
+        latest.horarioCab
+      ),
+
+    ipk:
+      graphParseNumber(
+        latest.ipk
+      ),
+
+    siniestros:
+      graphSiniestrosLive(),
+
+    titularidad:
+      graphParseNumber(
+        latest.titularidad
+      )
+
+  };
+
+
+  const getValue =
     (
-      valueFields,
-      metaFields
+      map,
+      monthKey,
+      liveValue
     ) => {
 
-      const values = [];
-      const metas = [];
+      if (
+        monthKey === currentKey
+        &&
+        liveValue !== null
+      ) {
+
+        return liveValue;
+      }
 
 
-      months.forEach(
-        month => {
-
-          const row =
-            byPeriod.get(
-              month.key
-            )
-            ||
-            {};
-
-
-          values.push(
-            graphValue(
-              row,
-              valueFields
-            )
-          );
-
-
-          metas.push(
-            graphValue(
-              row,
-              metaFields
-            )
-          );
-        }
+      return graphHistoryValue(
+        map,
+        monthKey
       );
-
-
-      return {
-        values,
-        metas
-      };
     };
 
 
@@ -8710,82 +8002,135 @@ function graphSeries(){
 
     months,
 
-    wara:
-      build(
-        [
-          'wara',
-          'kmWara',
-          'kmWaraMunicipalidad',
-          'waraEjecutado'
-        ],
-        [
-          'waraMeta',
-          'kmPresupuestado',
-          'kmPresupuesto',
-          'kmTSJPresupuestado'
-        ]
-      ),
 
-    horario:
-      build(
-        [
-          'horario',
-          'cumplimientoHorario',
-          'horarioGeneral'
-        ],
-        [
-          'horarioMeta',
-          'metaHorario'
-        ]
-      ),
+    wara: {
 
-    cabecera:
-      build(
-        [
-          'cabecera',
-          'cumplimientoCabecera',
-          'horarioCab',
-          'horarioCabecera'
-        ],
-        [
-          'cabeceraMeta',
-          'metaCabecera'
-        ]
-      ),
+      values:
+        months.map(
+          month =>
+            getValue(
+              GRAPH_HISTORY
+                .wara
+                .values,
+              month.key,
+              live.wara
+            )
+        ),
 
-    ipk:
-      build(
-        [
-          'ipk'
-        ],
-        [
-          'ipkMeta',
-          'metaIPK'
-        ]
-      ),
+      metas:
+        months.map(
+          month =>
+            getValue(
+              GRAPH_HISTORY
+                .wara
+                .budget,
+              month.key,
+              live.waraBudget
+            )
+        )
+    },
 
-    siniestros:
-      build(
-        [
-          'siniestros',
-          'totalSiniestros'
-        ],
-        [
-          'siniestrosMeta',
-          'metaSiniestros'
-        ]
-      ),
 
-    titularidad:
-      build(
-        [
-          'titularidad'
-        ],
-        [
-          'titularidadMeta',
-          'metaTitularidad'
-        ]
-      )
+    horario: {
+
+      values:
+        months.map(
+          month =>
+            getValue(
+              GRAPH_HISTORY.horario,
+              month.key,
+              live.horario
+            )
+        ),
+
+      metas:
+        months.map(
+          () => 90
+        )
+    },
+
+
+    cabecera: {
+
+      values:
+        months.map(
+          month =>
+            getValue(
+              GRAPH_HISTORY.cabecera,
+              month.key,
+              live.cabecera
+            )
+        ),
+
+      metas:
+        months.map(
+          () => 90
+        )
+    },
+
+
+    ipk: {
+
+      values:
+        months.map(
+          month =>
+            getValue(
+              GRAPH_HISTORY.ipk,
+              month.key,
+              live.ipk
+            )
+        ),
+
+      metas:
+        months.map(
+          month =>
+            graphMetaIPK(
+              month.key
+            )
+        )
+    },
+
+
+    siniestros: {
+
+      values:
+        months.map(
+          month =>
+            getValue(
+              GRAPH_HISTORY.siniestros,
+              month.key,
+              live.siniestros
+            )
+        ),
+
+      metas:
+        months.map(
+          month =>
+            graphMetaSiniestros(
+              month.key
+            )
+        )
+    },
+
+
+    titularidad: {
+
+      values:
+        months.map(
+          month =>
+            getValue(
+              GRAPH_HISTORY.titularidad,
+              month.key,
+              live.titularidad
+            )
+        ),
+
+      metas:
+        months.map(
+          () => 80
+        )
+    }
+
   };
 }
 
@@ -8796,38 +8141,23 @@ function niceChartMax(
   fixedMax=null
 ){
 
-  if (
-    fixedMax !==
-    null
-  ) {
-
+  if (fixedMax !== null) {
     return fixedMax;
   }
 
 
   const nums =
     [
-      ...(
-        values ||
-        []
-      ),
-      ...(
-        metas ||
-        []
-      )
+      ...(values || []),
+      ...(metas || [])
     ]
     .filter(
       value =>
-        Number.isFinite(
-          value
-        )
+        Number.isFinite(value)
     );
 
 
-  if (
-    !nums.length
-  ) {
-
+  if (!nums.length) {
     return 1;
   }
 
@@ -8840,17 +8170,14 @@ function niceChartMax(
 
 
   const padded =
-    raw *
-    1.15;
+    raw * 1.15;
 
 
   const power =
     Math.pow(
       10,
       Math.floor(
-        Math.log10(
-          padded
-        )
+        Math.log10(padded)
       )
     );
 
@@ -8877,40 +8204,29 @@ function chartDisplayValue(
   if (
     value === null
     ||
-    !Number.isFinite(
-      value
-    )
+    !Number.isFinite(value)
   ) {
 
     return '';
   }
 
 
-  if (
-    type ===
-    'percent'
-  ) {
+  if (type === 'percent') {
 
     return (
       Math.round(
-        value *
-        10
+        value * 10
       )
       /
       10
     )
-    .toLocaleString(
-      'es-AR'
-    )
+    .toLocaleString('es-AR')
     +
     '%';
   }
 
 
-  if (
-    type ===
-    'ipk'
-  ) {
+  if (type === 'ipk') {
 
     return value
       .toLocaleString(
@@ -8923,111 +8239,44 @@ function chartDisplayValue(
   }
 
 
-  return Math.round(
-    value
-  )
-  .toLocaleString(
-    'es-AR'
-  );
+  return Math.round(value)
+    .toLocaleString('es-AR');
 }
 
 
-/*
- * Etiquetas para la línea roja.
- *
- * - Meta constante:
- *   muestra una sola vez "Meta 90%".
- *
- * - Meta que cambia pocas veces:
- *   muestra solamente cada cambio.
- *
- * - Meta que cambia casi todos los meses
- *   como WARA:
- *   muestra el valor de cada punto.
- */
-function buildMetaLabels(
-  metas,
-  type
-){
+function graphMetaChangeLabels(metas){
 
-  const finite =
-    (
-      metas ||
-      []
-    )
-    .filter(
-      value =>
-        Number.isFinite(
-          value
-        )
-    );
-
-
-  const distinct =
-    [
-      ...new Set(
-        finite.map(
-          value =>
-            Number(
-              value
-            )
-            .toFixed(
-              6
-            )
-        )
-      )
-    ];
-
-
-  const changesOften =
-    distinct.length >
-    3;
-
-
-  const labels = [];
+  const out = [];
 
 
   let previous =
     null;
 
 
-  let previousWasFinite =
+  let previousFinite =
     false;
 
 
-  (
-    metas ||
-    []
-  )
+  (metas || [])
   .forEach(
-    (
-      value,
-      index
-    ) => {
+    (value,index) => {
 
-      if (
-        !Number.isFinite(
-          value
-        )
-      ) {
+      if (!Number.isFinite(value)) {
 
         previous =
           null;
 
-
-        previousWasFinite =
+        previousFinite =
           false;
-
 
         return;
       }
 
 
-      const changed =
-        !previousWasFinite
+      if (
+        !previousFinite
         ||
-        previous ===
-        null
+        previous === null
         ||
         Math.abs(
           Number(value)
@@ -9035,36 +8284,14 @@ function buildMetaLabels(
           Number(previous)
         )
         >
-        .000001;
-
-
-      if (
-        changesOften
-        ||
-        changed
+        .000001
       ) {
 
-        labels.push({
+        out.push({
 
-          index:
-            index,
+          index,
+          value
 
-          value:
-            value,
-
-          text:
-            changesOften
-
-              ? chartDisplayValue(
-                  value,
-                  type
-                )
-
-              : 'Meta ' +
-                chartDisplayValue(
-                  value,
-                  type
-                )
         });
       }
 
@@ -9072,14 +8299,161 @@ function buildMetaLabels(
       previous =
         value;
 
-
-      previousWasFinite =
+      previousFinite =
         true;
     }
   );
 
 
-  return labels;
+  return out;
+}
+
+
+/*
+ * Crea tramos para la línea roja.
+ *
+ * Cuando la meta es fija:
+ * se extiende de extremo a extremo.
+ *
+ * Cuando cambia:
+ * cada tramo conserva su valor.
+ */
+
+function graphLineSegments(
+  metas,
+  left,
+  slot,
+  width,
+  right,
+  y,
+  extendEdges
+){
+
+  const segments = [];
+
+  let current = [];
+
+
+  (metas || [])
+  .forEach(
+    (value,index) => {
+
+      if (!Number.isFinite(value)) {
+
+        if (current.length) {
+
+          segments.push(current);
+
+          current = [];
+        }
+
+
+        return;
+      }
+
+
+      current.push({
+
+        index,
+
+        x:
+          left
+          +
+          slot*index
+          +
+          slot/2,
+
+        y:
+          y(value),
+
+        value
+
+      });
+    }
+  );
+
+
+  if (current.length) {
+
+    segments.push(current);
+  }
+
+
+  return segments.map(
+    segment => {
+
+      const points = [];
+
+
+      if (
+        extendEdges
+        &&
+        segment.length
+      ) {
+
+        const first =
+          segment[0];
+
+
+        const startX =
+          first.index === 0
+
+            ? left
+
+            : Math.max(
+                left,
+                first.x-slot/2
+              );
+
+
+        points.push(
+          `${startX},${first.y}`
+        );
+      }
+
+
+      segment.forEach(
+        item => {
+
+          points.push(
+            `${item.x},${item.y}`
+          );
+        }
+      );
+
+
+      if (
+        extendEdges
+        &&
+        segment.length
+      ) {
+
+        const last =
+          segment[
+            segment.length-1
+          ];
+
+
+        const endX =
+          last.index === 11
+
+            ? width-right
+
+            : Math.min(
+                width-right,
+                last.x+slot/2
+              );
+
+
+        points.push(
+          `${endX},${last.y}`
+        );
+      }
+
+
+      return points;
+    }
+  );
 }
 
 
@@ -9091,7 +8465,9 @@ function renderComboChart({
   valueLegend,
   metaLegend='Meta',
   type='number',
-  fixedMax=null
+  fixedMax=null,
+  showMetaValue=true,
+  metaIsSeries=false
 }){
 
   const hasData =
@@ -9101,15 +8477,11 @@ function renderComboChart({
     ]
     .some(
       value =>
-        Number.isFinite(
-          value
-        )
+        Number.isFinite(value)
     );
 
 
-  if (
-    !hasData
-  ) {
+  if (!hasData) {
 
     return `
 
@@ -9147,8 +8519,13 @@ function renderComboChart({
     260;
 
 
+  /*
+   * Dejamos un poco más de margen izquierdo
+   * para mostrar la leyenda META.
+   */
+
   const left =
-    46;
+    54;
 
 
   const right =
@@ -9164,19 +8541,11 @@ function renderComboChart({
 
 
   const plotW =
-    width
-    -
-    left
-    -
-    right;
+    width-left-right;
 
 
   const plotH =
-    height
-    -
-    top
-    -
-    bottom;
+    height-top-bottom;
 
 
   const maxY =
@@ -9188,8 +8557,7 @@ function renderComboChart({
 
 
   const slot =
-    plotW /
-    12;
+    plotW/12;
 
 
   const barW =
@@ -9197,8 +8565,7 @@ function renderComboChart({
       8,
       Math.min(
         22,
-        slot *
-        .46
+        slot*.46
       )
     );
 
@@ -9212,10 +8579,7 @@ function renderComboChart({
       (
         Math.max(
           0,
-          Number(
-            value ||
-            0
-          )
+          Number(value || 0)
         )
         /
         maxY
@@ -9228,15 +8592,13 @@ function renderComboChart({
 
 
   for (
-    let i = 0;
-    i <= 4;
+    let i=0;
+    i<=4;
     i++
   ) {
 
     const value =
-      maxY *
-      i /
-      4;
+      maxY*i/4;
 
 
     ticks.push({
@@ -9244,79 +8606,40 @@ function renderComboChart({
       value,
 
       y:
-        y(
-          value
-        )
+        y(value)
+
     });
   }
 
 
-  const targetSegments = [];
+  /*
+   * IMPORTANTE:
+   * La línea se genera antes de las barras.
+   * Por lo tanto queda visualmente atrás.
+   */
 
-  let currentSegment = [];
-
-
-  metas.forEach(
-    (
-      value,
-      index
-    ) => {
-
-      if (
-        !Number.isFinite(
-          value
-        )
-      ) {
-
-        if (
-          currentSegment.length
-        ) {
-
-          targetSegments.push(
-            currentSegment
-          );
-
-
-          currentSegment = [];
-        }
-
-
-        return;
-      }
-
-
-      const x =
-        left
-        +
-        slot *
-        index
-        +
-        slot /
-        2;
-
-
-      currentSegment.push(
-        `${x},${y(value)}`
-      );
-    }
-  );
-
-
-  if (
-    currentSegment.length
-  ) {
-
-    targetSegments.push(
-      currentSegment
+  const lineSegments =
+    graphLineSegments(
+      metas,
+      left,
+      slot,
+      width,
+      right,
+      y,
+      !metaIsSeries
     );
-  }
 
 
   const metaLabels =
-    buildMetaLabels(
-      metas,
-      type
-    );
+    showMetaValue
+    &&
+    !metaIsSeries
+
+      ? graphMetaChangeLabels(
+          metas
+        )
+
+      : [];
 
 
   return `
@@ -9345,6 +8668,7 @@ function renderComboChart({
         role="img"
         aria-label="${esc(title)}"
       >
+
 
         ${
           ticks
@@ -9390,20 +8714,37 @@ function renderComboChart({
         ></line>
 
 
+        <!-- LINEA ROJA DETRAS DE LAS BARRAS -->
+
+        ${
+          lineSegments
+          .map(
+            segment =>
+
+              segment.length > 1
+
+                ? `
+
+                  <polyline
+                    class="chart-target"
+                    points="${segment.join(' ')}"
+                  ></polyline>
+                `
+
+                : ''
+          )
+          .join('')
+        }
+
+
+        <!-- BARRAS -->
+
         ${
           values
           .map(
-            (
-              value,
-              index
-            ) => {
+            (value,index) => {
 
-              if (
-                !Number.isFinite(
-                  value
-                )
-              ) {
-
+              if (!Number.isFinite(value)) {
                 return '';
               }
 
@@ -9411,17 +8752,13 @@ function renderComboChart({
               const cx =
                 left
                 +
-                slot *
-                index
+                slot*index
                 +
-                slot /
-                2;
+                slot/2;
 
 
               const barY =
-                y(
-                  value
-                );
+                y(value);
 
 
               const barH =
@@ -9442,12 +8779,43 @@ function renderComboChart({
                   height="${Math.max(0,barH)}"
                   rx="2"
                 ></rect>
+              `;
+            }
+          )
+          .join('')
+        }
 
+
+        <!-- VALORES BARRAS -->
+
+        ${
+          values
+          .map(
+            (value,index) => {
+
+              if (!Number.isFinite(value)) {
+                return '';
+              }
+
+
+              const cx =
+                left
+                +
+                slot*index
+                +
+                slot/2;
+
+
+              const barY =
+                y(value);
+
+
+              return `
 
                 <text
                   class="chart-value-label"
                   x="${cx}"
-                  y="${Math.max(10,barY-5)}"
+                  y="${Math.max(11,barY-6)}"
                   text-anchor="middle"
                 >
 
@@ -9466,147 +8834,60 @@ function renderComboChart({
         }
 
 
-        ${
-          targetSegments
-          .map(
-            segment =>
-              segment.length >
-              1
-
-                ? `
-
-                  <polyline
-                    class="chart-target"
-                    points="${segment.join(' ')}"
-                  ></polyline>
-                `
-
-                : ''
-          )
-          .join('')
-        }
-
-
-        ${
-          metas
-          .map(
-            (
-              value,
-              index
-            ) => {
-
-              if (
-                !Number.isFinite(
-                  value
-                )
-              ) {
-
-                return '';
-              }
-
-
-              const cx =
-                left
-                +
-                slot *
-                index
-                +
-                slot /
-                2;
-
-
-              return `
-
-                <circle
-                  class="chart-point"
-                  cx="${cx}"
-                  cy="${y(value)}"
-                  r="2.6"
-                ></circle>
-              `;
-            }
-          )
-          .join('')
-        }
-
+        <!-- META EN INICIO DE CADA TRAMO -->
 
         ${
           metaLabels
           .map(
             item => {
 
-              const cx =
-                left
-                +
-                slot *
-                item.index
-                +
-                slot /
-                2;
-
-
               const metaY =
-                y(
-                  item.value
-                );
+                y(item.value);
+
+
+              const x =
+                item.index === 0
+
+                  ? left+5
+
+                  : Math.max(
+                      left+5,
+                      left
+                      +
+                      slot*item.index
+                      -
+                      slot/2
+                      +
+                      4
+                    );
 
 
               const labelY =
-                metaY <
-                18
+                metaY < 17
 
-                  ? metaY +
-                    13
+                  ? metaY+13
 
-                  : metaY -
-                    7;
-
-
-              let anchor =
-                'middle';
-
-
-              let labelX =
-                cx;
-
-
-              if (
-                item.index ===
-                0
-              ) {
-
-                anchor =
-                  'start';
-
-
-                labelX +=
-                  3;
-              }
-
-
-              if (
-                item.index ===
-                11
-              ) {
-
-                anchor =
-                  'end';
-
-
-                labelX -=
-                  3;
-              }
+                  : metaY-7;
 
 
               return `
 
                 <text
                   class="chart-meta-label"
-                  x="${labelX}"
+                  x="${x}"
                   y="${labelY}"
-                  text-anchor="${anchor}"
+                  text-anchor="start"
                 >
-                  ${esc(item.text)}
+
+                  Meta
+
+                  ${esc(
+                    chartDisplayValue(
+                      item.value,
+                      type
+                    )
+                  )}
+
                 </text>
               `;
             }
@@ -9615,22 +8896,19 @@ function renderComboChart({
         }
 
 
+        <!-- MESES -->
+
         ${
           months
           .map(
-            (
-              month,
-              index
-            ) => {
+            (month,index) => {
 
               const cx =
                 left
                 +
-                slot *
-                index
+                slot*index
                 +
-                slot /
-                2;
+                slot/2;
 
 
               return `
@@ -9642,9 +8920,7 @@ function renderComboChart({
                   text-anchor="middle"
                 >
 
-                  ${esc(
-                    month.label
-                  )}
+                  ${esc(month.label)}
 
                 </text>
               `;
@@ -9706,29 +8982,21 @@ function handleChartKey(
 ){
 
   if (
-    event.key ===
-    'Enter'
+    event.key === 'Enter'
     ||
-    event.key ===
-    ' '
+    event.key === ' '
   ) {
 
     event.preventDefault();
 
-
-    openChartModal(
-      card
-    );
+    openChartModal(card);
   }
 }
 
 
 function openChartModal(card){
 
-  if (
-    !card
-  ) {
-
+  if (!card) {
     return;
   }
 
@@ -9752,34 +9020,14 @@ function openChartModal(card){
 
 
   const clone =
-    card.cloneNode(
-      true
-    );
+    card.cloneNode(true);
 
 
-  clone.removeAttribute(
-    'onclick'
-  );
-
-
-  clone.removeAttribute(
-    'onkeydown'
-  );
-
-
-  clone.removeAttribute(
-    'tabindex'
-  );
-
-
-  clone.removeAttribute(
-    'role'
-  );
-
-
-  clone.removeAttribute(
-    'aria-label'
-  );
+  clone.removeAttribute('onclick');
+  clone.removeAttribute('onkeydown');
+  clone.removeAttribute('tabindex');
+  clone.removeAttribute('role');
+  clone.removeAttribute('aria-label');
 
 
   const subtitle =
@@ -9788,9 +9036,7 @@ function openChartModal(card){
     );
 
 
-  if (
-    subtitle
-  ) {
+  if (subtitle) {
 
     subtitle.textContent =
       'Últimos 12 meses';
@@ -9801,14 +9047,10 @@ function openChartModal(card){
     '';
 
 
-  body.appendChild(
-    clone
-  );
+  body.appendChild(clone);
 
 
-  modal.classList.add(
-    'open'
-  );
+  modal.classList.add('open');
 
 
   modal.setAttribute(
@@ -9846,17 +9088,12 @@ function closeChartModal(){
     $('#chartModalBody');
 
 
-  if (
-    !modal
-  ) {
-
+  if (!modal) {
     return;
   }
 
 
-  modal.classList.remove(
-    'open'
-  );
+  modal.classList.remove('open');
 
 
   modal.setAttribute(
@@ -9872,9 +9109,7 @@ function closeChartModal(){
     );
 
 
-  if (
-    body
-  ) {
+  if (body) {
 
     body.innerHTML =
       '';
@@ -9903,14 +9138,11 @@ document.addEventListener(
   event => {
 
     if (
-      event.key ===
-      'Escape'
+      event.key === 'Escape'
       &&
       $('#chartModal')
         ?.classList
-        .contains(
-          'open'
-        )
+        .contains('open')
     ) {
 
       closeChartModal();
@@ -9974,7 +9206,13 @@ function renderGraficos(){
           'KM presupuestados',
 
         type:
-          'number'
+          'number',
+
+        showMetaValue:
+          false,
+
+        metaIsSeries:
+          true
 
       })}
 
@@ -10087,7 +9325,10 @@ function renderGraficos(){
           'Meta',
 
         type:
-          'number'
+          'number',
+
+        fixedMax:
+          50
 
       })}
 
@@ -10131,9 +9372,7 @@ function renderGraficos(){
 
 function renderSignature(tab){
 
-  switch(
-    tab
-  ) {
+  switch(tab) {
 
     case 'resumen':
 
@@ -10144,9 +9383,7 @@ function renderSignature(tab){
         VERSION.guardia,
         DATE_BY_TAB.resumen
 
-      ].join(
-        '|'
-      );
+      ].join('|');
 
 
     case 'conduccion':
@@ -10158,9 +9395,7 @@ function renderSignature(tab){
         VERSION.guardia,
         DATE_BY_TAB.conduccion
 
-      ].join(
-        '|'
-      );
+      ].join('|');
 
 
     case 'plan':
@@ -10177,9 +9412,7 @@ function renderSignature(tab){
         VERSION.salidas,
         DATE_BY_TAB.salidas
 
-      ].join(
-        '|'
-      );
+      ].join('|');
 
 
     case 'guardia':
@@ -10189,9 +9422,7 @@ function renderSignature(tab){
         VERSION.guardia,
         DATE_BY_TAB.guardia
 
-      ].join(
-        '|'
-      );
+      ].join('|');
 
 
     case 'os':
@@ -10208,19 +9439,13 @@ function renderSignature(tab){
         VERSION.kpi,
         DATE_BY_TAB.kpi
 
-      ].join(
-        '|'
-      );
+      ].join('|');
 
 
     case 'graficos':
 
-      return [
-        VERSION.graficos,
+      return String(
         VERSION.kpi
-      ]
-      .join(
-        '|'
       );
 
 
@@ -10247,9 +9472,8 @@ function renderActiveTab(
   if (
     !force
     &&
-    LAST_RENDER[
-      ACTIVE_TAB
-    ] ===
+    LAST_RENDER[ACTIVE_TAB]
+    ===
     signature
   ) {
 
@@ -10257,9 +9481,7 @@ function renderActiveTab(
   }
 
 
-  switch(
-    ACTIVE_TAB
-  ) {
+  switch(ACTIVE_TAB) {
 
     case 'resumen':
 
@@ -10306,9 +9528,7 @@ function renderActiveTab(
     case 'kpi':
 
       if (
-        sectionAllowedForProfile(
-          'kpi'
-        )
+        sectionAllowedForProfile('kpi')
       ) {
 
         renderKPI();
@@ -10320,9 +9540,7 @@ function renderActiveTab(
     case 'graficos':
 
       if (
-        sectionAllowedForProfile(
-          'graficos'
-        )
+        sectionAllowedForProfile('graficos')
       ) {
 
         renderGraficos();
@@ -10332,9 +9550,7 @@ function renderActiveTab(
   }
 
 
-  LAST_RENDER[
-    ACTIVE_TAB
-  ] =
+  LAST_RENDER[ACTIVE_TAB] =
     signature;
 
 
@@ -10349,8 +9565,7 @@ function renderActiveTab(
 function configureDatePicker(){
 
   const p =
-    DATA.period ||
-    {};
+    DATA.period || {};
 
 
   const el =
@@ -10371,36 +9586,28 @@ function configureDatePicker(){
     todayISO();
 
 
-  if (
-    !DATE_BY_TAB.resumen
-  ) {
+  if (!DATE_BY_TAB.resumen) {
 
     DATE_BY_TAB.resumen =
       today;
   }
 
 
-  if (
-    !DATE_BY_TAB.conduccion
-  ) {
+  if (!DATE_BY_TAB.conduccion) {
 
     DATE_BY_TAB.conduccion =
       today;
   }
 
 
-  if (
-    !DATE_BY_TAB.salidas
-  ) {
+  if (!DATE_BY_TAB.salidas) {
 
     DATE_BY_TAB.salidas =
       today;
   }
 
 
-  if (
-    !DATE_BY_TAB.guardia
-  ) {
+  if (!DATE_BY_TAB.guardia) {
 
     DATE_BY_TAB.guardia =
       today;
@@ -10408,9 +9615,7 @@ function configureDatePicker(){
 
 
   if (
-    sectionAllowedForProfile(
-      'kpi'
-    )
+    sectionAllowedForProfile('kpi')
     &&
     !DATE_BY_TAB.kpi
   ) {
@@ -10421,14 +9626,11 @@ function configureDatePicker(){
 
 
   const hide =
-    ACTIVE_TAB ===
-    'plan'
+    ACTIVE_TAB === 'plan'
     ||
-    ACTIVE_TAB ===
-    'os'
+    ACTIVE_TAB === 'os'
     ||
-    ACTIVE_TAB ===
-    'graficos';
+    ACTIVE_TAB === 'graficos';
 
 
   el.parentElement
@@ -10439,10 +9641,7 @@ function configureDatePicker(){
     );
 
 
-  if (
-    hide
-  ) {
-
+  if (hide) {
     return;
   }
 
@@ -10452,8 +9651,7 @@ function configureDatePicker(){
 
 
   el.max =
-    ACTIVE_TAB ===
-    'kpi'
+    ACTIVE_TAB === 'kpi'
 
       ? kpiDefaultISO()
 
@@ -10461,9 +9659,7 @@ function configureDatePicker(){
 
 
   el.value =
-    DATE_BY_TAB[
-      ACTIVE_TAB
-    ]
+    DATE_BY_TAB[ACTIVE_TAB]
     ||
     today;
 }
@@ -10475,26 +9671,19 @@ function configureDatePicker(){
 
 function mergePayload(payload){
 
-  if (
-    !payload
-  ) {
-
+  if (!payload) {
     return;
   }
 
 
-  if (
-    payload.period
-  ) {
+  if (payload.period) {
 
     DATA.period =
       payload.period;
   }
 
 
-  if (
-    payload.generatedAt
-  ) {
+  if (payload.generatedAt) {
 
     DATA.generatedAt =
       payload.generatedAt;
@@ -10503,15 +9692,10 @@ function mergePayload(payload){
 
   DATA.sources = {
 
-    ...(
-      DATA.sources ||
-      {}
-    ),
+    ...(DATA.sources || {}),
 
-    ...(
-      payload.sources ||
-      {}
-    )
+    ...(payload.sources || {})
+
   };
 
 
@@ -10527,9 +9711,8 @@ function mergePayload(payload){
     section => {
 
       if (
-        payload[
-          section
-        ] ===
+        payload[section]
+        ===
         undefined
       ) {
 
@@ -10548,35 +9731,24 @@ function mergePayload(payload){
 
 
       if (
-        payload.ok ===
-        false
+        payload.ok === false
         &&
-        READY[
-          section
-        ]
+        READY[section]
       ) {
 
         return;
       }
 
 
-      DATA[
-        section
-      ] =
-        payload[
-          section
-        ];
+      DATA[section] =
+        payload[section];
 
 
-      READY[
-        section
-      ] =
+      READY[section] =
         true;
 
 
-      VERSION[
-        section
-      ]++;
+      VERSION[section]++;
     }
   );
 
@@ -10603,15 +9775,15 @@ function requestSection(
     )
   ) {
 
-    return Promise.resolve(
-      null
-    );
+    return Promise.resolve(null);
   }
 
 
   const requestKey =
-    section +
-    '|' +
+    section
+    +
+    '|'
+    +
     (
       force
         ? '1'
@@ -10619,15 +9791,9 @@ function requestSection(
     );
 
 
-  if (
-    INFLIGHT[
-      requestKey
-    ]
-  ) {
+  if (INFLIGHT[requestKey]) {
 
-    return INFLIGHT[
-      requestKey
-    ];
+    return INFLIGHT[requestKey];
   }
 
 
@@ -10640,16 +9806,15 @@ function requestSection(
 
 
         const cb =
-          'tsj_cb_' +
-          Date.now() +
-          '_' +
+          'tsj_cb_'
+          +
+          Date.now()
+          +
+          '_'
+          +
           Math.random()
-            .toString(
-              36
-            )
-            .slice(
-              2
-            );
+            .toString(36)
+            .slice(2);
 
 
         const script =
@@ -10665,16 +9830,12 @@ function requestSection(
         const cleanup =
           () => {
 
-            clearTimeout(
-              timer
-            );
+            clearTimeout(timer);
 
 
             try {
 
-              delete window[
-                cb
-              ];
+              delete window[cb];
 
             } catch(err) {}
 
@@ -10686,10 +9847,7 @@ function requestSection(
         const fail =
           reason => {
 
-            if (
-              finished
-            ) {
-
+            if (finished) {
               return;
             }
 
@@ -10702,22 +9860,15 @@ function requestSection(
 
 
             reject(
-              new Error(
-                reason
-              )
+              new Error(reason)
             );
           };
 
 
-        window[
-          cb
-        ] =
+        window[cb] =
           payload => {
 
-            if (
-              finished
-            ) {
-
+            if (finished) {
               return;
             }
 
@@ -10729,25 +9880,17 @@ function requestSection(
             cleanup();
 
 
-            mergePayload(
-              payload
-            );
+            mergePayload(payload);
 
 
             if (
-              payload?.ok ===
-              false
+              payload?.ok === false
             ) {
 
               reject(
                 new Error(
-                  (
-                    payload.errors ||
-                    []
-                  )
-                  .join(
-                    ' · '
-                  )
+                  (payload.errors || [])
+                    .join(' · ')
                   ||
                   'Respuesta parcial'
                 )
@@ -10758,9 +9901,7 @@ function requestSection(
             }
 
 
-            resolve(
-              payload
-            );
+            resolve(payload);
           };
 
 
@@ -10786,24 +9927,18 @@ function requestSection(
           +
           '?section='
           +
-          encodeURIComponent(
-            section
-          )
+          encodeURIComponent(section)
           +
           '&callback='
           +
-          encodeURIComponent(
-            cb
-          )
+          encodeURIComponent(cb)
           +
           '&_='
           +
           Date.now();
 
 
-        if (
-          force
-        ) {
+        if (force) {
 
           url +=
             '&force=1';
@@ -10815,9 +9950,7 @@ function requestSection(
 
 
         document.body
-          .appendChild(
-            script
-          );
+          .appendChild(script);
       }
     )
     .catch(
@@ -10841,7 +9974,7 @@ function requestSection(
               requestSection(
                 section,
                 false,
-                retry - 1
+                retry-1
               )
           );
         }
@@ -10860,9 +9993,7 @@ function requestSection(
     );
 
 
-  INFLIGHT[
-    requestKey
-  ] =
+  INFLIGHT[requestKey] =
     promise;
 
 
@@ -10892,25 +10023,19 @@ function hasAnyVisibleData(){
         section
       )
       &&
-      READY[
-        section
-      ]
+      READY[section]
   );
 }
 
 
 function clearSilentRetry(section){
 
-  if(
-    SILENT_RETRY_TIMERS[
-      section
-    ]
-  ){
+  if (
+    SILENT_RETRY_TIMERS[section]
+  ) {
 
     clearTimeout(
-      SILENT_RETRY_TIMERS[
-        section
-      ]
+      SILENT_RETRY_TIMERS[section]
     );
 
 
@@ -10920,25 +10045,20 @@ function clearSilentRetry(section){
   }
 
 
-  SILENT_RETRY_ATTEMPTS[
-    section
-  ] = 0;
+  SILENT_RETRY_ATTEMPTS[section] =
+    0;
 }
 
 
 function scheduleSilentRetry(section){
 
-  if(
+  if (
     !section
     ||
-    !sectionAllowedForProfile(
-      section
-    )
+    !sectionAllowedForProfile(section)
     ||
-    SILENT_RETRY_TIMERS[
-      section
-    ]
-  ){
+    SILENT_RETRY_TIMERS[section]
+  ) {
 
     return;
   }
@@ -10946,39 +10066,30 @@ function scheduleSilentRetry(section){
 
   const attempt =
     Number(
-      SILENT_RETRY_ATTEMPTS[
-        section
-      ]
+      SILENT_RETRY_ATTEMPTS[section]
       ||
       0
     );
 
 
-  if(
+  if (
     attempt >=
     SILENT_RETRY_DELAYS.length
-  ){
+  ) {
 
     return;
   }
 
 
   const delay =
-    SILENT_RETRY_DELAYS[
-      attempt
-    ];
+    SILENT_RETRY_DELAYS[attempt];
 
 
-  SILENT_RETRY_ATTEMPTS[
-    section
-  ] =
-    attempt +
-    1;
+  SILENT_RETRY_ATTEMPTS[section] =
+    attempt+1;
 
 
-  SILENT_RETRY_TIMERS[
-    section
-  ] =
+  SILENT_RETRY_TIMERS[section] =
     setTimeout(
       () => {
 
@@ -10995,9 +10106,7 @@ function scheduleSilentRetry(section){
         .then(
           () => {
 
-            clearSilentRetry(
-              section
-            );
+            clearSilentRetry(section);
 
 
             setStatus(
@@ -11009,9 +10118,9 @@ function scheduleSilentRetry(section){
         .catch(
           () => {
 
-            if(
+            if (
               hasAnyVisibleData()
-            ){
+            ) {
 
               setStatus(
                 true,
@@ -11020,9 +10129,7 @@ function scheduleSilentRetry(section){
             }
 
 
-            scheduleSilentRetry(
-              section
-            );
+            scheduleSilentRetry(section);
           }
         );
       },
@@ -11050,16 +10157,18 @@ function sectionForTab(tab){
     kpi:
       'kpi',
 
+    /*
+     * Gráficos utiliza el mismo bloque KPI.
+     * Evitamos una llamada extra a Apps Script.
+     */
     graficos:
-      'graficos'
+      'kpi'
 
   };
 
 
   const section =
-    map[
-      tab
-    ]
+    map[tab]
     ||
     '';
 
@@ -11083,9 +10192,7 @@ function sectionForTab(tab){
 function applyProfileUI(){
 
   document
-    .querySelectorAll(
-      '.tab'
-    )
+    .querySelectorAll('.tab')
     .forEach(
       tab => {
 
@@ -11097,9 +10204,7 @@ function applyProfileUI(){
 
         tab.style.display =
           allowed
-
             ? ''
-
             : 'none';
 
 
@@ -11115,9 +10220,7 @@ function applyProfileUI(){
 
 
   document
-    .querySelectorAll(
-      '.tab-panel'
-    )
+    .querySelectorAll('.tab-panel')
     .forEach(
       panel => {
 
@@ -11129,9 +10232,7 @@ function applyProfileUI(){
 
         panel.style.display =
           allowed
-
             ? ''
-
             : 'none';
 
 
@@ -11150,17 +10251,13 @@ function applyProfileUI(){
 function ensureTabData(tab){
 
   const safeTab =
-    sanitizeTab(
-      tab
-    );
+    sanitizeTab(tab);
 
 
   if (
-    safeTab ===
-    'resumen'
+    safeTab === 'resumen'
     ||
-    safeTab ===
-    'conduccion'
+    safeTab === 'conduccion'
   ) {
 
     const sections = [
@@ -11173,15 +10270,11 @@ function ensureTabData(tab){
     return Promise.allSettled(
       sections.map(
         section =>
-          READY[
-            section
-          ]
+          READY[section]
 
             ? Promise.resolve()
 
-            : requestSection(
-                section
-              )
+            : requestSection(section)
       )
     );
   }
@@ -11193,24 +10286,26 @@ function ensureTabData(tab){
     );
 
 
-  if (
-    !section
-  ) {
+  if (!section) {
 
     return Promise.resolve();
   }
 
 
-  if (
-    READY[
-      section
-    ]
-  ) {
+  if (READY[section]) {
 
     setStatus(
       true,
       'Datos disponibles'
     );
+
+
+    if (
+      safeTab === 'graficos'
+    ) {
+
+      renderGraficos();
+    }
 
 
     return Promise.resolve();
@@ -11223,15 +10318,11 @@ function ensureTabData(tab){
   );
 
 
-  return requestSection(
-    section
-  )
+  return requestSection(section)
   .then(
     payload => {
 
-      clearSilentRetry(
-        section
-      );
+      clearSilentRetry(section);
 
 
       setStatus(
@@ -11240,15 +10331,21 @@ function ensureTabData(tab){
       );
 
 
+      if (
+        safeTab === 'graficos'
+      ) {
+
+        renderGraficos();
+      }
+
+
       return payload;
     }
   )
   .catch(
     () => {
 
-      scheduleSilentRetry(
-        section
-      );
+      scheduleSilentRetry(section);
 
 
       if (
@@ -11270,8 +10367,7 @@ function ensureTabData(tab){
 
 
       if (
-        safeTab ===
-        'graficos'
+        safeTab === 'graficos'
       ) {
 
         renderGraficos();
@@ -11287,15 +10383,11 @@ function loadInitial(){
     restoreLocalSnapshot();
 
 
-  if (
-    restored
-  ) {
+  if (restored) {
 
     configureDatePicker();
 
-    renderActiveTab(
-      true
-    );
+    renderActiveTab(true);
 
     updateLastUpdate();
 
@@ -11324,9 +10416,7 @@ function loadInitial(){
   Promise.allSettled(
     initialSections.map(
       section =>
-        requestSection(
-          section
-        )
+        requestSection(section)
     )
   )
   .then(
@@ -11339,25 +10429,19 @@ function loadInitial(){
         ) => {
 
           const section =
-            initialSections[
-              index
-            ];
+            initialSections[index];
 
 
-          if(
+          if (
             result.status ===
             'fulfilled'
-          ){
+          ) {
 
-            clearSilentRetry(
-              section
-            );
+            clearSilentRetry(section);
 
           } else {
 
-            scheduleSilentRetry(
-              section
-            );
+            scheduleSilentRetry(section);
           }
         }
       );
@@ -11381,28 +10465,22 @@ function loadInitial(){
       }
 
 
-      renderActiveTab(
-        true
-      );
+      renderActiveTab(true);
 
 
       setTimeout(
         () => {
 
           if (
-            sectionAllowedForProfile(
-              'os'
-            )
+            sectionAllowedForProfile('os')
             &&
             !READY.os
           ) {
 
-            requestSection(
-              'os'
-            )
-            .catch(
-              () => {}
-            );
+            requestSection('os')
+              .catch(
+                () => {}
+              );
           }
 
         },
@@ -11411,24 +10489,18 @@ function loadInitial(){
 
 
       if (
-        sectionAllowedForProfile(
-          'kpi'
-        )
+        sectionAllowedForProfile('kpi')
       ) {
 
         setTimeout(
           () => {
 
-            if (
-              !READY.kpi
-            ) {
+            if (!READY.kpi) {
 
-              requestSection(
-                'kpi'
-              )
-              .catch(
-                () => {}
-              );
+              requestSection('kpi')
+                .catch(
+                  () => {}
+                );
             }
 
           },
@@ -11454,11 +10526,9 @@ function refreshActive(
 
 
   if (
-    ACTIVE_TAB ===
-    'resumen'
+    ACTIVE_TAB === 'resumen'
     ||
-    ACTIVE_TAB ===
-    'conduccion'
+    ACTIVE_TAB === 'conduccion'
   ) {
 
     sections = [
@@ -11475,9 +10545,7 @@ function refreshActive(
       );
 
 
-    if (
-      section
-    ) {
+    if (section) {
 
       sections = [
         section
@@ -11521,9 +10589,7 @@ function refreshActive(
       }
 
 
-      renderActiveTab(
-        true
-      );
+      renderActiveTab(true);
 
 
       return results;
@@ -11539,9 +10605,7 @@ function refreshActive(
 function activateTab(tabName){
 
   const safeTab =
-    sanitizeTab(
-      tabName
-    );
+    sanitizeTab(tabName);
 
 
   if (
@@ -11559,9 +10623,7 @@ function activateTab(tabName){
 
 
   document
-    .querySelectorAll(
-      '.tab'
-    )
+    .querySelectorAll('.tab')
     .forEach(
       x => {
 
@@ -11583,9 +10645,7 @@ function activateTab(tabName){
 
 
   document
-    .querySelectorAll(
-      '.tab-panel'
-    )
+    .querySelectorAll('.tab-panel')
     .forEach(
       x => {
 
@@ -11619,9 +10679,7 @@ function activateTab(tabName){
 
 
 document
-  .querySelectorAll(
-    '.tab'
-  )
+  .querySelectorAll('.tab')
   .forEach(
     btn => {
 
@@ -11654,22 +10712,16 @@ $('#datePicker')
         )
       ) {
 
-        DATE_BY_TAB[
-          ACTIVE_TAB
-        ] =
+        DATE_BY_TAB[ACTIVE_TAB] =
           e.target.value;
       }
 
 
-      LAST_RENDER[
-        ACTIVE_TAB
-      ] =
+      LAST_RENDER[ACTIVE_TAB] =
         '';
 
 
-      renderActiveTab(
-        true
-      );
+      renderActiveTab(true);
     }
   );
 
@@ -11678,9 +10730,7 @@ $('#refreshBtn')
   .addEventListener(
     'click',
     () =>
-      refreshActive(
-        true
-      )
+      refreshActive(true)
   );
 
 
@@ -11695,9 +10745,7 @@ function exportSummaryPDF(){
 
 
   const date =
-    selectedISO(
-      'resumen'
-    )
+    selectedISO('resumen')
     ||
     'jornada';
 
@@ -11731,9 +10779,7 @@ function exportSummaryPDF(){
   window.addEventListener(
     'afterprint',
     cleanup,
-    {
-      once:true
-    }
+    {once:true}
   );
 
 
@@ -11753,15 +10799,12 @@ function exportSummaryPDF(){
 
 applyProfileUI();
 
-
 loadInitial();
 
 
 setInterval(
   () =>
-    refreshActive(
-      false
-    ),
+    refreshActive(false),
   300000
 );
 
