@@ -193,7 +193,9 @@ input{
 }
 
 body.profile-guardia .tab[data-tab="kpi"],
-body.profile-guardia #kpi{
+body.profile-guardia #kpi,
+body.profile-guardia .tab[data-tab="graficos"],
+body.profile-guardia #graficos{
   display:none !important;
 }
 
@@ -394,28 +396,23 @@ body.profile-conduccion .tab-panel:not(#conduccion){
 }
 
 .planillaria-right.has-absence{
-  grid-template-rows:
-    auto 1fr 1fr;
+  grid-template-rows:auto 1fr 1fr;
 }
 
 .planillaria-right.has-observations{
-  grid-template-rows:
-    1fr 1fr auto;
+  grid-template-rows:1fr 1fr auto;
 }
 
 .planillaria-right.has-absence.has-observations{
-  grid-template-rows:
-    auto 1fr 1fr auto;
+  grid-template-rows:auto 1fr 1fr auto;
 }
 
 .absence-panel{
-  border-top:
-    5px solid var(--bad);
+  border-top:5px solid var(--bad);
 }
 
 .observation-panel{
-  border-top:
-    5px solid #746d72;
+  border-top:5px solid #746d72;
 }
 
 .plan-observations{
@@ -565,11 +562,7 @@ th{
 
 .summary-kpis{
   display:grid;
-  grid-template-columns:
-    repeat(
-      4,
-      minmax(0,1fr)
-    );
+  grid-template-columns:repeat(4,minmax(0,1fr));
   gap:14px;
   margin-bottom:18px;
 }
@@ -673,9 +666,7 @@ th{
 
 .summary-lower-grid{
   display:grid;
-  grid-template-columns:
-    minmax(0,1.27fr)
-    minmax(0,.98fr);
+  grid-template-columns:minmax(0,1.27fr) minmax(0,.98fr);
   gap:14px;
   align-items:stretch;
 }
@@ -691,11 +682,7 @@ th{
 
 .summary-alert-grid{
   display:grid;
-  grid-template-columns:
-    repeat(
-      3,
-      minmax(0,1fr)
-    );
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:12px;
 }
 
@@ -898,10 +885,7 @@ th{
 
 .impact-row{
   display:grid;
-  grid-template-columns:
-    42px
-    minmax(0,1fr)
-    28px;
+  grid-template-columns:42px minmax(0,1fr) 28px;
   align-items:center;
   gap:10px;
 }
@@ -943,8 +927,7 @@ th{
 
 .plan-hero{
   display:grid;
-  grid-template-columns:
-    260px 1fr;
+  grid-template-columns:260px 1fr;
   gap:16px;
   margin-bottom:14px;
 }
@@ -1006,11 +989,7 @@ th{
 
 .plan-main{
   display:grid;
-  grid-template-columns:
-    repeat(
-      4,
-      1fr
-    );
+  grid-template-columns:repeat(4,1fr);
   gap:12px;
 }
 
@@ -1034,8 +1013,7 @@ th{
 
 .plan-detail{
   display:grid;
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns:1fr 1fr;
   gap:14px;
 }
 
@@ -1088,8 +1066,7 @@ th{
 
 .guard-mechanical-grid{
   display:grid;
-  grid-template-columns:
-    1fr 1fr;
+  grid-template-columns:1fr 1fr;
   gap:14px;
   margin-bottom:14px;
 }
@@ -1156,8 +1133,7 @@ th{
 
 .guard-event{
   display:grid;
-  grid-template-columns:
-    8px 1fr;
+  grid-template-columns:8px 1fr;
   gap:10px;
   font-size:12px;
   line-height:1.5;
@@ -1184,41 +1160,38 @@ th{
 
 .kpi-dashboard{
   display:grid;
-  grid-template-columns:
-    1.8fr 1fr;
+  grid-template-columns:1.8fr 1fr;
   gap:18px;
+  align-items:start;
 }
 
 .kpi-card-grid{
   display:grid;
-  grid-template-columns:
-    repeat(
-      3,
-      1fr
-    );
-  gap:14px;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  align-content:start;
 }
 
 .kpi-ref-card{
-  padding:17px 18px;
-  min-height:155px;
+  padding:14px 16px;
+  min-height:112px;
 }
 
 .metric-label{
   color:#655e63;
-  font-size:12px;
+  font-size:11px;
   font-weight:800;
 }
 
 .metric-value{
-  font-size:31px;
+  font-size:28px;
   font-weight:900;
-  margin:7px 0;
+  margin:5px 0;
 }
 
 .metric-sub{
   color:var(--muted);
-  font-size:11px;
+  font-size:10px;
 }
 
 .metric-track{
@@ -1226,7 +1199,7 @@ th{
   background:#eee9ec;
   border-radius:999px;
   overflow:hidden;
-  margin-top:13px;
+  margin-top:9px;
 }
 
 .metric-fill{
@@ -1247,16 +1220,21 @@ th{
 }
 
 .kpi-month-panel{
-  padding:22px 24px;
+  padding:18px 20px;
+  align-self:start;
+}
+
+.kpi-month-panel h3{
+  margin:0 0 10px;
 }
 
 .kpi-month-row{
   display:grid;
-  grid-template-columns:
-    1fr auto 86px;
+  grid-template-columns:1fr auto 86px;
   gap:12px;
-  padding:13px 0;
+  padding:10px 0;
   border-bottom:1px solid #ece7ea;
+  align-items:center;
 }
 
 .kpi-badge{
@@ -1278,6 +1256,129 @@ th{
 .kpi-badge.neutral{
   background:#f0edef;
   color:#6d656a;
+}
+
+
+/* =========================================================
+   GRAFICOS
+========================================================= */
+
+.chart-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  align-items:start;
+}
+
+.chart-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  padding:15px 15px 12px;
+  min-width:0;
+}
+
+.chart-card h3{
+  margin:0;
+  font-size:14px;
+  line-height:1.2;
+}
+
+.chart-subtitle{
+  color:var(--muted);
+  font-size:10px;
+  margin:4px 0 8px;
+}
+
+.chart-svg{
+  width:100%;
+  height:auto;
+  display:block;
+  overflow:visible;
+}
+
+.chart-axis-label{
+  fill:#756e73;
+  font-size:8px;
+  font-weight:700;
+}
+
+.chart-month-label{
+  fill:#756e73;
+  font-size:7px;
+}
+
+.chart-value-label{
+  fill:#4f494d;
+  font-size:7px;
+  font-weight:800;
+}
+
+.chart-grid-line{
+  stroke:#ebe7e9;
+  stroke-width:1;
+}
+
+.chart-axis-line{
+  stroke:#bdb6ba;
+  stroke-width:1;
+}
+
+.chart-bar{
+  fill:#173a78;
+}
+
+.chart-target{
+  fill:none;
+  stroke:var(--pink);
+  stroke-width:2.5;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.chart-point{
+  fill:var(--pink);
+}
+
+.chart-legend{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-top:5px;
+  color:#655e63;
+  font-size:9px;
+}
+
+.chart-legend-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.chart-legend-bar{
+  width:18px;
+  height:7px;
+  border-radius:2px;
+  background:#173a78;
+}
+
+.chart-legend-line{
+  width:20px;
+  height:0;
+  border-top:3px solid var(--pink);
+}
+
+.chart-empty{
+  min-height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
 }
 
 
@@ -1309,27 +1410,15 @@ th{
 @media(max-width:1100px){
 
   .kpis{
-    grid-template-columns:
-      repeat(
-        3,
-        1fr
-      );
+    grid-template-columns:repeat(3,1fr);
   }
 
   #salidas .kpis.has-six{
-    grid-template-columns:
-      repeat(
-        3,
-        1fr
-      );
+    grid-template-columns:repeat(3,1fr);
   }
 
   .summary-kpis{
-    grid-template-columns:
-      repeat(
-        2,
-        1fr
-      );
+    grid-template-columns:repeat(2,1fr);
   }
 
   .summary-lower-grid,
@@ -1340,6 +1429,10 @@ th{
     grid-template-columns:1fr;
   }
 
+  .chart-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
   .planillaria-right,
   .planillaria-right.has-absence,
   .planillaria-right.has-observations,
@@ -1348,11 +1441,7 @@ th{
   }
 
   .plan-main{
-    grid-template-columns:
-      repeat(
-        2,
-        1fr
-      );
+    grid-template-columns:repeat(2,1fr);
   }
 
 }
@@ -1378,11 +1467,15 @@ th{
     grid-template-columns:1fr;
   }
 
+  .chart-grid{
+    grid-template-columns:1fr;
+  }
+
 }
 
 
 /* =========================================================
-   PDF RESUMEN - A4 VERTICAL / 1 HOJA
+   PDF RESUMEN
 ========================================================= */
 
 @page{
@@ -1399,10 +1492,8 @@ th{
     margin:0 !important;
     padding:0 !important;
     background:#fff !important;
-    -webkit-print-color-adjust:
-      exact !important;
-    print-color-adjust:
-      exact !important;
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
   }
 
   body.print-summary{
@@ -1430,8 +1521,7 @@ th{
     justify-content:flex-start !important;
     margin:0 0 4mm 0 !important;
     padding:0 0 3mm 0 !important;
-    border-bottom:
-      1px solid #ded8dc;
+    border-bottom:1px solid #ded8dc;
   }
 
   body.print-summary .top .status-wrap{
@@ -1485,8 +1575,7 @@ th{
 
   body.print-summary .summary-kpis{
     display:grid !important;
-    grid-template-columns:
-      1fr 1fr !important;
+    grid-template-columns:1fr 1fr !important;
     gap:3mm !important;
     margin:0 0 3mm 0 !important;
   }
@@ -1503,19 +1592,16 @@ th{
   body.print-summary .summary-kpi-label{
     max-width:78% !important;
     font-size:7.5pt !important;
-    line-height:1.2 !important;
   }
 
   body.print-summary .summary-kpi-value{
     margin-top:2mm !important;
     font-size:22pt !important;
-    line-height:1 !important;
   }
 
   body.print-summary .summary-kpi-sub{
     margin-top:2mm !important;
     font-size:8pt !important;
-    line-height:1.2 !important;
   }
 
   body.print-summary .summary-icon{
@@ -1546,138 +1632,8 @@ th{
 
   body.print-summary .summary-lower-grid{
     display:grid !important;
-    grid-template-columns:
-      1fr !important;
+    grid-template-columns:1fr !important;
     gap:3mm !important;
-  }
-
-  body.print-summary .summary-alert-area,
-  body.print-summary .impact-panel{
-    padding:3.5mm !important;
-    border-radius:3mm !important;
-    box-shadow:none !important;
-    break-inside:avoid !important;
-    page-break-inside:avoid !important;
-  }
-
-  body.print-summary .summary-title{
-    margin:0 0 2.5mm 0 !important;
-    font-size:11pt !important;
-  }
-
-  body.print-summary .summary-alert-grid{
-    display:grid !important;
-    grid-template-columns:
-      repeat(
-        3,
-        1fr
-      )
-      !important;
-    gap:2.5mm !important;
-  }
-
-  body.print-summary .alert-card{
-    min-height:39mm !important;
-    padding:3.5mm !important;
-    border-radius:3mm !important;
-    box-shadow:none !important;
-    break-inside:avoid !important;
-    page-break-inside:avoid !important;
-  }
-
-  body.print-summary .alert-card:before{
-    height:1.2mm !important;
-  }
-
-  body.print-summary .alert-head{
-    min-height:8mm !important;
-    gap:2mm !important;
-  }
-
-  body.print-summary .alert-icon{
-    width:8mm !important;
-    height:8mm !important;
-    flex-basis:8mm !important;
-  }
-
-  body.print-summary .alert-icon svg{
-    width:4mm !important;
-    height:4mm !important;
-  }
-
-  body.print-summary .alert-card-title{
-    font-size:7pt !important;
-    line-height:1.15 !important;
-  }
-
-  body.print-summary .alert-card-number{
-    margin-top:2mm !important;
-    font-size:20pt !important;
-    line-height:1 !important;
-  }
-
-  body.print-summary .alert-card-detail{
-    gap:1.3mm !important;
-    margin-top:2.5mm !important;
-  }
-
-  body.print-summary .alert-extra-list,
-  body.print-summary .alert-additional-btn{
-    display:none !important;
-  }
-
-  body.print-summary .alert-detail-row,
-  body.print-summary .alert-none{
-    font-size:7.5pt !important;
-    line-height:1.2 !important;
-  }
-
-  body.print-summary .alert-none{
-    margin-top:3mm !important;
-  }
-
-  body.print-summary .alert-detail-dot{
-    width:1.5mm !important;
-    height:1.5mm !important;
-    flex-basis:1.5mm !important;
-    margin-top:1.2mm !important;
-  }
-
-  body.print-summary .impact-panel{
-    padding-bottom:3mm !important;
-  }
-
-  body.print-summary .impact-head{
-    align-items:flex-start !important;
-    margin-bottom:3mm !important;
-  }
-
-  body.print-summary .impact-head h3{
-    font-size:11pt !important;
-    line-height:1.2 !important;
-  }
-
-  body.print-summary .impact-head span{
-    font-size:7pt !important;
-  }
-
-  body.print-summary .impact-chart{
-    gap:2.2mm !important;
-  }
-
-  body.print-summary .impact-row{
-    grid-template-columns:
-      9mm minmax(0,1fr) 7mm !important;
-    gap:2mm !important;
-  }
-
-  body.print-summary .impact-line,
-  body.print-summary .impact-value{
-    font-size:7.5pt !important;
-  }
-
-  body.print-summary .impact-track{
-    height:2.5mm !important;
   }
 
 }
@@ -1685,6 +1641,7 @@ th{
 </style>
 
 </head>
+
 
 <body>
 
@@ -1808,6 +1765,13 @@ th{
     KPI
   </button>
 
+  <button
+    class="tab"
+    data-tab="graficos"
+  >
+    Gráficos
+  </button>
+
 </nav>
 
 
@@ -1848,6 +1812,11 @@ th{
     class="tab-panel"
   ></section>
 
+  <section
+    id="graficos"
+    class="tab-panel"
+  ></section>
+
 </main>
 
 
@@ -1873,7 +1842,7 @@ const API_URL =
 
 
 /* =========================================================
-   PERFIL / ACCESO
+   PERFIL
 ========================================================= */
 
 const URL_PARAMS =
@@ -1911,7 +1880,8 @@ const ALL_TABS = [
   'salidas',
   'guardia',
   'os',
-  'kpi'
+  'kpi',
+  'graficos'
 ];
 
 
@@ -2009,8 +1979,13 @@ function sectionAllowedForProfile(section){
   if (
     IS_GUARD_PROFILE
     &&
-    section ===
-    'kpi'
+    (
+      section ===
+      'kpi'
+      ||
+      section ===
+      'graficos'
+    )
   ) {
 
     return false;
@@ -2050,10 +2025,12 @@ if (
 ========================================================= */
 
 const LOCAL_CACHE_KEY =
-  'TSJ_DASHBOARD_CACHE_V11';
+  'TSJ_DASHBOARD_CACHE_V12';
+
 
 const LOCAL_CACHE_MAX_AGE =
   12 * 60 * 60 * 1000;
+
 
 const REQUEST_TIMEOUT =
   45000;
@@ -2074,7 +2051,8 @@ const READY = {
   salidas:false,
   guardia:false,
   os:false,
-  kpi:false
+  kpi:false,
+  graficos:false
 
 };
 
@@ -2085,7 +2063,8 @@ const VERSION = {
   salidas:0,
   guardia:0,
   os:0,
-  kpi:0
+  kpi:0,
+  graficos:0
 
 };
 
@@ -2098,7 +2077,8 @@ const LAST_RENDER = {
   salidas:'',
   guardia:'',
   os:'',
-  kpi:''
+  kpi:'',
+  graficos:''
 
 };
 
@@ -2117,7 +2097,9 @@ const DATE_BY_TAB = {
 const INFLIGHT = {};
 
 const SILENT_RETRY_TIMERS = {};
+
 const SILENT_RETRY_ATTEMPTS = {};
+
 
 const SILENT_RETRY_DELAYS = [
   10000,
@@ -2201,7 +2183,7 @@ function setStatus(
 }
 
 
-function showError(message){
+function showError(){
   return;
 }
 
@@ -2282,7 +2264,8 @@ function restoreLocalSnapshot(){
       'salidas',
       'guardia',
       'os',
-      'kpi'
+      'kpi',
+      'graficos'
     ]
     .forEach(
       section => {
@@ -2547,7 +2530,7 @@ function svgIcon(type){
 
 
 /* =========================================================
-   COMPONENTES GENERALES
+   COMPONENTES
 ========================================================= */
 
 function kpi(
@@ -3479,29 +3462,8 @@ function normalizeMechanicalCategory(value){
 }
 
 
-function normalizePerson(value){
-
-  return String(
-    value ||
-    ''
-  )
-  .normalize(
-    'NFD'
-  )
-  .replace(
-    /[\u0300-\u036f]/g,
-    ''
-  )
-  .toUpperCase()
-  .replace(
-    /[^A-Z0-9]/g,
-    ''
-  );
-}
-
-
 /* =========================================================
-   CONSOLIDACION DE CONDUCTORES
+   CONDUCTORES
 ========================================================= */
 
 function stripLeadingLegajo(value){
@@ -3758,6 +3720,7 @@ function sameDriverReplacement(
         a?.conductor
         ||
         a?.chofer,
+
         b?.titular
         ||
         b?.conductor
@@ -3776,14 +3739,12 @@ function sameDriverReplacement(
 
 
   const reemplazoA =
-    a?.reemplazo
-    ||
+    a?.reemplazo ||
     '';
 
 
   const reemplazoB =
-    b?.reemplazo
-    ||
+    b?.reemplazo ||
     '';
 
 
@@ -4275,7 +4236,7 @@ function compactList(
 
 
 /* =========================================================
-   ALERTAS RESUMEN
+   ALERTAS
 ========================================================= */
 
 function renderAlertCases(
@@ -4383,9 +4344,7 @@ function renderAlertCases(
 
               ${
                 more === 1
-
                   ? 'adicional'
-
                   : 'adicionales'
               }
 
@@ -4831,9 +4790,7 @@ function renderResumen(){
 
           ${
             compliance === null
-
               ? '—'
-
               : `${num(compliance)}%`
           }
 
@@ -6767,9 +6724,7 @@ function renderGuardia(){
                     <span
                       class="${
                         pending
-
                           ? 'pending-pill'
-
                           : 'resolved-pill'
                       }"
                     >
@@ -7256,20 +7211,38 @@ function rawNumber(v){
   }
 
 
-  const n =
-    parseFloat(
-      String(
-        v
-      )
-      .replace(
-        '%',
-        ''
-      )
-      .replace(
+  let s =
+    String(
+      v
+    )
+    .trim()
+    .replace(
+      '%',
+      ''
+    )
+    .replace(
+      /\s/g,
+      ''
+    );
+
+
+  if (
+    s.includes(',')
+    &&
+    !s.includes('.')
+  ) {
+
+    s =
+      s.replace(
         ',',
         '.'
-      )
-      .replace(
+      );
+  }
+
+
+  const n =
+    parseFloat(
+      s.replace(
         /[^0-9.\-]/g,
         ''
       )
@@ -7455,6 +7428,128 @@ function kpiCard(
 }
 
 
+/*
+ * Evita repetir indicadores en el panel mensual.
+ * Si la fuente trae el mismo indicador más de una vez,
+ * conserva una sola fila y completa con el último dato válido.
+ */
+function uniqueMonthlyIndicators(rows){
+
+  const order = [];
+
+  const map =
+    new Map();
+
+
+  (
+    rows ||
+    []
+  )
+  .forEach(
+    item => {
+
+      const key =
+        normalizeText(
+          item?.label ||
+          ''
+        );
+
+
+      if (
+        !key
+      ) {
+
+        return;
+      }
+
+
+      if (
+        !map.has(
+          key
+        )
+      ) {
+
+        order.push(
+          key
+        );
+
+
+        map.set(
+          key,
+          {
+            ...item
+          }
+        );
+
+
+        return;
+      }
+
+
+      const previous =
+        map.get(
+          key
+        );
+
+
+      const next = {
+        ...previous
+      };
+
+
+      Object
+        .entries(
+          item ||
+          {}
+        )
+        .forEach(
+          (
+            [
+              field,
+              value
+            ]
+          ) => {
+
+            if (
+              value !==
+              undefined
+              &&
+              value !==
+              null
+              &&
+              String(
+                value
+              )
+              .trim() !==
+              ''
+            ) {
+
+              next[
+                field
+              ] =
+                value;
+            }
+          }
+        );
+
+
+      map.set(
+        key,
+        next
+      );
+    }
+  );
+
+
+  return order.map(
+    key =>
+      map.get(
+        key
+      )
+  );
+}
+
+
 function renderKPI(){
 
   const d =
@@ -7516,8 +7611,10 @@ function renderKPI(){
 
 
   const indicators =
-    d.indicators ||
-    [];
+    uniqueMonthlyIndicators(
+      d.indicators ||
+      []
+    );
 
 
   const findIndicator =
@@ -7869,10 +7966,7 @@ function renderKPI(){
         </h3>
 
         ${
-          (
-            d.indicators ||
-            []
-          )
+          indicators
           .map(
             x => {
 
@@ -7931,6 +8025,1399 @@ function renderKPI(){
         }
 
       </aside>
+
+    </div>
+  `;
+}
+
+
+/* =========================================================
+   GRAFICOS - 12 MESES
+========================================================= */
+
+function graphParseNumber(value){
+
+  if (
+    value === null
+    ||
+    value === undefined
+    ||
+    value === ''
+  ) {
+
+    return null;
+  }
+
+
+  let s =
+    String(
+      value
+    )
+    .trim()
+    .replace(
+      '%',
+      ''
+    )
+    .replace(
+      /\s/g,
+      ''
+    );
+
+
+  /*
+   * Ej:
+   * 382.407 = 382407
+   * 2,04 = 2.04
+   * 2.04 = 2.04
+   * 382.407,50 = 382407.50
+   */
+  if (
+    /^-?\d{1,3}(?:\.\d{3})+(?:,\d+)?$/
+      .test(
+        s
+      )
+  ) {
+
+    s =
+      s
+      .replace(
+        /\./g,
+        ''
+      )
+      .replace(
+        ',',
+        '.'
+      );
+
+  } else if (
+    s.includes(',')
+    &&
+    s.includes('.')
+  ) {
+
+    if (
+      s.lastIndexOf(',')
+      >
+      s.lastIndexOf('.')
+    ) {
+
+      s =
+        s
+        .replace(
+          /\./g,
+          ''
+        )
+        .replace(
+          ',',
+          '.'
+        );
+
+    } else {
+
+      s =
+        s.replace(
+          /,/g,
+          ''
+        );
+    }
+
+  } else if (
+    s.includes(',')
+  ) {
+
+    s =
+      s.replace(
+        ',',
+        '.'
+      );
+  }
+
+
+  const n =
+    parseFloat(
+      s.replace(
+        /[^0-9.\-]/g,
+        ''
+      )
+    );
+
+
+  return Number.isFinite(
+    n
+  )
+
+    ? n
+
+    : null;
+}
+
+
+function graphMonthWindow(){
+
+  const p =
+    DATA.period ||
+    {};
+
+
+  const now =
+    new Date();
+
+
+  const endYear =
+    Number(
+      p.year
+    )
+    ||
+    now.getFullYear();
+
+
+  const endMonth =
+    Number(
+      p.month
+    )
+    ||
+    (
+      now.getMonth()
+      +
+      1
+    );
+
+
+  const monthNames = [
+    'ene',
+    'feb',
+    'mar',
+    'abr',
+    'may',
+    'jun',
+    'jul',
+    'ago',
+    'sep',
+    'oct',
+    'nov',
+    'dic'
+  ];
+
+
+  const out = [];
+
+
+  for (
+    let offset = 11;
+    offset >= 0;
+    offset--
+  ) {
+
+    const date =
+      new Date(
+        endYear,
+        endMonth - 1 - offset,
+        1
+      );
+
+
+    const year =
+      date.getFullYear();
+
+
+    const month =
+      date.getMonth()
+      +
+      1;
+
+
+    out.push({
+
+      key:
+        `${year}-${pad2(month)}`,
+
+      label:
+        monthNames[
+          month - 1
+        ]
+        +
+        '-'
+        +
+        String(
+          year
+        )
+        .slice(
+          -2
+        )
+    });
+  }
+
+
+  return out;
+}
+
+
+function graphRowPeriod(row){
+
+  const direct =
+    String(
+      row?.period
+      ||
+      row?.periodo
+      ||
+      row?.monthKey
+      ||
+      row?.mesKey
+      ||
+      ''
+    )
+    .trim();
+
+
+  const match =
+    direct.match(
+      /^(\d{4})[-\/](\d{1,2})$/
+    );
+
+
+  if (
+    match
+  ) {
+
+    return (
+      match[1]
+      +
+      '-'
+      +
+      pad2(
+        Number(
+          match[2]
+        )
+      )
+    );
+  }
+
+
+  const year =
+    Number(
+      row?.year
+      ||
+      row?.anio
+      ||
+      row?.año
+      ||
+      0
+    );
+
+
+  const month =
+    Number(
+      row?.month
+      ||
+      row?.mes
+      ||
+      0
+    );
+
+
+  if (
+    year
+    &&
+    month
+  ) {
+
+    return (
+      year
+      +
+      '-'
+      +
+      pad2(
+        month
+      )
+    );
+  }
+
+
+  return '';
+}
+
+
+function graphValue(
+  row,
+  fields
+){
+
+  for (
+    const field of fields
+  ) {
+
+    const value =
+      row?.[
+        field
+      ];
+
+
+    if (
+      value !==
+      undefined
+      &&
+      value !==
+      null
+      &&
+      String(
+        value
+      )
+      .trim() !==
+      ''
+    ) {
+
+      return graphParseNumber(
+        value
+      );
+    }
+  }
+
+
+  return null;
+}
+
+
+function graphSeries(){
+
+  const data =
+    DATA.graficos
+    ||
+    DATA.kpi?.graficos
+    ||
+    {};
+
+
+  const rows =
+    Array.isArray(
+      data.rows
+    )
+
+      ? data.rows
+
+      : Array.isArray(
+          data.monthly
+        )
+
+        ? data.monthly
+
+        : Array.isArray(
+            DATA.kpi?.history
+          )
+
+          ? DATA.kpi.history
+
+          : [];
+
+
+  const byPeriod =
+    new Map();
+
+
+  rows.forEach(
+    row => {
+
+      const key =
+        graphRowPeriod(
+          row
+        );
+
+
+      if (
+        key
+      ) {
+
+        byPeriod.set(
+          key,
+          row
+        );
+      }
+    }
+  );
+
+
+  const months =
+    graphMonthWindow();
+
+
+  const build =
+    (
+      valueFields,
+      metaFields
+    ) => {
+
+      const values = [];
+      const metas = [];
+
+
+      months.forEach(
+        month => {
+
+          const row =
+            byPeriod.get(
+              month.key
+            )
+            ||
+            {};
+
+
+          values.push(
+            graphValue(
+              row,
+              valueFields
+            )
+          );
+
+
+          metas.push(
+            graphValue(
+              row,
+              metaFields
+            )
+          );
+        }
+      );
+
+
+      return {
+        values,
+        metas
+      };
+    };
+
+
+  return {
+
+    months,
+
+    wara:
+      build(
+        [
+          'wara',
+          'kmWara',
+          'kmWaraMunicipalidad',
+          'waraEjecutado'
+        ],
+        [
+          'waraMeta',
+          'kmPresupuestado',
+          'kmPresupuesto',
+          'kmTSJPresupuestado'
+        ]
+      ),
+
+    horario:
+      build(
+        [
+          'horario',
+          'cumplimientoHorario',
+          'horarioGeneral'
+        ],
+        [
+          'horarioMeta',
+          'metaHorario'
+        ]
+      ),
+
+    cabecera:
+      build(
+        [
+          'cabecera',
+          'cumplimientoCabecera',
+          'horarioCab',
+          'horarioCabecera'
+        ],
+        [
+          'cabeceraMeta',
+          'metaCabecera'
+        ]
+      ),
+
+    ipk:
+      build(
+        [
+          'ipk'
+        ],
+        [
+          'ipkMeta',
+          'metaIPK'
+        ]
+      ),
+
+    siniestros:
+      build(
+        [
+          'siniestros',
+          'totalSiniestros'
+        ],
+        [
+          'siniestrosMeta',
+          'metaSiniestros'
+        ]
+      ),
+
+    titularidad:
+      build(
+        [
+          'titularidad'
+        ],
+        [
+          'titularidadMeta',
+          'metaTitularidad'
+        ]
+      )
+  };
+}
+
+
+function niceChartMax(
+  values,
+  metas,
+  fixedMax=null
+){
+
+  if (
+    fixedMax !==
+    null
+  ) {
+
+    return fixedMax;
+  }
+
+
+  const nums =
+    [
+      ...(
+        values ||
+        []
+      ),
+      ...(
+        metas ||
+        []
+      )
+    ]
+    .filter(
+      value =>
+        Number.isFinite(
+          value
+        )
+    );
+
+
+  if (
+    !nums.length
+  ) {
+
+    return 1;
+  }
+
+
+  const raw =
+    Math.max(
+      ...nums,
+      1
+    );
+
+
+  const padded =
+    raw *
+    1.15;
+
+
+  const power =
+    Math.pow(
+      10,
+      Math.floor(
+        Math.log10(
+          padded
+        )
+      )
+    );
+
+
+  return (
+    Math.ceil(
+      padded /
+      power *
+      2
+    )
+    /
+    2
+    *
+    power
+  );
+}
+
+
+function chartDisplayValue(
+  value,
+  type
+){
+
+  if (
+    value === null
+    ||
+    !Number.isFinite(
+      value
+    )
+  ) {
+
+    return '';
+  }
+
+
+  if (
+    type ===
+    'percent'
+  ) {
+
+    return (
+      Math.round(
+        value *
+        10
+      )
+      /
+      10
+    )
+    .toLocaleString(
+      'es-AR'
+    )
+    +
+    '%';
+  }
+
+
+  if (
+    type ===
+    'ipk'
+  ) {
+
+    return value
+      .toLocaleString(
+        'es-AR',
+        {
+          minimumFractionDigits:2,
+          maximumFractionDigits:2
+        }
+      );
+  }
+
+
+  return Math.round(
+    value
+  )
+  .toLocaleString(
+    'es-AR'
+  );
+}
+
+
+function renderComboChart({
+  title,
+  months,
+  values,
+  metas,
+  valueLegend,
+  metaLegend='Meta',
+  type='number',
+  fixedMax=null
+}){
+
+  const hasData =
+    [
+      ...values,
+      ...metas
+    ]
+    .some(
+      value =>
+        Number.isFinite(
+          value
+        )
+    );
+
+
+  if (
+    !hasData
+  ) {
+
+    return `
+
+      <article class="chart-card">
+
+        <h3>
+          ${esc(title)}
+        </h3>
+
+        <div class="chart-subtitle">
+          Últimos 12 meses
+        </div>
+
+        <div class="chart-empty">
+          Sin datos históricos disponibles.
+        </div>
+
+      </article>
+    `;
+  }
+
+
+  const width =
+    520;
+
+
+  const height =
+    260;
+
+
+  const left =
+    46;
+
+
+  const right =
+    12;
+
+
+  const top =
+    22;
+
+
+  const bottom =
+    47;
+
+
+  const plotW =
+    width
+    -
+    left
+    -
+    right;
+
+
+  const plotH =
+    height
+    -
+    top
+    -
+    bottom;
+
+
+  const maxY =
+    niceChartMax(
+      values,
+      metas,
+      fixedMax
+    );
+
+
+  const slot =
+    plotW /
+    12;
+
+
+  const barW =
+    Math.max(
+      8,
+      Math.min(
+        22,
+        slot *
+        .46
+      )
+    );
+
+
+  const y =
+    value =>
+      top
+      +
+      plotH
+      -
+      (
+        Math.max(
+          0,
+          Number(
+            value ||
+            0
+          )
+        )
+        /
+        maxY
+        *
+        plotH
+      );
+
+
+  const ticks = [];
+
+
+  for (
+    let i = 0;
+    i <= 4;
+    i++
+  ) {
+
+    const value =
+      maxY *
+      i /
+      4;
+
+
+    ticks.push({
+
+      value,
+
+      y:
+        y(
+          value
+        )
+    });
+  }
+
+
+  /*
+   * Divide la línea de meta si hay meses sin dato,
+   * para no inventar continuidad.
+   */
+  const targetSegments = [];
+
+  let currentSegment = [];
+
+
+  metas.forEach(
+    (
+      value,
+      index
+    ) => {
+
+      if (
+        !Number.isFinite(
+          value
+        )
+      ) {
+
+        if (
+          currentSegment.length
+        ) {
+
+          targetSegments.push(
+            currentSegment
+          );
+
+
+          currentSegment = [];
+        }
+
+
+        return;
+      }
+
+
+      const x =
+        left
+        +
+        slot *
+        index
+        +
+        slot /
+        2;
+
+
+      currentSegment.push(
+        `${x},${y(value)}`
+      );
+    }
+  );
+
+
+  if (
+    currentSegment.length
+  ) {
+
+    targetSegments.push(
+      currentSegment
+    );
+  }
+
+
+  return `
+
+    <article class="chart-card">
+
+      <h3>
+        ${esc(title)}
+      </h3>
+
+      <div class="chart-subtitle">
+        Últimos 12 meses
+      </div>
+
+
+      <svg
+        class="chart-svg"
+        viewBox="0 0 ${width} ${height}"
+        role="img"
+        aria-label="${esc(title)}"
+      >
+
+        ${
+          ticks
+          .map(
+            tick => `
+
+              <line
+                class="chart-grid-line"
+                x1="${left}"
+                y1="${tick.y}"
+                x2="${width-right}"
+                y2="${tick.y}"
+              ></line>
+
+
+              <text
+                class="chart-axis-label"
+                x="${left-6}"
+                y="${tick.y+3}"
+                text-anchor="end"
+              >
+
+                ${esc(
+                  chartDisplayValue(
+                    tick.value,
+                    type
+                  )
+                )}
+
+              </text>
+            `
+          )
+          .join('')
+        }
+
+
+        <line
+          class="chart-axis-line"
+          x1="${left}"
+          y1="${top+plotH}"
+          x2="${width-right}"
+          y2="${top+plotH}"
+        ></line>
+
+
+        ${
+          values
+          .map(
+            (
+              value,
+              index
+            ) => {
+
+              if (
+                !Number.isFinite(
+                  value
+                )
+              ) {
+
+                return '';
+              }
+
+
+              const cx =
+                left
+                +
+                slot *
+                index
+                +
+                slot /
+                2;
+
+
+              const barY =
+                y(
+                  value
+                );
+
+
+              const barH =
+                top
+                +
+                plotH
+                -
+                barY;
+
+
+              return `
+
+                <rect
+                  class="chart-bar"
+                  x="${cx-barW/2}"
+                  y="${barY}"
+                  width="${barW}"
+                  height="${Math.max(0,barH)}"
+                  rx="2"
+                ></rect>
+
+
+                <text
+                  class="chart-value-label"
+                  x="${cx}"
+                  y="${Math.max(10,barY-5)}"
+                  text-anchor="middle"
+                >
+
+                  ${esc(
+                    chartDisplayValue(
+                      value,
+                      type
+                    )
+                  )}
+
+                </text>
+              `;
+            }
+          )
+          .join('')
+        }
+
+
+        ${
+          targetSegments
+          .map(
+            segment =>
+              segment.length >
+              1
+
+                ? `
+
+                  <polyline
+                    class="chart-target"
+                    points="${segment.join(' ')}"
+                  ></polyline>
+                `
+
+                : ''
+          )
+          .join('')
+        }
+
+
+        ${
+          metas
+          .map(
+            (
+              value,
+              index
+            ) => {
+
+              if (
+                !Number.isFinite(
+                  value
+                )
+              ) {
+
+                return '';
+              }
+
+
+              const cx =
+                left
+                +
+                slot *
+                index
+                +
+                slot /
+                2;
+
+
+              return `
+
+                <circle
+                  class="chart-point"
+                  cx="${cx}"
+                  cy="${y(value)}"
+                  r="2.6"
+                ></circle>
+              `;
+            }
+          )
+          .join('')
+        }
+
+
+        ${
+          months
+          .map(
+            (
+              month,
+              index
+            ) => {
+
+              const cx =
+                left
+                +
+                slot *
+                index
+                +
+                slot /
+                2;
+
+
+              return `
+
+                <text
+                  class="chart-month-label"
+                  x="${cx}"
+                  y="${height-25}"
+                  text-anchor="middle"
+                >
+
+                  ${esc(
+                    month.label
+                  )}
+
+                </text>
+              `;
+            }
+          )
+          .join('')
+        }
+
+
+        <text
+          class="chart-axis-label"
+          x="${left+plotW/2}"
+          y="${height-5}"
+          text-anchor="middle"
+        >
+          MESES
+        </text>
+
+      </svg>
+
+
+      <div class="chart-legend">
+
+        <span class="chart-legend-item">
+
+          <span class="chart-legend-bar"></span>
+
+          <span>
+            ${esc(valueLegend)}
+          </span>
+
+        </span>
+
+
+        <span class="chart-legend-item">
+
+          <span class="chart-legend-line"></span>
+
+          <span>
+            ${esc(metaLegend)}
+          </span>
+
+        </span>
+
+      </div>
+
+    </article>
+  `;
+}
+
+
+function renderGraficos(){
+
+  const series =
+    graphSeries();
+
+
+  $('#graficos').innerHTML = `
+
+    <div class="section-head">
+
+      <h2>
+        Gráficos
+      </h2>
+
+      <div class="source">
+
+        Evolución histórica
+
+        <br>
+
+        Últimos 12 meses
+
+      </div>
+
+    </div>
+
+
+    <div class="chart-grid">
+
+
+      ${renderComboChart({
+
+        title:
+          'Cumplimiento WARA',
+
+        months:
+          series.months,
+
+        values:
+          series.wara.values,
+
+        metas:
+          series.wara.metas,
+
+        valueLegend:
+          'KM WARA',
+
+        metaLegend:
+          'KM presupuestados',
+
+        type:
+          'number'
+
+      })}
+
+
+      ${renderComboChart({
+
+        title:
+          'Cumplimiento Horario',
+
+        months:
+          series.months,
+
+        values:
+          series.horario.values,
+
+        metas:
+          series.horario.metas,
+
+        valueLegend:
+          'Cumplimiento horario',
+
+        metaLegend:
+          'Meta %',
+
+        type:
+          'percent',
+
+        fixedMax:
+          100
+
+      })}
+
+
+      ${renderComboChart({
+
+        title:
+          'Cumplimiento Cabecera',
+
+        months:
+          series.months,
+
+        values:
+          series.cabecera.values,
+
+        metas:
+          series.cabecera.metas,
+
+        valueLegend:
+          'Cumplimiento cabecera',
+
+        metaLegend:
+          'Meta %',
+
+        type:
+          'percent',
+
+        fixedMax:
+          100
+
+      })}
+
+
+      ${renderComboChart({
+
+        title:
+          'IPK',
+
+        months:
+          series.months,
+
+        values:
+          series.ipk.values,
+
+        metas:
+          series.ipk.metas,
+
+        valueLegend:
+          'IPK cumplido',
+
+        metaLegend:
+          'Meta',
+
+        type:
+          'ipk',
+
+        fixedMax:
+          3
+
+      })}
+
+
+      ${renderComboChart({
+
+        title:
+          'Siniestros',
+
+        months:
+          series.months,
+
+        values:
+          series.siniestros.values,
+
+        metas:
+          series.siniestros.metas,
+
+        valueLegend:
+          'Total de siniestros',
+
+        metaLegend:
+          'Meta',
+
+        type:
+          'number'
+
+      })}
+
+
+      ${renderComboChart({
+
+        title:
+          'Titularidad',
+
+        months:
+          series.months,
+
+        values:
+          series.titularidad.values,
+
+        metas:
+          series.titularidad.metas,
+
+        valueLegend:
+          'Titularidad',
+
+        metaLegend:
+          'Meta %',
+
+        type:
+          'percent',
+
+        fixedMax:
+          100
+
+      })}
 
     </div>
   `;
@@ -8025,6 +9512,17 @@ function renderSignature(tab){
       );
 
 
+    case 'graficos':
+
+      return [
+        VERSION.graficos,
+        VERSION.kpi
+      ]
+      .join(
+        '|'
+      );
+
+
     default:
 
       return '';
@@ -8113,6 +9611,20 @@ function renderActiveTab(
       ) {
 
         renderKPI();
+      }
+
+      break;
+
+
+    case 'graficos':
+
+      if (
+        sectionAllowedForProfile(
+          'graficos'
+        )
+      ) {
+
+        renderGraficos();
       }
 
       break;
@@ -8212,7 +9724,10 @@ function configureDatePicker(){
     'plan'
     ||
     ACTIVE_TAB ===
-    'os';
+    'os'
+    ||
+    ACTIVE_TAB ===
+    'graficos';
 
 
   el.parentElement
@@ -8254,7 +9769,7 @@ function configureDatePicker(){
 
 
 /* =========================================================
-   API / CACHE LOCAL
+   API
 ========================================================= */
 
 function mergePayload(payload){
@@ -8304,7 +9819,8 @@ function mergePayload(payload){
     'salidas',
     'guardia',
     'os',
-    'kpi'
+    'kpi',
+    'graficos'
   ]
   .forEach(
     section => {
@@ -8397,9 +9913,7 @@ function requestSection(
     '|' +
     (
       force
-
         ? '1'
-
         : '0'
     );
 
@@ -8656,7 +10170,7 @@ function requestSection(
 
 
 /* =========================================================
-   CARGA DE SOLAPAS
+   CARGA
 ========================================================= */
 
 function hasAnyVisibleData(){
@@ -8667,7 +10181,8 @@ function hasAnyVisibleData(){
     'salidas',
     'guardia',
     'os',
-    'kpi'
+    'kpi',
+    'graficos'
 
   ]
   .some(
@@ -8832,7 +10347,10 @@ function sectionForTab(tab){
       'os',
 
     kpi:
-      'kpi'
+      'kpi',
+
+    graficos:
+      'graficos'
 
   };
 
@@ -8964,54 +10482,6 @@ function ensureTabData(tab){
                 section
               )
       )
-    )
-    .then(
-      results => {
-
-        results.forEach(
-          (
-            result,
-            index
-          ) => {
-
-            const section =
-              sections[
-                index
-              ];
-
-
-            if(
-              result.status ===
-              'fulfilled'
-            ){
-
-              clearSilentRetry(
-                section
-              );
-
-            } else {
-
-              scheduleSilentRetry(
-                section
-              );
-            }
-          }
-        );
-
-
-        if(
-          hasAnyVisibleData()
-        ){
-
-          setStatus(
-            true,
-            'Datos disponibles'
-          );
-        }
-
-
-        return results;
-      }
     );
   }
 
@@ -9080,6 +10550,11 @@ function ensureTabData(tab){
       );
 
 
+      /*
+       * No mostrar cartel de error.
+       * Si el histórico todavía no existe,
+       * la página continúa funcionando.
+       */
       if (
         hasAnyVisibleData()
       ) {
@@ -9095,6 +10570,15 @@ function ensureTabData(tab){
           false,
           'Actualizando…'
         );
+      }
+
+
+      if (
+        safeTab ===
+        'graficos'
+      ) {
+
+        renderGraficos();
       }
     }
   );
@@ -9134,6 +10618,10 @@ function loadInitial(){
   }
 
 
+  /*
+   * No se cargan los gráficos históricos acá.
+   * Solo cuando el usuario abre la solapa.
+   */
   const initialSections = [
     'planServ',
     'salidas',
@@ -9220,17 +10708,8 @@ function loadInitial(){
             requestSection(
               'os'
             )
-            .then(
-              () =>
-                clearSilentRetry(
-                  'os'
-                )
-            )
             .catch(
-              () =>
-                scheduleSilentRetry(
-                  'os'
-                )
+              () => {}
             );
           }
 
@@ -9255,17 +10734,8 @@ function loadInitial(){
               requestSection(
                 'kpi'
               )
-              .then(
-                () =>
-                  clearSilentRetry(
-                    'kpi'
-                  )
-              )
               .catch(
-                () =>
-                  scheduleSilentRetry(
-                    'kpi'
-                  )
+                () => {}
               );
             }
 
@@ -9340,37 +10810,6 @@ function refreshActive(
   )
   .then(
     results => {
-
-      results.forEach(
-        (
-          result,
-          index
-        ) => {
-
-          const section =
-            sections[
-              index
-            ];
-
-
-          if(
-            result.status ===
-            'fulfilled'
-          ){
-
-            clearSilentRetry(
-              section
-            );
-
-          } else {
-
-            scheduleSilentRetry(
-              section
-            );
-          }
-        }
-      );
-
 
       if (
         hasAnyVisibleData()
