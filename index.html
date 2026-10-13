@@ -197,6 +197,11 @@ body.profile-guardia #kpi{
   display:none !important;
 }
 
+body.profile-conduccion .tab:not([data-tab="conduccion"]),
+body.profile-conduccion .tab-panel:not(#conduccion){
+  display:none !important;
+}
+
 .section-head{
   display:flex;
   justify-content:space-between;
@@ -1369,6 +1374,10 @@ th{
     grid-template-columns:1fr;
   }
 
+  .grid3{
+    grid-template-columns:1fr;
+  }
+
 }
 
 
@@ -1673,11 +1682,6 @@ th{
 
 }
 
-
-/* =========================================================
-   FIN CSS
-========================================================= */
-
 </style>
 
 </head>
@@ -1764,6 +1768,13 @@ th{
 
   <button
     class="tab"
+    data-tab="conduccion"
+  >
+    Resumen conducción
+  </button>
+
+  <button
+    class="tab"
     data-tab="plan"
   >
     Plan Serv
@@ -1805,6 +1816,11 @@ th{
   <section
     id="resumen"
     class="tab-panel active"
+  ></section>
+
+  <section
+    id="conduccion"
+    class="tab-panel"
   ></section>
 
   <section
@@ -1883,25 +1899,41 @@ const IS_GUARD_PROFILE =
   'guardia';
 
 
+const IS_CONDUCTION_PROFILE =
+  PROFILE ===
+  'conduccion';
+
+
+const ALL_TABS = [
+  'resumen',
+  'conduccion',
+  'plan',
+  'salidas',
+  'guardia',
+  'os',
+  'kpi'
+];
+
+
 const ALLOWED_TABS =
-  IS_GUARD_PROFILE
+  IS_CONDUCTION_PROFILE
 
     ? [
-        'resumen',
-        'plan',
-        'salidas',
-        'guardia',
-        'os'
+        'conduccion'
       ]
 
-    : [
-        'resumen',
-        'plan',
-        'salidas',
-        'guardia',
-        'os',
-        'kpi'
-      ];
+    : IS_GUARD_PROFILE
+
+      ? [
+          'resumen',
+          'conduccion',
+          'plan',
+          'salidas',
+          'guardia',
+          'os'
+        ]
+
+      : ALL_TABS;
 
 
 const REQUESTED_TAB =
@@ -1937,11 +1969,55 @@ function sanitizeTab(tab){
   }
 
 
-  return IS_GUARD_PROFILE
+  if (
+    IS_CONDUCTION_PROFILE
+  ) {
 
-    ? 'guardia'
+    return 'conduccion';
+  }
 
-    : 'resumen';
+
+  if (
+    IS_GUARD_PROFILE
+  ) {
+
+    return 'guardia';
+  }
+
+
+  return 'resumen';
+}
+
+
+function sectionAllowedForProfile(section){
+
+  if (
+    IS_CONDUCTION_PROFILE
+  ) {
+
+    return [
+      'planServ',
+      'salidas',
+      'guardia'
+    ]
+    .includes(
+      section
+    );
+  }
+
+
+  if (
+    IS_GUARD_PROFILE
+    &&
+    section ===
+    'kpi'
+  ) {
+
+    return false;
+  }
+
+
+  return true;
 }
 
 
@@ -1953,6 +2029,18 @@ if (
     .classList
     .add(
       'profile-guardia'
+    );
+}
+
+
+if (
+  IS_CONDUCTION_PROFILE
+) {
+
+  document.body
+    .classList
+    .add(
+      'profile-conduccion'
     );
 }
 
@@ -2005,6 +2093,7 @@ const VERSION = {
 const LAST_RENDER = {
 
   resumen:'',
+  conduccion:'',
   plan:'',
   salidas:'',
   guardia:'',
@@ -2017,6 +2106,7 @@ const LAST_RENDER = {
 const DATE_BY_TAB = {
 
   resumen:'',
+  conduccion:'',
   salidas:'',
   guardia:'',
   kpi:''
@@ -2699,7 +2789,7 @@ function bars(
 
 
 /* =========================================================
-   FECHAS FRONTEND
+   FECHAS
 ========================================================= */
 
 function todayISO(){
@@ -3410,91 +3500,359 @@ function normalizePerson(value){
 }
 
 
-function sameDriverReplacement(
+/* =========================================================
+   CONSOLIDACION DE CONDUCTORES
+========================================================= */
+
+function stripLeadingLegajo(value){
+
+  return String(
+    value ||
+    ''
+  )
+  .trim()
+  .replace(
+    /^\d{2,8}(?:\s*[-–—]\s*|\s+)/,
+    ''
+  )
+  .trim();
+}
+
+
+function personWords(value){
+
+  return normalizeText(
+    stripLeadingLegajo(
+      value
+    )
+  )
+  .replace(
+    /[^A-Z0-9Ñ]+/g,
+    ' '
+  )
+  .trim()
+  .split(
+    /\s+/
+  )
+  .filter(
+    Boolean
+  );
+}
+
+
+function personNamesMatch(
   a,
   b
 ){
 
-  const titularA =
-    normalizePerson(
-      a?.titular
+  const aw =
+    personWords(
+      a
     );
 
 
-  const titularB =
-    normalizePerson(
-      b?.titular
-    );
-
-
-  const replA =
-    normalizePerson(
-      a?.reemplazo
-    );
-
-
-  const replB =
-    normalizePerson(
-      b?.reemplazo
+  const bw =
+    personWords(
+      b
     );
 
 
   if (
-    titularA
-    &&
-    titularB
-    &&
-    replA
-    &&
-    replB
-    &&
-    titularA ===
-    titularB
-    &&
-    replA ===
-    replB
+    !aw.length
+    ||
+    !bw.length
+  ) {
+
+    return false;
+  }
+
+
+  const as =
+    aw.join(
+      ' '
+    );
+
+
+  const bs =
+    bw.join(
+      ' '
+    );
+
+
+  if (
+    as ===
+    bs
   ) {
 
     return true;
   }
 
 
-  if (
-    replA
-    &&
-    replB
-    &&
-    replA ===
-    replB
+  const shorter =
+    aw.length <=
+    bw.length
+
+      ? aw
+
+      : bw;
+
+
+  const longer =
+    aw.length <=
+    bw.length
+
+      ? bw
+
+      : aw;
+
+
+  return shorter.every(
+    word =>
+      longer.includes(
+        word
+      )
+  );
+}
+
+
+function getTitularLegajo(row){
+
+  const candidates = [
+
+    row?.legajoTitular,
+    row?.legajoConductor,
+    row?.legajo,
+    row?.nroLegajo,
+    row?.numeroLegajo
+
+  ];
+
+
+  for (
+    const value of candidates
   ) {
 
-    const lineA =
-      normalizeBaseLine(
-        a?.linea
-      );
-
-
-    const lineB =
-      normalizeBaseLine(
-        b?.linea
-      );
+    const text =
+      String(
+        value ??
+        ''
+      )
+      .trim();
 
 
     if (
-      lineA
-      &&
-      lineB
-      &&
-      lineA ===
-      lineB
+      /^\d{2,8}$/.test(
+        text
+      )
     ) {
 
-      return true;
+      return text;
     }
   }
 
 
-  return false;
+  const source =
+    row?.titular
+    ||
+    row?.conductor
+    ||
+    row?.chofer
+    ||
+    '';
+
+
+  const match =
+    String(
+      source
+    )
+    .trim()
+    .match(
+      /^(\d{2,8})(?:\s|[-–—])/
+    );
+
+
+  return match
+
+    ? match[1]
+
+    : '';
+}
+
+
+function replacementCompleteness(row){
+
+  const fields = [
+
+    row?.titular,
+    row?.reemplazo,
+    row?.motivo,
+    row?.linea,
+    row?.turno,
+    getTitularLegajo(
+      row
+    )
+
+  ];
+
+
+  return fields.reduce(
+    (
+      total,
+      value
+    ) =>
+      total
+      +
+      (
+        String(
+          value ??
+          ''
+        )
+        .trim()
+
+          ? 1
+
+          : 0
+      ),
+    0
+  );
+}
+
+
+function sameDriverReplacement(
+  a,
+  b
+){
+
+  const legajoA =
+    getTitularLegajo(
+      a
+    );
+
+
+  const legajoB =
+    getTitularLegajo(
+      b
+    );
+
+
+  let titularMatch =
+    false;
+
+
+  if (
+    legajoA
+    &&
+    legajoB
+  ) {
+
+    titularMatch =
+      legajoA ===
+      legajoB;
+
+  } else {
+
+    titularMatch =
+      personNamesMatch(
+        a?.titular
+        ||
+        a?.conductor
+        ||
+        a?.chofer,
+        b?.titular
+        ||
+        b?.conductor
+        ||
+        b?.chofer
+      );
+  }
+
+
+  if (
+    !titularMatch
+  ) {
+
+    return false;
+  }
+
+
+  const reemplazoA =
+    a?.reemplazo
+    ||
+    '';
+
+
+  const reemplazoB =
+    b?.reemplazo
+    ||
+    '';
+
+
+  if (
+    reemplazoA
+    &&
+    reemplazoB
+    &&
+    !personNamesMatch(
+      reemplazoA,
+      reemplazoB
+    )
+  ) {
+
+    return false;
+  }
+
+
+  const lineA =
+    normalizeBaseLine(
+      a?.linea
+    );
+
+
+  const lineB =
+    normalizeBaseLine(
+      b?.linea
+    );
+
+
+  if (
+    lineA
+    &&
+    lineB
+    &&
+    lineA !==
+    lineB
+  ) {
+
+    return false;
+  }
+
+
+  const turnA =
+    normalizeText(
+      a?.turno
+    );
+
+
+  const turnB =
+    normalizeText(
+      b?.turno
+    );
+
+
+  if (
+    turnA
+    &&
+    turnB
+    &&
+    turnA !==
+    turnB
+  ) {
+
+    return false;
+  }
+
+
+  return true;
 }
 
 
@@ -3503,34 +3861,61 @@ function mergeDriverReplacements(
   guardRows
 ){
 
-  const result = [
+  const result = [];
+
+
+  [
     ...(
       planRows ||
       []
+    ),
+    ...(
+      guardRows ||
+      []
     )
-  ];
-
-
-  (
-    guardRows ||
-    []
-  )
+  ]
   .forEach(
     row => {
 
-      if (
-        !result.some(
+      const index =
+        result.findIndex(
           existing =>
             sameDriverReplacement(
               existing,
               row
             )
-        )
+        );
+
+
+      if (
+        index ===
+        -1
       ) {
 
         result.push(
           row
         );
+
+        return;
+      }
+
+
+      if (
+        replacementCompleteness(
+          row
+        )
+        >
+        replacementCompleteness(
+          result[
+            index
+          ]
+        )
+      ) {
+
+        result[
+          index
+        ] =
+          row;
       }
     }
   );
@@ -3549,7 +3934,7 @@ function extractNumericPrefix(value){
     )
     .trim()
     .match(
-      /^(\d{2,8})\s*[-–—]/
+      /^(\d{2,8})(?:\s+|\s*[-–—]\s*)/
     );
 
 
@@ -3662,7 +4047,7 @@ function getDriverSurname(row){
         value
       )
       .replace(
-        /^\d{2,8}\s*[-–—]\s*/,
+        /^\d{2,8}(?:\s*[-–—]\s*|\s+)/,
         ''
       )
       .trim();
@@ -3725,6 +4110,104 @@ function uniqueDriverReferences(rows){
       )
     )
   ];
+}
+
+
+function dedupeDriverRecords(
+  rows,
+  extraFields=[]
+){
+
+  const seen =
+    new Set();
+
+
+  return (
+    rows ||
+    []
+  )
+  .filter(
+    row => {
+
+      const legajo =
+        getDriverLegajo(
+          row
+        );
+
+
+      const person =
+        normalizeText(
+          stripLeadingLegajo(
+            row?.conductor
+            ||
+            row?.chofer
+            ||
+            row?.titular
+            ||
+            row?.reemplazo
+            ||
+            row?.nombre
+            ||
+            ''
+          )
+        );
+
+
+      const extras =
+        extraFields
+          .map(
+            field =>
+              normalizeText(
+                row?.[
+                  field
+                ]
+              )
+          )
+          .join(
+            '|'
+          );
+
+
+      const key = [
+
+        legajo
+        ||
+        person,
+
+        normalizeText(
+          row?.fecha
+        ),
+
+        normalizeText(
+          row?.turno
+        ),
+
+        extras
+
+      ]
+      .join(
+        '|'
+      );
+
+
+      if (
+        seen.has(
+          key
+        )
+      ) {
+
+        return false;
+      }
+
+
+      seen.add(
+        key
+      );
+
+
+      return true;
+    }
+  );
 }
 
 
@@ -4153,16 +4636,22 @@ function renderResumen(){
 
 
   const late =
-    (
-      salidas.lateRows ||
-      []
-    )
-    .filter(
-      r =>
-        sameDay(
-          r.fecha,
-          key
-        )
+    dedupeDriverRecords(
+      (
+        salidas.lateRows ||
+        []
+      )
+      .filter(
+        r =>
+          sameDay(
+            r.fecha,
+            key
+          )
+      ),
+      [
+        'prevista',
+        'real'
+      ]
     );
 
 
@@ -4504,7 +4993,6 @@ function renderResumen(){
 
         <div class="summary-alert-grid">
 
-
           <article
             class="
               alert-card
@@ -4674,6 +5162,385 @@ function renderResumen(){
       </section>
 
     </div>
+  `;
+}
+
+
+/* =========================================================
+   RESUMEN CONDUCCION
+========================================================= */
+
+function renderConduccion(){
+
+  const key =
+    selectedDDMM(
+      'conduccion'
+    );
+
+
+  const plan =
+    DATA.planServ ||
+    {};
+
+
+  const salidas =
+    DATA.salidas ||
+    {};
+
+
+  const guardia =
+    DATA.guardia ||
+    {};
+
+
+  const day =
+    (
+      salidas.daily ||
+      []
+    )
+    .find(
+      x =>
+        sameDay(
+          x.day,
+          key
+        )
+    )
+    ||
+    {};
+
+
+  const selectedIsToday =
+    selectedISO(
+      'conduccion'
+    )
+    ===
+    todayISO();
+
+
+  const conductoresTM =
+    Number(
+      day.planTM
+      ??
+      (
+        selectedIsToday
+
+          ? plan.conductoresTM
+
+          : 0
+      )
+      ??
+      0
+    );
+
+
+  const conductoresTT =
+    Number(
+      day.planTT
+      ??
+      (
+        selectedIsToday
+
+          ? plan.conductoresTT
+
+          : 0
+      )
+      ??
+      0
+    );
+
+
+  const totalCitados =
+    conductoresTM
+    +
+    conductoresTT;
+
+
+  const absences =
+    dedupeDriverRecords(
+      (
+        salidas.absenceRows ||
+        []
+      )
+      .filter(
+        r =>
+          sameDay(
+            r.fecha,
+            key
+          )
+      ),
+      [
+        'estado'
+      ]
+    );
+
+
+  const planDrivers =
+    (
+      salidas.driverRows ||
+      []
+    )
+    .filter(
+      r =>
+        sameDay(
+          r.fecha,
+          key
+        )
+    );
+
+
+  const guardDrivers =
+    (
+      guardia.driverRows ||
+      []
+    )
+    .filter(
+      r =>
+        sameDay(
+          r.fecha,
+          key
+        )
+    );
+
+
+  const drivers =
+    sortByLineAndService(
+      mergeDriverReplacements(
+        planDrivers,
+        guardDrivers
+      )
+    );
+
+
+  const late =
+    dedupeDriverRecords(
+      (
+        salidas.lateRows ||
+        []
+      )
+      .filter(
+        r =>
+          sameDay(
+            r.fecha,
+            key
+          )
+      ),
+      [
+        'prevista',
+        'real'
+      ]
+    );
+
+
+  $('#conduccion').innerHTML = `
+
+    <div class="section-head">
+
+      <h2>
+        Resumen conducción
+      </h2>
+
+      <div class="source">
+
+        ${esc(
+          selectedLabel(
+            'conduccion'
+          )
+        )}
+
+        <br>
+
+        Consolidado diario de conducción
+
+      </div>
+
+    </div>
+
+
+    <article class="panel">
+
+      <h3>
+        Dotación / conducción
+      </h3>
+
+      <div class="grid3">
+
+        ${mini(
+          'Conductores TM',
+          num(
+            conductoresTM
+          )
+        )}
+
+        ${mini(
+          'Conductores TT',
+          num(
+            conductoresTT
+          )
+        )}
+
+        ${mini(
+          'Total citados',
+          num(
+            totalCitados
+          )
+        )}
+
+      </div>
+
+    </article>
+
+
+    <article class="panel absence-panel">
+
+      <h3 class="panel-title">
+
+        <span>
+          Inasistencias relevantes
+        </span>
+
+        <span class="count-badge pink">
+          ${num(
+            absences.length
+          )}
+        </span>
+
+      </h3>
+
+
+      ${table(
+        [
+
+          [
+            'Fecha',
+            'fecha'
+          ],
+
+          [
+            'Conductor',
+            'conductor'
+          ],
+
+          [
+            'Estado',
+            'estado',
+
+            v =>
+              `<span class="pill">${esc(v)}</span>`
+          ],
+
+          [
+            'Turno',
+            'turno'
+          ]
+        ],
+
+        absences
+      )}
+
+    </article>
+
+
+    <article class="panel driver-panel">
+
+      <h3 class="panel-title">
+
+        <span>
+          Reemplazos de conductores
+        </span>
+
+        <span class="count-badge pink">
+          ${num(
+            drivers.length
+          )}
+        </span>
+
+      </h3>
+
+
+      ${table(
+        [
+
+          [
+            'Titular',
+            'titular'
+          ],
+
+          [
+            'Reemplazo',
+            'reemplazo'
+          ],
+
+          [
+            'Motivo',
+            'motivo'
+          ],
+
+          [
+            'Línea',
+            'linea'
+          ],
+
+          [
+            'Turno',
+            'turno'
+          ]
+        ],
+
+        drivers
+      )}
+
+    </article>
+
+
+    <article class="panel">
+
+      <h3 class="panel-title">
+
+        <span>
+          Llegadas tarde
+        </span>
+
+        <span class="count-badge">
+          ${num(
+            late.length
+          )}
+        </span>
+
+      </h3>
+
+
+      ${table(
+        [
+
+          [
+            'Conductor',
+            'chofer'
+          ],
+
+          [
+            'Hs presentación',
+            'prevista'
+          ],
+
+          [
+            'Hs llegada',
+            'real'
+          ],
+
+          [
+            'Demora',
+            'minutos',
+
+            v =>
+              `${num(v)} min`
+          ]
+        ],
+
+        late
+      )}
+
+    </article>
+
   `;
 }
 
@@ -5764,7 +6631,6 @@ function renderGuardia(){
 
 
     <div class="guard-mechanical-grid">
-
 
       <article class="panel aux-panel">
 
@@ -7095,6 +7961,20 @@ function renderSignature(tab){
       );
 
 
+    case 'conduccion':
+
+      return [
+
+        VERSION.planServ,
+        VERSION.salidas,
+        VERSION.guardia,
+        DATE_BY_TAB.conduccion
+
+      ].join(
+        '|'
+      );
+
+
     case 'plan':
 
       return String(
@@ -7189,6 +8069,13 @@ function renderActiveTab(
       break;
 
 
+    case 'conduccion':
+
+      renderConduccion();
+
+      break;
+
+
     case 'plan':
 
       renderPlan();
@@ -7220,7 +8107,9 @@ function renderActiveTab(
     case 'kpi':
 
       if (
-        !IS_GUARD_PROFILE
+        sectionAllowedForProfile(
+          'kpi'
+        )
       ) {
 
         renderKPI();
@@ -7279,6 +8168,15 @@ function configureDatePicker(){
 
 
   if (
+    !DATE_BY_TAB.conduccion
+  ) {
+
+    DATE_BY_TAB.conduccion =
+      today;
+  }
+
+
+  if (
     !DATE_BY_TAB.salidas
   ) {
 
@@ -7297,7 +8195,9 @@ function configureDatePicker(){
 
 
   if (
-    !IS_GUARD_PROFILE
+    sectionAllowedForProfile(
+      'kpi'
+    )
     &&
     !DATE_BY_TAB.kpi
   ) {
@@ -7421,10 +8321,9 @@ function mergePayload(payload){
 
 
       if (
-        IS_GUARD_PROFILE
-        &&
-        section ===
-        'kpi'
+        !sectionAllowedForProfile(
+          section
+        )
       ) {
 
         return;
@@ -7482,10 +8381,9 @@ function requestSection(
 ){
 
   if (
-    IS_GUARD_PROFILE
-    &&
-    section ===
-    'kpi'
+    !sectionAllowedForProfile(
+      section
+    )
   ) {
 
     return Promise.resolve(
@@ -7763,20 +8661,24 @@ function requestSection(
 
 function hasAnyVisibleData(){
 
-  return (
-    READY.planServ
-    ||
-    READY.salidas
-    ||
-    READY.guardia
-    ||
-    READY.os
-    ||
-    (
-      !IS_GUARD_PROFILE
+  return [
+
+    'planServ',
+    'salidas',
+    'guardia',
+    'os',
+    'kpi'
+
+  ]
+  .some(
+    section =>
+      sectionAllowedForProfile(
+        section
+      )
       &&
-      READY.kpi
-    )
+      READY[
+        section
+      ]
   );
 }
 
@@ -7813,11 +8715,8 @@ function scheduleSilentRetry(section){
   if(
     !section
     ||
-    (
-      IS_GUARD_PROFILE
-      &&
-      section ===
-      'kpi'
+    !sectionAllowedForProfile(
+      section
     )
     ||
     SILENT_RETRY_TIMERS[
@@ -7947,10 +8846,11 @@ function sectionForTab(tab){
 
 
   if (
-    IS_GUARD_PROFILE
+    section
     &&
-    section ===
-    'kpi'
+    !sectionAllowedForProfile(
+      section
+    )
   ) {
 
     return '';
@@ -7963,53 +8863,6 @@ function sectionForTab(tab){
 
 function applyProfileUI(){
 
-  if (
-    IS_GUARD_PROFILE
-  ) {
-
-    const kpiTab =
-      document.querySelector(
-        '.tab[data-tab="kpi"]'
-      );
-
-
-    const kpiPanel =
-      document.querySelector(
-        '#kpi'
-      );
-
-
-    if (
-      kpiTab
-    ) {
-
-      kpiTab.style.display =
-        'none';
-
-
-      kpiTab.classList
-        .remove(
-          'active'
-        );
-    }
-
-
-    if (
-      kpiPanel
-    ) {
-
-      kpiPanel.style.display =
-        'none';
-
-
-      kpiPanel.classList
-        .remove(
-          'active'
-        );
-    }
-  }
-
-
   document
     .querySelectorAll(
       '.tab'
@@ -8021,6 +8874,14 @@ function applyProfileUI(){
           ALLOWED_TABS.includes(
             tab.dataset.tab
           );
+
+
+        tab.style.display =
+          allowed
+
+            ? ''
+
+            : 'none';
 
 
         tab.classList.toggle(
@@ -8047,6 +8908,14 @@ function applyProfileUI(){
           );
 
 
+        panel.style.display =
+          allowed
+
+            ? ''
+
+            : 'none';
+
+
         panel.classList.toggle(
           'active',
           allowed
@@ -8070,6 +8939,9 @@ function ensureTabData(tab){
   if (
     safeTab ===
     'resumen'
+    ||
+    safeTab ===
+    'conduccion'
   ) {
 
     const sections = [
@@ -8338,6 +9210,10 @@ function loadInitial(){
         () => {
 
           if (
+            sectionAllowedForProfile(
+              'os'
+            )
+            &&
             !READY.os
           ) {
 
@@ -8364,7 +9240,9 @@ function loadInitial(){
 
 
       if (
-        !IS_GUARD_PROFILE
+        sectionAllowedForProfile(
+          'kpi'
+        )
       ) {
 
         setTimeout(
@@ -8416,6 +9294,9 @@ function refreshActive(
   if (
     ACTIVE_TAB ===
     'resumen'
+    ||
+    ACTIVE_TAB ===
+    'conduccion'
   ) {
 
     sections = [
@@ -8632,6 +9513,7 @@ $('#datePicker')
       if (
         [
           'resumen',
+          'conduccion',
           'salidas',
           'guardia',
           'kpi'
