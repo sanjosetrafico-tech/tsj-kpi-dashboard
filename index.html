@@ -5072,7 +5072,12 @@ function renderConduccion(){
 
           [
             'Motivo',
-            'motivo'
+            'motivo',
+
+            v =>
+              v
+                ? `<span class="pill">${esc(v)}</span>`
+                : '—'
           ],
 
           [
@@ -5530,7 +5535,10 @@ function renderSalidas(){
       ${kpi(
         'Reemplazos de conductores',
         num(drivers.length),
-        key
+        key,
+        drivers.length > 0
+          ? 'absence-alert'
+          : ''
       )}
 
 
@@ -5753,7 +5761,12 @@ function renderSalidas(){
 
               [
                 'Motivo',
-                'motivo'
+                'motivo',
+
+                v =>
+                  v
+                    ? `<span class="pill">${esc(v)}</span>`
+                    : '—'
               ],
 
               [
@@ -7839,12 +7852,6 @@ function graphCurrentMonthValues(){
     latestGraphKpiRow();
 
 
-  /*
-   * Prioridad:
-   * 1. acumulado mensual enviado por V14
-   * 2. dato diario como fallback por compatibilidad
-   */
-
   const valueOrFallback =
     (
       monthlyValue,
@@ -8012,12 +8019,6 @@ function graphSeries(){
   const currentKey =
     currentGraphPeriodKey();
 
-
-  /*
-   * IMPORTANTE:
-   * El mes actual se completa con ACUMULADO MENSUAL,
-   * no con el último dato diario.
-   */
 
   const current =
     graphCurrentMonthValues();
