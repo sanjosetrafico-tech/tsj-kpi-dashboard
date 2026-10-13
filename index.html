@@ -2124,7 +2124,7 @@ if (IS_CONDUCTION_PROFILE) {
 ========================================================= */
 
 const LOCAL_CACHE_KEY =
-  'TSJ_DASHBOARD_CACHE_V13';
+  'TSJ_DASHBOARD_CACHE_V14';
 
 
 const LOCAL_CACHE_MAX_AGE =
@@ -7823,80 +7823,161 @@ function graphHistoryValue(
 }
 
 
-function graphSiniestrosLive(){
+/* =========================================================
+   ACUMULADO DEL MES ACTUAL
+========================================================= */
+
+function graphCurrentMonthValues(){
+
+  const accumulated =
+    DATA.kpi?.monthlyAccumulated
+    ||
+    {};
+
 
   const latest =
     latestGraphKpiRow();
 
 
-  const direct =
-    graphParseNumber(
-      latest.siniestros
-    );
+  /*
+   * Prioridad:
+   * 1. acumulado mensual enviado por V14
+   * 2. dato diario como fallback por compatibilidad
+   */
 
+  const valueOrFallback =
+    (
+      monthlyValue,
+      dailyValue
+    ) => {
 
-  if (direct !== null) {
-
-    return direct;
-  }
-
-
-  const indicators =
-    DATA.kpi?.indicators || [];
-
-
-  let total =
-    0;
-
-
-  let found =
-    false;
-
-
-  indicators.forEach(
-    row => {
-
-      const label =
-        normalizeText(
-          row.label ||
-          ''
+      const monthly =
+        graphParseNumber(
+          monthlyValue
         );
 
 
       if (
-        label.includes(
-          'SINIESTROS CON RESPONSABILIDAD'
-        )
-        ||
-        label.includes(
-          'SINIESTROS SIN RESPONSABILIDAD'
-        )
-        ||
-        label.includes(
-          'SINIESTROS SIN RESPONABILIDAD'
-        )
+        monthly !==
+        null
       ) {
 
-        const value =
-          graphParseNumber(
-            row.dayValue
-          );
-
-
-        if (value !== null) {
-
-          total += value;
-
-          found = true;
-        }
+        return monthly;
       }
+
+
+      return graphParseNumber(
+        dailyValue
+      );
+    };
+
+
+  let siniestrosTotal =
+    graphParseNumber(
+      accumulated
+        .siniestrosTotal
+    );
+
+
+  if (
+    siniestrosTotal ===
+    null
+  ) {
+
+    const con =
+      graphParseNumber(
+        accumulated
+          .siniestrosConResponsabilidad
+      );
+
+
+    const sin =
+      graphParseNumber(
+        accumulated
+          .siniestrosSinResponsabilidad
+      );
+
+
+    if (
+      con !== null
+      ||
+      sin !== null
+    ) {
+
+      siniestrosTotal =
+        (
+          con ||
+          0
+        )
+        +
+        (
+          sin ||
+          0
+        );
     }
-  );
+  }
 
 
-  return found
-    ? total
-    : null;
+  if (
+    siniestrosTotal ===
+    null
+  ) {
+
+    siniestrosTotal =
+      graphParseNumber(
+        latest.siniestros
+      );
+  }
+
+
+  return {
+
+    wara:
+      valueOrFallback(
+        accumulated.waraKm,
+        latest.wara
+      ),
+
+
+    waraBudget:
+      valueOrFallback(
+        accumulated.waraBudget,
+        latest.kmPresupuesto
+      ),
+
+
+    horario:
+      valueOrFallback(
+        accumulated.horario,
+        latest.horarioGeneral
+      ),
+
+
+    cabecera:
+      valueOrFallback(
+        accumulated.cabecera,
+        latest.horarioCab
+      ),
+
+
+    ipk:
+      valueOrFallback(
+        accumulated.ipk,
+        latest.ipk
+      ),
+
+
+    siniestros:
+      siniestrosTotal,
+
+
+    titularidad:
+      valueOrFallback(
+        accumulated.titularidad,
+        latest.titularidad
+      )
+
+  };
 }
 
 
@@ -7932,62 +8013,30 @@ function graphSeries(){
     currentGraphPeriodKey();
 
 
-  const latest =
-    latestGraphKpiRow();
+  /*
+   * IMPORTANTE:
+   * El mes actual se completa con ACUMULADO MENSUAL,
+   * no con el último dato diario.
+   */
 
-
-  const live = {
-
-    wara:
-      graphParseNumber(
-        latest.wara
-      ),
-
-    waraBudget:
-      graphParseNumber(
-        latest.kmPresupuesto
-      ),
-
-    horario:
-      graphParseNumber(
-        latest.horarioGeneral
-      ),
-
-    cabecera:
-      graphParseNumber(
-        latest.horarioCab
-      ),
-
-    ipk:
-      graphParseNumber(
-        latest.ipk
-      ),
-
-    siniestros:
-      graphSiniestrosLive(),
-
-    titularidad:
-      graphParseNumber(
-        latest.titularidad
-      )
-
-  };
+  const current =
+    graphCurrentMonthValues();
 
 
   const getValue =
     (
       map,
       monthKey,
-      liveValue
+      currentValue
     ) => {
 
       if (
         monthKey === currentKey
         &&
-        liveValue !== null
+        currentValue !== null
       ) {
 
-        return liveValue;
+        return currentValue;
       }
 
 
@@ -8013,7 +8062,7 @@ function graphSeries(){
                 .wara
                 .values,
               month.key,
-              live.wara
+              current.wara
             )
         ),
 
@@ -8025,7 +8074,7 @@ function graphSeries(){
                 .wara
                 .budget,
               month.key,
-              live.waraBudget
+              current.waraBudget
             )
         )
     },
@@ -8039,7 +8088,7 @@ function graphSeries(){
             getValue(
               GRAPH_HISTORY.horario,
               month.key,
-              live.horario
+              current.horario
             )
         ),
 
@@ -8058,7 +8107,7 @@ function graphSeries(){
             getValue(
               GRAPH_HISTORY.cabecera,
               month.key,
-              live.cabecera
+              current.cabecera
             )
         ),
 
@@ -8077,7 +8126,7 @@ function graphSeries(){
             getValue(
               GRAPH_HISTORY.ipk,
               month.key,
-              live.ipk
+              current.ipk
             )
         ),
 
@@ -8099,7 +8148,7 @@ function graphSeries(){
             getValue(
               GRAPH_HISTORY.siniestros,
               month.key,
-              live.siniestros
+              current.siniestros
             )
         ),
 
@@ -8121,7 +8170,7 @@ function graphSeries(){
             getValue(
               GRAPH_HISTORY.titularidad,
               month.key,
-              live.titularidad
+              current.titularidad
             )
         ),
 
@@ -8308,16 +8357,6 @@ function graphMetaChangeLabels(metas){
   return out;
 }
 
-
-/*
- * Crea tramos para la línea roja.
- *
- * Cuando la meta es fija:
- * se extiende de extremo a extremo.
- *
- * Cuando cambia:
- * cada tramo conserva su valor.
- */
 
 function graphLineSegments(
   metas,
@@ -8519,11 +8558,6 @@ function renderComboChart({
     260;
 
 
-  /*
-   * Dejamos un poco más de margen izquierdo
-   * para mostrar la leyenda META.
-   */
-
   const left =
     54;
 
@@ -8611,12 +8645,6 @@ function renderComboChart({
     });
   }
 
-
-  /*
-   * IMPORTANTE:
-   * La línea se genera antes de las barras.
-   * Por lo tanto queda visualmente atrás.
-   */
 
   const lineSegments =
     graphLineSegments(
@@ -8714,8 +8742,6 @@ function renderComboChart({
         ></line>
 
 
-        <!-- LINEA ROJA DETRAS DE LAS BARRAS -->
-
         ${
           lineSegments
           .map(
@@ -8736,8 +8762,6 @@ function renderComboChart({
           .join('')
         }
 
-
-        <!-- BARRAS -->
 
         ${
           values
@@ -8786,8 +8810,6 @@ function renderComboChart({
         }
 
 
-        <!-- VALORES BARRAS -->
-
         ${
           values
           .map(
@@ -8833,8 +8855,6 @@ function renderComboChart({
           .join('')
         }
 
-
-        <!-- META EN INICIO DE CADA TRAMO -->
 
         ${
           metaLabels
@@ -8895,8 +8915,6 @@ function renderComboChart({
           .join('')
         }
 
-
-        <!-- MESES -->
 
         ${
           months
@@ -10157,10 +10175,6 @@ function sectionForTab(tab){
     kpi:
       'kpi',
 
-    /*
-     * Gráficos utiliza el mismo bloque KPI.
-     * Evitamos una llamada extra a Apps Script.
-     */
     graficos:
       'kpi'
 
