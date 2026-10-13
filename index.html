@@ -23,6 +23,7 @@
   --warn:#d77817;
   --bad:#c43351;
   --blue:#2f80d0;
+  --target:#ef1717;
   --shadow:0 10px 30px rgba(44,30,39,.07);
 }
 
@@ -49,6 +50,10 @@ body{
 button,
 input{
   font:inherit;
+}
+
+body.chart-modal-open{
+  overflow:hidden;
 }
 
 .shell{
@@ -380,11 +385,7 @@ body.profile-conduccion .tab-panel:not(#conduccion){
 }
 
 #salidas .kpis.has-six{
-  grid-template-columns:
-    repeat(
-      6,
-      minmax(0,1fr)
-    );
+  grid-template-columns:repeat(6,minmax(0,1fr));
 }
 
 .kpi.absence-alert{
@@ -1277,6 +1278,24 @@ th{
   box-shadow:var(--shadow);
   padding:15px 15px 12px;
   min-width:0;
+
+  cursor:zoom-in;
+
+  transition:
+    transform .16s ease,
+    box-shadow .16s ease,
+    border-color .16s ease;
+}
+
+.chart-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 34px rgba(44,30,39,.11);
+  border-color:#ddd4d9;
+}
+
+.chart-card:focus-visible{
+  outline:3px solid rgba(237,46,145,.2);
+  outline-offset:3px;
 }
 
 .chart-card h3{
@@ -1315,6 +1334,17 @@ th{
   font-weight:800;
 }
 
+.chart-meta-label{
+  fill:var(--target);
+  font-size:7px;
+  font-weight:950;
+
+  paint-order:stroke;
+  stroke:#fff;
+  stroke-width:2.4px;
+  stroke-linejoin:round;
+}
+
 .chart-grid-line{
   stroke:#ebe7e9;
   stroke-width:1;
@@ -1331,14 +1361,14 @@ th{
 
 .chart-target{
   fill:none;
-  stroke:var(--pink);
-  stroke-width:2.5;
+  stroke:var(--target);
+  stroke-width:2.8;
   stroke-linecap:round;
   stroke-linejoin:round;
 }
 
 .chart-point{
-  fill:var(--pink);
+  fill:var(--target);
 }
 
 .chart-legend{
@@ -1368,7 +1398,7 @@ th{
 .chart-legend-line{
   width:20px;
   height:0;
-  border-top:3px solid var(--pink);
+  border-top:3px solid var(--target);
 }
 
 .chart-empty{
@@ -1379,6 +1409,163 @@ th{
   text-align:center;
   color:var(--muted);
   font-size:12px;
+}
+
+
+/* =========================================================
+   MODAL GRAFICOS
+========================================================= */
+
+.chart-modal{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:22px;
+
+  background:
+    rgba(
+      24,
+      20,
+      22,
+      .78
+    );
+
+  backdrop-filter:
+    blur(3px);
+}
+
+.chart-modal.open{
+  display:flex;
+}
+
+.chart-modal-dialog{
+  position:relative;
+
+  width:
+    min(
+      94vw,
+      1500px
+    );
+
+  max-height:
+    94vh;
+
+  overflow:auto;
+
+  padding:
+    28px;
+
+  background:#fff;
+
+  border-radius:20px;
+
+  box-shadow:
+    0 24px 70px
+    rgba(
+      0,
+      0,
+      0,
+      .28
+    );
+}
+
+.chart-modal-close{
+  position:absolute;
+
+  top:12px;
+  right:14px;
+
+  z-index:5;
+
+  width:40px;
+  height:40px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:0;
+
+  border:1px solid var(--line);
+
+  border-radius:50%;
+
+  background:#fff;
+
+  color:var(--ink);
+
+  font-size:26px;
+  line-height:1;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 5px 18px
+    rgba(
+      0,
+      0,
+      0,
+      .08
+    );
+}
+
+.chart-modal-close:hover{
+  background:#f7f4f5;
+}
+
+.chart-modal-body{
+  width:100%;
+}
+
+.chart-modal-body .chart-card{
+  width:100%;
+
+  margin:0;
+
+  padding:
+    18px 14px 8px;
+
+  border:0;
+
+  border-radius:0;
+
+  box-shadow:none;
+
+  cursor:default;
+
+  transform:none !important;
+}
+
+.chart-modal-body .chart-card:hover{
+  transform:none;
+  box-shadow:none;
+  border-color:transparent;
+}
+
+.chart-modal-body .chart-card h3{
+  padding-right:50px;
+  font-size:22px;
+}
+
+.chart-modal-body .chart-subtitle{
+  font-size:12px;
+}
+
+.chart-modal-body .chart-svg{
+  width:100%;
+  max-height:74vh;
+}
+
+.chart-modal-body .chart-legend{
+  margin-top:8px;
+  font-size:12px;
+  gap:24px;
 }
 
 
@@ -1443,7 +1630,6 @@ th{
   .plan-main{
     grid-template-columns:repeat(2,1fr);
   }
-
 }
 
 @media(max-width:720px){
@@ -1471,6 +1657,20 @@ th{
     grid-template-columns:1fr;
   }
 
+  .chart-modal{
+    padding:8px;
+  }
+
+  .chart-modal-dialog{
+    width:98vw;
+    padding:20px 8px 10px;
+    border-radius:14px;
+  }
+
+  .chart-modal-close{
+    top:8px;
+    right:8px;
+  }
 }
 
 
@@ -1511,7 +1711,8 @@ th{
   body.print-summary .tabs,
   body.print-summary .foot,
   body.print-summary #errorBox,
-  body.print-summary .summary-actions{
+  body.print-summary .summary-actions,
+  body.print-summary .chart-modal{
     display:none !important;
   }
 
@@ -1635,7 +1836,6 @@ th{
     grid-template-columns:1fr !important;
     gap:3mm !important;
   }
-
 }
 
 </style>
@@ -1818,6 +2018,39 @@ th{
   ></section>
 
 </main>
+
+
+<div
+  id="chartModal"
+  class="chart-modal"
+  aria-hidden="true"
+>
+
+  <div
+    class="chart-modal-dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Gráfico ampliado"
+  >
+
+    <button
+      id="chartModalClose"
+      class="chart-modal-close"
+      type="button"
+      aria-label="Cerrar gráfico"
+      onclick="closeChartModal()"
+    >
+      ×
+    </button>
+
+    <div
+      id="chartModalBody"
+      class="chart-modal-body"
+    ></div>
+
+  </div>
+
+</div>
 
 
 <footer class="foot">
@@ -7428,11 +7661,6 @@ function kpiCard(
 }
 
 
-/*
- * Evita repetir indicadores en el panel mensual.
- * Si la fuente trae el mismo indicador más de una vez,
- * conserva una sola fila y completa con el último dato válido.
- */
 function uniqueMonthlyIndicators(rows){
 
   const order = [];
@@ -8032,7 +8260,7 @@ function renderKPI(){
 
 
 /* =========================================================
-   GRAFICOS - 12 MESES
+   GRAFICOS
 ========================================================= */
 
 function graphParseNumber(value){
@@ -8064,13 +8292,6 @@ function graphParseNumber(value){
     );
 
 
-  /*
-   * Ej:
-   * 382.407 = 382407
-   * 2,04 = 2.04
-   * 2.04 = 2.04
-   * 382.407,50 = 382407.50
-   */
   if (
     /^-?\d{1,3}(?:\.\d{3})+(?:,\d+)?$/
       .test(
@@ -8711,6 +8932,157 @@ function chartDisplayValue(
 }
 
 
+/*
+ * Etiquetas para la línea roja.
+ *
+ * - Meta constante:
+ *   muestra una sola vez "Meta 90%".
+ *
+ * - Meta que cambia pocas veces:
+ *   muestra solamente cada cambio.
+ *
+ * - Meta que cambia casi todos los meses
+ *   como WARA:
+ *   muestra el valor de cada punto.
+ */
+function buildMetaLabels(
+  metas,
+  type
+){
+
+  const finite =
+    (
+      metas ||
+      []
+    )
+    .filter(
+      value =>
+        Number.isFinite(
+          value
+        )
+    );
+
+
+  const distinct =
+    [
+      ...new Set(
+        finite.map(
+          value =>
+            Number(
+              value
+            )
+            .toFixed(
+              6
+            )
+        )
+      )
+    ];
+
+
+  const changesOften =
+    distinct.length >
+    3;
+
+
+  const labels = [];
+
+
+  let previous =
+    null;
+
+
+  let previousWasFinite =
+    false;
+
+
+  (
+    metas ||
+    []
+  )
+  .forEach(
+    (
+      value,
+      index
+    ) => {
+
+      if (
+        !Number.isFinite(
+          value
+        )
+      ) {
+
+        previous =
+          null;
+
+
+        previousWasFinite =
+          false;
+
+
+        return;
+      }
+
+
+      const changed =
+        !previousWasFinite
+        ||
+        previous ===
+        null
+        ||
+        Math.abs(
+          Number(value)
+          -
+          Number(previous)
+        )
+        >
+        .000001;
+
+
+      if (
+        changesOften
+        ||
+        changed
+      ) {
+
+        labels.push({
+
+          index:
+            index,
+
+          value:
+            value,
+
+          text:
+            changesOften
+
+              ? chartDisplayValue(
+                  value,
+                  type
+                )
+
+              : 'Meta ' +
+                chartDisplayValue(
+                  value,
+                  type
+                )
+        });
+      }
+
+
+      previous =
+        value;
+
+
+      previousWasFinite =
+        true;
+    }
+  );
+
+
+  return labels;
+}
+
+
 function renderComboChart({
   title,
   months,
@@ -8741,7 +9113,14 @@ function renderComboChart({
 
     return `
 
-      <article class="chart-card">
+      <article
+        class="chart-card"
+        tabindex="0"
+        role="button"
+        aria-label="Ampliar gráfico ${esc(title)}"
+        onclick="openChartModal(this)"
+        onkeydown="handleChartKey(event,this)"
+      >
 
         <h3>
           ${esc(title)}
@@ -8872,10 +9251,6 @@ function renderComboChart({
   }
 
 
-  /*
-   * Divide la línea de meta si hay meses sin dato,
-   * para no inventar continuidad.
-   */
   const targetSegments = [];
 
   let currentSegment = [];
@@ -8937,16 +9312,30 @@ function renderComboChart({
   }
 
 
+  const metaLabels =
+    buildMetaLabels(
+      metas,
+      type
+    );
+
+
   return `
 
-    <article class="chart-card">
+    <article
+      class="chart-card"
+      tabindex="0"
+      role="button"
+      aria-label="Ampliar gráfico ${esc(title)}"
+      onclick="openChartModal(this)"
+      onkeydown="handleChartKey(event,this)"
+    >
 
       <h3>
         ${esc(title)}
       </h3>
 
       <div class="chart-subtitle">
-        Últimos 12 meses
+        Últimos 12 meses · clic para ampliar
       </div>
 
 
@@ -9142,6 +9531,91 @@ function renderComboChart({
 
 
         ${
+          metaLabels
+          .map(
+            item => {
+
+              const cx =
+                left
+                +
+                slot *
+                item.index
+                +
+                slot /
+                2;
+
+
+              const metaY =
+                y(
+                  item.value
+                );
+
+
+              const labelY =
+                metaY <
+                18
+
+                  ? metaY +
+                    13
+
+                  : metaY -
+                    7;
+
+
+              let anchor =
+                'middle';
+
+
+              let labelX =
+                cx;
+
+
+              if (
+                item.index ===
+                0
+              ) {
+
+                anchor =
+                  'start';
+
+
+                labelX +=
+                  3;
+              }
+
+
+              if (
+                item.index ===
+                11
+              ) {
+
+                anchor =
+                  'end';
+
+
+                labelX -=
+                  3;
+              }
+
+
+              return `
+
+                <text
+                  class="chart-meta-label"
+                  x="${labelX}"
+                  y="${labelY}"
+                  text-anchor="${anchor}"
+                >
+                  ${esc(item.text)}
+                </text>
+              `;
+            }
+          )
+          .join('')
+        }
+
+
+        ${
           months
           .map(
             (
@@ -9221,6 +9695,233 @@ function renderComboChart({
   `;
 }
 
+
+/* =========================================================
+   AMPLIAR GRAFICO
+========================================================= */
+
+function handleChartKey(
+  event,
+  card
+){
+
+  if (
+    event.key ===
+    'Enter'
+    ||
+    event.key ===
+    ' '
+  ) {
+
+    event.preventDefault();
+
+
+    openChartModal(
+      card
+    );
+  }
+}
+
+
+function openChartModal(card){
+
+  if (
+    !card
+  ) {
+
+    return;
+  }
+
+
+  const modal =
+    $('#chartModal');
+
+
+  const body =
+    $('#chartModalBody');
+
+
+  if (
+    !modal
+    ||
+    !body
+  ) {
+
+    return;
+  }
+
+
+  const clone =
+    card.cloneNode(
+      true
+    );
+
+
+  clone.removeAttribute(
+    'onclick'
+  );
+
+
+  clone.removeAttribute(
+    'onkeydown'
+  );
+
+
+  clone.removeAttribute(
+    'tabindex'
+  );
+
+
+  clone.removeAttribute(
+    'role'
+  );
+
+
+  clone.removeAttribute(
+    'aria-label'
+  );
+
+
+  const subtitle =
+    clone.querySelector(
+      '.chart-subtitle'
+    );
+
+
+  if (
+    subtitle
+  ) {
+
+    subtitle.textContent =
+      'Últimos 12 meses';
+  }
+
+
+  body.innerHTML =
+    '';
+
+
+  body.appendChild(
+    clone
+  );
+
+
+  modal.classList.add(
+    'open'
+  );
+
+
+  modal.setAttribute(
+    'aria-hidden',
+    'false'
+  );
+
+
+  document.body
+    .classList
+    .add(
+      'chart-modal-open'
+    );
+
+
+  setTimeout(
+    () => {
+
+      $('#chartModalClose')
+        ?.focus();
+
+    },
+    20
+  );
+}
+
+
+function closeChartModal(){
+
+  const modal =
+    $('#chartModal');
+
+
+  const body =
+    $('#chartModalBody');
+
+
+  if (
+    !modal
+  ) {
+
+    return;
+  }
+
+
+  modal.classList.remove(
+    'open'
+  );
+
+
+  modal.setAttribute(
+    'aria-hidden',
+    'true'
+  );
+
+
+  document.body
+    .classList
+    .remove(
+      'chart-modal-open'
+    );
+
+
+  if (
+    body
+  ) {
+
+    body.innerHTML =
+      '';
+  }
+}
+
+
+$('#chartModal')
+  ?.addEventListener(
+    'click',
+    event => {
+
+      if (
+        event.target ===
+        event.currentTarget
+      ) {
+
+        closeChartModal();
+      }
+    }
+  );
+
+
+document.addEventListener(
+  'keydown',
+  event => {
+
+    if (
+      event.key ===
+      'Escape'
+      &&
+      $('#chartModal')
+        ?.classList
+        .contains(
+          'open'
+        )
+    ) {
+
+      closeChartModal();
+    }
+  }
+);
+
+
+/* =========================================================
+   RENDER GRAFICOS
+========================================================= */
 
 function renderGraficos(){
 
@@ -10550,11 +11251,6 @@ function ensureTabData(tab){
       );
 
 
-      /*
-       * No mostrar cartel de error.
-       * Si el histórico todavía no existe,
-       * la página continúa funcionando.
-       */
       if (
         hasAnyVisibleData()
       ) {
@@ -10618,10 +11314,6 @@ function loadInitial(){
   }
 
 
-  /*
-   * No se cargan los gráficos históricos acá.
-   * Solo cuando el usuario abre la solapa.
-   */
   const initialSections = [
     'planServ',
     'salidas',
