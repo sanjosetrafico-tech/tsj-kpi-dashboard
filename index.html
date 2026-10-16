@@ -168,9 +168,9 @@ box-shadow:var(--shadow);
 table{width:100%;border-collapse:collapse;table-layout:fixed}
 th,td{padding:9px 8px;border-bottom:1px solid #eee9ec;font-size:11px;text-align:left;vertical-align:top;overflow-wrap:anywhere;line-height:1.3}
 th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;letter-spacing:.04em}
-.pill{display:inline-flex;border-radius:999px;padding:4px 8px;background:var(--pink-pale);color:var(--pink-dark);font-size:10px;font-weight:800}
-.pending-pill{display:inline-flex;padding:4px 8px;border-radius:999px;background:#fff0df;color:#a15a16;font-size:10px;font-weight:850}
-.resolved-pill{display:inline-flex;padding:4px 8px;border-radius:999px;background:#e7f5f0;color:var(--good);font-size:10px;font-weight:850}
+.pill{display:inline-flex;border-radius:999px;padding:4px 8px;background:var(--pink-pale);color:var(--pink-dark);font-size:10px;font-weight:800;text-transform:uppercase}
+.pending-pill{display:inline-flex;padding:4px 8px;border-radius:999px;background:#fff0df;color:#a15a16;font-size:10px;font-weight:850;text-transform:uppercase}
+.resolved-pill{display:inline-flex;padding:4px 8px;border-radius:999px;background:#e7f5f0;color:var(--good);font-size:10px;font-weight:850;text-transform:uppercase}
 .empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed #d7ced3;border-radius:12px}
 
 .summary-actions{display:flex;justify-content:flex-end;margin-bottom:14px}
@@ -458,6 +458,7 @@ body.print-summary .summary-lower-grid{display:grid!important;grid-template-colu
 <span>Transporte San José S.A. · Uso interno</span>
 <span id="updatedAt">Última actualización: —</span>
 </footer></div>
+
 <div id="unitsReportRoot" class="units-report-root" aria-hidden="true"></div>
 
 <script>
@@ -528,6 +529,56 @@ const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({
 const num=v=>Number(v||0).toLocaleString('es-AR');
 const pad2=v=>String(v).padStart(2,'0');
 
+function dashboardName(value){
+const raw=String(value??'').trim();
+if(!raw)return '';
+
+const format=text=>
+String(text||'')
+.toLocaleLowerCase('es-AR')
+.replace(
+/(^|[\s'’\-])([a-záéíóúüñ])/g,
+(_,sep,ch)=>sep+ch.toLocaleUpperCase('es-AR')
+);
+
+const match=
+raw.match(
+/^(\d{2,8})(?:\s*[-–—]\s*|\s+)(.+)$/
+);
+
+return match
+?match[1]+' '+format(match[2])
+:format(raw);
+}
+
+function dashboardCode(value){
+return String(value??'')
+.trim()
+.toLocaleUpperCase('es-AR');
+}
+
+function delayPill(value){
+const raw=String(value??'').trim();
+
+if(!raw)return '—';
+
+const parsed=
+parseFloat(
+raw
+.replace(',','.')
+.replace(/[^0-9.\-]/g,'')
+);
+
+const label=
+Number.isFinite(parsed)
+?parsed.toLocaleString('es-AR')+' min'
+:raw;
+
+return Number.isFinite(parsed)&&parsed>0
+?`<span class="pill">${esc(label)}</span>`
+:esc(label);
+}
+
 function sourceLabel(src){
 return src?.name?`Fuente: ${esc(src.name)}`:'Fuente no disponible';
 }
@@ -597,11 +648,7 @@ return `<svg viewBox="0 0 24 24"><path d="M14.5 6.5a5 5 0 0 0-6.8 6.1L3 17.3A2.6
 
 if(type==='road'){
 return `<svg viewBox="0 0 24 24"><path d="M8 3 5 21M16 3l3 18" ${common}></path><path d="M12 4v3M12 10v4M12 17v3" ${common}></path></svg>`;
-}
-return '';
-}
-
-function kpi(label,value,sub='',tone=''){
+}function kpi(label,value,sub='',tone=''){
 return `<article class="kpi ${tone}">
 <div class="label">${esc(label)}</div>
 <div class="value">${esc(value)}</div>
@@ -1113,9 +1160,7 @@ ${renderImpactChart(detours)}
 </section>
 
 </div>`;
-}
-
-function renderConduccion(){
+}function renderConduccion(){
 const key=selectedDDMM('conduccion');
 const plan=DATA.planServ||{};
 const salidas=DATA.salidas||{};
@@ -1168,9 +1213,9 @@ ${mini('Total citados',num(totalCitados))}
 
 ${table([
 ['Fecha','fecha'],
-['Conductor','conductor'],
+['Conductor','conductor',v=>esc(dashboardName(v))],
 ['Estado','estado',v=>`<span class="pill">${esc(v)}</span>`],
-['Turno','turno']
+['Turno','turno',v=>esc(dashboardCode(v))]
 ],absences)}
 </article>
 
@@ -1181,11 +1226,11 @@ ${table([
 </h3>
 
 ${table([
-['Titular','titular'],
-['Reemplazo','reemplazo'],
+['Titular','titular',v=>esc(dashboardName(v))],
+['Reemplazo','reemplazo',v=>esc(dashboardName(v))],
 ['Motivo','motivo',v=>v?`<span class="pill">${esc(v)}</span>`:'—'],
-['Línea','linea'],
-['Turno','turno']
+['Línea','linea',v=>esc(dashboardCode(v))],
+['Turno','turno',v=>esc(dashboardCode(v))]
 ],drivers)}
 </article>
 
@@ -1196,10 +1241,10 @@ ${table([
 </h3>
 
 ${table([
-['Conductor','chofer'],
+['Conductor','chofer',v=>esc(dashboardName(v))],
 ['Hs presentación','prevista'],
 ['Hs llegada','real'],
-['Demora','minutos',v=>`${num(v)} min`]
+['Demora','minutos',v=>delayPill(v)]
 ],late)}
 </article>`;
 }
@@ -1336,8 +1381,8 @@ ${table([
 ['Avería','averia'],
 ['Reemplazo','reemplazo'],
 ['Motivo','motivo',v=>`<span class="pill">${esc(v)}</span>`],
-['Línea','linea'],
-['Servicio','turno']
+['Línea','linea',v=>esc(dashboardCode(v))],
+['Servicio','turno',v=>esc(dashboardCode(v))]
 ],units)}
 
 </article>
@@ -1356,9 +1401,9 @@ hasAbsences
 </h3>
 ${table([
 ['Fecha','fecha'],
-['Conductor','conductor'],
+['Conductor','conductor',v=>esc(dashboardName(v))],
 ['Estado','estado',v=>`<span class="pill">${esc(v)}</span>`],
-['Turno','turno']
+['Turno','turno',v=>esc(dashboardCode(v))]
 ],absences)}
 </article>
 `
@@ -1371,11 +1416,11 @@ ${table([
 <span class="count-badge pink">${num(drivers.length)}</span>
 </h3>
 ${table([
-['Titular','titular'],
-['Reemplazo','reemplazo'],
+['Titular','titular',v=>esc(dashboardName(v))],
+['Reemplazo','reemplazo',v=>esc(dashboardName(v))],
 ['Motivo','motivo',v=>v?`<span class="pill">${esc(v)}</span>`:'—'],
-['Línea','linea'],
-['Turno','turno']
+['Línea','linea',v=>esc(dashboardCode(v))],
+['Turno','turno',v=>esc(dashboardCode(v))]
 ],drivers)}
 </article>
 
@@ -1386,10 +1431,10 @@ ${table([
 </h3>
 ${table([
 ['Fecha','fecha'],
-['Conductor','chofer'],
+['Conductor','chofer',v=>esc(dashboardName(v))],
 ['Prevista','prevista'],
 ['Real','real'],
-['Demora','minutos',v=>`${num(v)} min`]
+['Demora','minutos',v=>delayPill(v)]
 ],late)}
 </article>
 
@@ -1457,7 +1502,8 @@ const det=sortByLine(
 (d.detours||[]).filter(r=>sameDay(r.fecha,key))
 );
 
-const obs=(d.observations||[]).filter(r=>sameDay(r.fecha,key));const groupedObs=splitGuardiaObservations(obs);
+const obs=(d.observations||[]).filter(r=>sameDay(r.fecha,key));
+const groupedObs=splitGuardiaObservations(obs);
 
 const lines=new Set(
 [...aux,...inc,...det]
@@ -1504,7 +1550,7 @@ ${kpi('Líneas afectadas',num(lines.size),'Líneas reales')}
 </h3>
 
 ${table([
-['Línea','linea'],
+['Línea','linea',v=>esc(dashboardCode(v))],
 ['Interno','interno'],
 ['Falla','falla',v=>esc(normalizeMechanicalCategory(v))],
 ['Hs solicitud','hsSolicitud'],
@@ -1527,7 +1573,7 @@ v=>v
 </h3>
 
 ${table([
-['Línea','linea'],
+['Línea','linea',v=>esc(dashboardCode(v))],
 ['Interno','interno'],
 ['Falla','falla',v=>esc(normalizeMechanicalCategory(v))],
 ['Intervención','intervencion'],
@@ -1556,8 +1602,8 @@ return `<span class="pending-pill">Pendiente</span>`;
 </h3>
 
 ${table([
-['Titular','titular'],
-['Reemplazo','reemplazo'],
+['Titular','titular',v=>esc(dashboardName(v))],
+['Reemplazo','reemplazo',v=>esc(dashboardName(v))],
 [
 'Motivo',
 'motivo',
@@ -1565,8 +1611,8 @@ v=>v
 ?`<span class="pill">${esc(v)}</span>`
 :'—'
 ],
-['Línea','linea'],
-['Turno','turno']
+['Línea','linea',v=>esc(dashboardCode(v))],
+['Turno','turno',v=>esc(dashboardCode(v))]
 ],drv)}
 
 </article>
@@ -1593,7 +1639,7 @@ ${bars(countByNormalizedLine(det))}
 </h3>
 
 ${table([
-['Línea','linea'],
+['Línea','linea',v=>esc(dashboardCode(v))],
 ['Ubicación','ubicacion'],
 ['Motivo','motivo'],
 ['Desvío','desvio']
@@ -1641,9 +1687,7 @@ groupedObs.tarde,
 
 </article>
 `;
-}
-
-function renderOS(){
+}function renderOS(){
 const d=DATA.os||{};
 const s=d.summary||{};
 
@@ -1690,12 +1734,12 @@ ${bars(d.topDrivers)}
 ${table([
 ['Fecha','fecha'],
 ['Legajo','legajo'],
-['Conductor','nombre'],
-['Línea','linea'],
+['Conductor','nombre',v=>esc(dashboardName(v))],
+['Línea','linea',v=>esc(dashboardCode(v))],
 ['Interno','interno'],
 ['Motivo','motivo'],
 ['Observación','observacion'],
-['Agente','agente']
+['Agente','agente',v=>esc(dashboardName(v))]
 ],d.rows||[])}
 
 </article>`;
@@ -2331,8 +2375,9 @@ points.push(`${endX},${last.y}`);
 
 return points;
 });
-}function renderComboChart({
-title,
+}
+
+function renderComboChart({title,
 months,
 values,
 metas,
@@ -3209,9 +3254,7 @@ allowed&&panel.id===ACTIVE_TAB
 
 });
 
-}
-
-function ensureTabData(tab){
+}function ensureTabData(tab){
 
 const safeTab=sanitizeTab(tab);
 
@@ -3509,7 +3552,9 @@ renderActiveTab(true);
 $('#refreshBtn').addEventListener(
 'click',
 ()=>refreshActive(true)
-);/* =========================================================
+);
+
+/* =========================================================
    REPORTE REEMPLAZOS DE UNIDADES
 ========================================================= */
 
