@@ -231,7 +231,8 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 .impact-track{height:13px;border-radius:999px;background:#eceaec;overflow:hidden}
 .impact-fill{height:100%;background:var(--pink);border-radius:999px}
 .impact-value{text-align:right;font-size:12px;font-weight:850}
-.impact-empty{padding:35px 10px;text-align:center;color:var(--muted)}.plan-hero{display:grid;grid-template-columns:260px 1fr;gap:16px;margin-bottom:14px}
+.impact-empty{padding:35px 10px;text-align:center;color:var(--muted)}
+.plan-hero{display:grid;grid-template-columns:260px 1fr;gap:16px;margin-bottom:14px}
 .gauge-card{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px}
 .gauge{--p:0;--gauge-color:var(--pink);position:relative;width:154px;height:154px;border-radius:50%;background:conic-gradient(var(--gauge-color) calc(var(--p)*1%),#eee8eb 0);display:grid;place-items:center}
 .gauge:after{content:"";position:absolute;width:116px;height:116px;border-radius:50%;background:#fff}
@@ -326,7 +327,8 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 .chart-svg{width:100%;height:auto;display:block;overflow:visible}
 .chart-axis-label{fill:#756e73;font-size:8px;font-weight:700}
 .chart-month-label{fill:#756e73;font-size:7px}
-.chart-value-label{fill:#4f494d;font-size:7px;font-weight:800;paint-order:stroke;stroke:#fff;stroke-width:2px}.chart-meta-label{fill:var(--target);font-size:7px;font-weight:950;paint-order:stroke;stroke:#fff;stroke-width:2.4px;stroke-linejoin:round}
+.chart-value-label{fill:#4f494d;font-size:7px;font-weight:800;paint-order:stroke;stroke:#fff;stroke-width:2px}
+.chart-meta-label{fill:var(--target);font-size:7px;font-weight:950;paint-order:stroke;stroke:#fff;stroke-width:2.4px;stroke-linejoin:round}
 .chart-grid-line{stroke:#ebe7e9;stroke-width:1}
 .chart-axis-line{stroke:#bdb6ba;stroke-width:1}
 .chart-bar{fill:#173a78}
@@ -526,7 +528,7 @@ return true;
 if(IS_GUARD_PROFILE)document.body.classList.add('profile-guardia');
 if(IS_CONDUCTION_PROFILE)document.body.classList.add('profile-conduccion');
 
-const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V16';
+const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V17';
 const LOCAL_CACHE_MAX_AGE=12*60*60*1000;
 const REQUEST_TIMEOUT=45000;
 
@@ -646,9 +648,7 @@ function saveLocalSnapshot(){
 try{
 localStorage.setItem(LOCAL_CACHE_KEY,JSON.stringify({savedAt:Date.now(),data:DATA}));
 }catch(err){}
-}
-
-function svgIcon(type){
+}function svgIcon(type){
 const common=`fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"`;
 
 if(type==='check'){
@@ -948,7 +948,8 @@ return extractNumericPrefix(row?.titular)
 ||'';
 }
 
-function getDriverSurname(row){const values=[row?.apellido,row?.titular,row?.conductor,row?.chofer,row?.reemplazo,row?.nombre];
+function getDriverSurname(row){
+const values=[row?.apellido,row?.titular,row?.conductor,row?.chofer,row?.reemplazo,row?.nombre];
 for(let value of values){
 if(!String(value||'').trim())continue;
 let text=String(value).replace(/^\d{2,8}(?:\s*[-–—]\s*|\s+)/,'').trim();
@@ -1190,7 +1191,9 @@ ${renderImpactChart(detours)}
 </section>
 
 </div>`;
-}function renderConduccion(){
+}
+
+function renderConduccion(){
 const key=selectedDDMM('conduccion');
 const plan=DATA.planServ||{};
 const salidas=DATA.salidas||{};
@@ -1297,8 +1300,7 @@ $('#plan').innerHTML=`
 <div class="gauge-content">
 <b>${num(comp)}%</b>
 <span>${num(d.serviceDone)} / ${num(d.servicePlanned)}</span>
-</div>
-</div>
+</div></div>
 <div class="gauge-label">Cumplimiento Línea TM</div>
 </article>
 
@@ -1716,7 +1718,9 @@ groupedObs.tarde,
 
 </article>
 `;
-}function osHistoryRows(){
+}
+
+function osHistoryRows(){
 const d=DATA.os||{};
 return Array.isArray(d.historyRows)?d.historyRows:Array.isArray(d.allRows)?d.allRows:(d.rows||[]);
 }
@@ -1780,7 +1784,8 @@ return haystack.includes(query);
 }).slice(0,10);
 
 if(!matches.length){
-box.innerHTML=`<div class="os-history-empty" style="margin:8px">Sin coincidencias.</div>`;box.classList.add('show');
+box.innerHTML=`<div class="os-history-empty" style="margin:8px">Sin coincidencias.</div>`;
+box.classList.add('show');
 return;
 }
 
@@ -1946,9 +1951,7 @@ return Number.isFinite(n)?n:null;
 
 function metricPass(value,meta){
 const n=rawNumber(value);
-const t=rawNumber(meta);
-
-if(n===null||t===null)return null;
+const t=rawNumber(meta);if(n===null||t===null)return null;
 
 const s=String(meta||'').replace(/\s+/g,'');
 
@@ -2032,7 +2035,9 @@ return indicators.find(item=>{
 const label=normalizeText(item.label||'');
 return matchers.some(matcher=>label.includes(matcher));
 })||{};
-};const siniestrosConResponsabilidad=
+};
+
+const siniestrosConResponsabilidad=
 findIndicator(['SINIESTROS CON RESPONSABILIDAD']);
 
 const siniestrosSinResponsabilidad=
@@ -2597,9 +2602,7 @@ const top=22;
 const bottom=47;
 
 const plotW=width-left-right;
-const plotH=height-top-bottom;
-
-const maxY=niceChartMax(values,metas,fixedMax);
+const plotH=height-top-bottom;const maxY=niceChartMax(values,metas,fixedMax);
 const slot=plotW/12;
 
 const barW=Math.max(
@@ -3247,9 +3250,7 @@ return;
 resolve(payload);
 };
 
-script.onerror=()=>fail('No se pudo conectar con la fuente de datos.');
-
-const timer=setTimeout(
+script.onerror=()=>fail('No se pudo conectar con la fuente de datos.');const timer=setTimeout(
 ()=>fail('La fuente de datos demoró demasiado.'),
 REQUEST_TIMEOUT
 );
@@ -3435,7 +3436,9 @@ allowed&&panel.id===ACTIVE_TAB
 
 });
 
-}function ensureTabData(tab){
+}
+
+function ensureTabData(tab){
 
 const safeTab=sanitizeTab(tab);
 
@@ -3454,7 +3457,8 @@ const sections=[
 return Promise.allSettled(
 sections.map(section=>
 READY[section]
-?Promise.resolve():requestSection(section)
+?Promise.resolve()
+:requestSection(section)
 )
 );
 
@@ -3579,25 +3583,30 @@ setStatus(false,'Actualizando…');
 
 renderActiveTab(true);
 
+/*
+ * OS se actualiza SIEMPRE.
+ * Aunque exista snapshot local.
+ */
 setTimeout(()=>{
 
 if(
 sectionAllowedForProfile('os')
-&&
-!READY.os
 ){
-requestSection('os').catch(()=>{});
+requestSection('os',true,0).catch(()=>{});
 }
 
 },300);
 
+
+/*
+ * KPI también se actualiza SIEMPRE.
+ * Gráficos depende de esta misma fuente.
+ */
 if(sectionAllowedForProfile('kpi')){
 
 setTimeout(()=>{
 
-if(!READY.kpi){
-requestSection('kpi').catch(()=>{});
-}
+requestSection('kpi',true,0).catch(()=>{});
 
 },700);
 
@@ -3901,8 +3910,7 @@ return `<div class="empty">Sin datos.</div>`;
 }
 
 const max=
-Math.max(
-...rows.map(item=>
+Math.max(...rows.map(item=>
 Number(item.value||0)
 ),
 1
@@ -4551,8 +4559,7 @@ root.setAttribute(
 'true'
 );
 
-root.innerHTML=
-'';
+root.innerHTML='';
 
 document.title=
 previousTitle;
