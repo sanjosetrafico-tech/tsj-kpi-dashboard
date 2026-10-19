@@ -280,6 +280,39 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 .shift-empty{color:var(--muted);font-size:12px;padding:3px 0}
 
 
+/* OS · BUSCADOR HISTORICO POR CONDUCTOR */
+.os-section-head{align-items:flex-start}
+.os-header-tools{display:flex;align-items:center;justify-content:flex-end;gap:14px;flex-wrap:wrap}
+.os-driver-search{position:relative;width:310px;max-width:44vw;z-index:30}
+.os-search-box{height:42px;display:flex;align-items:center;gap:9px;padding:0 11px;background:var(--ink);color:#fff;border-radius:12px;box-shadow:0 5px 14px rgba(24,20,22,.08)}
+.os-search-icon{width:17px;height:17px;flex:0 0 17px;opacity:.82}
+.os-search-icon svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.os-search-input{width:100%;min-width:0;border:0!important;outline:0!important;background:transparent!important;color:#fff!important;font-size:12px;font-weight:800;padding:0!important}
+.os-search-input::placeholder{color:#d1cbcf;opacity:1}
+.os-search-clear{width:24px;height:24px;display:none;align-items:center;justify-content:center;flex:0 0 24px;border:0;background:rgba(255,255,255,.12);color:#fff;border-radius:50%;padding:0;cursor:pointer;font-size:15px;line-height:1}
+.os-search-clear.show{display:flex}
+.os-search-results{position:absolute;top:calc(100% + 7px);left:0;right:0;display:none;max-height:300px;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 40px rgba(44,30,39,.16);padding:6px}
+.os-search-results.show{display:block}
+.os-search-option{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;border:0;background:#fff;border-radius:9px;padding:10px 10px;text-align:left;cursor:pointer}.os-search-option:hover,.os-search-option:focus{background:#faf5f8;outline:0}
+.os-search-option-main{min-width:0;font-size:12px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.os-search-option-main b{font-weight:900}
+.os-search-option-count{flex:0 0 auto;padding:4px 7px;border-radius:999px;background:var(--pink-pale);color:var(--pink-dark);font-size:9px;font-weight:900;text-transform:uppercase}
+.os-search-empty{padding:12px;color:var(--muted);font-size:11px;text-align:center}
+.os-history-panel{border-top:5px solid var(--pink);margin-top:14px}
+.os-history-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:14px}
+.os-history-title-wrap h3{margin:0 0 4px;font-size:16px}
+.os-history-title-wrap p{margin:0;color:var(--muted);font-size:11px}
+.os-history-scope{flex:0 0 auto;padding:6px 9px;border-radius:999px;background:#f3eff1;color:#6b6368;font-size:9px;font-weight:850;text-transform:uppercase}
+.os-history-scope.full{background:#e7f5f0;color:var(--good)}
+.os-history-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.os-history-kpi{padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:#fff}
+.os-history-kpi .label{color:var(--muted);font-size:9px;font-weight:850;text-transform:uppercase;letter-spacing:.04em}
+.os-history-kpi .value{margin-top:5px;font-size:20px;font-weight:950;line-height:1.08}
+.os-history-kpi .sub{margin-top:4px;color:var(--muted);font-size:9px;line-height:1.25}
+.os-history-hint{margin:14px 0 0;padding:13px;border:1px dashed #d8cfd4;border-radius:12px;color:var(--muted);font-size:11px;text-align:center}
+.os-history-table-wrap{margin-top:2px}
+
+
 .kpi-dashboard{display:grid;grid-template-columns:1.8fr 1fr;gap:18px;align-items:start}
 .kpi-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-content:start}
 .kpi-ref-card{padding:14px 16px;min-height:112px}
@@ -344,6 +377,9 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 .kpis{grid-template-columns:repeat(3,1fr)}
 #salidas .kpis.has-six{grid-template-columns:repeat(3,1fr)}
 .summary-kpis{grid-template-columns:repeat(2,1fr)}
+.os-history-kpis{grid-template-columns:repeat(2,1fr)}
+.os-header-tools{width:100%;justify-content:space-between}
+.os-driver-search{width:min(420px,100%);max-width:none}
 .summary-lower-grid,.planillaria-board,.plan-hero,.kpi-dashboard,.guard-mechanical-grid{grid-template-columns:1fr}
 .chart-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .planillaria-right,.planillaria-right.has-absence,.planillaria-right.has-observations,.planillaria-right.has-absence.has-observations{grid-template-rows:auto}
@@ -352,6 +388,10 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 @media(max-width:720px){
 .shell{padding:18px 14px 35px}
 .top,.hero,.section-head{flex-direction:column;align-items:flex-start}
+.os-header-tools{width:100%;align-items:stretch;flex-direction:column}
+.os-driver-search{width:100%;max-width:none}
+.os-history-kpis{grid-template-columns:1fr}
+.os-history-head{flex-direction:column}
 .summary-alert-grid,.grid3,.chart-grid{grid-template-columns:1fr}
 .chart-modal{padding:8px}
 .chart-modal-dialog{width:98vw;padding:20px 8px 10px;border-radius:14px}
@@ -552,6 +592,9 @@ const SILENT_RETRY_TIMERS={};
 const SILENT_RETRY_ATTEMPTS={};
 const SILENT_RETRY_DELAYS=[10000,30000,60000];
 
+let OS_DRIVER_QUERY='';
+let OS_DRIVER_SELECTED='';
+
 
 const $=s=>document.querySelector(s);
 
@@ -738,8 +781,7 @@ if(!rows?.length)return `<div class="empty">Sin registros.</div>`;
 return `<div class="table-wrap"><table><thead><tr>${
 headers.map(h=>`<th>${esc(h[0])}</th>`).join('')
 }</tr></thead><tbody>${
-rows.map(r=>`<tr>${
-headers.map(h=>`<td>${h[2]?h[2](r[h[1]],r):esc(r[h[1]]??'')}</td>`).join('')
+rows.map(r=>`<tr>${headers.map(h=>`<td>${h[2]?h[2](r[h[1]],r):esc(r[h[1]]??'')}</td>`).join('')
 }</tr>`).join('')
 }</tbody></table></div>`;
 }
@@ -1434,8 +1476,7 @@ $('#plan').innerHTML=`
 ${mini('Servicio completo',`${num(d.serviceDone)}/${num(d.servicePlanned)}`,comp>=100?'good':'')}
 ${mini('Cortados',`${num(d.cortadoDone)}/${num(d.cortadoPlanned)}`)}
 ${mini('Refuerzos',`${num(d.refuerzoDone)}/${num(d.refuerzoPlanned)}`)}
-${mini('Especiales',`${num(d.especialDone)}/${num(d.especialPlanned)}`)}
-${mini('Francos trabajados',num(d.francos))}
+${mini('Especiales',`${num(d.especialDone)}/${num(d.especialPlanned)}`)}${mini('Francos trabajados',num(d.francos))}
 ${mini('Relevantes citados',`${num(d.relevantesTM)} TM · ${num(d.relevantesTT)} TT`)}
 ${mini('Inasist. relevantes',num(d.inasistenciaRelevantes),(+d.inasistenciaRelevantes||0)>0?'bad':'good')}
 ${mini('Inasistencias TM',num(d.inasistenciasTM),(+d.inasistenciasTM||0)>0?'bad':'good')}
@@ -1921,18 +1962,335 @@ groupedObs.tarde,
 
 </article>
 `;
-}function renderOS(){
+}
+
+function osHistoryRows(){
+const d=DATA.os||{};
+
+if(Array.isArray(d.historyRows))return d.historyRows;
+if(Array.isArray(d.allRows))return d.allRows;
+if(Array.isArray(d.historico))return d.historico;
+
+return Array.isArray(d.rows)?d.rows:[];
+}
+
+function osHasExplicitHistory(){
+const d=DATA.os||{};
+return Array.isArray(d.historyRows)||Array.isArray(d.allRows)||Array.isArray(d.historico);
+}
+
+function osDriverKey(row){
+const legajo=String(row?.legajo??'').trim();
+if(legajo)return 'L:'+legajo;
+
+const name=normalizeText(row?.nombre||row?.conductor||row?.chofer||'');
+return name?'N:'+name:'';
+}
+
+function osDriverName(row){
+return dashboardName(row?.nombre||row?.conductor||row?.chofer||'');
+}
+
+function osDriverCandidates(){
+const map=new Map();
+
+osHistoryRows().forEach(row=>{
+const key=osDriverKey(row);
+if(!key)return;
+
+const legajo=String(row?.legajo??'').trim();
+const nombre=osDriverName(row);
+
+if(!map.has(key)){
+map.set(key,{key,legajo,nombre,count:0});
+}
+
+map.get(key).count++;
+});
+
+return [...map.values()].sort((a,b)=>
+String(a.legajo||'999999').localeCompare(String(b.legajo||'999999'),'es',{numeric:true})
+||
+String(a.nombre||'').localeCompare(String(b.nombre||''),'es')
+);
+}
+
+function osSearchCandidates(query){
+const q=normalizeText(query);
+if(!q)return [];
+
+return osDriverCandidates().filter(item=>{
+const haystack=normalizeText(`${item.legajo} ${item.nombre}`);
+return haystack.includes(q);
+}).slice(0,12);
+}
+
+function osHistoryDateValue(value){
+const text=String(value||'').trim();
+const match=text.match(/^(\d{1,2})[\/-](\d{1,2})(?:[\/-](\d{2,4}))?/);
+if(!match)return 0;
+
+let year=match[3]?Number(match[3]):Number(DATA.period?.year||new Date().getFullYear());
+if(year<100)year+=2000;
+
+return new Date(year,Number(match[2])-1,Number(match[1])).getTime();
+}
+
+function osRowsForDriver(key){
+return osHistoryRows()
+.filter(row=>osDriverKey(row)===key)
+.sort((a,b)=>osHistoryDateValue(b.fecha)-osHistoryDateValue(a.fecha));
+}
+
+function osLatestDate(rows){
+if(!rows.length)return '—';
+return String(rows[0]?.fecha||'—');
+}
+
+function osMainReason(rows){
+const reasons=countBy(rows,'motivo');
+return reasons[0]||{label:'—',value:0};
+}
+
+function osDriverLineCount(rows){
+return new Set((rows||[]).map(r=>normalizeBaseLine(r.linea)).filter(Boolean)).size;
+}
+
+function hideOSDriverSuggestions(){
+const box=$('#osDriverSuggestions');
+if(box)box.classList.remove('show');
+}
+
+function renderOSDriverSuggestions(){
+const box=$('#osDriverSuggestions');
+if(!box)return;
+
+const query=String(OS_DRIVER_QUERY||'').trim();
+
+if(!query){
+box.innerHTML='';
+box.classList.remove('show');
+return;
+}
+
+const items=osSearchCandidates(query);
+
+if(!items.length){
+box.innerHTML=`<div class="os-search-empty">Sin coincidencias por legajo o apellido.</div>`;
+box.classList.add('show');
+return;
+}
+
+box.innerHTML=items.map(item=>{
+const encoded=encodeURIComponent(item.key);
+const legajo=item.legajo?`<b>${esc(item.legajo)}</b> · `:'';
+return `
+<button type="button" class="os-search-option" onclick="selectOSDriver('${encoded}')">
+<span class="os-search-option-main">${legajo}${esc(item.nombre||'Sin nombre')}</span>
+<span class="os-search-option-count">${num(item.count)} OS</span>
+</button>`;
+}).join('');
+
+box.classList.add('show');
+}
+
+function renderOSDriverHistory(){
+const root=$('#osDriverHistory');
+if(!root)return;
+
+if(!OS_DRIVER_SELECTED){
+root.innerHTML='';
+return;
+}
+
+const rows=osRowsForDriver(OS_DRIVER_SELECTED);
+const candidate=osDriverCandidates().find(item=>item.key===OS_DRIVER_SELECTED);
+
+if(!candidate||!rows.length){
+root.innerHTML=`<article class="panel os-history-panel"><div class="empty">Sin OS registradas para el conductor seleccionado.</div></article>`;
+return;
+}
+
+const mainReason=osMainReason(rows);
+const lineCount=osDriverLineCount(rows);
+const explicit=osHasExplicitHistory();
+
+root.innerHTML=`
+<article class="panel os-history-panel">
+
+<div class="os-history-head">
+<div class="os-history-title-wrap">
+<h3>Histórico de OS · ${candidate.legajo?esc(candidate.legajo)+' · ':''}${esc(candidate.nombre)}</h3>
+<p>Órdenes de servicio emitidas para el conductor seleccionado.</p>
+</div>
+
+<span class="os-history-scope ${explicit?'full':''}">
+${explicit?'Histórico completo':'Carga disponible'}
+</span>
+</div>
+
+<div class="os-history-kpis">
+<div class="os-history-kpi">
+<div class="label">Total OS</div>
+<div class="value">${num(rows.length)}</div>
+<div class="sub">Registros del conductor</div>
+</div>
+
+<div class="os-history-kpi">
+<div class="label">Última OS</div>
+<div class="value">${esc(osLatestDate(rows))}</div>
+<div class="sub">Registro más reciente</div>
+</div>
+
+<div class="os-history-kpi">
+<div class="label">Motivo principal</div>
+<div class="value" style="font-size:15px">${esc(dashboardName(mainReason.label))}</div>
+<div class="sub">${num(mainReason.value)} ${mainReason.value===1?'registro':'registros'}</div>
+</div>
+
+<div class="os-history-kpi">
+<div class="label">Líneas involucradas</div>
+<div class="value">${num(lineCount)}</div>
+<div class="sub">Líneas con OS registradas</div>
+</div>
+</div>
+
+<div class="os-history-table-wrap">
+${table([
+['Fecha','fecha'],
+['Legajo','legajo'],
+['Conductor','nombre',v=>esc(dashboardName(v))],
+['Línea','linea',v=>esc(dashboardCode(v))],
+['Interno','interno'],
+['Motivo','motivo',v=>v?`<span class="pill">${esc(v)}</span>`:'—'],
+['Observación','observacion'],
+['Agente','agente',v=>esc(dashboardName(v))]
+],rows)}
+</div>
+
+${explicit?'':`<div class="os-history-hint">La interfaz ya está preparada para el histórico completo. Con la carga actual, el buscador utiliza los registros que entrega la sección OS.</div>`}
+
+</article>`;
+}
+
+function selectOSDriver(encodedKey){
+const key=decodeURIComponent(encodedKey||'');
+const candidate=osDriverCandidates().find(item=>item.key===key);
+if(!candidate)return;
+
+OS_DRIVER_SELECTED=key;
+OS_DRIVER_QUERY=`${candidate.legajo?candidate.legajo+' · ':''}${candidate.nombre}`;
+
+const input=$('#osDriverSearchInput');
+if(input)input.value=OS_DRIVER_QUERY;
+
+const clear=$('#osDriverSearchClear');
+if(clear)clear.classList.add('show');
+
+hideOSDriverSuggestions();
+renderOSDriverHistory();
+}
+
+function handleOSDriverSearch(value){
+OS_DRIVER_QUERY=String(value||'');
+OS_DRIVER_SELECTED='';
+
+const clear=$('#osDriverSearchClear');
+if(clear)clear.classList.toggle('show',!!OS_DRIVER_QUERY.trim());
+
+renderOSDriverHistory();
+renderOSDriverSuggestions();
+
+const q=normalizeText(OS_DRIVER_QUERY);
+if(!q)return;
+
+const matches=osSearchCandidates(OS_DRIVER_QUERY);
+const exact=matches.find(item=>
+String(item.legajo||'')===OS_DRIVER_QUERY.trim()
+||
+normalizeText(item.nombre)===q
+);
+
+if(exact){
+selectOSDriver(encodeURIComponent(exact.key));
+}
+}
+
+function clearOSDriverSearch(){
+OS_DRIVER_QUERY='';
+OS_DRIVER_SELECTED='';
+
+const input=$('#osDriverSearchInput');
+if(input){
+input.value='';
+input.focus();
+}
+
+const clear=$('#osDriverSearchClear');
+if(clear)clear.classList.remove('show');
+
+hideOSDriverSuggestions();
+renderOSDriverHistory();
+}
+
+function initOSDriverSearch(){
+const input=$('#osDriverSearchInput');
+if(!input)return;
+
+input.value=OS_DRIVER_QUERY;
+
+const clear=$('#osDriverSearchClear');
+if(clear)clear.classList.toggle('show',!!OS_DRIVER_QUERY.trim());
+
+if(OS_DRIVER_SELECTED){
+renderOSDriverHistory();
+}
+}
+
+function renderOS(){
 const d=DATA.os||{};
 const s=d.summary||{};
 
 
 $('#os').innerHTML=`
-<div class="section-head">
+<div class="section-head os-section-head">
 <h2>OS</h2>
+
+<div class="os-header-tools">
+<div class="os-driver-search">
+<div class="os-search-box">
+<span class="os-search-icon" aria-hidden="true">
+<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg>
+</span>
+
+<input
+id="osDriverSearchInput"
+class="os-search-input"
+type="text"
+autocomplete="off"
+placeholder="Legajo o apellido"
+oninput="handleOSDriverSearch(this.value)"
+onfocus="renderOSDriverSuggestions()"
+onblur="setTimeout(hideOSDriverSuggestions,180)"
+>
+
+<button
+id="osDriverSearchClear"
+type="button"
+class="os-search-clear"
+aria-label="Limpiar búsqueda"
+onclick="clearOSDriverSearch()"
+>×</button>
+</div>
+
+<div id="osDriverSuggestions" class="os-search-results"></div>
+</div>
+
 <div class="source">
 ${sourceLabel(DATA.sources?.os||d.source)}
 <br>
 Acumulado ${esc(monthLabel())}
+</div>
 </div>
 </div>
 
@@ -1969,6 +2327,7 @@ ${bars(d.topDrivers)}
 
 </div>
 
+<div id="osDriverHistory"></div>
 
 <article class="panel">
 <h3>Detalle de solicitudes OS · mes</h3>
@@ -1987,6 +2346,8 @@ ${table([
 
 
 </article>`;
+
+requestAnimationFrame(initOSDriverSearch);
 }
 
 
@@ -2027,8 +2388,7 @@ return n>=t;
 
 function metricProgress(value){
 const n=rawNumber(value);
-if(n===null)return 0;
-return Math.max(0,Math.min(100,n));
+if(n===null)return 0;return Math.max(0,Math.min(100,n));
 }
 
 
@@ -2736,8 +3096,7 @@ return points;
 }
 
 
-function renderComboChart({
-title,
+function renderComboChart({title,
 months,
 values,
 metas,
@@ -3026,7 +3385,10 @@ MESES
 
 
 </article>`;
-}function handleChartKey(event,card){
+}
+
+
+function handleChartKey(event,card){
 if(event.key==='Enter'||event.key===' '){
 event.preventDefault();
 openChartModal(card);
@@ -3296,10 +3658,7 @@ switch(ACTIVE_TAB){
 
 case 'resumen':
 renderResumen();
-break;
-
-
-case 'conduccion':
+break;case 'conduccion':
 renderConduccion();
 break;
 
@@ -3793,9 +4152,7 @@ allowed&&panel.id===ACTIVE_TAB
 });
 
 
-}
-
-function ensureTabData(tab){
+}function ensureTabData(tab){
 
 
 const safeTab=sanitizeTab(tab);
@@ -4180,7 +4537,10 @@ renderActiveTab(true);
 $('#refreshBtn').addEventListener(
 'click',
 ()=>refreshActive(true)
-);/* =========================================================
+);
+
+
+/* =========================================================
    REPORTE REEMPLAZOS DE UNIDADES
 ========================================================= */
 
@@ -4530,8 +4890,7 @@ return `
 <th>Int. planificado</th>
 <th>Int. que salió</th>
 <th>Motivo</th>
-</tr>
-</thead>
+</tr></thead>
 
 
 <tbody>
@@ -5191,7 +5550,10 @@ pages.join('')
 );
 
 
-}function exportUnitsReport(){
+}
+
+
+function exportUnitsReport(){
 
 
 const root=
