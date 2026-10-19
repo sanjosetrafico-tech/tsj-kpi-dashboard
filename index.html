@@ -92,8 +92,6 @@ box-shadow:var(--shadow);
 .count-badge.orange{background:#fff0df;color:#a15a16}
 .count-badge.pink{background:#fff0f8;color:var(--pink-dark)}
 
-
-/* PLANILLERIA */
 .planillaria-board{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:stretch;margin-bottom:14px}
 .planillaria-left{display:grid;grid-template-rows:auto 1fr;gap:14px;min-width:0}
 .planillaria-right{display:grid;grid-template-rows:repeat(2,1fr);gap:14px;min-width:0}
@@ -110,12 +108,10 @@ box-shadow:var(--shadow);
 .plan-observations{display:flex;flex-direction:column;gap:8px}
 .plan-observation-item{padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#faf9fa;font-size:12px;line-height:1.4}
 
-
 .report-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
 .report-card-head h3{margin:0}
 .report-btn{border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:10px;padding:8px 13px;font-size:11px;font-weight:850;cursor:pointer}
 .report-btn:hover{opacity:.88}
-
 
 .units-report-root{display:none}
 .units-report-sheet{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#181416;background:#fff}
@@ -160,14 +156,12 @@ box-shadow:var(--shadow);
 .units-report-motive{display:inline-block;padding:.8mm 1.6mm;border-radius:99px;background:#fff0f8;color:#be176d;font-weight:850}
 .units-report-note{margin-top:3mm;color:#6f676c;font-size:6.5pt;line-height:1.35}
 
-
 .bars{display:flex;flex-direction:column;gap:11px}
 .bar-row{display:grid;grid-template-columns:minmax(120px,1fr) 2.2fr 34px;align-items:center;gap:9px}
 .bar-label{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .track{height:9px;background:#f0ecee;border-radius:999px;overflow:hidden}
 .fill{height:100%;background:var(--pink);border-radius:999px}
 .bar-value{text-align:right;font-size:12px;font-weight:800}
-
 
 .table-wrap{border:1px solid var(--line);border-radius:12px;overflow:visible;background:#fff}
 table{width:100%;border-collapse:collapse;table-layout:fixed}
@@ -177,7 +171,6 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 .pending-pill{display:inline-flex;padding:4px 8px;border-radius:999px;background:#fff0df;color:#a15a16;font-size:10px;font-weight:850;text-transform:uppercase}
 .resolved-pill{display:inline-flex;padding:4px 8px;border-radius:999px;background:#e7f5f0;color:var(--good);font-size:10px;font-weight:850;text-transform:uppercase}
 .empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed #d7ced3;border-radius:12px}
-
 
 .summary-actions{display:flex;justify-content:flex-end;margin-bottom:14px}
 .summary-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}
@@ -240,7 +233,6 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 .impact-value{text-align:right;font-size:12px;font-weight:850}
 .impact-empty{padding:35px 10px;text-align:center;color:var(--muted)}
 
-
 .plan-hero{display:grid;grid-template-columns:260px 1fr;gap:16px;margin-bottom:14px}
 .gauge-card{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px}
 .gauge{--p:0;--gauge-color:var(--pink);position:relative;width:154px;height:154px;border-radius:50%;background:conic-gradient(var(--gauge-color) calc(var(--p)*1%),#eee8eb 0);display:grid;place-items:center}
@@ -261,7 +253,6 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 .hero-stat .small{margin-top:3px;color:#d7d2d5;font-size:13px}
 .service-note{margin:-2px 0 14px;border-left:4px solid var(--good);background:#eef8f4;color:#17684f;border-radius:0 12px 12px 0;padding:11px 14px;font-size:13px;font-weight:750}
 
-
 #guardia .kpi{padding:17px;min-height:116px}
 .guard-mechanical-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
 .guard-mechanical-grid .panel{margin-bottom:0}
@@ -278,40 +269,6 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 .guard-event{display:grid;grid-template-columns:8px 1fr;gap:10px;font-size:12px;line-height:1.5}
 .guard-event-dot{width:7px;height:7px;border-radius:50%;margin-top:6px;background:var(--pink)}
 .shift-empty{color:var(--muted);font-size:12px;padding:3px 0}
-
-
-/* OS · BUSCADOR HISTORICO POR CONDUCTOR */
-.os-section-head{align-items:flex-start}
-.os-header-tools{display:flex;align-items:center;justify-content:flex-end;gap:14px;flex-wrap:wrap}
-.os-driver-search{position:relative;width:310px;max-width:44vw;z-index:30}
-.os-search-box{height:42px;display:flex;align-items:center;gap:9px;padding:0 11px;background:var(--ink);color:#fff;border-radius:12px;box-shadow:0 5px 14px rgba(24,20,22,.08)}
-.os-search-icon{width:17px;height:17px;flex:0 0 17px;opacity:.82}
-.os-search-icon svg{display:block;width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
-.os-search-input{width:100%;min-width:0;border:0!important;outline:0!important;background:transparent!important;color:#fff!important;font-size:12px;font-weight:800;padding:0!important}
-.os-search-input::placeholder{color:#d1cbcf;opacity:1}
-.os-search-clear{width:24px;height:24px;display:none;align-items:center;justify-content:center;flex:0 0 24px;border:0;background:rgba(255,255,255,.12);color:#fff;border-radius:50%;padding:0;cursor:pointer;font-size:15px;line-height:1}
-.os-search-clear.show{display:flex}
-.os-search-results{position:absolute;top:calc(100% + 7px);left:0;right:0;display:none;max-height:300px;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 40px rgba(44,30,39,.16);padding:6px}
-.os-search-results.show{display:block}
-.os-search-option{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;border:0;background:#fff;border-radius:9px;padding:10px 10px;text-align:left;cursor:pointer}.os-search-option:hover,.os-search-option:focus{background:#faf5f8;outline:0}
-.os-search-option-main{min-width:0;font-size:12px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.os-search-option-main b{font-weight:900}
-.os-search-option-count{flex:0 0 auto;padding:4px 7px;border-radius:999px;background:var(--pink-pale);color:var(--pink-dark);font-size:9px;font-weight:900;text-transform:uppercase}
-.os-search-empty{padding:12px;color:var(--muted);font-size:11px;text-align:center}
-.os-history-panel{border-top:5px solid var(--pink);margin-top:14px}
-.os-history-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:14px}
-.os-history-title-wrap h3{margin:0 0 4px;font-size:16px}
-.os-history-title-wrap p{margin:0;color:var(--muted);font-size:11px}
-.os-history-scope{flex:0 0 auto;padding:6px 9px;border-radius:999px;background:#f3eff1;color:#6b6368;font-size:9px;font-weight:850;text-transform:uppercase}
-.os-history-scope.full{background:#e7f5f0;color:var(--good)}
-.os-history-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px}
-.os-history-kpi{padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:#fff}
-.os-history-kpi .label{color:var(--muted);font-size:9px;font-weight:850;text-transform:uppercase;letter-spacing:.04em}
-.os-history-kpi .value{margin-top:5px;font-size:20px;font-weight:950;line-height:1.08}
-.os-history-kpi .sub{margin-top:4px;color:var(--muted);font-size:9px;line-height:1.25}
-.os-history-hint{margin:14px 0 0;padding:13px;border:1px dashed #d8cfd4;border-radius:12px;color:var(--muted);font-size:11px;text-align:center}
-.os-history-table-wrap{margin-top:2px}
-
 
 .kpi-dashboard{display:grid;grid-template-columns:1.8fr 1fr;gap:18px;align-items:start}
 .kpi-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-content:start}
@@ -331,6 +288,41 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 .kpi-badge.bad{background:#fde7ee;color:var(--bad)}
 .kpi-badge.neutral{background:#f0edef;color:#6d656a}
 
+/* OS · BUSCADOR HISTORICO */.os-head-tools{display:flex;align-items:flex-end;justify-content:flex-end;gap:14px;flex-wrap:wrap}
+.os-filter-wrap{position:relative;min-width:290px}
+.os-search-control{height:42px;display:flex;align-items:center;gap:9px;background:var(--ink);border:1px solid var(--ink);border-radius:14px;padding:0 11px 0 13px;box-shadow:0 5px 16px rgba(24,20,22,.08)}
+.os-search-icon{width:17px;height:17px;flex:0 0 17px;color:#fff;opacity:.9}
+.os-search-control input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:#fff;font-size:12px;font-weight:800}
+.os-search-control input::placeholder{color:#d7d1d4;opacity:1}
+.os-search-clear{width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex:0 0 24px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;font-size:16px;line-height:1}
+.os-search-clear:hover{background:rgba(255,255,255,.2)}
+.os-suggestions{position:absolute;z-index:40;left:0;right:0;top:48px;display:none;max-height:300px;overflow:auto;padding:6px;background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:0 14px 34px rgba(44,30,39,.16)}
+.os-suggestions.open{display:block}
+.os-suggestion{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;border:0;background:#fff;border-radius:9px;padding:10px 11px;text-align:left;cursor:pointer}
+.os-suggestion:hover{background:#faf7f9}
+.os-suggestion-main{min-width:0}
+.os-suggestion-name{font-size:12px;font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.os-suggestion-sub{margin-top:2px;color:var(--muted);font-size:10px}
+.os-suggestion-count{min-width:28px;padding:4px 7px;border-radius:999px;background:var(--pink-pale);color:var(--pink-dark);font-size:10px;font-weight:900;text-align:center}
+.os-history-panel{border-top:5px solid var(--pink)}
+.os-history-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:15px}
+.os-history-title{margin:0;font-size:16px}
+.os-history-sub{margin-top:4px;color:var(--muted);font-size:11px}
+.os-history-status{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:#eef8f4;color:#17684f;font-size:10px;font-weight:850;white-space:nowrap}
+.os-history-status.partial{background:#fff5e8;color:#9b5d16}
+.os-history-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.os-history-kpi{padding:14px 15px;border:1px solid var(--line);border-radius:13px;background:#fff}
+.os-history-kpi .t{color:var(--muted);font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.04em}
+.os-history-kpi .n{margin-top:5px;font-size:22px;font-weight:950}
+.os-history-kpi .s{margin-top:3px;color:var(--muted);font-size:10px}
+.os-history-empty{padding:18px;border:1px dashed #d7ced3;border-radius:12px;color:var(--muted);font-size:12px;text-align:center}
+.os-history-motive{display:inline-flex;border-radius:999px;padding:4px 8px;background:var(--pink-pale);color:var(--pink-dark);font-size:10px;font-weight:850;text-transform:uppercase}
+@media(max-width:720px){
+.os-head-tools{width:100%;align-items:stretch}
+.os-filter-wrap{width:100%;min-width:0}
+.os-search-control{width:100%}
+.os-history-kpis{grid-template-columns:1fr}
+}
 
 .chart-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
 .chart-card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:15px 15px 12px;min-width:0;cursor:zoom-in;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
@@ -354,7 +346,6 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 .chart-legend-line{width:20px;height:0;border-top:3px solid var(--target)}
 .chart-empty{min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);font-size:12px}
 
-
 .chart-modal{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(24,20,22,.78);backdrop-filter:blur(3px)}
 .chart-modal.open{display:flex}
 .chart-modal-dialog{position:relative;width:min(94vw,1500px);max-height:94vh;overflow:auto;padding:28px;background:#fff;border-radius:20px;box-shadow:0 24px 70px rgba(0,0,0,.28)}
@@ -368,18 +359,13 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 .chart-modal-body .chart-svg{width:100%;max-height:74vh}
 .chart-modal-body .chart-legend{margin-top:8px;font-size:12px;gap:24px}
 
-
 .error,.error.show{display:none!important}
 .foot{margin-top:24px;display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
-
 
 @media(max-width:1100px){
 .kpis{grid-template-columns:repeat(3,1fr)}
 #salidas .kpis.has-six{grid-template-columns:repeat(3,1fr)}
 .summary-kpis{grid-template-columns:repeat(2,1fr)}
-.os-history-kpis{grid-template-columns:repeat(2,1fr)}
-.os-header-tools{width:100%;justify-content:space-between}
-.os-driver-search{width:min(420px,100%);max-width:none}
 .summary-lower-grid,.planillaria-board,.plan-hero,.kpi-dashboard,.guard-mechanical-grid{grid-template-columns:1fr}
 .chart-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .planillaria-right,.planillaria-right.has-absence,.planillaria-right.has-observations,.planillaria-right.has-absence.has-observations{grid-template-rows:auto}
@@ -388,16 +374,11 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 @media(max-width:720px){
 .shell{padding:18px 14px 35px}
 .top,.hero,.section-head{flex-direction:column;align-items:flex-start}
-.os-header-tools{width:100%;align-items:stretch;flex-direction:column}
-.os-driver-search{width:100%;max-width:none}
-.os-history-kpis{grid-template-columns:1fr}
-.os-history-head{flex-direction:column}
 .summary-alert-grid,.grid3,.chart-grid{grid-template-columns:1fr}
 .chart-modal{padding:8px}
 .chart-modal-dialog{width:98vw;padding:20px 8px 10px;border-radius:14px}
 .chart-modal-close{top:8px;right:8px}
 }
-
 
 @page{size:A4 portrait;margin:8mm}
 @page unitsReport{size:A4 landscape;margin:7mm}
@@ -410,7 +391,6 @@ body.print-units-report .chart-modal{display:none!important}
 body.print-units-report .units-report-summary-grid,
 body.print-units-report .units-report-box,
 body.print-units-report .units-report-kpi{break-inside:avoid;page-break-inside:avoid}
-
 
 html,body{
 width:210mm;
@@ -454,10 +434,8 @@ body.print-summary .summary-lower-grid{display:grid!important;grid-template-colu
 </style>
 </head>
 
-
 <body>
 <div class="shell">
-
 
 <header class="top">
 <div class="brand">
@@ -473,7 +451,6 @@ body.print-summary .summary-lower-grid{display:grid!important;grid-template-colu
 </div>
 </header>
 
-
 <section class="hero">
 <h1>Rutina de regularidad y frecuencia</h1>
 <div class="date-control">
@@ -481,9 +458,7 @@ body.print-summary .summary-lower-grid{display:grid!important;grid-template-colu
 </div>
 </section>
 
-
 <div id="errorBox" class="error"></div>
-
 
 <nav class="tabs">
 <button class="tab active" data-tab="resumen">Resumen Jornada</button>
@@ -496,7 +471,6 @@ body.print-summary .summary-lower-grid{display:grid!important;grid-template-colu
 <button class="tab" data-tab="graficos">Gráficos</button>
 </nav>
 
-
 <main>
 <section id="resumen" class="tab-panel active"></section>
 <section id="conduccion" class="tab-panel"></section>
@@ -508,7 +482,6 @@ body.print-summary .summary-lower-grid{display:grid!important;grid-template-colu
 <section id="graficos" class="tab-panel"></section>
 </main>
 
-
 <div id="chartModal" class="chart-modal" aria-hidden="true">
 <div class="chart-modal-dialog" role="dialog" aria-modal="true" aria-label="Gráfico ampliado">
 <button id="chartModalClose" class="chart-modal-close" type="button" aria-label="Cerrar gráfico" onclick="closeChartModal()">×</button>
@@ -516,30 +489,23 @@ body.print-summary .summary-lower-grid{display:grid!important;grid-template-colu
 </div>
 </div>
 
-
 <footer class="foot">
 <span>Transporte San José S.A. · Uso interno</span>
 <span id="updatedAt">Última actualización: —</span>
 </footer></div>
 
-
 <div id="unitsReportRoot" class="units-report-root" aria-hidden="true"></div>
-
 
 <script>
 
-
 const API_URL='https://script.google.com/macros/s/AKfycbxzu1Mob_Z7E0-33nMXmFDk1zsaOWnUyzb1s58z1NH_2qDK4utHfvtO9-N31GtMuYwyEA/exec';
-
 
 const URL_PARAMS=new URLSearchParams(window.location.search);
 const PROFILE=String(URL_PARAMS.get('perfil')||'').trim().toLowerCase();
 const IS_GUARD_PROFILE=PROFILE==='guardia';
 const IS_CONDUCTION_PROFILE=PROFILE==='conduccion';
 
-
 const ALL_TABS=['resumen','conduccion','plan','salidas','guardia','os','kpi','graficos'];
-
 
 const ALLOWED_TABS=
 IS_CONDUCTION_PROFILE
@@ -548,9 +514,7 @@ IS_CONDUCTION_PROFILE
 ?['resumen','conduccion','plan','salidas','guardia','os']
 :ALL_TABS;
 
-
 const REQUESTED_TAB=String(URL_PARAMS.get('tab')||'').trim().toLowerCase();
-
 
 function sanitizeTab(tab){
 const value=String(tab||'').trim().toLowerCase();
@@ -560,7 +524,6 @@ if(IS_GUARD_PROFILE)return 'guardia';
 return 'resumen';
 }
 
-
 function sectionAllowedForProfile(section){
 if(IS_CONDUCTION_PROFILE){
 return ['planServ','salidas','guardia'].includes(section);
@@ -569,19 +532,18 @@ if(IS_GUARD_PROFILE&&(section==='kpi'||section==='graficos'))return false;
 return true;
 }
 
-
 if(IS_GUARD_PROFILE)document.body.classList.add('profile-guardia');
 if(IS_CONDUCTION_PROFILE)document.body.classList.add('profile-conduccion');
-
 
 const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V14';
 const LOCAL_CACHE_MAX_AGE=12*60*60*1000;
 const REQUEST_TIMEOUT=45000;
 
-
 let DATA={};
 let ACTIVE_TAB=sanitizeTab(REQUESTED_TAB);
 
+let OS_HISTORY_QUERY='';
+let OS_HISTORY_SELECTED='';
 
 const READY={planServ:false,salidas:false,guardia:false,os:false,kpi:false,graficos:false};
 const VERSION={planServ:0,salidas:0,guardia:0,os:0,kpi:0,graficos:0};
@@ -592,12 +554,7 @@ const SILENT_RETRY_TIMERS={};
 const SILENT_RETRY_ATTEMPTS={};
 const SILENT_RETRY_DELAYS=[10000,30000,60000];
 
-let OS_DRIVER_QUERY='';
-let OS_DRIVER_SELECTED='';
-
-
 const $=s=>document.querySelector(s);
-
 
 const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({
 '&':'&amp;',
@@ -607,15 +564,12 @@ const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({
 "'":'&#039;'
 }[m]));
 
-
 const num=v=>Number(v||0).toLocaleString('es-AR');
 const pad2=v=>String(v).padStart(2,'0');
-
 
 function dashboardName(value){
 const raw=String(value??'').trim();
 if(!raw)return '';
-
 
 const format=text=>
 String(text||'')
@@ -625,18 +579,15 @@ String(text||'')
 (_,sep,ch)=>sep+ch.toLocaleUpperCase('es-AR')
 );
 
-
 const match=
 raw.match(
 /^(\d{2,8})(?:\s*[-–—]\s*|\s+)(.+)$/
 );
 
-
 return match
 ?match[1]+' '+format(match[2])
 :format(raw);
 }
-
 
 function dashboardCode(value){
 return String(value??'')
@@ -644,13 +595,10 @@ return String(value??'')
 .toLocaleUpperCase('es-AR');
 }
 
-
 function delayPill(value){
 const raw=String(value??'').trim();
 
-
 if(!raw)return '—';
-
 
 const parsed=
 parseFloat(
@@ -659,38 +607,31 @@ raw
 .replace(/[^0-9.\-]/g,'')
 );
 
-
 const label=
 Number.isFinite(parsed)
 ?parsed.toLocaleString('es-AR')+' min'
 :raw;
-
 
 return Number.isFinite(parsed)&&parsed>0
 ?`<span class="pill">${esc(label)}</span>`
 :esc(label);
 }
 
-
 function sourceLabel(src){
 return src?.name?`Fuente: ${esc(src.name)}`:'Fuente no disponible';
 }
-
 
 function setStatus(ok,text){
 $('#statusDot').classList.toggle('ok',ok);
 $('#statusText').textContent=text;
 }
 
-
 function showError(){return}
-
 
 function updateLastUpdate(){
 if(!DATA.generatedAt)return;
 $('#updatedAt').textContent='Última actualización: '+new Date(DATA.generatedAt).toLocaleString('es-AR');
 }
-
 
 function restoreLocalSnapshot(){
 try{
@@ -710,54 +651,44 @@ return true;
 }catch(err){return false}
 }
 
-
 function saveLocalSnapshot(){
 try{
 localStorage.setItem(LOCAL_CACHE_KEY,JSON.stringify({savedAt:Date.now(),data:DATA}));
 }catch(err){}
 }
 
-
 function svgIcon(type){
 const common=`fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"`;
-
 
 if(type==='check'){
 return `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" ${common}></circle><path d="m8 12 2.5 2.5L16 9" ${common}></path></svg>`;
 }
 
-
 if(type==='bus'){
 return `<svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="16" rx="3" ${common}></rect><path d="M7 7h10M7 14h10" ${common}></path><circle cx="8" cy="17" r="1" fill="currentColor"></circle><circle cx="16" cy="17" r="1" fill="currentColor"></circle></svg>`;
 }
-
 
 if(type==='users'){
 return `<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" ${common}></circle><path d="M3.5 19c.4-4 2.4-6 5.5-6s5.1 2 5.5 6" ${common}></path><circle cx="17" cy="9" r="2.2" ${common}></circle></svg>`;
 }
 
-
 if(type==='clock'){
 return `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" ${common}></circle><path d="M12 7v5l3 2" ${common}></path></svg>`;
 }
-
 
 if(type==='gear'){
 return `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" ${common}></circle><circle cx="12" cy="12" r="8" ${common}></circle></svg>`;
 }
 
-
 if(type==='wrench'){
 return `<svg viewBox="0 0 24 24"><path d="M14.5 6.5a5 5 0 0 0-6.8 6.1L3 17.3A2.6 2.6 0 0 0 6.7 21l4.7-4.7a5 5 0 0 0 6.1-6.8l-3 3-3-3Z" ${common}></path></svg>`;
 }
-
 
 if(type==='road'){
 return `<svg viewBox="0 0 24 24"><path d="M8 3 5 21M16 3l3 18" ${common}></path><path d="M12 4v3M12 10v4M12 17v3" ${common}></path></svg>`;
 }
 return '';
 }
-
 
 function kpi(label,value,sub='',tone=''){
 return `<article class="kpi ${tone}">
@@ -767,25 +698,22 @@ return `<article class="kpi ${tone}">
 </article>`;
 }
 
-
 function mini(title,value,tone=''){
 return `<article class="mini ${tone}">
 <div class="t">${esc(title)}</div>
-<div class="n">${esc(value)}</div>
-</article>`;
+<div class="n">${esc(value)}</div></article>`;
 }
-
 
 function table(headers,rows){
 if(!rows?.length)return `<div class="empty">Sin registros.</div>`;
 return `<div class="table-wrap"><table><thead><tr>${
 headers.map(h=>`<th>${esc(h[0])}</th>`).join('')
 }</tr></thead><tbody>${
-rows.map(r=>`<tr>${headers.map(h=>`<td>${h[2]?h[2](r[h[1]],r):esc(r[h[1]]??'')}</td>`).join('')
+rows.map(r=>`<tr>${
+headers.map(h=>`<td>${h[2]?h[2](r[h[1]],r):esc(r[h[1]]??'')}</td>`).join('')
 }</tr>`).join('')
 }</tbody></table></div>`;
 }
-
 
 function bars(items,limit=12){
 const a=(items||[]).slice(0,limit);
@@ -800,35 +728,29 @@ a.map(x=>`<div class="bar-row">
 }</div>`;
 }
 
-
 function todayISO(){
 const p=DATA.period||{};
 return p.year&&p.month&&p.day?`${p.year}-${pad2(p.month)}-${pad2(p.day)}`:'';
 }
 
-
 function selectedISO(tab=ACTIVE_TAB){
 return DATE_BY_TAB[tab]||todayISO();
 }
-
 
 function selectedDDMM(tab=ACTIVE_TAB){
 const m=selectedISO(tab).match(/^(\d{4})-(\d{2})-(\d{2})$/);
 return m?`${m[3]}/${m[2]}`:'';
 }
 
-
 function selectedLabel(tab=ACTIVE_TAB){
 const v=selectedISO(tab);
 return v?new Date(v+'T12:00:00').toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'}):'';
 }
 
-
 function sameDay(value,key){
 const m=String(value||'').match(/^(\d{1,2})[\/-](\d{1,2})/);
 return !!m&&`${pad2(+m[1])}/${pad2(+m[2])}`===key;
 }
-
 
 function kpiDefaultISO(){
 const p=DATA.period||{};
@@ -843,7 +765,6 @@ const d=days[0]||Math.max(1,(+p.day||1)-1);
 return p.year?`${p.year}-${pad2(p.month)}-${pad2(d)}`:'';
 }
 
-
 function monthLabel(){
 const p=DATA.period||{};
 return p.month&&p.year
@@ -851,14 +772,12 @@ return p.month&&p.year
 :'';
 }
 
-
 function shortDateLabel(ddmm){
 const m=String(ddmm||'').match(/^(\d{1,2})[\/-](\d{1,2})/);
 if(!m)return ddmm||'';
 const mon=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'][+m[2]-1];
 return `${+m[1]}-${mon}`;
 }
-
 
 function countBy(rows,field){
 const out={};
@@ -871,13 +790,11 @@ return Object.entries(out)
 .sort((a,b)=>b.value-a.value||a.label.localeCompare(b.label));
 }
 
-
 function sortByLine(rows){
 return [...(rows||[])].sort((a,b)=>
 String(a.linea||'').localeCompare(String(b.linea||''),'es',{numeric:true})
 );
 }
-
 
 function sortByLineAndService(rows){
 return [...(rows||[])].sort((a,b)=>
@@ -887,7 +804,6 @@ String(a.turno||a.servicio||'').localeCompare(String(b.turno||b.servicio||''),'e
 );
 }
 
-
 function normalizeBaseLine(value){
 let line=String(value||'').trim().toUpperCase().replace(/\s+/g,'');
 if(!line)return '';
@@ -895,7 +811,6 @@ if(line==='P'||line==='P1'||line==='P2')return line;
 const match=line.match(/^([A-Z]+)(?:\/?\d+)?$/);
 return match?match[1]:line;
 }
-
 
 function countByNormalizedLine(rows){
 const counts={};
@@ -909,11 +824,9 @@ return Object.entries(counts)
 .sort((a,b)=>b.value-a.value||a.label.localeCompare(b.label,'es',{numeric:true}));
 }
 
-
 function normalizeText(value){
 return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toUpperCase();
 }
-
 
 function isValidAbsenceRow(row){
 const conductor=normalizeText(row?.conductor||row?.chofer||'');
@@ -927,7 +840,6 @@ const invalid=[
 ];
 return !invalid.some(value=>conductor===value||conductor.startsWith(value+' '));
 }
-
 
 function normalizeMechanicalCategory(value){
 const original=String(value||'').trim();
@@ -944,18 +856,15 @@ if(v.includes('PUERTA')||v.includes('RAMPA')||v.includes('ESPEJO')||v.includes('
 return original;
 }
 
-
 function stripLeadingLegajo(value){
 return String(value||'').trim().replace(/^\d{2,8}(?:\s*[-–—]\s*|\s+)/,'').trim();
 }
-
 
 function personWords(value){
 return normalizeText(stripLeadingLegajo(value))
 .replace(/[^A-Z0-9Ñ]+/g,' ')
 .trim().split(/\s+/).filter(Boolean);
 }
-
 
 function personNamesMatch(a,b){
 const aw=personWords(a);
@@ -969,7 +878,6 @@ const longer=aw.length<=bw.length?bw:aw;
 return shorter.every(word=>longer.includes(word));
 }
 
-
 function getTitularLegajo(row){
 const candidates=[row?.legajoTitular,row?.legajoConductor,row?.legajo,row?.nroLegajo,row?.numeroLegajo];
 for(const value of candidates){
@@ -981,18 +889,15 @@ const match=String(source).trim().match(/^(\d{2,8})(?:\s|[-–—])/);
 return match?match[1]:'';
 }
 
-
 function replacementCompleteness(row){
 const fields=[row?.titular,row?.reemplazo,row?.motivo,row?.linea,row?.turno,getTitularLegajo(row)];
 return fields.reduce((total,value)=>total+(String(value??'').trim()?1:0),0);
 }
 
-
 function sameDriverReplacement(a,b){
 const legajoA=getTitularLegajo(a);
 const legajoB=getTitularLegajo(b);
 let titularMatch=false;
-
 
 if(legajoA&&legajoB){
 titularMatch=legajoA===legajoB;
@@ -1004,27 +909,21 @@ b?.titular||b?.conductor||b?.chofer
 }
 if(!titularMatch)return false;
 
-
 const reemplazoA=a?.reemplazo||'';
 const reemplazoB=b?.reemplazo||'';
 
-
 if(reemplazoA&&reemplazoB&&!personNamesMatch(reemplazoA,reemplazoB))return false;
-
 
 const lineA=normalizeBaseLine(a?.linea);
 const lineB=normalizeBaseLine(b?.linea);
 if(lineA&&lineB&&lineA!==lineB)return false;
 
-
 const turnA=normalizeText(a?.turno);
 const turnB=normalizeText(b?.turno);
 if(turnA&&turnB&&turnA!==turnB)return false;
 
-
 return true;
 }
-
 
 function mergeDriverReplacements(planRows,guardRows){
 const result=[];
@@ -1038,12 +937,10 @@ result[index]=row;
 return result;
 }
 
-
 function extractNumericPrefix(value){
 const match=String(value||'').trim().match(/^(\d{2,8})(?:\s+|\s*[-–—]\s*)/);
 return match?match[1]:'';
 }
-
 
 function getDriverLegajo(row){
 const values=[
@@ -1060,7 +957,6 @@ return extractNumericPrefix(row?.titular)
 ||'';
 }
 
-
 function getDriverSurname(row){
 const values=[row?.apellido,row?.titular,row?.conductor,row?.chofer,row?.reemplazo,row?.nombre];
 for(let value of values){
@@ -1072,16 +968,13 @@ return text.split(/\s+/)[0];
 return '';
 }
 
-
 function getDriverReference(row){
 return getDriverLegajo(row)||getDriverSurname(row)||'';
 }
 
-
 function uniqueDriverReferences(rows){
 return [...new Set((rows||[]).map(getDriverReference).filter(Boolean))];
 }
-
 
 function dedupeDriverRecords(rows,extraFields=[]){
 const seen=new Set();
@@ -1103,7 +996,6 @@ return true;
 });
 }
 
-
 function compactList(values,limit=5){
 const clean=[...new Set((values||[]).map(x=>String(x??'').trim()).filter(Boolean))];
 if(!clean.length)return '—';
@@ -1112,20 +1004,17 @@ const more=clean.length-visible.length;
 return visible.join(', ')+(more>0?` +${more}`:'');
 }
 
-
 function renderAlertCases(rows,emptyText){
 if(!rows.length)return `<div class="alert-none">${esc(emptyText)}</div>`;
 const visible=rows.slice(0,3);
 const hidden=rows.slice(3);
 const more=hidden.length;
 
-
 const renderRow=r=>`
 <div class="alert-detail-row">
 <span class="alert-detail-dot"></span>
 <span>${esc(normalizeMechanicalCategory(r.falla))} · Int. ${esc(r.interno||'-')}</span>
 </div>`;
-
 
 return `<div class="alert-card-detail">
 ${visible.map(renderRow).join('')}
@@ -1140,7 +1029,6 @@ more>0
 </div>`;
 }
 
-
 function toggleAlertCard(button){
 const card=button.closest('.alert-card');
 if(!card)return;
@@ -1149,7 +1037,6 @@ const count=Number(button.dataset.count||0);
 button.setAttribute('aria-expanded',expanded?'true':'false');
 button.textContent=expanded?'Ver menos':`+${count} ${count===1?'adicional':'adicionales'}`;
 }
-
 
 function renderImpactChart(detours){
 const rows=countByNormalizedLine(detours).slice(0,5);
@@ -1165,59 +1052,47 @@ rows.map(row=>`
 }</div>`;
 }
 
-
 function renderResumen(){
 const key=selectedDDMM('resumen');
 const plan=DATA.planServ||{};
 const salidas=DATA.salidas||{};
 const guardia=DATA.guardia||{};
 
-
 const units=sortByLineAndService(
 (salidas.unitRows||[]).filter(r=>sameDay(r.fecha,key))
 );
 
-
 const replacedUnitNumbers=units.map(r=>r.averia||r.interno||'');
-
 
 const planDrivers=(salidas.driverRows||[]).filter(r=>sameDay(r.fecha,key));
 const guardDrivers=(guardia.driverRows||[]).filter(r=>sameDay(r.fecha,key));
 
-
 const drivers=mergeDriverReplacements(planDrivers,guardDrivers);
 const driverReferences=uniqueDriverReferences(drivers);
-
 
 const late=dedupeDriverRecords(
 (salidas.lateRows||[]).filter(r=>sameDay(r.fecha,key)),
 ['prevista','real']
 );
 
-
 const lateReferences=uniqueDriverReferences(late);
-
 
 const mechanical=sortByLine(
 (guardia.incidents||[]).filter(r=>sameDay(r.fecha,key))
 );
 
-
 const auxiliaries=sortByLine(
 (guardia.auxilios||[]).filter(r=>sameDay(r.fecha,key))
 );
-
 
 const detours=sortByLine(
 (guardia.detours||[]).filter(r=>sameDay(r.fecha,key))
 );
 
-
 const detourLines=new Set(detours.map(r=>normalizeBaseLine(r.linea)).filter(Boolean));
 const selectedIsToday=selectedISO('resumen')===todayISO();
 const compliance=selectedIsToday?Number(plan.compliance||0):null;
 const progress=compliance===null?0:Math.max(0,Math.min(100,compliance));
-
 
 $('#resumen').innerHTML=`
 <div class="section-head">
@@ -1225,14 +1100,11 @@ $('#resumen').innerHTML=`
 <div class="source">${esc(selectedLabel('resumen'))}<br>Consolidado operativo diario</div>
 </div>
 
-
 <div class="summary-actions">
 <button class="export-btn" onclick="exportSummaryPDF()">Exportar PDF</button>
 </div>
 
-
 <div class="summary-kpis">
-
 
 <article class="summary-kpi ${
 compliance!==null&&compliance>=100?'good':
@@ -1253,14 +1125,12 @@ compliance!==null
 <div class="summary-kpi-sub">${selectedIsToday?'Plan de servicio TM':'Sin dato histórico de Plan Serv'}</div>
 </article>
 
-
 <article class="summary-kpi">
 <div class="summary-icon pink">${svgIcon('bus')}</div>
 <div class="summary-kpi-label">Reemplazos de unidades</div>
 <div class="summary-kpi-value">${num(units.length)}</div>
 <div class="summary-kpi-sub">Internos: ${esc(compactList(replacedUnitNumbers,5))}</div>
 </article>
-
 
 <article class="summary-kpi">
 <div class="summary-icon pink">${svgIcon('users')}</div>
@@ -1269,7 +1139,6 @@ compliance!==null
 <div class="summary-kpi-sub">Legajos: ${esc(compactList(driverReferences,5))}</div>
 </article>
 
-
 <article class="summary-kpi ${late.length?'warn':'good'}">
 <div class="summary-icon green">${svgIcon('clock')}</div>
 <div class="summary-kpi-label">Llegadas tarde</div>
@@ -1277,19 +1146,14 @@ compliance!==null
 <div class="summary-kpi-sub">Legajos: ${esc(compactList(lateReferences,5))}</div>
 </article>
 
-
 </div>
 
-
 <div class="summary-lower-grid">
-
 
 <section class="summary-alert-area">
 <h3 class="summary-title">Alertas de la jornada</h3>
 
-
 <div class="summary-alert-grid">
-
 
 <article class="alert-card auxiliary ${auxiliaries.length?'':'good'}">
 <div class="alert-head">
@@ -1300,7 +1164,6 @@ compliance!==null
 ${renderAlertCases(auxiliaries,'Sin auxilios mecánicos')}
 </article>
 
-
 <article class="alert-card mechanical ${mechanical.length?'':'good'}">
 <div class="alert-head">
 <div class="alert-icon">${svgIcon('gear')}</div>
@@ -1309,7 +1172,6 @@ ${renderAlertCases(auxiliaries,'Sin auxilios mecánicos')}
 <div class="alert-card-number">${num(mechanical.length)}</div>
 ${renderAlertCases(mechanical,'Sin novedades mecánicas')}
 </article>
-
 
 <article class="alert-card detours ${detours.length?'':'good'}">
 <div class="alert-head">
@@ -1327,10 +1189,8 @@ detours.length
 }
 </article>
 
-
 </div>
 </section>
-
 
 <section class="impact-panel">
 <div class="impact-head">
@@ -1340,51 +1200,44 @@ detours.length
 ${renderImpactChart(detours)}
 </section>
 
-
 </div>`;
-}function renderConduccion(){
+}
+
+function renderConduccion(){
 const key=selectedDDMM('conduccion');
 const plan=DATA.planServ||{};
 const salidas=DATA.salidas||{};
 const guardia=DATA.guardia||{};
 
-
 const day=(salidas.daily||[]).find(x=>sameDay(x.day,key))||{};
 const selectedIsToday=selectedISO('conduccion')===todayISO();
-
 
 const conductoresTM=Number(day.planTM??(selectedIsToday?plan.conductoresTM:0)??0);
 const conductoresTT=Number(day.planTT??(selectedIsToday?plan.conductoresTT:0)??0);
 const totalCitados=conductoresTM+conductoresTT;
-
 
 const absences=dedupeDriverRecords(
 (salidas.absenceRows||[]).filter(r=>sameDay(r.fecha,key)&&isValidAbsenceRow(r)),
 ['estado']
 );
 
-
 const planDrivers=(salidas.driverRows||[]).filter(r=>sameDay(r.fecha,key));
 const guardDrivers=(guardia.driverRows||[]).filter(r=>sameDay(r.fecha,key));
-
 
 const drivers=sortByLineAndService(
 mergeDriverReplacements(planDrivers,guardDrivers)
 );
-
 
 const late=dedupeDriverRecords(
 (salidas.lateRows||[]).filter(r=>sameDay(r.fecha,key)),
 ['prevista','real']
 );
 
-
 $('#conduccion').innerHTML=`
 <div class="section-head">
 <h2>Resumen conducción</h2>
 <div class="source">${esc(selectedLabel('conduccion'))}<br>Consolidado diario de conducción</div>
 </div>
-
 
 <article class="panel">
 <h3>Dotación / conducción</h3>
@@ -1395,13 +1248,11 @@ ${mini('Total citados',num(totalCitados))}
 </div>
 </article>
 
-
 <article class="panel absence-panel">
 <h3 class="panel-title">
 <span>Inasistencias relevantes</span>
 <span class="count-badge pink">${num(absences.length)}</span>
 </h3>
-
 
 ${table([
 ['Fecha','fecha'],
@@ -1411,13 +1262,11 @@ ${table([
 ],absences)}
 </article>
 
-
 <article class="panel driver-panel">
 <h3 class="panel-title">
 <span>Reemplazos de conductores</span>
 <span class="count-badge pink">${num(drivers.length)}</span>
 </h3>
-
 
 ${table([
 ['Titular','titular',v=>esc(dashboardName(v))],
@@ -1428,13 +1277,11 @@ ${table([
 ],drivers)}
 </article>
 
-
 <article class="panel">
 <h3 class="panel-title">
 <span>Llegadas tarde</span>
 <span class="count-badge">${num(late.length)}</span>
 </h3>
-
 
 ${table([
 ['Conductor','chofer',v=>esc(dashboardName(v))],
@@ -1445,13 +1292,11 @@ ${table([
 </article>`;
 }
 
-
 function renderPlan(){
 const d=DATA.planServ||{};
 const comp=Math.max(0,Math.min(100,+d.compliance||0));
 const total=(+d.conductoresTM||0)+(+d.conductoresTT||0);
 const color=comp>=100?'var(--good)':comp>=95?'var(--warn)':'var(--bad)';
-
 
 $('#plan').innerHTML=`
 <div class="section-head">
@@ -1459,10 +1304,8 @@ $('#plan').innerHTML=`
 <div class="source">${sourceLabel(DATA.sources?.planServ||d.source)}<br>Hoy · ${esc(d.date||'')}</div>
 </div>
 
-
 <div class="plan-hero">
-<article class="gauge-card">
-<div class="gauge" style="--p:${comp};--gauge-color:${color}">
+<article class="gauge-card"><div class="gauge" style="--p:${comp};--gauge-color:${color}">
 <div class="gauge-content">
 <b>${num(comp)}%</b>
 <span>${num(d.serviceDone)} / ${num(d.servicePlanned)}</span>
@@ -1471,18 +1314,17 @@ $('#plan').innerHTML=`
 <div class="gauge-label">Cumplimiento Línea TM</div>
 </article>
 
-
 <div class="plan-main">
 ${mini('Servicio completo',`${num(d.serviceDone)}/${num(d.servicePlanned)}`,comp>=100?'good':'')}
 ${mini('Cortados',`${num(d.cortadoDone)}/${num(d.cortadoPlanned)}`)}
 ${mini('Refuerzos',`${num(d.refuerzoDone)}/${num(d.refuerzoPlanned)}`)}
-${mini('Especiales',`${num(d.especialDone)}/${num(d.especialPlanned)}`)}${mini('Francos trabajados',num(d.francos))}
+${mini('Especiales',`${num(d.especialDone)}/${num(d.especialPlanned)}`)}
+${mini('Francos trabajados',num(d.francos))}
 ${mini('Relevantes citados',`${num(d.relevantesTM)} TM · ${num(d.relevantesTT)} TT`)}
 ${mini('Inasist. relevantes',num(d.inasistenciaRelevantes),(+d.inasistenciaRelevantes||0)>0?'bad':'good')}
 ${mini('Inasistencias TM',num(d.inasistenciasTM),(+d.inasistenciasTM||0)>0?'bad':'good')}
 </div>
 </div>
-
 
 ${
 (+d.inasistenciasTM||0)>0&&comp>=100
@@ -1490,9 +1332,7 @@ ${
 :''
 }
 
-
 <div class="plan-detail">
-
 
 <article class="panel">
 <h3>Dotación / conducción</h3>
@@ -1503,50 +1343,39 @@ ${mini('Total citados',num(total))}
 </div>
 </article>
 
-
 <article class="hero-stat">
 <div class="over">Última salida TM</div>
 <div class="big">${esc(d.ultimaSalida||'-')} hs</div>
 <div class="small">Coche ${esc(d.ultimoCoche||'-')} · salida desde Base</div>
 </article>
 
-
 </div>`;
 }
-
 
 function renderSalidas(){
 const d=DATA.salidas||{};
 const key=selectedDDMM('salidas');
 
-
 const units=sortByLineAndService(
 (d.unitRows||[]).filter(r=>sameDay(r.fecha,key))
 );
-
 
 const drivers=sortByLineAndService(
 (d.driverRows||[]).filter(r=>sameDay(r.fecha,key))
 );
 
-
 const late=(d.lateRows||[]).filter(r=>sameDay(r.fecha,key));
-
 
 const absences=(d.absenceRows||[]).filter(r=>
 sameDay(r.fecha,key)&&isValidAbsenceRow(r)
 );
 
-
 const observations=(d.observations||[]).filter(r=>sameDay(r.fecha,key));
-
 
 const day=(d.daily||[]).find(x=>sameDay(x.day,key))||{};
 
-
 const hasAbsences=absences.length>0;
 const hasObservations=observations.length>0;
-
 
 $('#salidas').innerHTML=`
 <div class="section-head">
@@ -1558,7 +1387,6 @@ ${esc(selectedLabel('salidas'))}
 </div>
 </div>
 
-
 <div class="kpis ${hasAbsences?'has-six':''}">
 ${kpi('Reemplazos de unidades',num(units.length),key)}
 ${kpi('Reemplazos de conductores',num(drivers.length),key,drivers.length>0?'absence-alert':'')}
@@ -1568,21 +1396,16 @@ ${kpi('Plan TM',num(day.planTM||0),'Día seleccionado')}
 ${kpi('Plan TT',num(day.planTT||0),'Día seleccionado')}
 </div>
 
-
 <div class="planillaria-board">
 
-
 <div class="planillaria-left">
-
 
 <article class="panel">
 <h3>Motivos de reemplazo</h3>
 ${bars(countBy(units,'motivo'))}
 </article>
 
-
 <article class="panel">
-
 
 <div class="report-card-head">
 <h3>Unidades reemplazadas</h3>
@@ -1595,7 +1418,6 @@ Reporte
 </button>
 </div>
 
-
 ${table([
 ['Fecha','fecha'],
 ['Avería','averia'],
@@ -1605,15 +1427,11 @@ ${table([
 ['Servicio','turno',v=>esc(dashboardCode(v))]
 ],units)}
 
-
 </article>
-
 
 </div>
 
-
 <div class="planillaria-right ${hasAbsences?'has-absence':''} ${hasObservations?'has-observations':''}">
-
 
 ${
 hasAbsences
@@ -1634,7 +1452,6 @@ ${table([
 :''
 }
 
-
 <article class="panel">
 <h3 class="panel-title">
 <span>Reemplazos de conductores</span>
@@ -1649,7 +1466,6 @@ ${table([
 ],drivers)}
 </article>
 
-
 <article class="panel">
 <h3 class="panel-title">
 <span>Llegadas tarde</span>
@@ -1663,7 +1479,6 @@ ${table([
 ['Demora','minutos',v=>delayPill(v)]
 ],late)}
 </article>
-
 
 ${
 hasObservations
@@ -1681,16 +1496,13 @@ ${observations.map(row=>`<div class="plan-observation-item">${esc(row.texto||'')
 :''
 }
 
-
 </div>
 </div>`;
 }
 
-
 function normalizeGuardText(value){
 return normalizeText(value);
 }
-
 
 function splitGuardiaObservations(rows){
 const out={manana:[],tarde:[]};
@@ -1702,7 +1514,6 @@ if(turno==='TARDE')out.tarde.push(row);
 return out;
 }
 
-
 function renderGuardEvents(rows,emptyText){
 if(!rows?.length)return `<div class="shift-empty">${esc(emptyText)}</div>`;
 return rows.map(row=>`
@@ -1713,42 +1524,34 @@ return rows.map(row=>`
 `).join('');
 }
 
-
 function renderGuardia(){
 const d=DATA.guardia||{};
 const key=selectedDDMM('guardia');
-
 
 const aux=sortByLine(
 (d.auxilios||[]).filter(r=>sameDay(r.fecha,key))
 );
 
-
 const inc=sortByLine(
 (d.incidents||[]).filter(r=>sameDay(r.fecha,key))
 );
-
 
 const drv=sortByLineAndService(
 (d.driverRows||[]).filter(r=>sameDay(r.fecha,key))
 );
 
-
 const det=sortByLine(
 (d.detours||[]).filter(r=>sameDay(r.fecha,key))
 );
 
-
 const obs=(d.observations||[]).filter(r=>sameDay(r.fecha,key));
 const groupedObs=splitGuardiaObservations(obs);
-
 
 const lines=new Set(
 [...aux,...inc,...det]
 .map(r=>normalizeBaseLine(r.linea))
 .filter(Boolean)
 );
-
 
 $('#guardia').innerHTML=`
 <div class="section-head">
@@ -1760,15 +1563,11 @@ ${esc(selectedLabel('guardia'))}
 </div>
 </div>
 
-
 <div class="kpis">
-
 
 ${kpi('Auxilios mecánicos',num(aux.length),'Día seleccionado')}
 
-
 ${kpi('Novedades mecánicas',num(inc.length),'Día seleccionado')}
-
 
 ${kpi(
 'Reemplazos de conductores',
@@ -1777,27 +1576,20 @@ num(drv.length),
 drv.length>0?'absence-alert':''
 )}
 
-
 ${kpi('Desvíos',num(det.length),'Día seleccionado')}
-
 
 ${kpi('Líneas afectadas',num(lines.size),'Líneas reales')}
 
-
 </div>
-
 
 <div class="guard-mechanical-grid">
 
-
 <article class="panel aux-panel">
-
 
 <h3 class="panel-title">
 <span>Auxilios mecánicos</span>
 <span class="count-badge blue">${num(aux.length)}</span>
 </h3>
-
 
 ${table([
 ['Línea','linea',v=>esc(dashboardCode(v))],
@@ -1813,18 +1605,14 @@ v=>v
 ]
 ],aux)}
 
-
 </article>
 
-
 <article class="panel mechanical-panel">
-
 
 <h3 class="panel-title">
 <span>Novedades mecánicas</span>
 <span class="count-badge orange">${num(inc.length)}</span>
 </h3>
-
 
 ${table([
 ['Línea','linea',v=>esc(dashboardCode(v))],
@@ -1844,21 +1632,16 @@ return `<span class="pending-pill">Pendiente</span>`;
 ]
 ],inc)}
 
-
 </article>
-
 
 </div>
 
-
 <article class="panel driver-panel">
-
 
 <h3 class="panel-title">
 <span>Reemplazos de conductores</span>
 <span class="count-badge pink">${num(drv.length)}</span>
 </h3>
-
 
 ${table([
 ['Titular','titular',v=>esc(dashboardName(v))],
@@ -1874,36 +1657,28 @@ v=>v
 ['Turno','turno',v=>esc(dashboardCode(v))]
 ],drv)}
 
-
 </article>
 
-
 <div class="grid2">
-
 
 <article class="panel">
 <h3>Desvíos por motivo</h3>
 ${bars(countBy(det,'motivo'))}
 </article>
 
-
 <article class="panel">
 <h3>Desvíos por línea</h3>
 ${bars(countByNormalizedLine(det))}
 </article>
 
-
 </div>
 
-
 <article class="panel detour-panel">
-
 
 <h3 class="panel-title">
 <span>Desvíos</span>
 <span class="count-badge">${num(det.length)}</span>
 </h3>
-
 
 ${table([
 ['Línea','linea',v=>esc(dashboardCode(v))],
@@ -1912,15 +1687,11 @@ ${table([
 ['Desvío','desvio']
 ],det)}
 
-
 </article>
-
 
 <article class="panel">
 
-
 <h3>Parte de Guardia · novedades por turno</h3>
-
 
 <div class="shift-block">
 <div class="shift-title morning">
@@ -1931,7 +1702,6 @@ ${groupedObs.manana.length===1?'novedad':'novedades'}
 </span>
 </div>
 
-
 <div class="shift-body">
 ${renderGuardEvents(
 groupedObs.manana,
@@ -1939,7 +1709,6 @@ groupedObs.manana,
 )}
 </div>
 </div>
-
 
 <div class="shift-block">
 <div class="shift-title afternoon">
@@ -1950,7 +1719,6 @@ ${groupedObs.tarde.length===1?'novedad':'novedades'}
 </span>
 </div>
 
-
 <div class="shift-body">
 ${renderGuardEvents(
 groupedObs.tarde,
@@ -1959,331 +1727,292 @@ groupedObs.tarde,
 </div>
 </div>
 
-
 </article>
 `;
 }
 
-function osHistoryRows(){
-const d=DATA.os||{};
-
-if(Array.isArray(d.historyRows))return d.historyRows;
-if(Array.isArray(d.allRows))return d.allRows;
-if(Array.isArray(d.historico))return d.historico;
-
-return Array.isArray(d.rows)?d.rows:[];
+function osHistoryRows(data=DATA.os||{}){
+if(Array.isArray(data.historyRows)&&data.historyRows.length)return data.historyRows;
+if(Array.isArray(data.allRows)&&data.allRows.length)return data.allRows;
+return Array.isArray(data.rows)?data.rows:[];
 }
 
-function osHasExplicitHistory(){
-const d=DATA.os||{};
-return Array.isArray(d.historyRows)||Array.isArray(d.allRows)||Array.isArray(d.historico);
+function osHasFullHistory(data=DATA.os||{}){
+return(
+(Array.isArray(data.historyRows)&&data.historyRows.length>0)
+||
+(Array.isArray(data.allRows)&&data.allRows.length>0)
+);
 }
 
 function osDriverKey(row){
 const legajo=String(row?.legajo??'').trim();
 if(legajo)return 'L:'+legajo;
-
-const name=normalizeText(row?.nombre||row?.conductor||row?.chofer||'');
-return name?'N:'+name:'';
+return 'N:'+normalizeText(row?.nombre||'');
 }
 
-function osDriverName(row){
-return dashboardName(row?.nombre||row?.conductor||row?.chofer||'');
+function osDriverDisplay(row){
+const legajo=String(row?.legajo??'').trim();
+const nombre=dashboardName(row?.nombre||'');
+return [legajo,nombre].filter(Boolean).join(' · ');
 }
 
-function osDriverCandidates(){
+function osHistoryDrivers(rows){
 const map=new Map();
 
-osHistoryRows().forEach(row=>{
+(rows||[]).forEach(row=>{
 const key=osDriverKey(row);
-if(!key)return;
-
-const legajo=String(row?.legajo??'').trim();
-const nombre=osDriverName(row);
+if(key==='N:')return;
 
 if(!map.has(key)){
-map.set(key,{key,legajo,nombre,count:0});
+map.set(key,{
+key,
+legajo:String(row?.legajo??'').trim(),
+nombre:dashboardName(row?.nombre||''),
+count:0
+});
 }
 
 map.get(key).count++;
 });
 
 return [...map.values()].sort((a,b)=>
-String(a.legajo||'999999').localeCompare(String(b.legajo||'999999'),'es',{numeric:true})
+b.count-a.count
 ||
-String(a.nombre||'').localeCompare(String(b.nombre||''),'es')
+a.nombre.localeCompare(b.nombre,'es',{sensitivity:'base'})
 );
 }
 
-function osSearchCandidates(query){
-const q=normalizeText(query);
-if(!q)return [];
-
-return osDriverCandidates().filter(item=>{
-const haystack=normalizeText(`${item.legajo} ${item.nombre}`);
-return haystack.includes(q);
-}).slice(0,12);
-}
-
-function osHistoryDateValue(value){
-const text=String(value||'').trim();
-const match=text.match(/^(\d{1,2})[\/-](\d{1,2})(?:[\/-](\d{2,4}))?/);
+function osDateValue(value){
+const match=String(value||'').trim().match(/^(\d{1,2})[\/-](\d{1,2})(?:[\/-](\d{2,4}))?/);
 if(!match)return 0;
 
-let year=match[3]?Number(match[3]):Number(DATA.period?.year||new Date().getFullYear());
+let year=Number(match[3]||DATA.period?.year||new Date().getFullYear());
 if(year<100)year+=2000;
 
-return new Date(year,Number(match[2])-1,Number(match[1])).getTime();
+return new Date(
+year,
+Number(match[2])-1,
+Number(match[1]),
+12
+).getTime();
 }
 
-function osRowsForDriver(key){
-return osHistoryRows()
-.filter(row=>osDriverKey(row)===key)
-.sort((a,b)=>osHistoryDateValue(b.fecha)-osHistoryDateValue(a.fecha));
+function osHistoryForSelected(){
+const rows=osHistoryRows();
+if(!OS_HISTORY_SELECTED)return [];
+
+return rows
+.filter(row=>osDriverKey(row)===OS_HISTORY_SELECTED)
+.sort((a,b)=>osDateValue(b.fecha)-osDateValue(a.fecha));
 }
 
-function osLatestDate(rows){
-if(!rows.length)return '—';
-return String(rows[0]?.fecha||'—');
+function osTopReason(rows){
+const items=countBy(rows,'motivo');
+return items[0]||{label:'—',value:0};
 }
 
-function osMainReason(rows){
-const reasons=countBy(rows,'motivo');
-return reasons[0]||{label:'—',value:0};
-}
-
-function osDriverLineCount(rows){
-return new Set((rows||[]).map(r=>normalizeBaseLine(r.linea)).filter(Boolean)).size;
-}
-
-function hideOSDriverSuggestions(){
-const box=$('#osDriverSuggestions');
-if(box)box.classList.remove('show');
-}
-
-function renderOSDriverSuggestions(){
+function osRenderSuggestions(){
 const box=$('#osDriverSuggestions');
 if(!box)return;
 
-const query=String(OS_DRIVER_QUERY||'').trim();
-
+const query=normalizeText(OS_HISTORY_QUERY);
 if(!query){
+box.classList.remove('open');
 box.innerHTML='';
-box.classList.remove('show');
 return;
 }
 
-const items=osSearchCandidates(query);
+const drivers=osHistoryDrivers(osHistoryRows());
+const matches=drivers.filter(driver=>{
+const haystack=normalizeText(
+driver.legajo+' '+driver.nombre
+);
+return haystack.includes(query);
+}).slice(0,12);
 
-if(!items.length){
-box.innerHTML=`<div class="os-search-empty">Sin coincidencias por legajo o apellido.</div>`;
-box.classList.add('show');
+if(!matches.length){
+box.innerHTML=`<div class="os-history-empty">Sin coincidencias.</div>`;
+box.classList.add('open');
 return;
 }
 
-box.innerHTML=items.map(item=>{
-const encoded=encodeURIComponent(item.key);
-const legajo=item.legajo?`<b>${esc(item.legajo)}</b> · `:'';
-return `
-<button type="button" class="os-search-option" onclick="selectOSDriver('${encoded}')">
-<span class="os-search-option-main">${legajo}${esc(item.nombre||'Sin nombre')}</span>
-<span class="os-search-option-count">${num(item.count)} OS</span>
-</button>`;
-}).join('');
+box.innerHTML=matches.map(driver=>`
+<button
+type="button"
+class="os-suggestion"
+onclick="selectOSDriver(${JSON.stringify(driver.key)})"
+>
+<div class="os-suggestion-main">
+<div class="os-suggestion-name">${esc(driver.nombre||'Sin nombre')}</div>
+<div class="os-suggestion-sub">${driver.legajo?`Legajo ${esc(driver.legajo)}`:'Sin legajo'}</div>
+</div>
+<div class="os-suggestion-count">${num(driver.count)}</div>
+</button>
+`).join('');
 
-box.classList.add('show');
+box.classList.add('open');
 }
 
-function renderOSDriverHistory(){
-const root=$('#osDriverHistory');
-if(!root)return;
+function filterOSHistory(value){
+OS_HISTORY_QUERY=String(value??'');
+OS_HISTORY_SELECTED='';
+osRenderSuggestions();
+renderOSHistoryArea();
+}
 
-if(!OS_DRIVER_SELECTED){
-root.innerHTML='';
+function selectOSDriver(key){
+OS_HISTORY_SELECTED=String(key||'');
+const driver=osHistoryDrivers(osHistoryRows()).find(x=>x.key===OS_HISTORY_SELECTED);
+OS_HISTORY_QUERY=driver?([driver.legajo,driver.nombre].filter(Boolean).join(' · ')):'';
+
+const input=$('#osDriverSearch');
+if(input)input.value=OS_HISTORY_QUERY;
+
+const box=$('#osDriverSuggestions');
+if(box){
+box.classList.remove('open');
+box.innerHTML='';
+}
+
+renderOSHistoryArea();
+}
+
+function clearOSHistory(){
+OS_HISTORY_QUERY='';
+OS_HISTORY_SELECTED='';
+
+const input=$('#osDriverSearch');
+if(input)input.value='';
+
+const box=$('#osDriverSuggestions');
+if(box){
+box.classList.remove('open');
+box.innerHTML='';
+}
+
+renderOSHistoryArea();
+
+if(input)input.focus();
+}
+
+function renderOSHistoryArea(){
+const host=$('#osHistoryArea');
+if(!host)return;
+
+if(!OS_HISTORY_SELECTED){
+host.innerHTML='';
 return;
 }
 
-const rows=osRowsForDriver(OS_DRIVER_SELECTED);
-const candidate=osDriverCandidates().find(item=>item.key===OS_DRIVER_SELECTED);
+const rows=osHistoryForSelected();
 
-if(!candidate||!rows.length){
-root.innerHTML=`<article class="panel os-history-panel"><div class="empty">Sin OS registradas para el conductor seleccionado.</div></article>`;
+if(!rows.length){
+host.innerHTML=`
+<article class="panel os-history-panel">
+<div class="os-history-empty">No se encontraron OS para el conductor seleccionado.</div>
+</article>`;
 return;
 }
 
-const mainReason=osMainReason(rows);
-const lineCount=osDriverLineCount(rows);
-const explicit=osHasExplicitHistory();
+const first=rows[0]||{};
+const topReason=osTopReason(rows);
+const driverLabel=osDriverDisplay(first)||'Conductor';
+const fullHistory=osHasFullHistory();
 
-root.innerHTML=`
+host.innerHTML=`
 <article class="panel os-history-panel">
 
 <div class="os-history-head">
-<div class="os-history-title-wrap">
-<h3>Histórico de OS · ${candidate.legajo?esc(candidate.legajo)+' · ':''}${esc(candidate.nombre)}</h3>
-<p>Órdenes de servicio emitidas para el conductor seleccionado.</p>
+<div>
+<h3 class="os-history-title">Histórico de OS · ${esc(driverLabel)}</h3>
+<div class="os-history-sub">Órdenes de servicio emitidas para el conductor seleccionado.</div>
 </div>
 
-<span class="os-history-scope ${explicit?'full':''}">
-${explicit?'Histórico completo':'Carga disponible'}
-</span>
+<div class="os-history-status ${fullHistory?'':'partial'}">
+${fullHistory?'Histórico completo':'Solo período cargado'}
+</div>
 </div>
 
 <div class="os-history-kpis">
+
 <div class="os-history-kpi">
-<div class="label">Total OS</div>
-<div class="value">${num(rows.length)}</div>
-<div class="sub">Registros del conductor</div>
+<div class="t">Total OS</div>
+<div class="n">${num(rows.length)}</div>
+<div class="s">Registros encontrados</div>
 </div>
 
 <div class="os-history-kpi">
-<div class="label">Última OS</div>
-<div class="value">${esc(osLatestDate(rows))}</div>
-<div class="sub">Registro más reciente</div>
+<div class="t">Última OS</div>
+<div class="n">${esc(first.fecha||'—')}</div>
+<div class="s">Último registro emitido</div>
 </div>
 
 <div class="os-history-kpi">
-<div class="label">Motivo principal</div>
-<div class="value" style="font-size:15px">${esc(dashboardName(mainReason.label))}</div>
-<div class="sub">${num(mainReason.value)} ${mainReason.value===1?'registro':'registros'}</div>
+<div class="t">Motivo principal</div>
+<div class="n" style="font-size:16px">${esc(dashboardName(topReason.label))}</div>
+<div class="s">${num(topReason.value)} registros</div>
 </div>
 
-<div class="os-history-kpi">
-<div class="label">Líneas involucradas</div>
-<div class="value">${num(lineCount)}</div>
-<div class="sub">Líneas con OS registradas</div>
-</div>
 </div>
 
-<div class="os-history-table-wrap">
 ${table([
 ['Fecha','fecha'],
 ['Legajo','legajo'],
 ['Conductor','nombre',v=>esc(dashboardName(v))],
 ['Línea','linea',v=>esc(dashboardCode(v))],
 ['Interno','interno'],
-['Motivo','motivo',v=>v?`<span class="pill">${esc(v)}</span>`:'—'],
+['Motivo','motivo',v=>v?`<span class="os-history-motive">${esc(v)}</span>`:'—'],
 ['Observación','observacion'],
 ['Agente','agente',v=>esc(dashboardName(v))]
 ],rows)}
-</div>
-
-${explicit?'':`<div class="os-history-hint">La interfaz ya está preparada para el histórico completo. Con la carga actual, el buscador utiliza los registros que entrega la sección OS.</div>`}
 
 </article>`;
-}
-
-function selectOSDriver(encodedKey){
-const key=decodeURIComponent(encodedKey||'');
-const candidate=osDriverCandidates().find(item=>item.key===key);
-if(!candidate)return;
-
-OS_DRIVER_SELECTED=key;
-OS_DRIVER_QUERY=`${candidate.legajo?candidate.legajo+' · ':''}${candidate.nombre}`;
-
-const input=$('#osDriverSearchInput');
-if(input)input.value=OS_DRIVER_QUERY;
-
-const clear=$('#osDriverSearchClear');
-if(clear)clear.classList.add('show');
-
-hideOSDriverSuggestions();
-renderOSDriverHistory();
-}
-
-function handleOSDriverSearch(value){
-OS_DRIVER_QUERY=String(value||'');
-OS_DRIVER_SELECTED='';
-
-const clear=$('#osDriverSearchClear');
-if(clear)clear.classList.toggle('show',!!OS_DRIVER_QUERY.trim());
-
-renderOSDriverHistory();
-renderOSDriverSuggestions();
-
-const q=normalizeText(OS_DRIVER_QUERY);
-if(!q)return;
-
-const matches=osSearchCandidates(OS_DRIVER_QUERY);
-const exact=matches.find(item=>
-String(item.legajo||'')===OS_DRIVER_QUERY.trim()
-||
-normalizeText(item.nombre)===q
-);
-
-if(exact){
-selectOSDriver(encodeURIComponent(exact.key));
-}
-}
-
-function clearOSDriverSearch(){
-OS_DRIVER_QUERY='';
-OS_DRIVER_SELECTED='';
-
-const input=$('#osDriverSearchInput');
-if(input){
-input.value='';
-input.focus();
-}
-
-const clear=$('#osDriverSearchClear');
-if(clear)clear.classList.remove('show');
-
-hideOSDriverSuggestions();
-renderOSDriverHistory();
-}
-
-function initOSDriverSearch(){
-const input=$('#osDriverSearchInput');
-if(!input)return;
-
-input.value=OS_DRIVER_QUERY;
-
-const clear=$('#osDriverSearchClear');
-if(clear)clear.classList.toggle('show',!!OS_DRIVER_QUERY.trim());
-
-if(OS_DRIVER_SELECTED){
-renderOSDriverHistory();
-}
 }
 
 function renderOS(){
 const d=DATA.os||{};
 const s=d.summary||{};
 
-
 $('#os').innerHTML=`
-<div class="section-head os-section-head">
+<div class="section-head">
 <h2>OS</h2>
 
-<div class="os-header-tools">
-<div class="os-driver-search">
-<div class="os-search-box">
-<span class="os-search-icon" aria-hidden="true">
-<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg>
-</span>
+<div class="os-head-tools">
+
+<div class="os-filter-wrap">
+
+<div class="os-search-control">
+
+<svg class="os-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+<circle cx="11" cy="11" r="7"></circle>
+<path d="m20 20-4-4"></path>
+</svg>
 
 <input
-id="osDriverSearchInput"
-class="os-search-input"
+id="osDriverSearch"
 type="text"
 autocomplete="off"
 placeholder="Legajo o apellido"
-oninput="handleOSDriverSearch(this.value)"
-onfocus="renderOSDriverSuggestions()"
-onblur="setTimeout(hideOSDriverSuggestions,180)"
+value="${esc(OS_HISTORY_QUERY)}"
+oninput="filterOSHistory(this.value)"
+onfocus="osRenderSuggestions()"
 >
 
 <button
-id="osDriverSearchClear"
 type="button"
 class="os-search-clear"
-aria-label="Limpiar búsqueda"
-onclick="clearOSDriverSearch()"
+title="Limpiar búsqueda"
+onclick="clearOSHistory()"
 >×</button>
+
 </div>
 
-<div id="osDriverSuggestions" class="os-search-results"></div>
+<div
+id="osDriverSuggestions"
+class="os-suggestions"
+></div>
+
 </div>
 
 <div class="source">
@@ -2291,9 +2020,9 @@ ${sourceLabel(DATA.sources?.os||d.source)}
 <br>
 Acumulado ${esc(monthLabel())}
 </div>
-</div>
-</div>
 
+</div>
+</div>
 
 <div class="kpis">
 ${kpi('OS del mes',num(s.total),'Acumulado mensual')}
@@ -2303,35 +2032,29 @@ ${kpi('Incumpl. directivas',num(s.directivas),'Acumulado mensual')}
 ${kpi('Vandalismo',num(s.vandalismo),'Acumulado mensual')}
 </div>
 
-
 <div class="grid3">
-
 
 <article class="panel">
 <h3>OS por motivo</h3>
 ${bars(d.reasons)}
 </article>
 
-
 <article class="panel">
 <h3>OS por línea</h3>
 ${bars(d.lines)}
 </article>
-
 
 <article class="panel">
 <h3>Conductores con registros</h3>
 ${bars(d.topDrivers)}
 </article>
 
-
 </div>
 
-<div id="osDriverHistory"></div>
+<div id="osHistoryArea"></div>
 
 <article class="panel">
 <h3>Detalle de solicitudes OS · mes</h3>
-
 
 ${table([
 ['Fecha','fecha'],
@@ -2344,19 +2067,16 @@ ${table([
 ['Agente','agente',v=>esc(dashboardName(v))]
 ],d.rows||[])}
 
-
 </article>`;
 
-requestAnimationFrame(initOSDriverSearch);
+renderOSHistoryArea();
 }
-
 
 function fmtPct(v){
 if(v===null||v===undefined||v==='')return '-';
 const s=String(v).trim();
 return s.includes('%')?s:s+'%';
 }
-
 
 function rawNumber(v){
 if(v===null||v===undefined||v==='')return null;
@@ -2366,31 +2086,25 @@ const n=parseFloat(s.replace(/[^0-9.\-]/g,''));
 return Number.isFinite(n)?n:null;
 }
 
-
 function metricPass(value,meta){
 const n=rawNumber(value);
 const t=rawNumber(meta);
 
-
 if(n===null||t===null)return null;
 
-
 const s=String(meta||'').replace(/\s+/g,'');
-
 
 if(s.includes('≤')||s.includes('<='))return n<=t;
 if(s.includes('≥')||s.includes('>='))return n>=t;
 
-
 return n>=t;
 }
 
-
 function metricProgress(value){
 const n=rawNumber(value);
-if(n===null)return 0;return Math.max(0,Math.min(100,n));
+if(n===null)return 0;
+return Math.max(0,Math.min(100,n));
 }
-
 
 function kpiCard(metric,dateLabel){
 const pass=metric.meta?metricPass(metric.raw,metric.meta):null;
@@ -2398,7 +2112,6 @@ const status=
 pass===true?'status-good':
 pass===false?'status-bad':
 '';
-
 
 return `
 <article class="kpi-ref-card ${status}">
@@ -2411,16 +2124,13 @@ return `
 </article>`;
 }
 
-
 function uniqueMonthlyIndicators(rows){
 const order=[];
 const map=new Map();
 
-
 (rows||[]).forEach(item=>{
 const key=normalizeText(item?.label||'');
 if(!key)return;
-
 
 if(!map.has(key)){
 order.push(key);
@@ -2428,34 +2138,26 @@ map.set(key,{...item});
 return;
 }
 
-
 const previous=map.get(key);
 const next={...previous};
 
-
-Object.entries(item||{}).forEach(([field,value])=>{
-if(value!==undefined&&value!==null&&String(value).trim()!==''){
+Object.entries(item||{}).forEach(([field,value])=>{if(value!==undefined&&value!==null&&String(value).trim()!==''){
 next[field]=value;
 }
 });
 
-
 map.set(key,next);
 });
 
-
 return order.map(key=>map.get(key));
 }
-
 
 function renderKPI(){
 const d=DATA.kpi||{};
 const key=selectedDDMM('kpi');
 const metas=d.metas||{};
 
-
 const r=(d.daily||[]).find(x=>sameDay(x.date,key));
-
 
 if(!r){
 $('#kpi').innerHTML=`
@@ -2464,9 +2166,7 @@ $('#kpi').innerHTML=`
 return;
 }
 
-
 const indicators=uniqueMonthlyIndicators(d.indicators||[]);
-
 
 const findIndicator=function(matchers){
 return indicators.find(item=>{
@@ -2475,10 +2175,8 @@ return matchers.some(matcher=>label.includes(matcher));
 })||{};
 };
 
-
 const siniestrosConResponsabilidad=
 findIndicator(['SINIESTROS CON RESPONSABILIDAD']);
-
 
 const siniestrosSinResponsabilidad=
 findIndicator([
@@ -2486,13 +2184,10 @@ findIndicator([
 'SINIESTROS SIN RESPONABILIDAD'
 ]);
 
-
 const vueltasPerdidasIndicador=
 findIndicator(['VUELTAS PERDIDAS']);
 
-
 const metrics=[
-
 
 {
 label:'Cumplimiento plan de servicio',
@@ -2501,14 +2196,12 @@ raw:r.planCumplimiento,
 meta:metas.planCumplimiento
 },
 
-
 {
 label:'Cumplimiento plan de kms',
 display:fmtPct(r.kmCumplimiento),
 raw:r.kmCumplimiento,
 meta:metas.kmCumplimiento
 },
-
 
 {
 label:'Cumplimiento plan Hs Extras Conducción',
@@ -2517,14 +2210,12 @@ raw:r.hsCumplimiento,
 meta:metas.hsCumplimiento
 },
 
-
 {
 label:'Titularidad',
 display:r.titularidad||'-',
 raw:r.titularidad,
 meta:metas.titularidad
 },
-
 
 {
 label:'Siniestros con responsabilidad',
@@ -2533,14 +2224,12 @@ raw:siniestrosConResponsabilidad.dayValue??r.siniestros??0,
 meta:siniestrosConResponsabilidad.meta||'≤10'
 },
 
-
 {
 label:'Siniestros sin responsabilidad',
 display:String(siniestrosSinResponsabilidad.dayValue??0),
 raw:siniestrosSinResponsabilidad.dayValue??0,
 meta:siniestrosSinResponsabilidad.meta||'≤6'
 },
-
 
 {
 label:'Cumplimiento Horario',
@@ -2549,14 +2238,12 @@ raw:r.horarioGeneral,
 meta:metas.horarioGeneral
 },
 
-
 {
 label:'Cumplimiento Cabecera',
 display:r.horarioCab||'-',
 raw:r.horarioCab,
 meta:metas.horarioCab
 },
-
 
 {
 label:'Cumplimiento Portón',
@@ -2565,14 +2252,12 @@ raw:r.horarioPorton,
 meta:metas.horarioPorton
 },
 
-
 {
 label:'IPK',
 display:String(r.ipk||'-'),
 raw:r.ipk,
 meta:metas.ipk
 },
-
 
 {
 label:'Estética',
@@ -2581,7 +2266,6 @@ raw:r.estetica,
 meta:metas.estetica
 },
 
-
 {
 label:'Vueltas Perdidas (Cantidad)',
 display:String(vueltasPerdidasIndicador.dayValue??r.vueltasPerdidas??0),
@@ -2589,9 +2273,7 @@ raw:vueltasPerdidasIndicador.dayValue??r.vueltasPerdidas??0,
 meta:vueltasPerdidasIndicador.meta||metas.vueltasPerdidaPct||'≤5%'
 }
 
-
 ];
-
 
 $('#kpi').innerHTML=`
 <div class="section-head">
@@ -2603,23 +2285,18 @@ Día anterior · ${esc(selectedLabel('kpi'))}
 </div>
 </div>
 
-
 <div class="kpi-dashboard">
-
 
 <div class="kpi-card-grid">
 ${metrics.map(x=>kpiCard(x,shortDateLabel(key))).join('')}
 </div>
 
-
 <aside class="kpi-month-panel">
 <h3>Metas y acumulado mensual</h3>
-
 
 ${indicators.map(x=>{
 const pass=metricPass(x.accumulated,x.meta);
 const cls=pass===false?'bad':pass===null?'neutral':'';
-
 
 return `
 <div class="kpi-month-row">
@@ -2629,16 +2306,12 @@ return `
 </div>`;
 }).join('')}
 
-
 </aside>
-
 
 </div>`;
 }
 
-
 const GRAPH_HISTORY={
-
 
 wara:{
 values:{
@@ -2668,7 +2341,6 @@ budget:{
 }
 },
 
-
 horario:{
 '2025-11':0,
 '2025-12':52,
@@ -2682,7 +2354,6 @@ horario:{
 '2026-08':89,
 '2026-09':89
 },
-
 
 cabecera:{
 '2025-11':0,
@@ -2698,7 +2369,6 @@ cabecera:{
 '2026-09':90
 },
 
-
 ipk:{
 '2025-11':0,
 '2025-12':0.76,
@@ -2712,7 +2382,6 @@ ipk:{
 '2026-08':1.94,
 '2026-09':2.11
 },
-
 
 siniestros:{
 '2025-11':0,
@@ -2728,7 +2397,6 @@ siniestros:{
 '2026-09':13
 },
 
-
 titularidad:{
 '2025-11':0,
 '2025-12':12,
@@ -2743,16 +2411,12 @@ titularidad:{
 '2026-09':62
 }
 
-
 };
-
 
 function graphParseNumber(value){
 if(value===null||value===undefined||value==='')return null;
 
-
 let s=String(value).trim().replace('%','').replace(/\s/g,'');
-
 
 if(/^-?\d{1,3}(?:\.\d{3})+(?:,\d+)?$/.test(s)){
 s=s.replace(/\./g,'').replace(',','.');
@@ -2766,35 +2430,28 @@ s=s.replace(/,/g,'');
 s=s.replace(',','.');
 }
 
-
 const n=parseFloat(s.replace(/[^0-9.\-]/g,''));
 return Number.isFinite(n)?n:null;
 }
-
 
 function graphMonthWindow(){
 const p=DATA.period||{};
 const now=new Date();
 
-
 const endYear=Number(p.year)||now.getFullYear();
 const endMonth=Number(p.month)||(now.getMonth()+1);
-
 
 const monthNames=[
 'ene','feb','mar','abr','may','jun',
 'jul','ago','sep','oct','nov','dic'
 ];
 
-
 const out=[];
-
 
 for(let offset=11;offset>=0;offset--){
 const date=new Date(endYear,endMonth-1-offset,1);
 const year=date.getFullYear();
 const month=date.getMonth()+1;
-
 
 out.push({
 key:`${year}-${pad2(month)}`,
@@ -2802,18 +2459,14 @@ label:monthNames[month-1]+'-'+String(year).slice(-2)
 });
 }
 
-
 return out;
 }
-
 
 function latestGraphKpiRow(){
 const rows=[...(DATA.kpi?.daily||[])]
 .filter(row=>row&&row.date);
 
-
 if(!rows.length)return {};
-
 
 rows.sort((a,b)=>{
 const getDay=value=>{
@@ -2823,10 +2476,8 @@ return m?Number(m[1]):0;
 return getDay(a.date)-getDay(b.date);
 });
 
-
 return rows[rows.length-1]||{};
 }
-
 
 function currentGraphPeriodKey(){
 const p=DATA.period||{};
@@ -2834,18 +2485,15 @@ if(!p.year||!p.month)return '';
 return p.year+'-'+pad2(p.month);
 }
 
-
 function graphHistoryValue(map,key){
 if(!map||!Object.prototype.hasOwnProperty.call(map,key))return null;
 const value=Number(map[key]);
 return Number.isFinite(value)?value:null;
 }
 
-
 function graphCurrentMonthValues(){
 const accumulated=DATA.kpi?.monthlyAccumulated||{};
 const latest=latestGraphKpiRow();
-
 
 const valueOrFallback=(monthlyValue,dailyValue)=>{
 const monthly=graphParseNumber(monthlyValue);
@@ -2853,25 +2501,20 @@ if(monthly!==null)return monthly;
 return graphParseNumber(dailyValue);
 };
 
-
 let siniestrosTotal=graphParseNumber(accumulated.siniestrosTotal);
-
 
 if(siniestrosTotal===null){
 const con=graphParseNumber(accumulated.siniestrosConResponsabilidad);
 const sin=graphParseNumber(accumulated.siniestrosSinResponsabilidad);
-
 
 if(con!==null||sin!==null){
 siniestrosTotal=(con||0)+(sin||0);
 }
 }
 
-
 if(siniestrosTotal===null){
 siniestrosTotal=graphParseNumber(latest.siniestros);
 }
-
 
 return{
 wara:valueOrFallback(accumulated.waraKm,latest.wara),
@@ -2884,63 +2527,52 @@ titularidad:valueOrFallback(accumulated.titularidad,latest.titularidad)
 };
 }
 
-
 function graphMetaIPK(key){
 if(key==='2026-07')return 1.5;
 return 2;
 }
 
-
 function graphMetaSiniestros(key){
 return key>='2026-07'?16:0;
 }
-
 
 function graphSeries(){
 const months=graphMonthWindow();
 const currentKey=currentGraphPeriodKey();
 const current=graphCurrentMonthValues();
 
-
 const getValue=(map,monthKey,currentValue)=>{
 if(monthKey===currentKey&&currentValue!==null)return currentValue;
 return graphHistoryValue(map,monthKey);
 };
 
-
 return{
 months,
-
 
 wara:{
 values:months.map(month=>getValue(GRAPH_HISTORY.wara.values,month.key,current.wara)),
 metas:months.map(month=>getValue(GRAPH_HISTORY.wara.budget,month.key,current.waraBudget))
 },
 
-
 horario:{
 values:months.map(month=>getValue(GRAPH_HISTORY.horario,month.key,current.horario)),
 metas:months.map(()=>90)
 },
-
 
 cabecera:{
 values:months.map(month=>getValue(GRAPH_HISTORY.cabecera,month.key,current.cabecera)),
 metas:months.map(()=>90)
 },
 
-
 ipk:{
 values:months.map(month=>getValue(GRAPH_HISTORY.ipk,month.key,current.ipk)),
 metas:months.map(month=>graphMetaIPK(month.key))
 },
 
-
 siniestros:{
 values:months.map(month=>getValue(GRAPH_HISTORY.siniestros,month.key,current.siniestros)),
 metas:months.map(month=>graphMetaSiniestros(month.key))
 },
-
 
 titularidad:{
 values:months.map(month=>getValue(GRAPH_HISTORY.titularidad,month.key,current.titularidad)),
@@ -2949,37 +2581,29 @@ metas:months.map(()=>80)
 };
 }
 
-
 function niceChartMax(values,metas,fixedMax=null){
 if(fixedMax!==null)return fixedMax;
-
 
 const nums=[
 ...(values||[]),
 ...(metas||[])
 ].filter(value=>Number.isFinite(value));
 
-
 if(!nums.length)return 1;
-
 
 const raw=Math.max(...nums,1);
 const padded=raw*1.15;
 const power=Math.pow(10,Math.floor(Math.log10(padded)));
 
-
 return Math.ceil(padded/power*2)/2*power;
 }
-
 
 function chartDisplayValue(value,type){
 if(value===null||!Number.isFinite(value))return '';
 
-
 if(type==='percent'){
 return (Math.round(value*10)/10).toLocaleString('es-AR')+'%';
 }
-
 
 if(type==='ipk'){
 return value.toLocaleString('es-AR',{
@@ -2988,16 +2612,13 @@ maximumFractionDigits:2
 });
 }
 
-
 return Math.round(value).toLocaleString('es-AR');
 }
-
 
 function graphMetaChangeLabels(metas){
 const out=[];
 let previous=null;
 let previousFinite=false;
-
 
 (metas||[]).forEach((value,index)=>{
 if(!Number.isFinite(value)){
@@ -3005,7 +2626,6 @@ previous=null;
 previousFinite=false;
 return;
 }
-
 
 if(
 !previousFinite
@@ -3017,15 +2637,12 @@ Math.abs(Number(value)-Number(previous))>.000001
 out.push({index,value});
 }
 
-
 previous=value;
 previousFinite=true;
 });
 
-
 return out;
 }
-
 
 function graphLineSegments(
 metas,
@@ -3039,7 +2656,6 @@ extendEdges
 const segments=[];
 let current=[];
 
-
 (metas||[]).forEach((value,index)=>{
 if(!Number.isFinite(value)){
 if(current.length){
@@ -3049,7 +2665,6 @@ current=[];
 return;
 }
 
-
 current.push({
 index,
 x:left+slot*index+slot/2,
@@ -3058,13 +2673,10 @@ value
 });
 });
 
-
 if(current.length)segments.push(current);
-
 
 return segments.map(segment=>{
 const points=[];
-
 
 if(extendEdges&&segment.length){
 const first=segment[0];
@@ -3074,11 +2686,9 @@ const startX=first.index===0
 points.push(`${startX},${first.y}`);
 }
 
-
 segment.forEach(item=>{
 points.push(`${item.x},${item.y}`);
 });
-
 
 if(extendEdges&&segment.length){
 const last=segment[segment.length-1];
@@ -3086,15 +2696,12 @@ const endX=last.index===11
 ?width-right
 :Math.min(width-right,last.x+slot/2);
 
-
 points.push(`${endX},${last.y}`);
 }
-
 
 return points;
 });
 }
-
 
 function renderComboChart({title,
 months,
@@ -3108,9 +2715,7 @@ showMetaValue=true,
 metaIsSeries=false
 }){
 
-
 const hasData=[...values,...metas].some(value=>Number.isFinite(value));
-
 
 if(!hasData){
 return `
@@ -3128,7 +2733,6 @@ onkeydown="handleChartKey(event,this)"
 </article>`;
 }
 
-
 const width=520;
 const height=260;
 const left=54;
@@ -3136,20 +2740,16 @@ const right=12;
 const top=22;
 const bottom=47;
 
-
 const plotW=width-left-right;
 const plotH=height-top-bottom;
 
-
 const maxY=niceChartMax(values,metas,fixedMax);
 const slot=plotW/12;
-
 
 const barW=Math.max(
 8,
 Math.min(22,slot*.46)
 );
-
 
 const y=value=>
 top+plotH-
@@ -3161,15 +2761,12 @@ maxY
 plotH
 );
 
-
 const ticks=[];
-
 
 for(let i=0;i<=4;i++){
 const value=maxY*i/4;
 ticks.push({value,y:y(value)});
 }
-
 
 const lineSegments=
 graphLineSegments(
@@ -3182,12 +2779,10 @@ y,
 !metaIsSeries
 );
 
-
 const metaLabels=
 showMetaValue&&!metaIsSeries
 ?graphMetaChangeLabels(metas)
 :[];
-
 
 return `
 <article
@@ -3199,14 +2794,11 @@ onclick="openChartModal(this)"
 onkeydown="handleChartKey(event,this)"
 >
 
-
 <h3>${esc(title)}</h3>
-
 
 <div class="chart-subtitle">
 Últimos 12 meses · clic para ampliar
 </div>
-
 
 <svg
 class="chart-svg"
@@ -3214,7 +2806,6 @@ viewBox="0 0 ${width} ${height}"
 role="img"
 aria-label="${esc(title)}"
 >
-
 
 ${
 ticks.map(tick=>`
@@ -3225,7 +2816,6 @@ y1="${tick.y}"
 x2="${width-right}"
 y2="${tick.y}"
 ></line>
-
 
 <text
 class="chart-axis-label"
@@ -3238,7 +2828,6 @@ ${esc(chartDisplayValue(tick.value,type))}
 `).join('')
 }
 
-
 <line
 class="chart-axis-line"
 x1="${left}"
@@ -3246,7 +2835,6 @@ y1="${top+plotH}"
 x2="${width-right}"
 y2="${top+plotH}"
 ></line>
-
 
 ${
 lineSegments.map(segment=>
@@ -3256,16 +2844,13 @@ segment.length>1
 ).join('')
 }
 
-
 ${
 values.map((value,index)=>{
 if(!Number.isFinite(value))return '';
 
-
 const cx=left+slot*index+slot/2;
 const barY=y(value);
 const barH=top+plotH-barY;
-
 
 return `
 <rect
@@ -3279,15 +2864,12 @@ rx="2"
 }).join('')
 }
 
-
 ${
 values.map((value,index)=>{
 if(!Number.isFinite(value))return '';
 
-
 const cx=left+slot*index+slot/2;
 const barY=y(value);
-
 
 return `
 <text
@@ -3301,11 +2883,9 @@ ${esc(chartDisplayValue(value,type))}
 }).join('')
 }
 
-
 ${
 metaLabels.map(item=>{
 const metaY=y(item.value);
-
 
 const x=
 item.index===0
@@ -3315,12 +2895,10 @@ left+5,
 left+slot*item.index-slot/2+4
 );
 
-
 const labelY=
 metaY<17
 ?metaY+13
 :metaY-7;
-
 
 return `
 <text
@@ -3334,11 +2912,9 @@ Meta ${esc(chartDisplayValue(item.value,type))}
 }).join('')
 }
 
-
 ${
 months.map((month,index)=>{
 const cx=left+slot*index+slot/2;
-
 
 return `
 <text
@@ -3352,7 +2928,6 @@ ${esc(month.label)}
 }).join('')
 }
 
-
 <text
 class="chart-axis-label"
 x="${left+plotW/2}"
@@ -3362,31 +2937,24 @@ text-anchor="middle"
 MESES
 </text>
 
-
 </svg>
 
-
 <div class="chart-legend">
-
 
 <span class="chart-legend-item">
 <span class="chart-legend-bar"></span>
 <span>${esc(valueLegend)}</span>
 </span>
 
-
 <span class="chart-legend-item">
 <span class="chart-legend-line"></span>
 <span>${esc(metaLegend)}</span>
 </span>
 
-
 </div>
-
 
 </article>`;
 }
-
 
 function handleChartKey(event,card){
 if(event.key==='Enter'||event.key===' '){
@@ -3395,20 +2963,15 @@ openChartModal(card);
 }
 }
 
-
 function openChartModal(card){
 if(!card)return;
-
 
 const modal=$('#chartModal');
 const body=$('#chartModalBody');
 
-
 if(!modal||!body)return;
 
-
 const clone=card.cloneNode(true);
-
 
 clone.removeAttribute('onclick');
 clone.removeAttribute('onkeydown');
@@ -3416,59 +2979,46 @@ clone.removeAttribute('tabindex');
 clone.removeAttribute('role');
 clone.removeAttribute('aria-label');
 
-
 const subtitle=clone.querySelector('.chart-subtitle');
-
 
 if(subtitle){
 subtitle.textContent='Últimos 12 meses';
 }
 
-
 body.innerHTML='';
 body.appendChild(clone);
-
 
 modal.classList.add('open');
 modal.setAttribute('aria-hidden','false');
 
-
 document.body.classList.add('chart-modal-open');
-
 
 setTimeout(()=>{
 $('#chartModalClose')?.focus();
 },20);
 }
 
-
 function closeChartModal(){
 const modal=$('#chartModal');
 const body=$('#chartModalBody');
 
-
 if(!modal)return;
-
 
 modal.classList.remove('open');
 modal.setAttribute('aria-hidden','true');
 
-
 document.body.classList.remove('chart-modal-open');
-
 
 if(body){
 body.innerHTML='';
 }
 }
 
-
 $('#chartModal')?.addEventListener('click',event=>{
 if(event.target===event.currentTarget){
 closeChartModal();
 }
 });
-
 
 document.addEventListener('keydown',event=>{
 if(
@@ -3478,12 +3028,23 @@ $('#chartModal')?.classList.contains('open')
 ){
 closeChartModal();
 }
+
+if(event.key==='Escape'){
+const box=$('#osDriverSuggestions');
+if(box)box.classList.remove('open');
+}
 });
 
+document.addEventListener('click',event=>{
+const wrap=event.target.closest?.('.os-filter-wrap');
+if(!wrap){
+const box=$('#osDriverSuggestions');
+if(box)box.classList.remove('open');
+}
+});
 
 function renderGraficos(){
 const series=graphSeries();
-
 
 $('#graficos').innerHTML=`
 <div class="section-head">
@@ -3495,9 +3056,7 @@ Evolución histórica
 </div>
 </div>
 
-
 <div class="chart-grid">
-
 
 ${renderComboChart({
 title:'Cumplimiento WARA',
@@ -3511,7 +3070,6 @@ showMetaValue:false,
 metaIsSeries:true
 })}
 
-
 ${renderComboChart({
 title:'Cumplimiento Horario',
 months:series.months,
@@ -3522,7 +3080,6 @@ metaLegend:'Meta %',
 type:'percent',
 fixedMax:100
 })}
-
 
 ${renderComboChart({
 title:'Cumplimiento Cabecera',
@@ -3535,7 +3092,6 @@ type:'percent',
 fixedMax:100
 })}
 
-
 ${renderComboChart({
 title:'IPK',
 months:series.months,
@@ -3546,7 +3102,6 @@ metaLegend:'Meta',
 type:'ipk',
 fixedMax:3
 })}
-
 
 ${renderComboChart({
 title:'Siniestros',
@@ -3559,7 +3114,6 @@ type:'number',
 fixedMax:50
 })}
 
-
 ${renderComboChart({
 title:'Titularidad',
 months:series.months,
@@ -3571,14 +3125,11 @@ type:'percent',
 fixedMax:100
 })}
 
-
 </div>`;
 }
 
-
 function renderSignature(tab){
 switch(tab){
-
 
 case 'resumen':
 return[
@@ -3588,7 +3139,6 @@ VERSION.guardia,
 DATE_BY_TAB.resumen
 ].join('|');
 
-
 case 'conduccion':
 return[
 VERSION.planServ,
@@ -3597,10 +3147,8 @@ VERSION.guardia,
 DATE_BY_TAB.conduccion
 ].join('|');
 
-
 case 'plan':
 return String(VERSION.planServ);
-
 
 case 'salidas':
 return[
@@ -3608,17 +3156,14 @@ VERSION.salidas,
 DATE_BY_TAB.salidas
 ].join('|');
 
-
 case 'guardia':
 return[
 VERSION.guardia,
 DATE_BY_TAB.guardia
 ].join('|');
 
-
 case 'os':
 return String(VERSION.os);
-
 
 case 'kpi':
 return[
@@ -3626,23 +3171,18 @@ VERSION.kpi,
 DATE_BY_TAB.kpi
 ].join('|');
 
-
 case 'graficos':
 return String(VERSION.kpi);
-
 
 default:
 return '';
 }
 }
 
-
 function renderActiveTab(force=false){
 configureDatePicker();
 
-
 const signature=renderSignature(ACTIVE_TAB);
-
 
 if(
 !force
@@ -3652,36 +3192,31 @@ LAST_RENDER[ACTIVE_TAB]===signature
 return;
 }
 
-
 switch(ACTIVE_TAB){
-
 
 case 'resumen':
 renderResumen();
-break;case 'conduccion':
-renderConduccion();
 break;
 
+case 'conduccion':
+renderConduccion();
+break;
 
 case 'plan':
 renderPlan();
 break;
 
-
 case 'salidas':
 renderSalidas();
 break;
-
 
 case 'guardia':
 renderGuardia();
 break;
 
-
 case 'os':
 renderOS();
 break;
-
 
 case 'kpi':
 if(sectionAllowedForProfile('kpi')){
@@ -3689,36 +3224,28 @@ renderKPI();
 }
 break;
 
-
-case 'graficos':
-if(sectionAllowedForProfile('graficos')){
+case 'graficos':if(sectionAllowedForProfile('graficos')){
 renderGraficos();
 }
 break;
 }
 
-
 LAST_RENDER[ACTIVE_TAB]=signature;
 updateLastUpdate();
 }
-
 
 function configureDatePicker(){
 const p=DATA.period||{};
 const el=$('#datePicker');
 
-
 if(!p.year||!p.month)return;
 
-
 const today=todayISO();
-
 
 if(!DATE_BY_TAB.resumen)DATE_BY_TAB.resumen=today;
 if(!DATE_BY_TAB.conduccion)DATE_BY_TAB.conduccion=today;
 if(!DATE_BY_TAB.salidas)DATE_BY_TAB.salidas=today;
 if(!DATE_BY_TAB.guardia)DATE_BY_TAB.guardia=today;
-
 
 if(
 sectionAllowedForProfile('kpi')
@@ -3728,7 +3255,6 @@ sectionAllowedForProfile('kpi')
 DATE_BY_TAB.kpi=kpiDefaultISO();
 }
 
-
 const hide=
 ACTIVE_TAB==='plan'
 ||
@@ -3736,45 +3262,35 @@ ACTIVE_TAB==='os'
 ||
 ACTIVE_TAB==='graficos';
 
-
 el.parentElement.classList.toggle('hidden',hide);
-
 
 if(hide)return;
 
-
 el.min=`${p.year}-${pad2(p.month)}-01`;
-
 
 el.max=
 ACTIVE_TAB==='kpi'
 ?kpiDefaultISO()
 :today;
 
-
 el.value=DATE_BY_TAB[ACTIVE_TAB]||today;
 }
 
-
 function mergePayload(payload){
 if(!payload)return;
-
 
 if(payload.period){
 DATA.period=payload.period;
 }
 
-
 if(payload.generatedAt){
 DATA.generatedAt=payload.generatedAt;
 }
-
 
 DATA.sources={
 ...(DATA.sources||{}),
 ...(payload.sources||{})
 };
-
 
 [
 'planServ',
@@ -3785,12 +3301,9 @@ DATA.sources={
 'graficos'
 ].forEach(section=>{
 
-
 if(payload[section]===undefined)return;
 
-
 if(!sectionAllowedForProfile(section))return;
-
 
 if(
 payload.ok===false
@@ -3800,14 +3313,11 @@ READY[section]
 return;
 }
 
-
 DATA[section]=payload[section];
 READY[section]=true;
 VERSION[section]++;
 
-
 });
-
 
 saveLocalSnapshot();
 configureDatePicker();
@@ -3815,18 +3325,15 @@ renderActiveTab();
 updateLastUpdate();
 }
 
-
 function requestSection(
 section,
 force=false,
 retry=1
 ){
 
-
 if(!sectionAllowedForProfile(section)){
 return Promise.resolve(null);
 }
-
 
 const requestKey=
 section
@@ -3835,15 +3342,12 @@ section
 +
 (force?'1':'0');
 
-
 if(INFLIGHT[requestKey]){
 return INFLIGHT[requestKey];
 }
 
-
 const promise=
 new Promise((resolve,reject)=>{
-
 
 const cb=
 'tsj_cb_'
@@ -3854,50 +3358,37 @@ Date.now()
 +
 Math.random().toString(36).slice(2);
 
-
 const script=document.createElement('script');
-
 
 let finished=false;
 
-
 const cleanup=()=>{
 clearTimeout(timer);
-
 
 try{
 delete window[cb];
 }catch(err){}
 
-
 script.remove();
 };
-
 
 const fail=reason=>{
 if(finished)return;
 
-
 finished=true;
 cleanup();
-
 
 reject(new Error(reason));
 };
 
-
 window[cb]=payload=>{
 
-
 if(finished)return;
-
 
 finished=true;
 cleanup();
 
-
 mergePayload(payload);
-
 
 if(payload?.ok===false){
 reject(
@@ -3910,19 +3401,15 @@ new Error(
 return;
 }
 
-
 resolve(payload);
 };
 
-
 script.onerror=()=>fail('No se pudo conectar con la fuente de datos.');
-
 
 const timer=setTimeout(
 ()=>fail('La fuente de datos demoró demasiado.'),
 REQUEST_TIMEOUT
 );
-
 
 let url=
 API_URL
@@ -3939,22 +3426,17 @@ encodeURIComponent(cb)
 +
 Date.now();
 
-
 if(force){
 url+='&force=1';
 }
 
-
 script.src=url;
 document.body.appendChild(script);
-
 
 })
 .catch(err=>{
 
-
 if(retry>0&&!force){
-
 
 return new Promise(resolve=>
 setTimeout(resolve,900)
@@ -3963,25 +3445,19 @@ setTimeout(resolve,900)
 requestSection(section,false,retry-1)
 );
 
-
 }
 
-
 throw err;
-
 
 })
 .finally(()=>{
 delete INFLIGHT[requestKey];
 });
 
-
 INFLIGHT[requestKey]=promise;
-
 
 return promise;
 }
-
 
 function hasAnyVisibleData(){
 return[
@@ -3998,22 +3474,17 @@ READY[section]
 );
 }
 
-
 function clearSilentRetry(section){
-
 
 if(SILENT_RETRY_TIMERS[section]){
 clearTimeout(SILENT_RETRY_TIMERS[section]);
 delete SILENT_RETRY_TIMERS[section];
 }
 
-
 SILENT_RETRY_ATTEMPTS[section]=0;
 }
 
-
 function scheduleSilentRetry(section){
-
 
 if(
 !section
@@ -4025,59 +3496,43 @@ SILENT_RETRY_TIMERS[section]
 return;
 }
 
-
 const attempt=Number(SILENT_RETRY_ATTEMPTS[section]||0);
-
 
 if(attempt>=SILENT_RETRY_DELAYS.length)return;
 
-
 const delay=SILENT_RETRY_DELAYS[attempt];
-
 
 SILENT_RETRY_ATTEMPTS[section]=attempt+1;
 
-
 SILENT_RETRY_TIMERS[section]=setTimeout(()=>{
 
-
 delete SILENT_RETRY_TIMERS[section];
-
 
 requestSection(section,false,0)
 .then(()=>{
 
-
 clearSilentRetry(section);
-
 
 setStatus(
 true,
 'Datos disponibles'
 );
 
-
 })
 .catch(()=>{
-
 
 if(hasAnyVisibleData()){
 setStatus(true,'Datos disponibles');
 }
 
-
 scheduleSilentRetry(section);
 
-
 });
-
 
 },delay);
 }
 
-
 function sectionForTab(tab){
-
 
 const map={
 plan:'planServ',
@@ -4088,9 +3543,7 @@ kpi:'kpi',
 graficos:'kpi'
 };
 
-
 const section=map[tab]||'';
-
 
 if(
 section
@@ -4100,63 +3553,50 @@ section
 return '';
 }
 
-
 return section;
 }
 
-
 function applyProfileUI(){
-
 
 document.querySelectorAll('.tab').forEach(tab=>{
 
-
 const allowed=
 ALLOWED_TABS.includes(tab.dataset.tab);
-
 
 tab.style.display=
 allowed
 ?''
 :'none';
 
-
 tab.classList.toggle(
 'active',
 allowed&&tab.dataset.tab===ACTIVE_TAB
 );
 
-
 });
-
 
 document.querySelectorAll('.tab-panel').forEach(panel=>{
 
-
 const allowed=
 ALLOWED_TABS.includes(panel.id);
-
 
 panel.style.display=
 allowed
 ?''
 :'none';
 
-
 panel.classList.toggle(
 'active',
 allowed&&panel.id===ACTIVE_TAB
 );
 
-
 });
 
+}
 
-}function ensureTabData(tab){
-
+function ensureTabData(tab){
 
 const safeTab=sanitizeTab(tab);
-
 
 if(
 safeTab==='resumen'
@@ -4164,13 +3604,11 @@ safeTab==='resumen'
 safeTab==='conduccion'
 ){
 
-
 const sections=[
 'planServ',
 'salidas',
 'guardia'
 ];
-
 
 return Promise.allSettled(
 sections.map(section=>
@@ -4180,73 +3618,55 @@ READY[section]
 )
 );
 
-
 }
 
-
 const section=sectionForTab(safeTab);
-
 
 if(!section){
 return Promise.resolve();
 }
 
-
 if(READY[section]){
-
 
 setStatus(
 true,
 'Datos disponibles'
 );
 
-
 if(safeTab==='graficos'){
 renderGraficos();
 }
 
-
 return Promise.resolve();
 }
-
 
 setStatus(
 false,
 'Actualizando…'
 );
 
-
 return requestSection(section)
-
 
 .then(payload=>{
 
-
 clearSilentRetry(section);
-
 
 setStatus(
 true,
 'Datos disponibles'
 );
 
-
 if(safeTab==='graficos'){
 renderGraficos();
 }
 
-
 return payload;
-
 
 })
 
-
 .catch(()=>{
 
-
 scheduleSilentRetry(section);
-
 
 if(hasAnyVisibleData()){
 setStatus(true,'Datos disponibles');
@@ -4254,56 +3674,43 @@ setStatus(true,'Datos disponibles');
 setStatus(false,'Actualizando…');
 }
 
-
 if(safeTab==='graficos'){
 renderGraficos();
 }
 
-
 });
-
 
 }
 
-
 function loadInitial(){
-
 
 const restored=restoreLocalSnapshot();
 
-
 if(restored){
-
 
 configureDatePicker();
 renderActiveTab(true);
 updateLastUpdate();
-
 
 setStatus(
 true,
 'Datos disponibles'
 );
 
-
 }else{
-
 
 setStatus(
 false,
 'Actualizando…'
 );
 
-
 }
-
 
 const initialSections=[
 'planServ',
 'salidas',
 'guardia'
 ];
-
 
 Promise.allSettled(
 initialSections.map(section=>
@@ -4312,12 +3719,9 @@ requestSection(section)
 )
 .then(results=>{
 
-
 results.forEach((result,index)=>{
 
-
 const section=initialSections[index];
-
 
 if(result.status==='fulfilled'){
 clearSilentRetry(section);
@@ -4325,9 +3729,7 @@ clearSilentRetry(section);
 scheduleSilentRetry(section);
 }
 
-
 });
-
 
 if(hasAnyVisibleData()){
 setStatus(true,'Datos disponibles');
@@ -4335,12 +3737,9 @@ setStatus(true,'Datos disponibles');
 setStatus(false,'Actualizando…');
 }
 
-
 renderActiveTab(true);
 
-
 setTimeout(()=>{
-
 
 if(
 sectionAllowedForProfile('os')
@@ -4350,44 +3749,32 @@ sectionAllowedForProfile('os')
 requestSection('os').catch(()=>{});
 }
 
-
 },300);
-
 
 if(sectionAllowedForProfile('kpi')){
 
-
 setTimeout(()=>{
-
 
 if(!READY.kpi){
 requestSection('kpi').catch(()=>{});
 }
 
-
 },700);
 
-
 }
-
 
 });
 
-
 }
 
-
 function refreshActive(force=true){
-
 
 setStatus(
 false,
 'Actualizando…'
 );
 
-
 let sections=[];
-
 
 if(
 ACTIVE_TAB==='resumen'
@@ -4395,27 +3782,21 @@ ACTIVE_TAB==='resumen'
 ACTIVE_TAB==='conduccion'
 ){
 
-
 sections=[
 'planServ',
 'salidas',
 'guardia'
 ];
 
-
 }else{
 
-
 const section=sectionForTab(ACTIVE_TAB);
-
 
 if(section){
 sections=[section];
 }
 
-
 }
-
 
 const requests=sections.map(section=>
 requestSection(
@@ -4425,10 +3806,8 @@ force,
 )
 );
 
-
 return Promise.allSettled(requests)
 .then(results=>{
-
 
 if(hasAnyVisibleData()){
 setStatus(true,'Datos disponibles');
@@ -4436,83 +3815,62 @@ setStatus(true,'Datos disponibles');
 setStatus(false,'Actualizando…');
 }
 
-
 renderActiveTab(true);
 
-
 return results;
-
 
 });
 }
 
-
 function activateTab(tabName){
 
-
 const safeTab=sanitizeTab(tabName);
-
 
 if(!ALLOWED_TABS.includes(safeTab)){
 return;
 }
 
-
 ACTIVE_TAB=safeTab;
-
 
 document.querySelectorAll('.tab').forEach(x=>{
 
-
 const allowed=
 ALLOWED_TABS.includes(x.dataset.tab);
-
 
 x.classList.toggle(
 'active',
 allowed&&x.dataset.tab===safeTab
 );
 
-
 });
-
 
 document.querySelectorAll('.tab-panel').forEach(x=>{
 
-
 const allowed=
 ALLOWED_TABS.includes(x.id);
-
 
 x.classList.toggle(
 'active',
 allowed&&x.id===safeTab
 );
 
-
 });
-
 
 configureDatePicker();
 renderActiveTab();
 ensureTabData(safeTab);
 }
 
-
 document.querySelectorAll('.tab').forEach(btn=>{
-
 
 btn.addEventListener(
 'click',
 ()=>activateTab(btn.dataset.tab)
 );
 
-
 });
 
-
 $('#datePicker').addEventListener('change',e=>{
-
 
 if(
 [
@@ -4526,31 +3884,24 @@ if(
 DATE_BY_TAB[ACTIVE_TAB]=e.target.value;
 }
 
-
 LAST_RENDER[ACTIVE_TAB]='';
-
 
 renderActiveTab(true);
 });
-
 
 $('#refreshBtn').addEventListener(
 'click',
 ()=>refreshActive(true)
 );
 
-
 /* =========================================================
    REPORTE REEMPLAZOS DE UNIDADES
 ========================================================= */
 
-
 function reportDateParts(value){
 const match=String(value||'').match(/^(\d{1,2})[\/-](\d{1,2})/);
 
-
 if(!match)return null;
-
 
 return{
 day:Number(match[1]),
@@ -4558,30 +3909,22 @@ month:Number(match[2])
 };
 }
 
-
 function reportReasonLabel(value){
 const text=String(value||'').trim();
 return text||'Sin motivo';
 }
 
-
 function reportAggregate(rows,getter){
-
 
 const map=new Map();
 
-
 (rows||[]).forEach(row=>{
-
 
 const raw=String(getter(row)??'').trim();
 
-
 if(!raw)return;
 
-
 const key=normalizeText(raw);
-
 
 if(!map.has(key)){
 map.set(key,{
@@ -4590,9 +3933,7 @@ value:0
 });
 }else{
 
-
 const current=map.get(key);
-
 
 if(
 current.label===current.label.toUpperCase()
@@ -4602,15 +3943,11 @@ raw!==raw.toUpperCase()
 current.label=raw;
 }
 
-
 }
-
 
 map.get(key).value++;
 
-
 });
-
 
 return [...map.values()]
 .sort((a,b)=>
@@ -4624,44 +3961,33 @@ String(b.label),
 );
 }
 
-
 function getUnitsReportRows(){
 
-
 const d=DATA.salidas||{};
-
 
 const selected=
 reportDateParts(
 selectedDDMM('salidas')
 );
 
-
 if(!selected)return [];
-
 
 return [...(d.unitRows||[])]
 
-
 .filter(row=>{
-
 
 const parts=
 reportDateParts(row.fecha);
 
-
 if(!parts)return false;
-
 
 if(parts.month!==selected.month){
 return false;
 }
 
-
 if(parts.day>selected.day){
 return false;
 }
-
 
 return(
 String(row.averia||'').trim()
@@ -4669,31 +3995,24 @@ String(row.averia||'').trim()
 String(row.reemplazo||'').trim()
 );
 
-
 })
 
-
 .sort((a,b)=>{
-
 
 const da=
 reportDateParts(a.fecha)?.day
 ||
 0;
 
-
 const db=
 reportDateParts(b.fecha)?.day
 ||
 0;
 
-
 return(
 da-db
 
-
 ||
-
 
 String(a.linea||'')
 .localeCompare(
@@ -4702,9 +4021,7 @@ String(b.linea||''),
 {numeric:true}
 )
 
-
 ||
-
 
 String(
 a.turno
@@ -4726,28 +4043,22 @@ b.servicio
 )
 );
 
-
 });
 
-
 }
-
 
 function reportBarsHtml(
 items,
 limit=12
 ){
 
-
 const rows=
 (items||[])
 .slice(0,limit);
 
-
 if(!rows.length){
 return `<div class="empty">Sin datos.</div>`;
 }
-
 
 const max=
 Math.max(
@@ -4757,25 +4068,19 @@ Number(item.value||0)
 1
 );
 
-
 return `
 <div class="units-report-bars">
-
 
 ${
 rows.map(item=>`
 
-
 <div class="units-report-bar-row">
-
 
 <div class="units-report-bar-label">
 ${esc(item.label)}
 </div>
 
-
 <div class="units-report-bar-track">
-
 
 <div
 class="units-report-bar-fill"
@@ -4791,25 +4096,19 @@ max
 }%"
 ></div>
 
-
 </div>
-
 
 <div class="units-report-bar-value">
 ${num(item.value)}
 </div>
 
-
 </div>
-
 
 `).join('')
 }
 
-
 </div>`;
 }
-
 
 function reportMiniTableHtml(
 title,
@@ -4818,23 +4117,18 @@ leftLabel,
 limit=8
 ){
 
-
 const data=
 (rows||[])
 .slice(0,limit);
 
-
 return `
 <div class="units-report-box">
-
 
 <h3>
 ${esc(title)}
 </h3>
 
-
 <table class="units-report-mini-table">
-
 
 <thead>
 <tr>
@@ -4843,13 +4137,10 @@ ${esc(title)}
 </tr>
 </thead>
 
-
 <tbody>
-
 
 ${
 data.length
-
 
 ?data.map(item=>`
 <tr>
@@ -4858,29 +4149,22 @@ data.length
 </tr>
 `).join('')
 
-
 :`<tr>
 <td colspan="2">Sin datos.</td>
 </tr>`
 }
 
-
 </tbody>
 
-
 </table>
-
 
 </div>`;
 }
 
-
 function reportDetailTableHtml(rows){
-
 
 return `
 <table class="units-report-detail-table">
-
 
 <thead>
 <tr>
@@ -4890,28 +4174,23 @@ return `
 <th>Int. planificado</th>
 <th>Int. que salió</th>
 <th>Motivo</th>
-</tr></thead>
-
+</tr>
+</thead>
 
 <tbody>
-
 
 ${
 (rows||[]).map(row=>`
 
-
 <tr>
-
 
 <td>
 ${esc(row.fecha)}
 </td>
 
-
 <td>
 ${esc(row.linea||'—')}
 </td>
-
 
 <td>
 ${esc(
@@ -4923,16 +4202,13 @@ row.servicio
 )}
 </td>
 
-
 <td class="units-report-change">
 ${esc(row.averia)}
 </td>
 
-
 <td class="units-report-change">
 ${esc(row.reemplazo)}
 </td>
-
 
 <td>
 <span class="units-report-motive">
@@ -4944,43 +4220,33 @@ row.motivo
 </span>
 </td>
 
-
 </tr>
-
 
 `).join('')
 }
 
-
 </tbody>
-
 
 </table>`;
 }
 
-
 function buildUnitsReport(){
-
 
 const rows=
 getUnitsReportRows();
 
-
 const p=
 DATA.period||{};
-
 
 const selected=
 reportDateParts(
 selectedDDMM('salidas')
 );
 
-
 const selectedDay=
 selected?.day
 ||
 0;
-
 
 const selectedMonth=
 selected?.month
@@ -4989,16 +4255,13 @@ Number(p.month)
 ||
 0;
 
-
 const selectedYear=
 Number(p.year)
 ||
 new Date().getFullYear();
 
-
 const periodText=
 `01/${pad2(selectedMonth)}/${selectedYear} al ${pad2(selectedDay)}/${pad2(selectedMonth)}/${selectedYear}`;
-
 
 const byDate=
 reportAggregate(
@@ -5006,13 +4269,11 @@ rows,
 row=>row.fecha
 );
 
-
 byDate.sort((a,b)=>
 (reportDateParts(a.label)?.day||0)
 -
 (reportDateParts(b.label)?.day||0)
 );
-
 
 const byReason=
 reportAggregate(
@@ -5023,13 +4284,11 @@ row.motivo
 )
 );
 
-
 const byPlanned=
 reportAggregate(
 rows,
 row=>row.averia
 );
-
 
 const byReplacement=
 reportAggregate(
@@ -5037,17 +4296,14 @@ rows,
 row=>row.reemplazo
 );
 
-
 const byLine=
 reportAggregate(
 rows,
 row=>row.linea
 );
 
-
 const daysWithChanges=
 byDate.length;
-
 
 const average=
 daysWithChanges
@@ -5056,42 +4312,33 @@ rows.length/daysWithChanges
 :
 0;
 
-
 const topPlanned=
 byPlanned[0]
 ||
 {label:'—',value:0};
-
 
 const topReplacement=
 byReplacement[0]
 ||
 {label:'—',value:0};
 
-
 const topLine=
 byLine[0]
 ||
 {label:'—',value:0};
-
 
 const topReason=
 byReason[0]
 ||
 {label:'—',value:0};
 
-
 const summaryPage=`
-
 
 <section class="units-report-sheet">
 
-
 <div class="units-report-header">
 
-
 <div class="units-report-brand">
-
 
 <img
 class="units-report-logo"
@@ -5099,115 +4346,76 @@ src="logo-tsj.png"
 alt="TSJ"
 >
 
-
 <div class="units-report-company">
 TRANSPORTE SAN JOSÉ S.A.
 </div>
 
-
 </div>
-
 
 <div class="units-report-period">
 
-
 Planillería · Reemplazos de unidades
 
-
 <br>
-
 
 Período:
 ${esc(periodText)}
 
-
 </div>
 
-
 </div>
-
-
-
 
 <h1 class="units-report-title">
 Reporte de Reemplazos de Unidades
 </h1>
 
-
-
-
 <p class="units-report-subtitle">
-
 
 Diferencias entre la unidad prevista en la planificación y la unidad que finalmente inicia el servicio.
 
-
 </p>
-
-
-
 
 <div class="units-report-kpis">
 
-
-
-
 <div class="units-report-kpi">
-
 
 <div class="units-report-kpi-label">
 Reemplazos acumulados
 </div>
 
-
 <div class="units-report-kpi-value">
 ${num(rows.length)}
 </div>
-
 
 <div class="units-report-kpi-sub">
 Hasta el día seleccionado
 </div>
 
-
 </div>
 
-
-
-
 <div class="units-report-kpi">
-
 
 <div class="units-report-kpi-label">
 Días con reemplazos
 </div>
 
-
 <div class="units-report-kpi-value">
 ${num(daysWithChanges)}
 </div>
-
 
 <div class="units-report-kpi-sub">
 Jornadas con al menos un cambio
 </div>
 
-
 </div>
 
-
-
-
 <div class="units-report-kpi">
-
 
 <div class="units-report-kpi-label">
 Promedio por día
 </div>
 
-
 <div class="units-report-kpi-value">
-
 
 ${average.toLocaleString(
 'es-AR',
@@ -5217,117 +4425,78 @@ maximumFractionDigits:1
 }
 )}
 
-
 </div>
-
 
 <div class="units-report-kpi-sub">
 Sobre días con reemplazos
 </div>
 
-
 </div>
 
-
-
-
 <div class="units-report-kpi">
-
 
 <div class="units-report-kpi-label">
 Int. planificado más reemplazado
 </div>
 
-
 <div class="units-report-kpi-value">
 ${esc(topPlanned.label)}
 </div>
-
 
 <div class="units-report-kpi-sub">
 ${num(topPlanned.value)} reemplazos
 </div>
 
-
 </div>
 
-
-
-
 <div class="units-report-kpi">
-
 
 <div class="units-report-kpi-label">
 Backup más utilizado
 </div>
 
-
 <div class="units-report-kpi-value">
 ${esc(topReplacement.label)}
 </div>
-
 
 <div class="units-report-kpi-sub">
 ${num(topReplacement.value)} salidas
 </div>
 
-
 </div>
 
-
-
-
 <div class="units-report-kpi">
-
 
 <div class="units-report-kpi-label">
 Línea con más reemplazos
 </div>
 
-
 <div class="units-report-kpi-value">
 ${esc(topLine.label)}
 </div>
-
 
 <div class="units-report-kpi-sub">
 ${num(topLine.value)} reemplazos
 </div>
 
-
 </div>
 
-
-
-
 </div>
-
-
-
 
 <div class="units-report-summary-grid">
 
-
-
-
 <div class="units-report-box">
-
 
 <h3>
 Reemplazos por día
 </h3>
-
 
 ${reportBarsHtml(
 byDate,
 31
 )}
 
-
 </div>
-
-
-
 
 ${reportMiniTableHtml(
 'Internos planificados con mayor recurrencia',
@@ -5336,9 +4505,6 @@ byPlanned,
 8
 )}
 
-
-
-
 ${reportMiniTableHtml(
 'Motivos principales',
 byReason,
@@ -5346,59 +4512,37 @@ byReason,
 8
 )}
 
-
-
-
 </div>
-
-
-
 
 <div class="units-report-note">
 
-
 Motivo más frecuente:
-
 
 <strong>
 ${esc(topReason.label)}
 </strong>
 
-
 ·
-
 
 ${num(topReason.value)}
 
-
 registros.
-
 
 La información corresponde a Planillería y contempla desde el primer día del mes hasta la fecha seleccionada.
 
-
 </div>
-
-
-
 
 </section>
 `;
-
 
 if(!rows.length){
 return summaryPage;
 }
 
-
 const PAGE_SIZE=
 48;
 
-
 const pages=[];
-
-
-
 
 for(
 let start=0;
@@ -5406,19 +4550,16 @@ start<rows.length;
 start+=PAGE_SIZE
 ){
 
-
 const chunk=
 rows.slice(
 start,
 start+PAGE_SIZE
 );
 
-
 const splitAt=
 Math.ceil(
 chunk.length/2
 );
-
 
 const left=
 chunk.slice(
@@ -5426,30 +4567,21 @@ chunk.slice(
 splitAt
 );
 
-
 const right=
 chunk.slice(
 splitAt
 );
 
-
 const pageNumber=
 pages.length+2;
 
-
-
-
 pages.push(`
-
 
 <section class="units-report-sheet">
 
-
 <div class="units-report-header">
 
-
 <div class="units-report-brand">
-
 
 <img
 class="units-report-logo"
@@ -5457,63 +4589,43 @@ src="logo-tsj.png"
 alt="TSJ"
 >
 
-
 <div class="units-report-company">
 TRANSPORTE SAN JOSÉ S.A.
 </div>
 
-
 </div>
-
 
 <div class="units-report-period">
 
-
 Detalle acumulado
-
 
 <br>
 
-
 ${esc(periodText)}
 
-
 </div>
 
-
 </div>
-
-
-
 
 <div class="units-report-detail-title">
-
 
 <h2>
 Detalle diario de reemplazos
 </h2>
 
-
 <span>
 Página ${pageNumber}
 </span>
 
-
 </div>
 
-
-
-
 <div class="units-report-detail-columns">
-
 
 <div>
 ${reportDetailTableHtml(left)}
 </div>
 
-
 <div>
-
 
 ${
 right.length
@@ -5525,23 +4637,14 @@ right
 ''
 }
 
-
 </div>
 
-
 </div>
-
-
-
 
 </section>
 `);
 
-
 }
-
-
-
 
 return(
 summaryPage
@@ -5549,45 +4652,35 @@ summaryPage
 pages.join('')
 );
 
-
 }
-
 
 function exportUnitsReport(){
 
-
 const root=
 $('#unitsReportRoot');
-
 
 if(!root){
 return;
 }
 
-
 const previousTitle=
 document.title;
-
 
 const date=
 selectedISO('salidas')
 ||
 'reporte';
 
-
 root.innerHTML=
 buildUnitsReport();
-
 
 root.setAttribute(
 'aria-hidden',
 'false'
 );
 
-
 document.title=
 `TSJ_Reporte_Reemplazos_Unidades_${date}`;
-
 
 document.body
 .classList
@@ -5595,49 +4688,37 @@ document.body
 'print-units-report'
 );
 
-
 let cleaned=
 false;
 
-
 const cleanup=
 ()=>{
-
 
 if(cleaned){
 return;
 }
 
-
 cleaned=
 true;
-
 
 document.body
 .classList
 .remove(
 'print-units-report'
 );
-
 
 root.setAttribute(
 'aria-hidden',
 'true'
 );
 
-
 root.innerHTML=
 '';
-
 
 document.title=
 previousTitle;
 
-
 };
-
-
-
 
 window.addEventListener(
 'afterprint',
@@ -5645,62 +4726,43 @@ cleanup,
 {once:true}
 );
 
-
-
-
 requestAnimationFrame(
 ()=>{
 
-
 requestAnimationFrame(
 ()=>{
-
 
 window.print();
 
-
 }
 );
 
-
 }
 );
-
-
-
 
 setTimeout(
 cleanup,
 60000
 );
 
-
 }
-
-
-
 
 /* =========================================================
    PDF RESUMEN JORNADA
 ========================================================= */
 
-
 function exportSummaryPDF(){
-
 
 const previousTitle=
 document.title;
-
 
 const date=
 selectedISO('resumen')
 ||
 'jornada';
 
-
 document.title=
 `TSJ_Resumen_Jornada_${date}`;
-
 
 document.body
 .classList
@@ -5708,10 +4770,8 @@ document.body
 'print-summary'
 );
 
-
 const cleanup=
 ()=>{
-
 
 document.body
 .classList
@@ -5719,13 +4779,10 @@ document.body
 'print-summary'
 );
 
-
 document.title=
 previousTitle;
 
-
 };
-
 
 window.addEventListener(
 'afterprint',
@@ -5733,31 +4790,22 @@ cleanup,
 {once:true}
 );
 
-
 window.print();
-
 
 setTimeout(
 cleanup,
 2500
 );
 
-
 }
-
-
-
 
 /* =========================================================
    INICIO
 ========================================================= */
 
-
 applyProfileUI();
 
-
 loadInitial();
-
 
 setInterval(
 ()=>
@@ -5765,11 +4813,8 @@ refreshActive(false),
 300000
 );
 
-
 </script>
 
-
 </body>
-
 
 </html>
