@@ -430,6 +430,27 @@ body.print-summary .summary-progress-track{height:2mm!important}
 body.print-summary .summary-progress-value{min-width:10mm!important;font-size:7pt!important}
 body.print-summary .summary-lower-grid{display:grid!important;grid-template-columns:1fr!important;gap:3mm!important}
 }
+
+/* Let Recorridos use the whole viewport while keeping the other tabs unchanged. */
+@media screen{
+body.recorridos-view{overflow:hidden}
+body.recorridos-view .shell{width:100%;max-width:none;height:100dvh;min-height:0;margin:0;padding:8px;display:flex;flex-direction:column;gap:8px}
+body.recorridos-view .top,body.recorridos-view .hero,body.recorridos-view .foot{display:none}
+body.recorridos-view .tabs{flex:0 0 auto;flex-wrap:nowrap;overflow-x:auto;margin:0;padding:4px;border-radius:10px}
+body.recorridos-view .tab{white-space:nowrap;padding:9px 14px}
+body.recorridos-view .shell>main{flex:1 1 auto;min-height:0}
+body.recorridos-view #recorridos.active{height:100%;min-height:0;display:flex;flex-direction:column}
+body.recorridos-view .recorridos-toolbar{flex:0 0 auto;margin:0 4px 6px;min-height:26px}
+body.recorridos-view .recorridos-toolbar h2{font-size:17px}
+body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;border-radius:8px}
+@media(max-width:700px){
+body.recorridos-view .shell{padding:4px;gap:5px}
+body.recorridos-view .tab{padding:8px 11px;font-size:12px}
+body.recorridos-view .recorridos-toolbar{min-height:23px;margin-bottom:4px}
+body.recorridos-view .recorridos-toolbar h2{font-size:15px}
+body.recorridos-view .recorridos-toolbar a{font-size:10px}
+}
+}
 </style>
 </head>
 
@@ -3441,6 +3462,7 @@ return section;
 }
 
 function applyProfileUI(){
+document.body.classList.toggle('recorridos-view',ACTIVE_TAB==='recorridos');
 
 document.querySelectorAll('.tab').forEach(tab=>{
 
@@ -3720,6 +3742,7 @@ return;
 }
 
 ACTIVE_TAB=safeTab;
+document.body.classList.toggle('recorridos-view',safeTab==='recorridos');
 
 document.querySelectorAll('.tab').forEach(x=>{
 
