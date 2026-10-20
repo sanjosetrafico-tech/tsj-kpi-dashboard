@@ -528,7 +528,7 @@ return true;
 if(IS_GUARD_PROFILE)document.body.classList.add('profile-guardia');
 if(IS_CONDUCTION_PROFILE)document.body.classList.add('profile-conduccion');
 
-const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V17';
+const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V18';
 const LOCAL_CACHE_MAX_AGE=12*60*60*1000;
 const REQUEST_TIMEOUT=45000;
 
@@ -745,17 +745,34 @@ return !!m&&`${pad2(+m[1])}/${pad2(+m[2])}`===key;
 
 function kpiDefaultISO(){
 const p=DATA.period||{};
+if(!p.year||!p.month||!p.day)return '';
+
+const yesterday=new Date(
+Number(p.year),
+Number(p.month)-1,
+Number(p.day)-1,
+12
+);
+
+if(
+yesterday.getFullYear()===Number(p.year)
+&&
+(yesterday.getMonth()+1)===Number(p.month)
+){
+return `${yesterday.getFullYear()}-${pad2(yesterday.getMonth()+1)}-${pad2(yesterday.getDate())}`;
+}
+
 const days=(DATA.kpi?.daily||[])
 .map(x=>{
 const m=String(x.date||'').match(/^(\d{1,2})[\/-](\d{1,2})/);
 return m&&+m[2]===+p.month?+m[1]:0;
 })
-.filter(d=>d>0&&d<+p.day)
+.filter(d=>d>0&&d<=+p.day)
 .sort((a,b)=>b-a);
-const d=days[0]||Math.max(1,(+p.day||1)-1);
-return p.year?`${p.year}-${pad2(p.month)}-${pad2(d)}`:'';
-}
 
+const d=days[0]||1;
+return `${p.year}-${pad2(p.month)}-${pad2(d)}`;
+}
 function monthLabel(){
 const p=DATA.period||{};
 return p.month&&p.year
@@ -3114,10 +3131,7 @@ if(hide)return;
 
 el.min=`${p.year}-${pad2(p.month)}-01`;
 
-el.max=
-ACTIVE_TAB==='kpi'
-?kpiDefaultISO()
-:today;
+el.max=today;
 
 el.value=DATE_BY_TAB[ACTIVE_TAB]||today;
 }
