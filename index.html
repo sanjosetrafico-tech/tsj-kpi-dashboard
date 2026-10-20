@@ -54,16 +54,18 @@ cursor:pointer;
 .date-control{display:flex;background:var(--ink);border-radius:12px;padding:7px 10px}
 .date-control input{border:0;outline:0;background:transparent;color:#fff;font-weight:800;color-scheme:dark}
 .date-control.hidden{display:none}
+.recorridos-open{display:none;align-items:center;justify-content:center;justify-self:end;background:var(--ink);color:#fff;text-decoration:none;border-radius:12px;padding:9px 14px;font-size:14px;font-weight:850;white-space:nowrap}
+body.recorridos-view .recorridos-open{display:inline-flex}
+.recorridos-open:hover{background:#302930}
+.recorridos-open:focus-visible{outline:3px solid var(--pink);outline-offset:3px}
+@media(max-width:720px){.recorridos-open{font-size:11px;padding:8px 10px}}
 .tabs{display:flex;gap:7px;flex-wrap:wrap;padding:5px;background:#ece8ea;border-radius:14px;margin-bottom:22px}
 .tab{border:0;background:transparent;color:#5f585d;font-weight:800;padding:11px 17px;border-radius:10px;cursor:pointer}
 .tab.active{background:#fff;color:var(--ink);box-shadow:0 3px 10px rgba(0,0,0,.06)}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
-.recorridos-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px}
-.recorridos-toolbar h2{margin:0;font-size:20px}
-.recorridos-toolbar a{font-size:12px;font-weight:750;color:var(--pink-dark);text-decoration:none}
 .recorridos-frame{display:block;width:100%;height:76dvh;min-height:520px;border:1px solid var(--line);border-radius:12px;background:#fff}
-@media(max-width:700px){.recorridos-frame{height:80dvh;min-height:480px}.recorridos-toolbar h2{font-size:18px}}
+@media(max-width:700px){.recorridos-frame{height:80dvh;min-height:480px}}
 body.profile-guardia .tab[data-tab="kpi"],
 body.profile-guardia #kpi,
 body.profile-guardia .tab[data-tab="graficos"],
@@ -447,8 +449,6 @@ body.recorridos-view .shell{height:100dvh;min-height:0}
 body.recorridos-view .foot{display:none}
 body.recorridos-view .shell>main{flex:1 1 auto;min-height:0}
 body.recorridos-view #recorridos.active{height:100%;min-height:0;display:flex;flex-direction:column}
-body.recorridos-view .recorridos-toolbar{flex:0 0 auto;margin:0 4px 6px;min-height:26px}
-body.recorridos-view .recorridos-toolbar h2{font-size:17px}
 body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;border-radius:8px}
 @media(max-width:720px){
 .shell{padding:4px;gap:5px}
@@ -464,9 +464,6 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 .date-control{padding:6px}
 .date-control input{font-size:11px;min-width:0;width:100px}
 .tab{padding:8px 11px;font-size:12px}
-body.recorridos-view .recorridos-toolbar{min-height:23px;margin-bottom:4px}
-body.recorridos-view .recorridos-toolbar h2{font-size:15px}
-body.recorridos-view .recorridos-toolbar a{font-size:10px}
 }
 }
 </style>
@@ -494,6 +491,7 @@ body.recorridos-view .recorridos-toolbar a{font-size:10px}
 <div class="date-control">
 <input id="datePicker" type="date">
 </div>
+<a class="recorridos-open" href="https://sanjosetrafico-tech.github.io/tsj-visor-recorridos/" target="_blank" rel="noopener" aria-label="Abrir mapa en otra pestaña">Abrir mapa ↗</a>
 </section>
 
 <div id="errorBox" class="error"></div>
@@ -519,7 +517,6 @@ body.recorridos-view .recorridos-toolbar a{font-size:10px}
 <section id="kpi" class="tab-panel"></section>
 <section id="graficos" class="tab-panel"></section>
 <section id="recorridos" class="tab-panel" aria-label="Recorridos">
-<div class="recorridos-toolbar"><h2>Recorridos</h2><a href="https://sanjosetrafico-tech.github.io/tsj-visor-recorridos/" target="_blank" rel="noopener">Abrir mapa en otra pestaña ↗</a></div>
 <iframe id="recorridosFrame" class="recorridos-frame" title="Mapas TSJ: líneas y ramales" data-src="https://sanjosetrafico-tech.github.io/tsj-visor-recorridos/?embed=1"></iframe>
 </section>
 </main>
