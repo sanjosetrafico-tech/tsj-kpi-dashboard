@@ -59,6 +59,11 @@ cursor:pointer;
 .tab.active{background:#fff;color:var(--ink);box-shadow:0 3px 10px rgba(0,0,0,.06)}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
+.recorridos-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px}
+.recorridos-toolbar h2{margin:0;font-size:20px}
+.recorridos-toolbar a{font-size:12px;font-weight:750;color:var(--pink-dark);text-decoration:none}
+.recorridos-frame{display:block;width:100%;height:76dvh;min-height:520px;border:1px solid var(--line);border-radius:12px;background:#fff}
+@media(max-width:700px){.recorridos-frame{height:80dvh;min-height:480px}.recorridos-toolbar h2{font-size:18px}}
 body.profile-guardia .tab[data-tab="kpi"],
 body.profile-guardia #kpi,
 body.profile-guardia .tab[data-tab="graficos"],
@@ -462,6 +467,7 @@ body.print-summary .summary-lower-grid{display:grid!important;grid-template-colu
 <button class="tab" data-tab="os">OS</button>
 <button class="tab" data-tab="kpi">KPI</button>
 <button class="tab" data-tab="graficos">Gráficos</button>
+<button class="tab" data-tab="recorridos">Recorridos</button>
 </nav>
 
 <main>
@@ -473,6 +479,10 @@ body.print-summary .summary-lower-grid{display:grid!important;grid-template-colu
 <section id="os" class="tab-panel"></section>
 <section id="kpi" class="tab-panel"></section>
 <section id="graficos" class="tab-panel"></section>
+<section id="recorridos" class="tab-panel" aria-label="Recorridos">
+<div class="recorridos-toolbar"><h2>Recorridos</h2><a href="https://sanjosetrafico-tech.github.io/tsj-visor-recorridos/" target="_blank" rel="noopener">Abrir mapa en otra pestaña ↗</a></div>
+<iframe id="recorridosFrame" class="recorridos-frame" title="Mapas TSJ: líneas y ramales" data-src="https://sanjosetrafico-tech.github.io/tsj-visor-recorridos/"></iframe>
+</section>
 </main>
 
 <div id="chartModal" class="chart-modal" aria-hidden="true">
@@ -498,7 +508,7 @@ const PROFILE=String(URL_PARAMS.get('perfil')||'').trim().toLowerCase();
 const IS_GUARD_PROFILE=PROFILE==='guardia';
 const IS_CONDUCTION_PROFILE=PROFILE==='conduccion';
 
-const ALL_TABS=['resumen','conduccion','plan','salidas','guardia','os','kpi','graficos'];
+const ALL_TABS=['resumen','conduccion','plan','salidas','guardia','os','kpi','graficos','recorridos'];
 
 const ALLOWED_TABS=
 IS_CONDUCTION_PROFILE
@@ -2990,6 +3000,11 @@ fixedMax:100
 </div>`;
 }
 
+function renderRecorridos(){
+const frame=$('#recorridosFrame');
+if(!frame.getAttribute('src'))frame.src=frame.dataset.src;
+}
+
 function renderSignature(tab){
 switch(tab){
 
@@ -3035,6 +3050,9 @@ DATE_BY_TAB.kpi
 
 case 'graficos':
 return String(VERSION.kpi);
+
+case 'recorridos':
+return 'recorridos';
 
 default:
 return '';
@@ -3091,6 +3109,10 @@ if(sectionAllowedForProfile('graficos')){
 renderGraficos();
 }
 break;
+
+case 'recorridos':
+renderRecorridos();
+break;
 }
 
 LAST_RENDER[ACTIVE_TAB]=signature;
@@ -3098,6 +3120,10 @@ updateLastUpdate();
 }
 
 function configureDatePicker(){
+if(ACTIVE_TAB==='recorridos'){
+$('#datePicker').parentElement.classList.add('hidden');
+return;
+}
 const p=DATA.period||{};
 const el=$('#datePicker');
 
@@ -4664,6 +4690,8 @@ cleanup,
 ========================================================= */
 
 applyProfileUI();
+
+if(ACTIVE_TAB==='recorridos')renderActiveTab();
 
 loadInitial();
 
