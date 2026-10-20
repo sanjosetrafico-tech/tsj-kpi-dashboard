@@ -431,34 +431,38 @@ body.print-summary .summary-progress-value{min-width:10mm!important;font-size:7p
 body.print-summary .summary-lower-grid{display:grid!important;grid-template-columns:1fr!important;gap:3mm!important}
 }
 
-/* Let Recorridos use the whole viewport while keeping the other tabs unchanged. */
+/* Shared screen layout keeps the dashboard header aligned across every tab. */
 @media screen{
+.shell{width:100%;max-width:none;min-height:100dvh;margin:0;padding:8px;display:flex;flex-direction:column;gap:8px}
+.top{flex:0 0 auto;margin:0;padding:4px 10px}
+.top .brand-logo{width:90px}
+.hero{flex:0 0 auto;margin:0;padding:0 10px 4px;display:grid;grid-template-columns:minmax(0,1fr) 160px;align-items:center;gap:12px;min-height:42px}
+.hero h1{font-size:26px}
+.date-control{justify-self:end}
+.tabs{flex:0 0 auto;flex-wrap:nowrap;overflow-x:auto;margin:0;padding:4px;border-radius:10px}
+.tab{white-space:nowrap;padding:9px 14px}
 body.recorridos-view{overflow:hidden}
-body.recorridos-view .shell{width:100%;max-width:none;height:100dvh;min-height:0;margin:0;padding:8px;display:flex;flex-direction:column;gap:8px}
-body.recorridos-view .top{flex:0 0 auto;margin:0;padding:4px 10px}
-body.recorridos-view .top .brand-logo{width:90px}
-body.recorridos-view .hero{flex:0 0 auto;margin:0;padding:0 10px 4px}
-body.recorridos-view .hero h1{font-size:26px}
+body.recorridos-view .shell{height:100dvh;min-height:0}
 body.recorridos-view .foot{display:none}
-body.recorridos-view .tabs{flex:0 0 auto;flex-wrap:nowrap;overflow-x:auto;margin:0;padding:4px;border-radius:10px}
-body.recorridos-view .tab{white-space:nowrap;padding:9px 14px}
 body.recorridos-view .shell>main{flex:1 1 auto;min-height:0}
 body.recorridos-view #recorridos.active{height:100%;min-height:0;display:flex;flex-direction:column}
 body.recorridos-view .recorridos-toolbar{flex:0 0 auto;margin:0 4px 6px;min-height:26px}
 body.recorridos-view .recorridos-toolbar h2{font-size:17px}
 body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;border-radius:8px}
-@media(max-width:700px){
-body.recorridos-view .shell{padding:4px;gap:5px}
-body.recorridos-view .top{flex-direction:row;align-items:center;gap:8px;padding:2px 6px}
-body.recorridos-view .top .brand{gap:7px}
-body.recorridos-view .top .brand-logo{width:62px}
-body.recorridos-view .top .brand-name{font-size:9px;letter-spacing:0}
-body.recorridos-view .top .status-wrap{gap:5px}
-body.recorridos-view .top .live{font-size:9px}
-body.recorridos-view .top .refresh{font-size:10px;padding:7px}
-body.recorridos-view .hero{padding:0 6px 2px}
-body.recorridos-view .hero h1{font-size:20px}
-body.recorridos-view .tab{padding:8px 11px;font-size:12px}
+@media(max-width:720px){
+.shell{padding:4px;gap:5px}
+.top{flex-direction:row;align-items:center;gap:8px;padding:2px 6px}
+.top .brand{gap:7px}
+.top .brand-logo{width:62px}
+.top .brand-name{font-size:9px;letter-spacing:0}
+.top .status-wrap{gap:5px}
+.top .live{font-size:9px}
+.top .refresh{font-size:10px;padding:7px}
+.hero{padding:0 6px 2px;grid-template-columns:minmax(0,1fr) 110px;gap:8px;min-height:66px}
+.hero h1{font-size:20px}
+.date-control{padding:6px}
+.date-control input{font-size:11px;min-width:0;width:100px}
+.tab{padding:8px 11px;font-size:12px}
 body.recorridos-view .recorridos-toolbar{min-height:23px;margin-bottom:4px}
 body.recorridos-view .recorridos-toolbar h2{font-size:15px}
 body.recorridos-view .recorridos-toolbar a{font-size:10px}
