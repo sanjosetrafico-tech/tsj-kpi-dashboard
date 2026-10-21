@@ -324,6 +324,9 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 .kpi-badge{min-width:82px;text-align:center;border-radius:999px;padding:6px 10px;background:#e7f5f0;color:var(--good);font-size:11px;font-weight:900}
 .kpi-badge.bad{background:#fde7ee;color:var(--bad)}
 .kpi-badge.neutral{background:#f0edef;color:#6d656a}
+.kpi-data-status{display:inline-block;margin-top:4px;font-size:10px;font-weight:850}
+.kpi-data-status.complete{color:var(--good)}
+.kpi-data-status.partial{color:var(--warn)}
 
 .chart-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
 .chart-card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:15px 15px 12px;min-width:0;cursor:zoom-in;transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
@@ -574,7 +577,7 @@ return true;
 if(IS_GUARD_PROFILE)document.body.classList.add('profile-guardia');
 if(IS_CONDUCTION_PROFILE)document.body.classList.add('profile-conduccion');
 
-const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V18';
+const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V19';
 const LOCAL_CACHE_MAX_AGE=12*60*60*1000;
 const REQUEST_TIMEOUT=45000;
 
@@ -1998,17 +2001,97 @@ renderOSHistorySuggestions();
 renderOSHistoryPanel();
 }
 
-function fmtPct(v){
-if(v===null||v===undefined||v==='')return '-';
+function kpiValue(v){
+if(v===null||v===undefined)return '—';
+
 const s=String(v).trim();
-return s.includes('%')?s:s+'%';
+
+if(
+!s
+||
+s.startsWith('#')
+||
+s==='-'
+||
+s==='-%'
+){
+return '—';
+}
+
+return s;
+}
+
+function fmtPct(v){
+const s=kpiValue(v);
+
+if(s==='—')return s;
+
+return s.includes('%')
+?s
+:s+'%';
+}
+
+function kpiRowStatus(row){
+if(!row){
+return{
+complete:false,
+label:'Sin datos KPI para el día seleccionado'
+};
+}
+
+const fields=[
+'planCumplimiento',
+'kmCumplimiento',
+'hsCumplimiento',
+'titularidad',
+'ipk',
+'horarioGeneral',
+'horarioCab',
+'horarioPorton',
+'estetica'
+];
+
+const valid=
+fields.filter(
+field=>kpiValue(row[field])!=='—'
+).length;
+
+const complete=
+valid===fields.length;
+
+return{
+complete:complete,
+label:complete
+?'Datos consolidados'
+:'Datos parciales · pendiente de actualización'
+};
 }
 
 function rawNumber(v){
 if(v===null||v===undefined||v==='')return null;
-let s=String(v).trim().replace('%','').replace(/\s/g,'');
+
+const raw=String(v).trim();
+
+if(
+!raw
+||
+raw.startsWith('#')
+||
+raw==='—'
+||
+raw==='-'
+||
+raw==='-%'
+){
+return null;
+}
+
+let s=raw.replace('%','').replace(/\s/g,'');
+
 if(s.includes(',')&&!s.includes('.'))s=s.replace(',','.');
+
 const n=parseFloat(s.replace(/[^0-9.\-]/g,''));
+
 return Number.isFinite(n)?n:null;
 }
 
@@ -2086,11 +2169,23 @@ const r=(d.daily||[]).find(x=>sameDay(x.date,key));
 
 if(!r){
 $('#kpi').innerHTML=`
-<div class="section-head"><h2>KPI</h2></div>
-<div class="panel"><div class="empty">Sin datos KPI para el día seleccionado.</div></div>`;
+<div class="section-head">
+<h2>KPI</h2>
+<div class="source">
+${sourceLabel(DATA.sources?.kpi||d.source)}
+<br>
+Día seleccionado · ${esc(selectedLabel('kpi'))}
+<br>
+<span class="kpi-data-status partial">Sin datos cargados</span>
+</div>
+</div>
+<div class="panel">
+<div class="empty">Todavía no hay datos KPI cargados para el día seleccionado.</div>
+</div>`;
 return;
 }
 
+const status=kpiRowStatus(r);
 const indicators=uniqueMonthlyIndicators(d.indicators||[]);
 
 const findIndicator=function(matchers){
@@ -2109,8 +2204,18 @@ findIndicator([
 'SINIESTROS SIN RESPONABILIDAD'
 ]);
 
-const vueltasPerdidasIndicador=
-findIndicator(['VUELTAS PERDIDAS']);
+const selectedIsDefault=
+selectedISO('kpi')===kpiDefaultISO();
+
+const sinRespValue=
+selectedIsDefault
+?kpiValue(siniestrosConResponsabilidad.dayValue)
+:'—';
+
+const sinSinRespValue=
+selectedIsDefault
+?kpiValue(siniestrosSinResponsabilidad.dayValue)
+:'—';
 
 const metrics=[
 
@@ -2137,49 +2242,49 @@ meta:metas.hsCumplimiento
 
 {
 label:'Titularidad',
-display:r.titularidad||'-',
+display:kpiValue(r.titularidad),
 raw:r.titularidad,
 meta:metas.titularidad
 },
 
 {
 label:'Siniestros con responsabilidad',
-display:String(siniestrosConResponsabilidad.dayValue??r.siniestros??0),
-raw:siniestrosConResponsabilidad.dayValue??r.siniestros??0,
+display:sinRespValue,
+raw:sinRespValue,
 meta:siniestrosConResponsabilidad.meta||'≤10'
 },
 
 {
 label:'Siniestros sin responsabilidad',
-display:String(siniestrosSinResponsabilidad.dayValue??0),
-raw:siniestrosSinResponsabilidad.dayValue??0,
+display:sinSinRespValue,
+raw:sinSinRespValue,
 meta:siniestrosSinResponsabilidad.meta||'≤6'
 },
 
 {
 label:'Cumplimiento Horario',
-display:r.horarioGeneral||'-',
+display:kpiValue(r.horarioGeneral),
 raw:r.horarioGeneral,
 meta:metas.horarioGeneral
 },
 
 {
 label:'Cumplimiento Cabecera',
-display:r.horarioCab||'-',
+display:kpiValue(r.horarioCab),
 raw:r.horarioCab,
 meta:metas.horarioCab
 },
 
 {
 label:'Cumplimiento Portón',
-display:r.horarioPorton||'-',
+display:kpiValue(r.horarioPorton),
 raw:r.horarioPorton,
 meta:metas.horarioPorton
 },
 
 {
 label:'IPK',
-display:String(r.ipk||'-'),
+display:kpiValue(r.ipk),
 raw:r.ipk,
 meta:metas.ipk
 },
@@ -2193,9 +2298,9 @@ meta:metas.estetica
 
 {
 label:'Vueltas Perdidas (Cantidad)',
-display:String(vueltasPerdidasIndicador.dayValue??r.vueltasPerdidas??0),
-raw:vueltasPerdidasIndicador.dayValue??r.vueltasPerdidas??0,
-meta:vueltasPerdidasIndicador.meta||metas.vueltasPerdidaPct||'≤5%'
+display:kpiValue(r.vueltasPerdidas),
+raw:r.vueltasPerdidas,
+meta:metas.vueltasPerdidaPct||'≤5%'
 }
 
 ];
@@ -2207,6 +2312,10 @@ $('#kpi').innerHTML=`
 ${sourceLabel(DATA.sources?.kpi||d.source)}
 <br>
 Día anterior · ${esc(selectedLabel('kpi'))}
+<br>
+<span class="kpi-data-status ${status.complete?'complete':'partial'}">
+${esc(status.label)}
+</span>
 </div>
 </div>
 
@@ -2227,7 +2336,7 @@ return `
 <div class="kpi-month-row">
 <div>${esc(x.label)}</div>
 <div>Meta ${esc(x.meta||'-')}</div>
-<div class="kpi-badge ${cls}">${esc(x.accumulated||'-')}</div>
+<div class="kpi-badge ${cls}">${esc(kpiValue(x.accumulated))}</div>
 </div>`;
 }).join('')}
 
@@ -3558,6 +3667,28 @@ if(safeTab==='graficos'){
 renderGraficos();
 }
 
+if(
+safeTab==='kpi'
+||
+safeTab==='graficos'
+){
+return requestSection('kpi',true,0)
+.then(payload=>{
+clearSilentRetry('kpi');
+setStatus(true,'Datos disponibles');
+
+if(safeTab==='graficos'){
+renderGraficos();
+}
+
+return payload;
+})
+.catch(()=>{
+scheduleSilentRetry('kpi');
+setStatus(true,'Datos disponibles');
+});
+}
+
 return Promise.resolve();
 }
 
@@ -3814,6 +3945,11 @@ DATE_BY_TAB[ACTIVE_TAB]=e.target.value;
 LAST_RENDER[ACTIVE_TAB]='';
 
 renderActiveTab(true);
+
+if(ACTIVE_TAB==='kpi'){
+requestSection('kpi',true,0)
+.catch(()=>{});
+}
 });
 
 $('#refreshBtn').addEventListener(
