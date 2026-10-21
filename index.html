@@ -163,6 +163,43 @@ box-shadow:var(--shadow);
 .units-report-motive{display:inline-block;padding:.8mm 1.6mm;border-radius:99px;background:#fff0f8;color:#be176d;font-weight:850}
 .units-report-note{margin-top:3mm;color:#6f676c;font-size:6.5pt;line-height:1.35}
 
+/* REPORTE MENSUAL OS */
+.os-report-root{display:none}
+.os-report-sheet{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#181416;background:#fff}
+.os-report-header{display:flex;align-items:center;justify-content:space-between;gap:6mm;padding-bottom:3mm;border-bottom:1px solid #ded8dc}
+.os-report-brand{display:flex;align-items:center;gap:4mm}
+.os-report-logo{width:28mm;height:auto}
+.os-report-company{font-size:10pt;font-weight:850;letter-spacing:.08em}
+.os-report-period{text-align:right;color:#655e63;font-size:8pt;line-height:1.35}
+.os-report-title{margin:4mm 0 1mm;font-size:18pt;line-height:1.05}
+.os-report-subtitle{margin:0 0 4mm;color:#6f676c;font-size:8pt}
+.os-report-kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:2.5mm;margin-bottom:4mm}
+.os-report-kpi{min-height:23mm;padding:3.2mm;border:1px solid #e7e1e4;border-radius:3mm;background:#fff}
+.os-report-kpi-label{color:#6b6268;font-size:6.7pt;font-weight:850;text-transform:uppercase;letter-spacing:.03em}
+.os-report-kpi-value{margin-top:2mm;font-size:16pt;font-weight:950;line-height:1.05}
+.os-report-kpi-sub{margin-top:1.5mm;color:#6f676c;font-size:6.5pt;line-height:1.25}
+.os-report-summary-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:3mm}
+.os-report-box{border:1px solid #e7e1e4;border-radius:3mm;padding:3.2mm;background:#fff}
+.os-report-box h3{margin:0 0 2.5mm;font-size:9pt}
+.os-report-bars{display:flex;flex-direction:column;gap:1.5mm}
+.os-report-bar-row{display:grid;grid-template-columns:28mm 1fr 8mm;gap:2mm;align-items:center;font-size:6.6pt}
+.os-report-bar-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.os-report-bar-track{height:2.5mm;background:#f0ecee;border-radius:99px;overflow:hidden}
+.os-report-bar-fill{height:100%;background:#ed2e91;border-radius:99px}
+.os-report-bar-value{text-align:right;font-weight:850}
+.os-report-mini-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.os-report-mini-table th,.os-report-mini-table td{padding:1.5mm 1.4mm;border-bottom:1px solid #eee9ec;font-size:6.6pt;line-height:1.2}
+.os-report-mini-table th{background:#faf8f9;color:#645d62;font-size:6pt;text-transform:uppercase}
+.os-report-detail-title{display:flex;justify-content:space-between;align-items:end;gap:4mm;margin:4mm 0 3mm}
+.os-report-detail-title h2{margin:0;font-size:13pt}
+.os-report-detail-title span{color:#6f676c;font-size:7pt}
+.os-report-detail-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.os-report-detail-table th,.os-report-detail-table td{padding:1.35mm 1.1mm;border-bottom:1px solid #e8e2e5;font-size:5.9pt;line-height:1.16;vertical-align:top;overflow-wrap:anywhere}
+.os-report-detail-table th{background:#f6f3f5;color:#5f575c;font-size:5.5pt;font-weight:850;text-transform:uppercase}
+.os-report-detail-table th:nth-child(1){width:8%}.os-report-detail-table th:nth-child(2){width:7%}.os-report-detail-table th:nth-child(3){width:15%}.os-report-detail-table th:nth-child(4){width:7%}.os-report-detail-table th:nth-child(5){width:7%}.os-report-detail-table th:nth-child(6){width:13%}.os-report-detail-table th:nth-child(7){width:29%}.os-report-detail-table th:nth-child(8){width:14%}
+.os-report-motive{display:inline-block;padding:.7mm 1.4mm;border-radius:99px;background:#fff0f8;color:#be176d;font-weight:850}
+.os-report-note{margin-top:3mm;color:#6f676c;font-size:6.5pt;line-height:1.35}
+
 .bars{display:flex;flex-direction:column;gap:11px}
 .bar-row{display:grid;grid-template-columns:minmax(120px,1fr) 2.2fr 34px;align-items:center;gap:9px}
 .bar-label{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -386,6 +423,7 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 
 @page{size:A4 portrait;margin:8mm}
 @page unitsReport{size:A4 landscape;margin:7mm}
+@page osReport{size:A4 landscape;margin:7mm}
 @media print{
 body.print-units-report .shell{display:none!important}
 body.print-units-report .units-report-root{display:block!important;width:100%!important;margin:0!important;padding:0!important}
@@ -395,6 +433,15 @@ body.print-units-report .chart-modal{display:none!important}
 body.print-units-report .units-report-summary-grid,
 body.print-units-report .units-report-box,
 body.print-units-report .units-report-kpi{break-inside:avoid;page-break-inside:avoid}
+body.print-os-report .shell{display:none!important}
+body.print-os-report .os-report-root{display:block!important;width:100%!important;margin:0!important;padding:0!important}
+body.print-os-report .os-report-sheet{display:block!important;page:osReport;break-after:page;page-break-after:always;min-height:0}
+body.print-os-report .os-report-sheet:last-child{break-after:auto;page-break-after:auto}
+body.print-os-report .chart-modal{display:none!important}
+body.print-os-report .os-report-summary-grid,
+body.print-os-report .os-report-box,
+body.print-os-report .os-report-kpi{break-inside:avoid;page-break-inside:avoid}
+html:has(body.print-os-report),body.print-os-report{width:297mm;min-height:210mm}
 
 html,body{
 width:210mm;
@@ -537,6 +584,7 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 </footer></div>
 
 <div id="unitsReportRoot" class="units-report-root" aria-hidden="true"></div>
+<div id="osReportRoot" class="os-report-root" aria-hidden="true"></div>
 
 <script>
 
@@ -1948,6 +1996,8 @@ $('#os').innerHTML=`
 ${sourceLabel(DATA.sources?.os||d.source)}
 <br>
 Acumulado ${esc(monthLabel())}
+<br>
+<button type="button" class="report-btn" onclick="exportOSReport()">Exportar PDF</button>
 </div>
 </div>
 
@@ -4805,6 +4855,133 @@ cleanup,
 60000
 );
 
+}
+
+/* =========================================================
+   REPORTE MENSUAL DE OS
+========================================================= */
+
+function osReportAggregate(rows,getter){
+const map=new Map();
+
+(rows||[]).forEach(row=>{
+const label=String(getter(row)||'').trim()||'Sin especificar';
+const key=normalizeText(label);
+if(!map.has(key))map.set(key,{label,value:0});
+map.get(key).value++;
+});
+
+return [...map.values()].sort((a,b)=>b.value-a.value||a.label.localeCompare(b.label,'es',{numeric:true}));
+}
+
+function osReportBarsHtml(items,limit=12){
+const data=(items||[]).slice(0,limit);
+if(!data.length)return '<div class="empty">Sin datos.</div>';
+const max=Math.max(...data.map(item=>Number(item.value)||0),1);
+
+return `<div class="os-report-bars">${data.map(item=>`
+<div class="os-report-bar-row">
+<div class="os-report-bar-label">${esc(item.label)}</div>
+<div class="os-report-bar-track"><div class="os-report-bar-fill" style="width:${Math.max(4,(Number(item.value)||0)/max*100)}%"></div></div>
+<div class="os-report-bar-value">${num(item.value)}</div>
+</div>`).join('')}</div>`;
+}
+
+function osReportMiniTableHtml(title,rows,leftLabel,limit=10){
+const data=(rows||[]).slice(0,limit);
+return `<div class="os-report-box">
+<h3>${esc(title)}</h3>
+<table class="os-report-mini-table"><thead><tr><th>${esc(leftLabel)}</th><th>Cant.</th></tr></thead><tbody>
+${data.length?data.map(item=>`<tr><td>${esc(item.label)}</td><td><strong>${num(item.value)}</strong></td></tr>`).join(''):'<tr><td colspan="2">Sin datos.</td></tr>'}
+</tbody></table></div>`;
+}
+
+function osReportDetailTableHtml(rows){
+return `<table class="os-report-detail-table"><thead><tr>
+<th>Fecha</th><th>Legajo</th><th>Conductor</th><th>Línea</th><th>Interno</th><th>Motivo</th><th>Observación</th><th>Agente</th>
+</tr></thead><tbody>${(rows||[]).map(row=>`<tr>
+<td>${esc(row.fecha||'—')}</td><td>${esc(row.legajo||'—')}</td><td>${esc(dashboardName(row.nombre)||'—')}</td>
+<td>${esc(dashboardCode(row.linea)||'—')}</td><td>${esc(row.interno||'—')}</td>
+<td>${row.motivo?`<span class="os-report-motive">${esc(row.motivo)}</span>`:'—'}</td>
+<td>${esc(row.observacion||'—')}</td><td>${esc(dashboardName(row.agente)||'—')}</td>
+</tr>`).join('')}</tbody></table>`;
+}
+
+function osReportDateValue(value){
+const text=String(value||'').trim();
+const match=text.match(/^(\d{1,2})[\/-](\d{1,2})(?:[\/-](\d{2,4}))?/);
+if(!match)return Number.MAX_SAFE_INTEGER;
+return Number(match[3]||0)*10000+Number(match[2])*100+Number(match[1]);
+}
+
+function buildOSReport(){
+const d=DATA.os||{};
+const summary=d.summary||{};
+const rows=[...(d.rows||[])].sort((a,b)=>osReportDateValue(a.fecha)-osReportDateValue(b.fecha)||String(a.nombre||'').localeCompare(String(b.nombre||''),'es'));
+const reasons=osReportAggregate(rows,row=>row.motivo);
+const lines=osReportAggregate(rows,row=>dashboardCode(row.linea));
+const drivers=osReportAggregate(rows,row=>{
+const name=dashboardName(row.nombre);
+return row.legajo?`${row.legajo} · ${name||'Sin nombre'}`:(name||'Sin conductor');
+});
+const period=monthLabel();
+const metrics=[
+['OS del mes',summary.total??rows.length,'Acumulado mensual'],
+['Siniestros',summary.siniestros??0,'Acumulado mensual'],
+['Incumpl. horario',summary.horario??0,'Acumulado mensual'],
+['Incumpl. directivas',summary.directivas??0,'Acumulado mensual'],
+['Vandalismo',summary.vandalismo??0,'Acumulado mensual']
+];
+
+const summaryPage=`<section class="os-report-sheet">
+<div class="os-report-header"><div class="os-report-brand"><img class="os-report-logo" src="logo-tsj.png" alt="TSJ"><div class="os-report-company">TRANSPORTE SAN JOSÉ S.A.</div></div><div class="os-report-period">Órdenes de servicio<br>Período: ${esc(period)}</div></div>
+<h1 class="os-report-title">Reporte mensual de órdenes de servicio</h1>
+<p class="os-report-subtitle">Resumen de registros OS, distribución y conductores con mayor cantidad de intervenciones.</p>
+<div class="os-report-kpis">${metrics.map(metric=>`<div class="os-report-kpi"><div class="os-report-kpi-label">${esc(metric[0])}</div><div class="os-report-kpi-value">${num(metric[1])}</div><div class="os-report-kpi-sub">${esc(metric[2])}</div></div>`).join('')}</div>
+<div class="os-report-summary-grid">
+<div class="os-report-box"><h3>OS por motivo</h3>${osReportBarsHtml(reasons,12)}</div>
+${osReportMiniTableHtml('OS por línea',lines,'Línea',10)}
+${osReportMiniTableHtml('Conductores con registros',drivers,'Conductor',10)}
+</div>
+<div class="os-report-note">Total de registros detallados: <strong>${num(rows.length)}</strong>. Documento de uso interno.</div>
+</section>`;
+
+if(!rows.length)return summaryPage;
+
+const pageSize=20;
+const detailPages=[];
+for(let start=0;start<rows.length;start+=pageSize){
+const page=detailPages.length+2;
+const chunk=rows.slice(start,start+pageSize);
+detailPages.push(`<section class="os-report-sheet">
+<div class="os-report-header"><div class="os-report-brand"><img class="os-report-logo" src="logo-tsj.png" alt="TSJ"><div class="os-report-company">TRANSPORTE SAN JOSÉ S.A.</div></div><div class="os-report-period">Detalle mensual de OS<br>${esc(period)}</div></div>
+<div class="os-report-detail-title"><h2>Detalle completo de órdenes de servicio</h2><span>Página ${page}</span></div>
+${osReportDetailTableHtml(chunk)}
+</section>`);
+}
+return summaryPage+detailPages.join('');
+}
+
+function exportOSReport(){
+const root=$('#osReportRoot');
+if(!root)return;
+const previousTitle=document.title;
+root.innerHTML=buildOSReport();
+root.setAttribute('aria-hidden','false');
+document.title=`TSJ_Reporte_OS_${String(monthLabel()).replace(/\s+/g,'_')}`;
+document.body.classList.add('print-os-report');
+let cleaned=false;
+const cleanup=()=>{
+if(cleaned)return;
+cleaned=true;
+document.body.classList.remove('print-os-report');
+root.setAttribute('aria-hidden','true');
+root.innerHTML='';
+document.title=previousTitle;
+};
+window.addEventListener('afterprint',cleanup,{once:true});
+requestAnimationFrame(()=>requestAnimationFrame(()=>window.print()));
+setTimeout(cleanup,60000);
 }
 
 /* =========================================================
