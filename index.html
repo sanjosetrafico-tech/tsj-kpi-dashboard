@@ -625,7 +625,7 @@ return true;
 if(IS_GUARD_PROFILE)document.body.classList.add('profile-guardia');
 if(IS_CONDUCTION_PROFILE)document.body.classList.add('profile-conduccion');
 
-const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V22';
+const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V23';
 const LOCAL_CACHE_MAX_AGE=12*60*60*1000;
 const REQUEST_TIMEOUT=45000;
 const CACHE_SAVE_DELAY=900;
@@ -949,8 +949,41 @@ return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().
 }
 
 function isValidAbsenceRow(row){
-const conductor=normalizeText(row?.conductor||row?.chofer||'');
-if(!conductor)return false;
+const raw=String(
+row?.conductor
+||
+row?.chofer
+||
+row?.nombre
+||
+row?.legajo
+||
+''
+).trim();
+
+if(!raw)return false;
+
+const conductor=normalizeText(raw);
+
+/* Una fila sólo es novedad si identifica a una persona:
+   - legajo numérico, o
+   - nombre/apellido con letras.
+   Separadores, guiones, puntos o celdas de plantilla no cuentan. */
+const hasLegajo=
+/\b\d{2,8}\b/.test(raw);
+
+const hasName=
+/[A-ZÁÉÍÓÚÜÑ]/i.test(raw);
+
+if(!hasLegajo&&!hasName)return false;
+
+const placeholders=[
+'---','----','-----','------','-------','--------',
+'.........','........','.......','......','.....','....','...'
+];
+
+if(placeholders.includes(raw))return false;
+
 const invalid=[
 'LLEGADAS TARDE','LLEGADA TARDE','OBSERVACIONES','PLAN DIARIO',
 'REEMPLAZOS DE CONDUCTORES','REEMPLAZO DE CONDUCTORES',
@@ -958,7 +991,13 @@ const invalid=[
 'INASISTENCIAS RELEVANTES','INASISTENCIAS RELEVANTE',
 'CHOFER','CONDUCTOR','ESTADO','TURNO'
 ];
-return !invalid.some(value=>conductor===value||conductor.startsWith(value+' '));
+
+return !invalid.some(
+value=>
+conductor===value
+||
+conductor.startsWith(value+' ')
+);
 }
 
 function normalizeMechanicalCategory(value){
