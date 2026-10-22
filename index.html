@@ -625,7 +625,7 @@ return true;
 if(IS_GUARD_PROFILE)document.body.classList.add('profile-guardia');
 if(IS_CONDUCTION_PROFILE)document.body.classList.add('profile-conduccion');
 
-const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V19';
+const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V20';
 const LOCAL_CACHE_MAX_AGE=12*60*60*1000;
 const REQUEST_TIMEOUT=45000;
 const CACHE_SAVE_DELAY=900;
@@ -742,6 +742,7 @@ DATA=snapshot.data;
 if(DATA[section]){
 READY[section]=true;
 VERSION[section]=1;
+SECTION_LAST_SUCCESS[section]=Number(snapshot.savedAt||0);
 }
 });
 return true;
@@ -1011,35 +1012,74 @@ const fields=[row?.titular,row?.reemplazo,row?.motivo,row?.linea,row?.turno,getT
 return fields.reduce((total,value)=>total+(String(value??'').trim()?1:0),0);
 }
 
+function replacementSurname(row){
+const values=[
+row?.titular,
+row?.conductor,
+row?.chofer,
+row?.apellido,
+row?.legajo
+];
+
+for(const value of values){
+let text=String(value??'').trim();
+if(!text)continue;
+
+text=stripLeadingLegajo(text);
+
+if(!text)continue;
+
+const surname=
+text.includes(',')
+?text.split(',')[0].trim()
+:text.split(/\s+/)[0].trim();
+
+const normalized=
+normalizeText(surname);
+
+if(
+normalized
+&&
+!/^[0-9]+$/.test(normalized)
+){
+return normalized;
+}
+}
+
+return '';
+}
+
 function sameDriverReplacement(a,b){
 const legajoA=getTitularLegajo(a);
 const legajoB=getTitularLegajo(b);
-let titularMatch=false;
 
-if(legajoA&&legajoB){
-titularMatch=legajoA===legajoB;
-}else{
-titularMatch=personNamesMatch(
-a?.titular||a?.conductor||a?.chofer,
-b?.titular||b?.conductor||b?.chofer
-);
-}
-if(!titularMatch)return false;
-
-const reemplazoA=a?.reemplazo||'';
-const reemplazoB=b?.reemplazo||'';
-
-if(reemplazoA&&reemplazoB&&!personNamesMatch(reemplazoA,reemplazoB))return false;
-
-const lineA=normalizeBaseLine(a?.linea);
-const lineB=normalizeBaseLine(b?.linea);
-if(lineA&&lineB&&lineA!==lineB)return false;
-
-const turnA=normalizeText(a?.turno);
-const turnB=normalizeText(b?.turno);
-if(turnA&&turnB&&turnA!==turnB)return false;
-
+if(
+legajoA
+&&
+legajoB
+&&
+legajoA===legajoB
+){
 return true;
+}
+
+const surnameA=replacementSurname(a);
+const surnameB=replacementSurname(b);
+
+if(
+surnameA
+&&
+surnameB
+&&
+surnameA===surnameB
+){
+return true;
+}
+
+return personNamesMatch(
+a?.titular||a?.conductor||a?.chofer||a?.legajo,
+b?.titular||b?.conductor||b?.chofer||b?.legajo
+);
 }
 
 function mergeDriverReplacements(planRows,guardRows){
@@ -1061,12 +1101,20 @@ return match?match[1]:'';
 
 function getDriverLegajo(row){
 const values=[
-row?.legajo,row?.legajoTitular,row?.legajoConductor,row?.nroLegajo,
-row?.numeroLegajo,row?.legajoReemplazo,row?.reemplazoLegajo
+row?.legajo,
+row?.legajoTitular,
+row?.legajoConductor,
+row?.nroLegajo,
+row?.numeroLegajo,
+row?.legajoReemplazo,
+row?.reemplazoLegajo
 ];
-for(const v of values){
-if(v!==undefined&&v!==null&&String(v).trim())return String(v).trim();
+
+for(const value of values){
+const text=String(value??'').trim();
+if(/^\d{2,8}$/.test(text))return text;
 }
+
 return extractNumericPrefix(row?.titular)
 ||extractNumericPrefix(row?.conductor)
 ||extractNumericPrefix(row?.chofer)
@@ -1090,7 +1138,20 @@ return getDriverLegajo(row)||getDriverSurname(row)||'';
 }
 
 function uniqueDriverReferences(rows){
-return [...new Set((rows||[]).map(getDriverReference).filter(Boolean))];
+const map=new Map();
+
+(rows||[]).forEach(row=>{
+const value=getDriverReference(row);
+if(!value)return;
+
+const key=normalizeText(value);
+
+if(!map.has(key)){
+map.set(key,value);
+}
+});
+
+return [...map.values()];
 }
 
 function dedupeDriverRecords(rows,extraFields=[]){
@@ -1253,7 +1314,7 @@ compliance!==null
 <div class="summary-icon pink">${svgIcon('users')}</div>
 <div class="summary-kpi-label">Reemplazos de conductores</div>
 <div class="summary-kpi-value">${num(drivers.length)}</div>
-<div class="summary-kpi-sub">Legajos: ${esc(compactList(driverReferences,5))}</div>
+<div class="summary-kpi-sub">Titulares: ${esc(compactList(driverReferences,5))}</div>
 </article>
 
 <article class="summary-kpi ${late.length?'warn':'good'}">
@@ -3850,17 +3911,45 @@ false,
 
 }
 
-const initialSections=[
+let initialSections=[];
+
+if(
+ACTIVE_TAB==='resumen'
+||
+ACTIVE_TAB==='conduccion'
+){
+initialSections=[
 'planServ',
 'salidas',
-'guardia',
-'os',
-'kpi'
-].filter(sectionAllowedForProfile);
+'guardia'
+];
+}else{
+const section=sectionForTab(ACTIVE_TAB);
+if(section){
+initialSections=[section];
+}
+}
 
-/* Cada sección es independiente: una fuente lenta no debe retener
-   OS, KPI ni las solapas que ya tienen datos listos. */
+initialSections=
+initialSections.filter(sectionAllowedForProfile);
+
+/* Sólo se cargan las fuentes necesarias para la solapa visible.
+   OS y KPI quedan en carga diferida al abrir esas solapas. */
 initialSections.forEach(section=>{
+
+const lastSuccess=
+Number(SECTION_LAST_SUCCESS[section]||0);
+
+if(
+READY[section]
+&&
+lastSuccess
+&&
+Date.now()-lastSuccess<SECTION_REFRESH_TTL
+){
+return;
+}
+
 requestSection(section,false,1)
 .then(()=>{
 clearSilentRetry(section);
@@ -5050,8 +5139,10 @@ if(ACTIVE_TAB==='recorridos')renderActiveTab();
 loadInitial();
 
 setInterval(
-()=>
-refreshActive(false),
+()=>{
+if(document.hidden)return;
+refreshActive(false);
+},
 300000
 );
 
