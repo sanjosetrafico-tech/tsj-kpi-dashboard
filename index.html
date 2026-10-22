@@ -64,9 +64,6 @@ body.recorridos-view .recorridos-open{display:inline-flex}
 .tab.active{background:#fff;color:var(--ink);box-shadow:0 3px 10px rgba(0,0,0,.06)}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
-.ipk-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
-.ipk-card{padding:17px;min-height:118px}.ipk-card .label{color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}.ipk-card .value{font-size:31px;font-weight:900;margin-top:9px}.ipk-card .sub{font-size:12px;color:var(--muted);margin-top:6px}
-.ipk-compare{display:grid;grid-template-columns:130px minmax(110px,1fr) minmax(110px,1fr);gap:12px;align-items:center;margin:11px 0}.ipk-compare-label{font-weight:800;font-size:12px}.ipk-track{height:10px;border-radius:999px;background:#f0ecee;overflow:hidden}.ipk-fill{height:100%;border-radius:999px;background:var(--pink)}.ipk-fill.acc{background:var(--blue)}.ipk-chart-value{font-size:12px;font-weight:850;margin-top:4px}.ipk-legend{display:flex;gap:14px;color:var(--muted);font-size:11px;margin-bottom:12px}.ipk-key{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;background:var(--pink)}.ipk-key.acc{background:var(--blue)}
 .recorridos-frame{display:block;width:100%;height:76dvh;min-height:520px;border:1px solid var(--line);border-radius:12px;background:#fff}
 @media(max-width:700px){.recorridos-frame{height:80dvh;min-height:480px}}
 body.profile-guardia .tab[data-tab="kpi"],
@@ -556,7 +553,6 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 <button class="tab" data-tab="guardia">Guardia</button>
 <button class="tab" data-tab="os">OS</button>
 <button class="tab" data-tab="kpi">KPI</button>
-<button class="tab" data-tab="ipk">IPK por línea</button>
 <button class="tab" data-tab="graficos">Gráficos</button>
 <button class="tab" data-tab="recorridos">Recorridos</button>
 </nav>
@@ -569,7 +565,6 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 <section id="guardia" class="tab-panel"></section>
 <section id="os" class="tab-panel"></section>
 <section id="kpi" class="tab-panel"></section>
-<section id="ipk" class="tab-panel"></section>
 <section id="graficos" class="tab-panel"></section>
 <section id="recorridos" class="tab-panel" aria-label="Recorridos">
 <iframe id="recorridosFrame" class="recorridos-frame" title="Mapas TSJ: líneas y ramales" data-src="https://sanjosetrafico-tech.github.io/tsj-visor-recorridos/?embed=1"></iframe>
@@ -600,7 +595,7 @@ const PROFILE=String(URL_PARAMS.get('perfil')||'').trim().toLowerCase();
 const IS_GUARD_PROFILE=PROFILE==='guardia';
 const IS_CONDUCTION_PROFILE=PROFILE==='conduccion';
 
-const ALL_TABS=['resumen','conduccion','plan','salidas','guardia','os','kpi','ipk','graficos','recorridos'];
+const ALL_TABS=['resumen','conduccion','plan','salidas','guardia','os','kpi','graficos','recorridos'];
 
 const ALLOWED_TABS=
 IS_CONDUCTION_PROFILE
@@ -623,7 +618,7 @@ function sectionAllowedForProfile(section){
 if(IS_CONDUCTION_PROFILE){
 return ['planServ','salidas','guardia'].includes(section);
 }
-if(IS_GUARD_PROFILE&&(section==='kpi'||section==='ipk'||section==='graficos'))return false;
+if(IS_GUARD_PROFILE&&(section==='kpi'||section==='graficos'))return false;
 return true;
 }
 
@@ -644,9 +639,9 @@ let ACTIVE_TAB=sanitizeTab(REQUESTED_TAB);
 let OS_HISTORY_QUERY='';
 let OS_HISTORY_SELECTED_KEY='';
 
-const READY={planServ:false,salidas:false,guardia:false,os:false,kpi:false,ipk:false,graficos:false};
-const VERSION={planServ:0,salidas:0,guardia:0,os:0,kpi:0,ipk:0,graficos:0};
-const LAST_RENDER={resumen:'',conduccion:'',plan:'',salidas:'',guardia:'',os:'',kpi:'',ipk:'',graficos:''};
+const READY={planServ:false,salidas:false,guardia:false,os:false,kpi:false,graficos:false};
+const VERSION={planServ:0,salidas:0,guardia:0,os:0,kpi:0,graficos:0};
+const LAST_RENDER={resumen:'',conduccion:'',plan:'',salidas:'',guardia:'',os:'',kpi:'',graficos:''};
 const DATE_BY_TAB={resumen:'',conduccion:'',salidas:'',guardia:'',kpi:''};
 const INFLIGHT={};
 const LIVE_INFLIGHT={};
@@ -746,7 +741,7 @@ const snapshot=JSON.parse(raw);
 const age=Date.now()-Number(snapshot.savedAt||0);
 if(!snapshot.data||age>LOCAL_CACHE_MAX_AGE)return false;
 DATA=snapshot.data;
-['planServ','salidas','guardia','os','kpi','ipk','graficos'].forEach(section=>{
+['planServ','salidas','guardia','os','kpi','graficos'].forEach(section=>{
 if(DATA[section]){
 READY[section]=true;
 VERSION[section]=1;
@@ -2521,51 +2516,6 @@ return `
 </div>`;
 }
 
-function ipkNumber(value){
-const n=Number(String(value??'').replace(',','.').replace(/[^0-9.-]/g,''));
-return Number.isFinite(n)?n:null;
-}
-
-function ipkFormat(value){
-const n=ipkNumber(value);
-return n===null?'—':n.toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});
-}
-
-function renderIPK(){
-const d=DATA.ipk||{};
-const rows=Array.isArray(d.lines)?d.lines:Array.isArray(d.rows)?d.rows:[];
-const date=d.reportedDate||d.diaInformado||d.date||'';
-const globalDaily=d.globalDaily??d.ipkDaily??d.daily;
-const globalAccumulated=d.globalAccumulated??d.ipkAccumulated??d.accumulated;
-const passengers=d.passengers??d.pasajeros;
-const productiveKm=d.productiveKm??d.kmProductivos;
-
-if(!rows.length){
-$('#ipk').innerHTML=`<div class="section-head"><h2>IPK por línea</h2><div class="source">Fuente: Outlook · Reporte IPK<br><span class="kpi-data-status partial">Sin reporte procesado</span></div></div><div class="panel"><div class="empty">Aún no hay un reporte IPK de Outlook disponible. La fecha visible será el “Día informado” dentro del PDF, no la fecha de recepción del correo.</div></div>`;
-return;
-}
-
-const normalized=rows.map(row=>({
-line:row.linea??row.line??row.lineName??'—',
-passengers:row.pasajeros??row.passengers,
-km:row.kmProductivos??row.productiveKm??row.km,
-daily:row.ipkDiario??row.daily??row.ipkDaily,
-accumulated:row.ipkAcumulado??row.accumulated??row.ipkAccumulated
-})).sort((a,b)=>String(a.line).localeCompare(String(b.line),'es',{numeric:true}));
-const max=Math.max(...normalized.flatMap(row=>[ipkNumber(row.daily)||0,ipkNumber(row.accumulated)||0]),1);
-const reportLabel=date?esc(String(date)): 'Fecha interna no disponible';
-
-$('#ipk').innerHTML=`
-<div class="section-head"><h2>IPK por línea</h2><div class="source">Fuente: Outlook · ${sourceLabel(DATA.sources?.ipk||d.source)}<br>Día informado · ${reportLabel}<br><span class="kpi-data-status complete">Reporte procesado</span></div></div>
-<div class="ipk-cards">
-<article class="kpi ipk-card"><div class="label">IPK productivo global · día</div><div class="value">${ipkFormat(globalDaily)}</div><div class="sub">Pasajeros / km productivos</div></article>
-<article class="kpi ipk-card"><div class="label">IPK productivo global · acumulado</div><div class="value">${ipkFormat(globalAccumulated)}</div><div class="sub">Acumulado al día informado</div></article>
-<article class="kpi ipk-card"><div class="label">Pasajeros</div><div class="value">${passengers===undefined?'—':num(passengers)}</div><div class="sub">Total informado</div></article>
-<article class="kpi ipk-card"><div class="label">Km productivos</div><div class="value">${productiveKm===undefined?'—':num(productiveKm)}</div><div class="sub">Total informado</div></article>
-</div>
-<div class="grid2"><section class="panel"><h3>IPK diario vs. acumulado por línea</h3><div class="ipk-legend"><span><i class="ipk-key"></i>Diario</span><span><i class="ipk-key acc"></i>Acumulado</span></div>${normalized.map(row=>`<div class="ipk-compare"><div class="ipk-compare-label">${esc(row.line)}</div><div><div class="ipk-track"><div class="ipk-fill" style="width:${Math.max(0,(ipkNumber(row.daily)||0)/max*100)}%"></div></div><div class="ipk-chart-value">${ipkFormat(row.daily)}</div></div><div><div class="ipk-track"><div class="ipk-fill acc" style="width:${Math.max(0,(ipkNumber(row.accumulated)||0)/max*100)}%"></div></div><div class="ipk-chart-value">${ipkFormat(row.accumulated)}</div></div></div>`).join('')}</section><section class="panel"><h3>Detalle por línea</h3>${table([['Línea','line'],['Pasajeros','passengers',v=>v===undefined?'—':num(v)],['Km productivos','km',v=>v===undefined?'—':num(v)],['IPK diario','daily',v=>ipkFormat(v)],['IPK acumulado','accumulated',v=>ipkFormat(v)]],normalized)}</section></div>`;
-}
-
 const GRAPH_HISTORY={
 
 wara:{
@@ -3414,9 +3364,6 @@ VERSION.kpi,
 DATE_BY_TAB.kpi
 ].join('|');
 
-case 'ipk':
-return String(VERSION.ipk);
-
 case 'graficos':
 return String(VERSION.kpi);
 
@@ -3470,12 +3417,6 @@ break;
 case 'kpi':
 if(sectionAllowedForProfile('kpi')){
 renderKPI();
-}
-break;
-
-case 'ipk':
-if(sectionAllowedForProfile('ipk')){
-renderIPK();
 }
 break;
 
@@ -3533,8 +3474,6 @@ ACTIVE_TAB==='plan'
 ||
 ACTIVE_TAB==='os'
 ||
-ACTIVE_TAB==='ipk'
-||
 ACTIVE_TAB==='graficos';
 
 el.parentElement.classList.toggle('hidden',hide);
@@ -3570,7 +3509,6 @@ DATA.sources={
 'guardia',
 'os',
 'kpi',
-'ipk',
 'graficos'
 ].forEach(section=>{
 
@@ -3857,7 +3795,6 @@ return[
 'guardia',
 'os',
 'kpi',
-'ipk',
 'graficos'
 ].some(section=>
 sectionAllowedForProfile(section)
@@ -3932,7 +3869,6 @@ salidas:'salidas',
 guardia:'guardia',
 os:'os',
 kpi:'kpi',
-ipk:'ipk',
 graficos:'kpi'
 };
 
