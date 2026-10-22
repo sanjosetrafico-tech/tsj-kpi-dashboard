@@ -1,0 +1,88 @@
+name: Actualizar cache del dashboard
+
+on:
+  push:
+    paths:
+      - ".github/workflows/cache-dashboard-data.yml"
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tsj-dashboard-data-cache
+  cancel-in-progress: true
+
+jobs:
+  cache:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout rama de cache
+        uses: actions/checkout@v4
+        with:
+          ref: data-cache
+          fetch-depth: 0
+
+      - name: Consultar fuentes y conservar ultimo dato valido
+        shell: bash
+        env:
+          API_URL: https://script.google.com/macros/s/AKfycbxzu1Mob_Z7E0-33nMXmFDk1zsaOWnUyzb1s58z1NH_2qDK4utHfvtO9-N31GtMuYwyEA/exec
+        run: |
+          set -u
+          mkdir -p data .tmp-cache
+
+          fetch_section() {
+            section="$1"
+            tmp=".tmp-cache/$section.json"
+            url="$API_URL?section=$section&_=$(date +%s)"
+
+            echo "Actualizando $section..."
+
+            if curl               --location               --fail               --silent               --show-error               --connect-timeout 20               --max-time 180               --retry 1               --retry-delay 2               "$url"               --output "$tmp"; then
+
+              if jq -e --arg section "$section"                 '.ok == true and .[$section] != null'                 "$tmp" >/dev/null; then
+                mv "$tmp" "data/$section.json"
+                echo "$section OK"
+                return 0
+              fi
+            fi
+
+            echo "$section no respondio correctamente; se conserva la ultima copia valida."
+            rm -f "$tmp"
+            return 0
+          }
+
+          fetch_section planServ &
+          p1=$!
+          fetch_section salidas &
+          p2=$!
+          fetch_section guardia &
+          p3=$!
+          fetch_section os &
+          p4=$!
+          fetch_section kpi &
+          p5=$!
+
+          wait "$p1" "$p2" "$p3" "$p4" "$p5"
+
+          rm -rf .tmp-cache
+
+      - name: Publicar cache si cambio
+        shell: bash
+        run: |
+          git config user.name "TSJ Dashboard Cache"
+          git config user.email "actions@users.noreply.github.com"
+
+          git add data
+
+          if git diff --cached --quiet; then
+            echo "Sin cambios."
+            exit 0
+          fi
+
+          git commit -m "cache: actualizar datos operativos"
+          git push origin data-cache
