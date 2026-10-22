@@ -625,12 +625,13 @@ return true;
 if(IS_GUARD_PROFILE)document.body.classList.add('profile-guardia');
 if(IS_CONDUCTION_PROFILE)document.body.classList.add('profile-conduccion');
 
-const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V23';
+const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V24';
 const LOCAL_CACHE_MAX_AGE=12*60*60*1000;
 const REQUEST_TIMEOUT=45000;
 const CACHE_SAVE_DELAY=900;
 const SECTION_REFRESH_TTL=2*60*1000;
 const STATIC_DATA_BASE='https://raw.githubusercontent.com/sanjosetrafico-tech/tsj-kpi-dashboard/data-cache/data';
+const STATIC_DATA_MAX_AGE=7*60*1000;
 
 let DATA={};
 let ACTIVE_TAB=sanitizeTab(REQUESTED_TAB);
@@ -3743,12 +3744,20 @@ requestStaticSection(section)
 
 .then(payload=>{
 
-/* Mostrar primero la copia rápida. Si el usuario pidió Actualizar,
-   la consulta en vivo continúa en segundo plano sin bloquear la interfaz. */
-if(force){
+/* Mostrar primero la copia rápida. Si la copia quedó vieja o el usuario
+   pidió Actualizar, validar en vivo en segundo plano sin bloquear la interfaz. */
+const generatedAt=
+Date.parse(payload?.generatedAt||'');
+
+const stale=
+!Number.isFinite(generatedAt)
+||
+Date.now()-generatedAt>STATIC_DATA_MAX_AGE;
+
+if(force||stale){
 requestLiveSection(
 section,
-true,
+force,
 0
 )
 .catch(()=>{});
