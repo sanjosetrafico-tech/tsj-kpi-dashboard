@@ -625,7 +625,7 @@ return true;
 if(IS_GUARD_PROFILE)document.body.classList.add('profile-guardia');
 if(IS_CONDUCTION_PROFILE)document.body.classList.add('profile-conduccion');
 
-const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V20';
+const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V21';
 const LOCAL_CACHE_MAX_AGE=12*60*60*1000;
 const REQUEST_TIMEOUT=45000;
 const CACHE_SAVE_DELAY=900;
@@ -742,7 +742,7 @@ DATA=snapshot.data;
 if(DATA[section]){
 READY[section]=true;
 VERSION[section]=1;
-SECTION_LAST_SUCCESS[section]=Number(snapshot.savedAt||0);
+SECTION_LAST_SUCCESS[section]=0;
 }
 });
 return true;
@@ -3506,11 +3506,7 @@ return Promise.resolve(null);
 }
 
 const requestKey=
-section
-+
-'|'
-+
-(force?'1':'0');
+section;
 
 if(INFLIGHT[requestKey]){
 return INFLIGHT[requestKey];
@@ -3771,6 +3767,43 @@ allowed&&panel.id===ACTIVE_TAB
 
 }
 
+function ensureSectionFresh(section){
+if(!section||!sectionAllowedForProfile(section)){
+return Promise.resolve(null);
+}
+
+const lastSuccess=
+Number(SECTION_LAST_SUCCESS[section]||0);
+
+if(
+READY[section]
+&&
+lastSuccess>0
+&&
+Date.now()-lastSuccess<SECTION_REFRESH_TTL
+){
+return Promise.resolve(null);
+}
+
+return requestSection(section,false,0)
+.then(payload=>{
+clearSilentRetry(section);
+setStatus(true,'Datos disponibles');
+return payload;
+})
+.catch(()=>{
+scheduleSilentRetry(section);
+
+if(hasAnyVisibleData()){
+setStatus(true,'Datos disponibles');
+}else{
+setStatus(false,'Actualizando…');
+}
+
+return null;
+});
+}
+
 function ensureTabData(tab){
 
 const safeTab=sanitizeTab(tab);
@@ -3780,21 +3813,22 @@ safeTab==='resumen'
 ||
 safeTab==='conduccion'
 ){
-
 const sections=[
 'planServ',
 'salidas',
 'guardia'
-];
+].filter(sectionAllowedForProfile);
 
-return Promise.allSettled(
-sections.map(section=>
-READY[section]
-?Promise.resolve()
-:requestSection(section)
-)
+setStatus(
+READY.planServ||READY.salidas||READY.guardia,
+READY.planServ||READY.salidas||READY.guardia
+?'Datos disponibles'
+:'Actualizando…'
 );
 
+return Promise.allSettled(
+sections.map(ensureSectionFresh)
+);
 }
 
 const section=sectionForTab(safeTab);
@@ -3804,87 +3838,18 @@ return Promise.resolve();
 }
 
 if(READY[section]){
-
-setStatus(
-true,
-'Datos disponibles'
-);
-
-if(safeTab==='graficos'){
-renderGraficos();
-}
-
-if(
-safeTab==='kpi'
-||
-safeTab==='graficos'
-){
-const lastSuccess=Number(SECTION_LAST_SUCCESS.kpi||0);
-
-if(Date.now()-lastSuccess<SECTION_REFRESH_TTL){
-return Promise.resolve();
-}
-
-return requestSection('kpi',false,1)
-.then(payload=>{
-clearSilentRetry('kpi');
-setStatus(true,'Datos disponibles');
-
-if(safeTab==='graficos'){
-renderGraficos();
-}
-
-return payload;
-})
-.catch(()=>{
-scheduleSilentRetry('kpi');
-setStatus(true,'Datos disponibles');
-});
-}
-
-return Promise.resolve();
-}
-
-setStatus(
-false,
-'Actualizando…'
-);
-
-return requestSection(section)
-
-.then(payload=>{
-
-clearSilentRetry(section);
-
-setStatus(
-true,
-'Datos disponibles'
-);
-
-if(safeTab==='graficos'){
-renderGraficos();
-}
-
-return payload;
-
-})
-
-.catch(()=>{
-
-scheduleSilentRetry(section);
-
-if(hasAnyVisibleData()){
 setStatus(true,'Datos disponibles');
 }else{
 setStatus(false,'Actualizando…');
 }
 
+return ensureSectionFresh(section)
+.then(payload=>{
 if(safeTab==='graficos'){
 renderGraficos();
 }
-
+return payload;
 });
-
 }
 
 function loadInitial(){
@@ -3892,23 +3857,12 @@ function loadInitial(){
 const restored=restoreLocalSnapshot();
 
 if(restored){
-
 configureDatePicker();
 renderActiveTab(true);
 updateLastUpdate();
-
-setStatus(
-true,
-'Datos disponibles'
-);
-
+setStatus(true,'Datos disponibles');
 }else{
-
-setStatus(
-false,
-'Actualizando…'
-);
-
+setStatus(false,'Actualizando…');
 }
 
 let initialSections=[];
@@ -3933,37 +3887,11 @@ initialSections=[section];
 initialSections=
 initialSections.filter(sectionAllowedForProfile);
 
-/* Sólo se cargan las fuentes necesarias para la solapa visible.
-   OS y KPI quedan en carga diferida al abrir esas solapas. */
+/* El snapshot se muestra de inmediato para que la interfaz responda,
+   pero las fuentes visibles siempre se validan en segundo plano. */
 initialSections.forEach(section=>{
-
-const lastSuccess=
-Number(SECTION_LAST_SUCCESS[section]||0);
-
-if(
-READY[section]
-&&
-lastSuccess
-&&
-Date.now()-lastSuccess<SECTION_REFRESH_TTL
-){
-return;
-}
-
-requestSection(section,false,1)
-.then(()=>{
-clearSilentRetry(section);
-setStatus(true,'Datos disponibles');
-})
-.catch(()=>{
-scheduleSilentRetry(section);
-
-if(hasAnyVisibleData()){
-setStatus(true,'Datos disponibles');
-}
+ensureSectionFresh(section);
 });
-});
-
 }
 
 function refreshActive(force=true){
@@ -3997,13 +3925,18 @@ sections=[section];
 
 }
 
-const requests=sections.map(section=>
-requestSection(
+const requests=sections.map(section=>{
+
+if(INFLIGHT[section]){
+return INFLIGHT[section];
+}
+
+return requestSection(
 section,
 force,
 0
-)
 );
+});
 
 return Promise.allSettled(requests)
 .then(results=>{
