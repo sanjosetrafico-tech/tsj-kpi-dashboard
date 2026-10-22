@@ -1,5 +1,7 @@
 name: Actualizar cache del dashboard
 
+# Drive es la fuente de verdad; esta copia se renueva cada 5 minutos.
+
 on:
   push:
     paths:
