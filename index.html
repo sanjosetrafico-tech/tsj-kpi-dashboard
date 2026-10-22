@@ -625,11 +625,12 @@ return true;
 if(IS_GUARD_PROFILE)document.body.classList.add('profile-guardia');
 if(IS_CONDUCTION_PROFILE)document.body.classList.add('profile-conduccion');
 
-const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V21';
+const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V22';
 const LOCAL_CACHE_MAX_AGE=12*60*60*1000;
 const REQUEST_TIMEOUT=45000;
 const CACHE_SAVE_DELAY=900;
 const SECTION_REFRESH_TTL=2*60*1000;
+const STATIC_DATA_BASE='https://raw.githubusercontent.com/sanjosetrafico-tech/tsj-kpi-dashboard/data-cache/data';
 
 let DATA={};
 let ACTIVE_TAB=sanitizeTab(REQUESTED_TAB);
@@ -642,6 +643,7 @@ const VERSION={planServ:0,salidas:0,guardia:0,os:0,kpi:0,graficos:0};
 const LAST_RENDER={resumen:'',conduccion:'',plan:'',salidas:'',guardia:'',os:'',kpi:'',graficos:''};
 const DATE_BY_TAB={resumen:'',conduccion:'',salidas:'',guardia:'',kpi:''};
 const INFLIGHT={};
+const LIVE_INFLIGHT={};
 const SILENT_RETRY_TIMERS={};
 const SILENT_RETRY_ATTEMPTS={};
 const SILENT_RETRY_DELAYS=[10000,30000,60000];
@@ -3495,7 +3497,55 @@ scheduleActiveRender();
 updateLastUpdate();
 }
 
-function requestSection(
+function requestStaticSection(section){
+
+const url=
+STATIC_DATA_BASE
++
+'/'
++
+encodeURIComponent(section)
++
+'.json?_='
++
+Date.now();
+
+return fetch(
+url,
+{
+cache:'no-store',
+mode:'cors'
+}
+)
+.then(response=>{
+
+if(!response.ok){
+throw new Error('Cache HTTP '+response.status);
+}
+
+return response.json();
+
+})
+.then(payload=>{
+
+if(
+!payload
+||
+payload.ok===false
+||
+payload[section]===undefined
+){
+throw new Error('Cache incompleto');
+}
+
+mergePayload(payload);
+
+return payload;
+
+});
+}
+
+function requestLiveSection(
 section,
 force=false,
 retry=1
@@ -3505,11 +3555,8 @@ if(!sectionAllowedForProfile(section)){
 return Promise.resolve(null);
 }
 
-const requestKey=
-section;
-
-if(INFLIGHT[requestKey]){
-return INFLIGHT[requestKey];
+if(LIVE_INFLIGHT[section]){
+return LIVE_INFLIGHT[section];
 }
 
 const promise=
@@ -3570,7 +3617,10 @@ return;
 resolve(payload);
 };
 
-script.onerror=()=>fail('No se pudo conectar con la fuente de datos.');const timer=setTimeout(
+script.onerror=
+()=>fail('No se pudo conectar con la fuente de datos.');
+
+const timer=setTimeout(
 ()=>fail('La fuente de datos demoró demasiado.'),
 REQUEST_TIMEOUT
 );
@@ -3602,17 +3652,19 @@ document.body.appendChild(script);
 
 if(retry>0&&!force){
 
-/* Libera la solicitud anterior antes de reintentar. Sin esto,
-   el reintento reutiliza su propia promesa pendiente. */
-if(INFLIGHT[requestKey]===promise){
-delete INFLIGHT[requestKey];
+if(LIVE_INFLIGHT[section]===promise){
+delete LIVE_INFLIGHT[section];
 }
 
 return new Promise(resolve=>
 setTimeout(resolve,900)
 )
 .then(()=>
-requestSection(section,false,retry-1)
+requestLiveSection(
+section,
+false,
+retry-1
+)
 );
 
 }
@@ -3621,12 +3673,69 @@ throw err;
 
 })
 .finally(()=>{
-if(INFLIGHT[requestKey]===promise){
-delete INFLIGHT[requestKey];
+
+if(LIVE_INFLIGHT[section]===promise){
+delete LIVE_INFLIGHT[section];
 }
+
 });
 
-INFLIGHT[requestKey]=promise;
+LIVE_INFLIGHT[section]=promise;
+
+return promise;
+}
+
+function requestSection(
+section,
+force=false,
+retry=1
+){
+
+if(!sectionAllowedForProfile(section)){
+return Promise.resolve(null);
+}
+
+if(INFLIGHT[section]){
+return INFLIGHT[section];
+}
+
+const promise=
+requestStaticSection(section)
+
+.then(payload=>{
+
+/* Mostrar primero la copia rápida. Si el usuario pidió Actualizar,
+   la consulta en vivo continúa en segundo plano sin bloquear la interfaz. */
+if(force){
+requestLiveSection(
+section,
+true,
+0
+)
+.catch(()=>{});
+}
+
+return payload;
+
+})
+
+.catch(()=>
+requestLiveSection(
+section,
+force,
+retry
+)
+)
+
+.finally(()=>{
+
+if(INFLIGHT[section]===promise){
+delete INFLIGHT[section];
+}
+
+});
+
+INFLIGHT[section]=promise;
 
 return promise;
 }
