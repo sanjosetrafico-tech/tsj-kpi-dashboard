@@ -1403,7 +1403,7 @@ ${
 detours.length
 ?`<div class="alert-card-detail"><div class="alert-detail-row">
 <span class="alert-detail-dot"></span>
-<span>${num(detourLines.size)} ${detourLines.size===1?'línea afectada':'líneas afectadas'}</span></div></div>`
+<span>${num(detourLines.size)} Líneas / ramales afectados</span></div></div>`
 :`<div class="alert-none">Sin desvíos</div>`
 }
 </article>
@@ -1796,7 +1796,7 @@ drv.length>0?'absence-alert':''
 
 ${kpi('Desvíos',num(det.length),'Día seleccionado')}
 
-${kpi('Líneas afectadas',num(lines.size),'Líneas reales')}
+${kpi('Líneas / ramales afectados',num(lines.size),'Líneas / ramales afectados')}
 
 </div>
 
