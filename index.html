@@ -567,7 +567,7 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 <section id="kpi" class="tab-panel"></section>
 <section id="graficos" class="tab-panel"></section>
 <section id="recorridos" class="tab-panel" aria-label="Recorridos">
-<iframe id="recorridosFrame" class="recorridos-frame" title="Mapas TSJ: líneas y ramales" data-src="https://sanjosetrafico-tech.github.io/tsj-visor-recorridos/?embed=1"></iframe>
+<iframe id="recorridosFrame" class="recorridos-frame" title="Mapas TSJ: líneas y ramales" data-src="https://sanjosetrafico-tech.github.io/tsj-visor-recorridos/?embed=1&v=auto-3"></iframe>
 </section>
 </main>
 
@@ -3316,7 +3316,20 @@ fixedMax:100
 
 function renderRecorridos(){
 const frame=$('#recorridosFrame');
-if(!frame.getAttribute('src'))frame.src=frame.dataset.src;
+if(!frame)return;
+
+if(!frame.getAttribute('src')){
+const separator=frame.dataset.src.includes('?')?'&':'?';
+frame.src=frame.dataset.src+separator+'_='+Date.now();
+return;
+}
+
+try{
+frame.contentWindow?.postMessage(
+{type:'tsj-recorridos-refresh'},
+window.location.origin
+);
+}catch{}
 }
 
 function renderSignature(tab){
@@ -4118,6 +4131,11 @@ return;
 }
 
 ACTIVE_TAB=safeTab;
+
+if(safeTab==='recorridos'){
+LAST_RENDER.recorridos='';
+}
+
 document.body.classList.toggle('recorridos-view',safeTab==='recorridos');
 
 document.querySelectorAll('.tab').forEach(x=>{
