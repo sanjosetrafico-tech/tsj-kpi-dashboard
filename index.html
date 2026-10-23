@@ -594,11 +594,14 @@ const URL_PARAMS=new URLSearchParams(window.location.search);
 const PROFILE=String(URL_PARAMS.get('perfil')||'').trim().toLowerCase();
 const IS_GUARD_PROFILE=PROFILE==='guardia';
 const IS_CONDUCTION_PROFILE=PROFILE==='conduccion';
+const IS_RECORRIDOS_PROFILE=PROFILE==='recorridos';
 
 const ALL_TABS=['resumen','conduccion','plan','salidas','guardia','os','kpi','graficos','recorridos'];
 
 const ALLOWED_TABS=
-IS_CONDUCTION_PROFILE
+IS_RECORRIDOS_PROFILE
+?['recorridos']
+:IS_CONDUCTION_PROFILE
 ?['conduccion']
 :IS_GUARD_PROFILE
 ?['resumen','conduccion','plan','salidas','guardia','os']
@@ -609,12 +612,14 @@ const REQUESTED_TAB=String(URL_PARAMS.get('tab')||'').trim().toLowerCase();
 function sanitizeTab(tab){
 const value=String(tab||'').trim().toLowerCase();
 if(ALLOWED_TABS.includes(value))return value;
+if(IS_RECORRIDOS_PROFILE)return 'recorridos';
 if(IS_CONDUCTION_PROFILE)return 'conduccion';
 if(IS_GUARD_PROFILE)return 'guardia';
 return 'resumen';
 }
 
 function sectionAllowedForProfile(section){
+if(IS_RECORRIDOS_PROFILE)return false;
 if(IS_CONDUCTION_PROFILE){
 return ['planServ','salidas','guardia'].includes(section);
 }
@@ -624,6 +629,7 @@ return true;
 
 if(IS_GUARD_PROFILE)document.body.classList.add('profile-guardia');
 if(IS_CONDUCTION_PROFILE)document.body.classList.add('profile-conduccion');
+if(IS_RECORRIDOS_PROFILE)document.body.classList.add('profile-recorridos');
 
 const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V24';
 const LOCAL_CACHE_MAX_AGE=12*60*60*1000;
