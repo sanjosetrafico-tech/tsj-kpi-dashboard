@@ -1522,9 +1522,14 @@ ${table([
 
 function renderPlan(){
 const d=DATA.planServ||{};
-const comp=Math.max(0,Math.min(100,+d.compliance||0));
+const serviciosTM=(+d.serviceDone||0)+(+d.cortadoDone||0);
+const serviciosTT=(+d.servicePlanned||0);
+const cumplimientoServicios=serviciosTT>0
+?(serviciosTM/serviciosTT)*100
+:(+d.compliance||0);
+const comp=Math.max(0,Math.min(100,cumplimientoServicios));
 const total=(+d.conductoresTM||0)+(+d.conductoresTT||0);
-const color=comp>=100?'var(--good)':comp>=95?'var(--warn)':'var(--bad)';
+const color=cumplimientoServicios>=100?'var(--good)':cumplimientoServicios>=95?'var(--warn)':'var(--bad)';
 
 $('#plan').innerHTML=`
 <div class="section-head">
@@ -1536,10 +1541,10 @@ $('#plan').innerHTML=`
 <article class="gauge-card">
 <div class="gauge" style="--p:${comp};--gauge-color:${color}">
 <div class="gauge-content">
-<b>${num(comp)}%</b>
-<span>${num(d.serviceDone)} / ${num(d.servicePlanned)}</span>
+<b>${num(Math.round(cumplimientoServicios))}%</b>
+<span>${num(serviciosTM)} / ${num(serviciosTT)}</span>
 </div></div>
-<div class="gauge-label">Cumplimiento Línea TM</div>
+<div class="gauge-label">Cumplimiento TM / TT</div>
 </article>
 
 <div class="plan-main">
@@ -1555,7 +1560,7 @@ ${mini('Inasistencias TM',num(d.inasistenciasTM),(+d.inasistenciasTM||0)>0?'bad'
 </div>
 
 ${
-(+d.inasistenciasTM||0)>0&&comp>=100
+(+d.inasistenciasTM||0)>0&&cumplimientoServicios>=100
 ?`<div class="service-note">Se cambia franco para cumplir con el servicio.</div>`
 :''
 }
