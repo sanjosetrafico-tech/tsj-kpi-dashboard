@@ -4069,6 +4069,16 @@ setStatus(true,'Datos disponibles');
 setStatus(false,'Actualizando…');
 }
 
+/* Plan Serv cambia durante la toma de servicio.
+   Al abrir la solapa siempre valida la fuente en vivo, aunque ya exista cache. */
+if(safeTab==='plan'){
+return requestSection('planServ',true,0)
+.catch(()=>{
+setStatus(true,'Datos disponibles');
+return null;
+});
+}
+
 return ensureSectionFresh(section)
 .then(payload=>{
 if(safeTab==='graficos'){
