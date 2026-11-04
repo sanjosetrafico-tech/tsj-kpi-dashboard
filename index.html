@@ -1522,8 +1522,8 @@ ${table([
 
 function renderPlan(){
 const d=DATA.planServ||{};
-const serviciosTM=(+d.serviceDone||0)+(+d.cortadoDone||0);
-const serviciosTT=(+d.servicePlanned||0);
+const serviciosTM=(+d.conductoresTM||0);
+const serviciosTT=(+d.conductoresTT||0);
 const cumplimientoServicios=serviciosTT>0
 ?(serviciosTM/serviciosTT)*100
 :(+d.compliance||0);
