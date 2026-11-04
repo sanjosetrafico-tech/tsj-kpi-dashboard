@@ -1522,10 +1522,10 @@ ${table([
 
 function renderPlan(){
 const d=DATA.planServ||{};
-const serviciosTM=(+d.conductoresTM||0);
-const serviciosTT=(+d.conductoresTT||0);
-const cumplimientoServicios=serviciosTT>0
-?(serviciosTM/serviciosTT)*100
+const serviciosTM=(+d.serviceDone||0);
+const serviciosPlanTM=(+d.servicePlanned||0);
+const cumplimientoServicios=serviciosPlanTM>0
+?(serviciosTM/serviciosPlanTM)*100
 :(+d.compliance||0);
 const comp=Math.max(0,Math.min(100,cumplimientoServicios));
 const total=(+d.conductoresTM||0)+(+d.conductoresTT||0);
@@ -1542,9 +1542,9 @@ $('#plan').innerHTML=`
 <div class="gauge" style="--p:${comp};--gauge-color:${color}">
 <div class="gauge-content">
 <b>${num(Math.round(comp))}%</b>
-<span>${num(serviciosTM)} / ${num(serviciosTT)}</span>
+<span>${num(serviciosTM)} / ${num(serviciosPlanTM)}</span>
 </div></div>
-<div class="gauge-label">Cumplimiento TM / TT</div>
+<div class="gauge-label">Cumplimiento TM</div>
 </article>
 
 <div class="plan-main">
