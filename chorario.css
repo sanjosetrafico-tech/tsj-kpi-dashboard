@@ -25,19 +25,19 @@
 .ch-delete{border:0;background:transparent;color:var(--bad);font-weight:850;cursor:pointer}
 .ch-summary{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 14px 0}
 .ch-summary-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}
-.ch-summary-card .eyebrow{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.ch-summary-card .eyebrow{font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
 .ch-summary-card .big{font-size:34px;font-weight:950;margin-top:3px;line-height:1}
-.ch-summary-card .sub{font-size:11px;color:var(--muted);margin-top:6px}
+.ch-summary-card .sub{font-size:14px;color:var(--muted);margin-top:6px}
 .ch-summary-card.horario{border-top:5px solid #244d87}
 .ch-summary-card.cabecera{border-top:5px solid var(--pink)}
 .ch-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px}
 .ch-panel{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
-.ch-panel-title{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;font-weight:950}
+.ch-panel-title{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;font-weight:950;font-size:17px}
 .ch-panel-title.horario{background:#eef4fb;color:#193f72}
 .ch-panel-title.cabecera{background:#fff0f7;color:#8e295d}
-.ch-meta{font-size:10px;font-weight:800;opacity:.75}
-.ch-table{width:100%;border-collapse:collapse;font-size:17px}
-.ch-table th{background:#f7f4f6;color:var(--muted);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;padding:10px 12px;text-align:right;border-bottom:1px solid var(--line)}
+.ch-meta{font-size:11px;font-weight:800;opacity:.75}
+.ch-table{width:100%;border-collapse:collapse;font-size:16px}
+.ch-table th{background:#f7f4f6;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.04em;padding:10px 12px;text-align:right;border-bottom:1px solid var(--line)}
 .ch-table th:first-child,.ch-table td:first-child{text-align:left}
 .ch-table td{padding:11px 12px;border-bottom:1px solid #eee9ec;text-align:right;font-variant-numeric:tabular-nums}
 .ch-table tr:last-child td{border-bottom:0}
@@ -114,12 +114,12 @@ color:#746d72
 .ch-export-card .ch-summary-card.horario{border-top:5px solid #1d6fc0!important}
 .ch-export-card .ch-summary-card.cabecera{border-top:5px solid #dc267f!important}
 .ch-export-card .ch-summary-card .big{font-size:42px!important}
-.ch-export-card .ch-summary-card .sub{font-size:12px!important}
+.ch-export-card .ch-summary-card .sub{font-size:14px!important}
 .ch-export-card .ch-grid{padding:0 10px 10px!important;gap:10px!important}
 .ch-export-card .ch-panel{border-radius:14px!important}
-.ch-export-card .ch-panel-title{padding:10px 14px!important;font-size:16px!important}
-.ch-export-card .ch-table{font-size:16px!important}
-.ch-export-card .ch-table th{font-size:12px!important;padding:7px 10px!important}
+.ch-export-card .ch-panel-title{padding:10px 14px!important;font-size:17px!important}
+.ch-export-card .ch-table{font-size:15px!important}
+.ch-export-card .ch-table th{font-size:13px!important;padding:7px 10px!important}
 .ch-export-card .ch-table td{padding:7px 10px!important}
 .ch-export-card .ch-score{font-weight:950!important;font-size:17px!important;min-width:74px!important}
 .ch-export-card .ch-trend.compact small{font-size:7px!important}
@@ -129,3 +129,14 @@ color:#746d72
 .ch-trend:not(.compact) span{display:none}
 }
 
+
+.ch-table td:nth-child(3),
+.ch-table td:nth-child(4){
+font-size:16px;
+font-weight:650
+}
+.ch-export-card .ch-table td:nth-child(3),
+.ch-export-card .ch-table td:nth-child(4){
+font-size:15px!important;
+font-weight:650!important
+}
