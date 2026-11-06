@@ -520,7 +520,7 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 }
 }
 </style>
-<link rel="stylesheet" href="chorario.css?v=8">
+<link rel="stylesheet" href="chorario.css?v=9">
 </head>
 
 <body>
@@ -595,7 +595,7 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-<script src="chorario.js?v=7"></script>
+<script src="chorario.js?v=9"></script>
 <script>
 
 const API_URL='https://script.google.com/macros/s/AKfycbxzu1Mob_Z7E0-33nMXmFDk1zsaOWnUyzb1s58z1NH_2qDK4utHfvtO9-N31GtMuYwyEA/exec';
@@ -605,11 +605,14 @@ const PROFILE=String(URL_PARAMS.get('perfil')||'').trim().toLowerCase();
 const IS_GUARD_PROFILE=PROFILE==='guardia';
 const IS_CONDUCTION_PROFILE=PROFILE==='conduccion';
 const IS_RECORRIDOS_PROFILE=PROFILE==='recorridos';
+const IS_CHORARIO_PROFILE=PROFILE==='chorario';
 
 const ALL_TABS=['resumen','conduccion','plan','salidas','guardia','os','kpi','chorario','graficos','recorridos'];
 
 const ALLOWED_TABS=
-IS_RECORRIDOS_PROFILE
+IS_CHORARIO_PROFILE
+?['chorario']
+:IS_RECORRIDOS_PROFILE
 ?['recorridos']
 :IS_CONDUCTION_PROFILE
 ?['conduccion']
@@ -622,6 +625,7 @@ const REQUESTED_TAB=String(URL_PARAMS.get('tab')||'').trim().toLowerCase();
 function sanitizeTab(tab){
 const value=String(tab||'').trim().toLowerCase();
 if(ALLOWED_TABS.includes(value))return value;
+if(IS_CHORARIO_PROFILE)return 'chorario';
 if(IS_RECORRIDOS_PROFILE)return 'recorridos';
 if(IS_CONDUCTION_PROFILE)return 'conduccion';
 if(IS_GUARD_PROFILE)return 'guardia';
@@ -629,6 +633,7 @@ return 'resumen';
 }
 
 function sectionAllowedForProfile(section){
+if(IS_CHORARIO_PROFILE)return false;
 if(IS_RECORRIDOS_PROFILE)return false;
 if(IS_CONDUCTION_PROFILE){
 return ['planServ','salidas','guardia'].includes(section);
@@ -640,6 +645,7 @@ return true;
 if(IS_GUARD_PROFILE)document.body.classList.add('profile-guardia');
 if(IS_CONDUCTION_PROFILE)document.body.classList.add('profile-conduccion');
 if(IS_RECORRIDOS_PROFILE)document.body.classList.add('profile-recorridos');
+if(IS_CHORARIO_PROFILE)document.body.classList.add('profile-chorario');
 
 const LOCAL_CACHE_KEY='TSJ_DASHBOARD_CACHE_V24';
 const LOCAL_CACHE_MAX_AGE=12*60*60*1000;
