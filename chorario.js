@@ -105,7 +105,9 @@ async function chLoadShared(force){
   try{
     let rows=await chApi('?select=*&order=report_date.desc,cut_time.asc');
 
-    if((!rows||!rows.length)){
+    if((!rows||!rows.length)&&!CH_SHARED_READY&&!force){
+      // Solo migra datos locales en la carga inicial. Tras un borrado forzado,
+      // no debe reinsertar desde localStorage el corte que acaba de eliminarse.
       const localRows=chLocalCutsFlat();
 
       if(localRows.length){
