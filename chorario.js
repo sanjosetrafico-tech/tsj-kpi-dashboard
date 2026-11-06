@@ -418,19 +418,28 @@ async function shareCHWhatsApp(){
     const safeTime=String(info.cut.time||'').replace(':','');
     const name='Cumplimiento_'+info.date+'_'+safeTime+'.png';
     const file=new File([blob],name,{type:'image/png'});
-    const text=chShareText();
 
+    /* Compartir únicamente la imagen: sin texto, título ni mensaje adicional. */
     if(navigator.canShare&&navigator.canShare({files:[file]})&&navigator.share){
-      await navigator.share({
-        files:[file],
-        title:'Cumplimiento horario y cabecera',
-        text:text
-      });
+      await navigator.share({files:[file]});
       return;
     }
 
+    /* WhatsApp Web no permite adjuntar un archivo por URL.
+       Como respaldo, copiamos la imagen al portapapeles y abrimos WhatsApp sin texto. */
+    if(navigator.clipboard&&window.ClipboardItem){
+      try{
+        await navigator.clipboard.write([
+          new ClipboardItem({'image/png':blob})
+        ]);
+        window.open('https://web.whatsapp.com/','_blank','noopener');
+        alert('Imagen copiada. En WhatsApp, pegala con Ctrl + V.');
+        return;
+      }catch(err){}
+    }
+
     chDownloadBlob(blob,name);
-    window.open('https://wa.me/?text='+encodeURIComponent(text+'\n\nSe genero la imagen para adjuntar.'),'_blank','noopener');
+    window.open('https://web.whatsapp.com/','_blank','noopener');
   }catch(err){
     if(err&&err.name==='AbortError')return;
     alert(err.message||'No se pudo generar la imagen.');
@@ -529,8 +538,8 @@ function renderCHorario(){
       '<div class="ch-report-actions">'+
         dateSelect+
         '<button class="ch-action" type="button" onclick="copyCHSummary()">Copiar resumen</button>'+
-        '<button class="ch-action whatsapp" type="button" onclick="shareCHWhatsApp()">WhatsApp · imagen</button>'+
-        '<button class="ch-action primary" type="button" onclick="exportCHorarioPDF()">PDF A4</button>'+
+        '<button class="ch-action whatsapp" type="button" onclick="shareCHWhatsApp()">WhatsApp</button>'+
+        '<button class="ch-action primary" type="button" onclick="exportCHorarioPDF()">PDF</button>'+
       '</div>'+
     '</div>'+
     '<div class="ch-wrap">'+
