@@ -486,34 +486,102 @@ function chShareText(){
   ].join('\n');
 }
 
-function chExportNode(){
-  const info=chLatestCutInfo();
-  if(!info)throw new Error('No hay cortes cargados.');
-  const source=document.querySelector('.ch-cut[data-cut-index="'+info.index+'"]');
-  if(!source)throw new Error('No se encontro el corte para exportar.');
+function chExportCutNode(index){
+  const cuts=chActiveCuts();
+  const cut=cuts[index];
+
+  if(!cut)throw new Error('No se encontró el corte para exportar.');
+
+  const source=document.querySelector('.ch-cut[data-cut-index="'+index+'"]');
+  if(!source)throw new Error('No se encontró el corte para exportar.');
 
   const stage=document.createElement('div');
   stage.className='ch-export-stage';
+
   const clone=source.cloneNode(true);
   clone.classList.add('ch-export-card');
 
-  clone.querySelectorAll('.ch-delete,.ch-note').forEach(function(el){el.remove();});
+  clone.querySelectorAll('.ch-delete,.ch-note,.ch-cut-share').forEach(function(el){
+    el.remove();
+  });
 
   const head=clone.querySelector('.ch-cut-head');
+
   if(head){
-    head.innerHTML='<div class="ch-export-meta">Corte '+(info.index+1)+' · '+esc(info.cut.time)+' · '+chDateLabel(info.date)+'</div>';
+    head.innerHTML='<div class="ch-export-meta">Corte '+(index+1)+' · '+esc(cut.time)+' · '+chDateLabel(CH_STATE.activeDate)+'</div>';
   }
 
   stage.appendChild(clone);
   document.body.appendChild(stage);
-  return{stage:stage,node:clone,info:info};
+
+  return{
+    stage:stage,
+    node:clone,
+    cut:cut,
+    index:index,
+    date:CH_STATE.activeDate
+  };
 }
 
-async function chRenderCanvas(){
+function chExportDayNode(){
+  const cuts=chActiveCuts();
+
+  if(!cuts.length)throw new Error('No hay cortes cargados.');
+
+  const source=document.querySelector('.ch-cuts');
+
+  if(!source)throw new Error('No se encontró el detalle del día.');
+
+  const stage=document.createElement('div');
+  stage.className='ch-export-stage ch-export-day-stage';
+
+  const wrapper=document.createElement('div');
+  wrapper.className='ch-export-day';
+
+  wrapper.innerHTML='<div class="ch-export-day-head">'+
+    '<b>Detalle del día · '+chDateLabel(CH_STATE.activeDate)+'</b>'+
+    '<span>'+cuts.length+' '+(cuts.length===1?'corte':'cortes')+'</span>'+
+  '</div>';
+
+  const clone=source.cloneNode(true);
+
+  clone.querySelectorAll('.ch-delete,.ch-note,.ch-cut-share').forEach(function(el){
+    el.remove();
+  });
+
+  clone.querySelectorAll('.ch-cut').forEach(function(card,index){
+    card.classList.add('ch-export-card');
+
+    const cut=cuts[index];
+    const head=card.querySelector('.ch-cut-head');
+
+    if(head&&cut){
+      head.innerHTML='<div class="ch-export-meta">Corte '+(index+1)+' · '+esc(cut.time)+'</div>';
+    }
+  });
+
+  wrapper.appendChild(clone);
+  stage.appendChild(wrapper);
+  document.body.appendChild(stage);
+
+  return{
+    stage:stage,
+    node:wrapper,
+    cuts:cuts,
+    date:CH_STATE.activeDate
+  };
+}
+
+async function chRenderNodeCanvas(out){
   if(!window.html2canvas)throw new Error('No se pudo cargar el generador de imagen.');
-  const out=chExportNode();
+
   try{
-    await new Promise(function(resolve){requestAnimationFrame(function(){requestAnimationFrame(resolve);});});
+    await new Promise(function(resolve){
+      requestAnimationFrame(function(){
+        requestAnimationFrame(resolve);
+      });
+    });
+
     return await html2canvas(out.node,{
       backgroundColor:'#ffffff',
       scale:2,
@@ -523,6 +591,27 @@ async function chRenderCanvas(){
   }finally{
     out.stage.remove();
   }
+}
+
+async function chRenderCanvas(index){
+  const info=chLatestCutInfo();
+
+  if(!info)throw new Error('No hay cortes cargados.');
+
+  const targetIndex=
+    Number.isInteger(index)
+    ?index
+    :info.index;
+
+  return chRenderNodeCanvas(
+    chExportCutNode(targetIndex)
+  );
+}
+
+async function chRenderDayCanvas(){
+  return chRenderNodeCanvas(
+    chExportDayNode()
+  );
 }
 
 function chCanvasBlob(canvas){
@@ -545,41 +634,65 @@ function chDownloadBlob(blob,name){
   setTimeout(function(){URL.revokeObjectURL(url);},1500);
 }
 
-async function shareCHWhatsApp(){
-  const info=chLatestCutInfo();
-  if(!info){
+async function chShareImage(canvas,name){
+  const blob=await chCanvasBlob(canvas);
+  const file=new File([blob],name,{type:'image/png'});
+
+  if(navigator.canShare&&navigator.canShare({files:[file]})&&navigator.share){
+    await navigator.share({files:[file]});
+    return;
+  }
+
+  if(navigator.clipboard&&window.ClipboardItem){
+    try{
+      await navigator.clipboard.write([
+        new ClipboardItem({'image/png':blob})
+      ]);
+
+      window.open('https://web.whatsapp.com/','_blank','noopener');
+      alert('Imagen copiada. En WhatsApp, pegala con Ctrl + V.');
+      return;
+    }catch(err){}
+  }
+
+  chDownloadBlob(blob,name);
+  window.open('https://web.whatsapp.com/','_blank','noopener');
+}
+
+async function shareCHWhatsAppCut(index){
+  const cuts=chActiveCuts();
+  const cut=cuts[index];
+
+  if(!cut){
+    alert('No se encontró el corte.');
+    return;
+  }
+
+  try{
+    const canvas=await chRenderCanvas(index);
+    const safeTime=String(cut.time||'').replace(':','');
+    const name='Cumplimiento_'+CH_STATE.activeDate+'_Corte_'+(index+1)+'_'+safeTime+'.png';
+
+    await chShareImage(canvas,name);
+  }catch(err){
+    if(err&&err.name==='AbortError')return;
+    alert(err.message||'No se pudo generar la imagen.');
+  }
+}
+
+async function shareCHWhatsAppDay(){
+  const cuts=chActiveCuts();
+
+  if(!cuts.length){
     alert('No hay cortes cargados.');
     return;
   }
 
   try{
-    const canvas=await chRenderCanvas();
-    const blob=await chCanvasBlob(canvas);
-    const safeTime=String(info.cut.time||'').replace(':','');
-    const name='Cumplimiento_'+info.date+'_'+safeTime+'.png';
-    const file=new File([blob],name,{type:'image/png'});
+    const canvas=await chRenderDayCanvas();
+    const name='Cumplimiento_'+CH_STATE.activeDate+'_Detalle_dia.png';
 
-    /* Compartir únicamente la imagen: sin texto, título ni mensaje adicional. */
-    if(navigator.canShare&&navigator.canShare({files:[file]})&&navigator.share){
-      await navigator.share({files:[file]});
-      return;
-    }
-
-    /* WhatsApp Web no permite adjuntar un archivo por URL.
-       Como respaldo, copiamos la imagen al portapapeles y abrimos WhatsApp sin texto. */
-    if(navigator.clipboard&&window.ClipboardItem){
-      try{
-        await navigator.clipboard.write([
-          new ClipboardItem({'image/png':blob})
-        ]);
-        window.open('https://web.whatsapp.com/','_blank','noopener');
-        alert('Imagen copiada. En WhatsApp, pegala con Ctrl + V.');
-        return;
-      }catch(err){}
-    }
-
-    chDownloadBlob(blob,name);
-    window.open('https://web.whatsapp.com/','_blank','noopener');
+    await chShareImage(canvas,name);
   }catch(err){
     if(err&&err.name==='AbortError')return;
     alert(err.message||'No se pudo generar la imagen.');
@@ -727,7 +840,10 @@ function renderCHorario(){
       return '<article class="ch-cut" data-cut-index="'+index+'">'+
         '<div class="ch-cut-head">'+
           '<div class="ch-cut-title"><b>Corte '+(index+1)+' · '+esc(cut.time)+'</b><span>'+chDateLabel(CH_STATE.activeDate)+'</span></div>'+
-          '<button class="ch-delete" type="button" onclick="chDeleteCut(\''+cut.id+'\')">Eliminar</button>'+
+          '<div class="ch-cut-actions">'+
+            '<button class="ch-action whatsapp ch-cut-share" type="button" onclick="shareCHWhatsAppCut('+index+')">WhatsApp</button>'+
+            '<button class="ch-delete" type="button" onclick="chDeleteCut(\''+cut.id+'\')">Eliminar</button>'+
+          '</div>'+
         '</div>'+
         '<div class="ch-summary">'+
           chMetricCard('Cumplimiento Horario',cut.horario,'horario',previous?previous.horario:null)+
@@ -747,7 +863,7 @@ function renderCHorario(){
       '<div><h2>C. Horario</h2><div style="font-size:12px;color:var(--muted);margin-top:4px">Cumplimiento Horario y Cumplimiento Cabecera · hasta 3 cortes diarios</div></div>'+
       '<div class="ch-report-actions">'+
         dateSelect+
-        '<button class="ch-action whatsapp" type="button" onclick="shareCHWhatsApp()">WhatsApp</button>'+
+        '<button class="ch-action whatsapp" type="button" onclick="shareCHWhatsAppDay()">WhatsApp</button>'+
         '<button class="ch-action primary" type="button" onclick="exportCHorarioPDF()">PDF</button>'+
       '</div>'+
     '</div>'+
