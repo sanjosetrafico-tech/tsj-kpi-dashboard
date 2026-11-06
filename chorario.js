@@ -527,7 +527,7 @@ function renderCHorario(){
           chTable('C. Horario',cut.horario,'horario',previous?previous.horario:null)+
           chTable('C. Cabecera',cut.cabecera,'cabecera',previous?previous.cabecera:null)+
         '</div>'+
-        '<div class="ch-note"><b>Criterio:</b> líneas ordenadas de menor a mayor cumplimiento. Rojo &lt;90% · ámbar 90–94,99% · verde ≥95%.</div>'+
+
       '</article>';
     }).join('')+'</div>'
     :'<div class="ch-empty">Importá los dos Excel del primer corte para generar el informe del día.</div>';
