@@ -520,6 +520,7 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 }
 }
 </style>
+<link rel="stylesheet" href="chorario.css?v=1">
 </head>
 
 <body>
@@ -556,6 +557,7 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 <button class="tab" data-tab="guardia">Guardia</button>
 <button class="tab" data-tab="os">OS</button>
 <button class="tab" data-tab="kpi">KPI</button>
+<button class="tab" data-tab="chorario">C. Horario</button>
 <button class="tab" data-tab="graficos">Gráficos</button>
 <button class="tab" data-tab="recorridos">Recorridos</button>
 </nav>
@@ -568,6 +570,7 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 <section id="guardia" class="tab-panel"></section>
 <section id="os" class="tab-panel"></section>
 <section id="kpi" class="tab-panel"></section>
+<section id="chorario" class="tab-panel"></section>
 <section id="graficos" class="tab-panel"></section>
 <section id="recorridos" class="tab-panel" aria-label="Recorridos">
 <iframe id="recorridosFrame" class="recorridos-frame" title="Mapas TSJ: líneas y ramales" data-src="https://sanjosetrafico-tech.github.io/tsj-visor-recorridos/?embed=1&v=auto-3"></iframe>
@@ -589,6 +592,8 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 <div id="unitsReportRoot" class="units-report-root" aria-hidden="true"></div>
 <div id="osReportRoot" class="os-report-root" aria-hidden="true"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script src="chorario.js?v=1"></script>
 <script>
 
 const API_URL='https://script.google.com/macros/s/AKfycbxzu1Mob_Z7E0-33nMXmFDk1zsaOWnUyzb1s58z1NH_2qDK4utHfvtO9-N31GtMuYwyEA/exec';
@@ -599,7 +604,7 @@ const IS_GUARD_PROFILE=PROFILE==='guardia';
 const IS_CONDUCTION_PROFILE=PROFILE==='conduccion';
 const IS_RECORRIDOS_PROFILE=PROFILE==='recorridos';
 
-const ALL_TABS=['resumen','conduccion','plan','salidas','guardia','os','kpi','graficos','recorridos'];
+const ALL_TABS=['resumen','conduccion','plan','salidas','guardia','os','kpi','chorario','graficos','recorridos'];
 
 const ALLOWED_TABS=
 IS_RECORRIDOS_PROFILE
@@ -650,7 +655,7 @@ let OS_HISTORY_SELECTED_KEY='';
 
 const READY={planServ:false,salidas:false,guardia:false,os:false,kpi:false,graficos:false};
 const VERSION={planServ:0,salidas:0,guardia:0,os:0,kpi:0,graficos:0};
-const LAST_RENDER={resumen:'',conduccion:'',plan:'',salidas:'',guardia:'',os:'',kpi:'',graficos:''};
+const LAST_RENDER={resumen:'',conduccion:'',plan:'',salidas:'',guardia:'',os:'',kpi:'',chorario:'',graficos:''};
 const DATE_BY_TAB={resumen:'',conduccion:'',salidas:'',guardia:'',kpi:''};
 const INFLIGHT={};
 const LIVE_INFLIGHT={};
@@ -3433,6 +3438,9 @@ VERSION.kpi,
 DATE_BY_TAB.kpi
 ].join('|');
 
+case 'chorario':
+return String(CH_VERSION);
+
 case 'graficos':
 return String(VERSION.kpi);
 
@@ -3489,6 +3497,10 @@ renderKPI();
 }
 break;
 
+case 'chorario':
+renderCHorario();
+break;
+
 case 'graficos':
 if(sectionAllowedForProfile('graficos')){
 renderGraficos();
@@ -3542,6 +3554,8 @@ const hide=
 ACTIVE_TAB==='plan'
 ||
 ACTIVE_TAB==='os'
+||
+ACTIVE_TAB==='chorario'
 ||
 ACTIVE_TAB==='graficos';
 
