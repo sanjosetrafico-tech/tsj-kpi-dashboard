@@ -71,7 +71,7 @@ body.print-chorario .ch-grid{gap:8px}
 .ch-summary-main>div:first-child{min-width:0}
 .ch-trend{display:inline-flex;align-items:center;gap:7px;border-radius:12px;padding:8px 10px;font-size:10px;font-weight:850;white-space:nowrap}
 .ch-trend b{font-size:21px;line-height:1}
-.ch-trend span{font-size:9px;line-height:1.15}
+.ch-trend span{font-size:12px;line-height:1.15}
 .ch-trend.up{background:#edf9f4;color:#08734e}
 .ch-trend.down{background:#fff0f2;color:#b4233c}
 .ch-trend.flat{background:#f1eff0;color:#6f696d}
@@ -251,7 +251,7 @@ justify-content:flex-end
 }
 .ch-cut-share{
 padding:7px 11px;
-font-size:11px
+font-size:12px
 }
 .ch-export-day-stage{
 width:1420px
