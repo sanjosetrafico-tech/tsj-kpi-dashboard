@@ -484,7 +484,7 @@ async function exportCHorarioPDF(){
   }
 }
 
-function renderCHorariofunction renderCHorario(){
+function renderCHorario(){
   const root=document.querySelector('#chorario');
   if(!root)return;
 
