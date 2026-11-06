@@ -504,18 +504,19 @@ function renderCHorariofunction renderCHorario(){
 
   const cutsHtml=cuts.length
     ?'<div class="ch-cuts">'+cuts.map(function(cut,index){
-      return '<article class="ch-cut">'+
+      const previous=index>0?cuts[index-1]:null;
+      return '<article class="ch-cut" data-cut-index="'+index+'">'+
         '<div class="ch-cut-head">'+
           '<div class="ch-cut-title"><b>Corte '+(index+1)+' · '+esc(cut.time)+'</b><span>'+chDateLabel(CH_STATE.activeDate)+'</span></div>'+
           '<button class="ch-delete" type="button" onclick="chDeleteCut(\''+cut.id+'\')">Eliminar</button>'+
         '</div>'+
         '<div class="ch-summary">'+
-          chMetricCard('Cumplimiento Horario',cut.horario,'horario')+
-          chMetricCard('Cumplimiento Cabecera',cut.cabecera,'cabecera')+
+          chMetricCard('Cumplimiento Horario',cut.horario,'horario',previous?previous.horario:null)+
+          chMetricCard('Cumplimiento Cabecera',cut.cabecera,'cabecera',previous?previous.cabecera:null)+
         '</div>'+
         '<div class="ch-grid">'+
-          chTable('C. Horario',cut.horario,'horario')+
-          chTable('C. Cabecera',cut.cabecera,'cabecera')+
+          chTable('C. Horario',cut.horario,'horario',previous?previous.horario:null)+
+          chTable('C. Cabecera',cut.cabecera,'cabecera',previous?previous.cabecera:null)+
         '</div>'+
         '<div class="ch-note"><b>Criterio:</b> líneas ordenadas de menor a mayor cumplimiento. Rojo &lt;90% · ámbar 90–94,99% · verde ≥95%.</div>'+
       '</article>';
