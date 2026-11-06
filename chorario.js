@@ -4,6 +4,11 @@ let CH_VERSION=0;
 let CH_DRAFT_TIME=new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit',hour12:false});
 let CH_PENDING={horario:null,cabecera:null};
 let CH_STATE=loadCHState();
+const CH_API_URL='https://xmosbwnredpzsrziqeux.supabase.co/rest/v1/ch_horario_cuts';
+const CH_API_KEY='sb_publishable_M_X1Lv-0SQuzXqd3-Seb7w_IXqbzsGK';
+let CH_SHARED_READY=false;
+let CH_SHARED_LOADING=false;
+
 
 function loadCHState(){
   try{
@@ -20,6 +25,145 @@ function saveCHState(){
   try{localStorage.setItem(CH_STORE_KEY,JSON.stringify(CH_STATE));}catch(err){}
   CH_VERSION++;
   if(typeof LAST_RENDER!=='undefined')LAST_RENDER.chorario='';
+}
+
+async function chApi(path,options){
+  const opts=options||{};
+  const headers=Object.assign({
+    apikey:CH_API_KEY,
+    Accept:'application/json'
+  },opts.headers||{});
+
+  if(opts.body!==undefined&&!headers['Content-Type']){
+    headers['Content-Type']='application/json';
+  }
+
+  const response=await fetch(CH_API_URL+(path||''),Object.assign({},opts,{headers:headers}));
+
+  if(!response.ok){
+    const detail=await response.text().catch(function(){return '';});
+    throw new Error('No se pudo actualizar la información compartida'+(detail?' · '+detail:''));
+  }
+
+  if(response.status===204)return null;
+
+  const text=await response.text();
+  return text?JSON.parse(text):null;
+}
+
+function chRemoteRowsToState(rows){
+  const days={};
+
+  (rows||[]).forEach(function(row){
+    const date=String(row.report_date||'');
+    if(!date)return;
+
+    if(!days[date])days[date]=[];
+
+    days[date].push({
+      id:String(row.id||''),
+      time:String(row.cut_time||'').slice(0,5),
+      horario:Array.isArray(row.horario)?row.horario:[],
+      cabecera:Array.isArray(row.cabecera)?row.cabecera:[],
+      sourceHorario:String(row.source_horario||''),
+      sourceCabecera:String(row.source_cabecera||'')
+    });
+  });
+
+  Object.keys(days).forEach(function(date){
+    days[date].sort(function(a,b){return String(a.time).localeCompare(String(b.time));});
+  });
+
+  return days;
+}
+
+function chLocalCutsFlat(){
+  const out=[];
+
+  Object.keys(CH_STATE.days||{}).forEach(function(date){
+    (CH_STATE.days[date]||[]).forEach(function(cut){
+      out.push({
+        report_date:date,
+        cut_time:String(cut.time||'').slice(0,5),
+        horario:cut.horario||[],
+        cabecera:cut.cabecera||[],
+        source_horario:cut.sourceHorario||'',
+        source_cabecera:cut.sourceCabecera||''
+      });
+    });
+  });
+
+  return out;
+}
+
+async function chLoadShared(force){
+  if(CH_SHARED_LOADING)return;
+  if(CH_SHARED_READY&&!force)return;
+
+  CH_SHARED_LOADING=true;
+
+  try{
+    let rows=await chApi('?select=*&order=report_date.desc,cut_time.asc');
+
+    if((!rows||!rows.length)){
+      const localRows=chLocalCutsFlat();
+
+      if(localRows.length){
+        await chApi('?on_conflict=report_date,cut_time',{
+          method:'POST',
+          headers:{Prefer:'resolution=merge-duplicates,return=minimal'},
+          body:JSON.stringify(localRows)
+        });
+
+        rows=await chApi('?select=*&order=report_date.desc,cut_time.asc');
+      }
+    }
+
+    const currentDate=CH_STATE.activeDate;
+    CH_STATE.days=chRemoteRowsToState(rows||[]);
+
+    const dates=Object.keys(CH_STATE.days).sort().reverse();
+    CH_STATE.activeDate=
+      currentDate&&CH_STATE.days[currentDate]
+      ?currentDate
+      :(dates[0]||'');
+
+    CH_SHARED_READY=true;
+    saveCHState();
+
+    if(document.querySelector('#chorario')){
+      renderCHorario();
+    }
+  }finally{
+    CH_SHARED_LOADING=false;
+  }
+}
+
+async function chUpsertShared(date,cut){
+  const payload={
+    report_date:date,
+    cut_time:String(cut.time||'').slice(0,5),
+    horario:cut.horario||[],
+    cabecera:cut.cabecera||[],
+    source_horario:cut.sourceHorario||'',
+    source_cabecera:cut.sourceCabecera||'',
+    updated_at:new Date().toISOString()
+  };
+
+  await chApi('?on_conflict=report_date,cut_time',{
+    method:'POST',
+    headers:{Prefer:'resolution=merge-duplicates,return=minimal'},
+    body:JSON.stringify(payload)
+  });
+}
+
+async function chDeleteShared(id){
+  if(!id)return;
+
+  await chApi('?id=eq.'+encodeURIComponent(id),{
+    method:'DELETE',
+    headers:{Prefer:'return=minimal'}
+  });
 }
 
 function chNumber(value){
@@ -242,7 +386,7 @@ function chSetActiveDate(value){
   renderCHorario();
 }
 
-function chSaveCut(){
+async function chSaveCut(){
   if(!CH_PENDING.horario||!CH_PENDING.cabecera){
     alert('Importá los dos Excel: Cumplimiento Horario y Cumplimiento Cabecera.');
     return;
@@ -255,12 +399,14 @@ function chSaveCut(){
     alert('No pude identificar la fecha en uno de los archivos.');
     return;
   }
+
   if(dateH!==dateC){
     alert('Los dos Excel corresponden a fechas distintas.');
     return;
   }
 
   const cuts=(CH_STATE.days[dateH]||[]).slice();
+
   if(cuts.length>=3){
     alert('Ya hay 3 cortes cargados para ese día.');
     return;
@@ -269,40 +415,34 @@ function chSaveCut(){
   const time=String(CH_DRAFT_TIME||'').trim()||
     new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit',hour12:false});
 
-  cuts.push({
-    id:Date.now(),
+  const cut={
     time:time,
     horario:CH_PENDING.horario.rows,
     cabecera:CH_PENDING.cabecera.rows,
     sourceHorario:CH_PENDING.horario.name,
     sourceCabecera:CH_PENDING.cabecera.name
-  });
+  };
 
-  cuts.sort(function(a,b){return String(a.time).localeCompare(String(b.time));});
-
-  CH_STATE.days[dateH]=cuts;
-  CH_STATE.activeDate=dateH;
-  CH_PENDING={horario:null,cabecera:null};
-  CH_DRAFT_TIME=new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit',hour12:false});
-  saveCHState();
-  renderCHorario();
+  try{
+    await chUpsertShared(dateH,cut);
+    CH_PENDING={horario:null,cabecera:null};
+    CH_DRAFT_TIME=new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit',hour12:false});
+    CH_STATE.activeDate=dateH;
+    await chLoadShared(true);
+  }catch(err){
+    alert(err.message||'No se pudo guardar el corte compartido.');
+  }
 }
 
-function chDeleteCut(id){
-  const date=CH_STATE.activeDate;
-  if(!date)return;
+async function chDeleteCut(id){
+  if(!id)return;
 
-  CH_STATE.days[date]=(CH_STATE.days[date]||[]).filter(function(cut){
-    return String(cut.id)!==String(id);
-  });
-
-  if(!CH_STATE.days[date].length){
-    delete CH_STATE.days[date];
-    CH_STATE.activeDate=chAvailableDates()[0]||'';
+  try{
+    await chDeleteShared(id);
+    await chLoadShared(true);
+  }catch(err){
+    alert(err.message||'No se pudo eliminar el corte.');
   }
-
-  saveCHState();
-  renderCHorario();
 }
 
 function chCriticalText(rows){
@@ -493,9 +633,79 @@ async function exportCHorarioPDF(){
   }
 }
 
+
+function chHistoryRows(){
+  return Object.keys(CH_STATE.days||{}).sort().reverse().map(function(date){
+    const cuts=(CH_STATE.days[date]||[]).slice().sort(function(a,b){
+      return String(a.time).localeCompare(String(b.time));
+    });
+
+    if(!cuts.length)return null;
+
+    const first=cuts[0];
+    const last=cuts[cuts.length-1];
+    const hFirst=chWeighted(first.horario,'cumplimiento');
+    const hLast=chWeighted(last.horario,'cumplimiento');
+    const cFirst=chWeighted(first.cabecera,'cumplimiento');
+    const cLast=chWeighted(last.cabecera,'cumplimiento');
+
+    return{
+      date:date,
+      cuts:cuts.length,
+      lastTime:last.time,
+      hLast:hLast,
+      cLast:cLast,
+      hTrend:chTrend(hLast,hFirst),
+      cTrend:chTrend(cLast,cFirst)
+    };
+  }).filter(Boolean);
+}
+
+function chHistoryTrendHtml(trend){
+  if(!trend||trend.delta===null){
+    return '<span class="ch-history-trend flat">—</span>';
+  }
+
+  return '<span class="ch-history-trend '+trend.cls+'"><b>'+trend.arrow+'</b><span>'+esc(trend.label)+'</span></span>';
+}
+
+function chHistoryHtml(){
+  const rows=chHistoryRows();
+
+  if(!rows.length){
+    return '<section class="ch-history"><div class="ch-history-head"><div><h3>Histórico diario</h3><span>Evolución del cumplimiento por día</span></div></div><div class="ch-history-empty">Todavía no hay días guardados.</div></section>';
+  }
+
+  return '<section class="ch-history">'+
+    '<div class="ch-history-head"><div><h3>Histórico diario</h3><span>Primer corte vs. último corte de cada día</span></div></div>'+
+    '<div class="ch-history-table-wrap"><table class="ch-history-table">'+
+      '<thead><tr><th>Fecha</th><th>Cortes</th><th>Último corte</th><th>C. Horario</th><th>Tendencia</th><th>C. Cabecera</th><th>Tendencia</th></tr></thead>'+
+      '<tbody>'+
+        rows.map(function(row){
+          return '<tr>'+
+            '<td><button class="ch-history-date" type="button" onclick="chSetActiveDate(\''+row.date+'\')">'+chDateLabel(row.date)+'</button></td>'+
+            '<td>'+row.cuts+'</td>'+
+            '<td>'+esc(row.lastTime||'—')+'</td>'+
+            '<td><b class="'+chClass(row.hLast)+'">'+chFmt(row.hLast)+'</b></td>'+
+            '<td>'+chHistoryTrendHtml(row.hTrend)+'</td>'+
+            '<td><b class="'+chClass(row.cLast)+'">'+chFmt(row.cLast)+'</b></td>'+
+            '<td>'+chHistoryTrendHtml(row.cTrend)+'</td>'+
+          '</tr>';
+        }).join('')+
+      '</tbody>'+
+    '</table></div>'+
+  '</section>';
+}
+
 function renderCHorario(){
   const root=document.querySelector('#chorario');
   if(!root)return;
+
+  if(!CH_SHARED_READY&&!CH_SHARED_LOADING){
+    chLoadShared(false).catch(function(err){
+      console.error('C. Horario compartido:',err);
+    });
+  }
 
   const dates=chAvailableDates();
   if(!CH_STATE.activeDate&&dates.length)CH_STATE.activeDate=dates[0];
@@ -567,5 +777,6 @@ function renderCHorario(){
         '<button class="ch-save" type="button" onclick="chSaveCut()" '+(canSave?'':'disabled')+'>Guardar corte</button>'+
       '</div>'+
       cutsHtml+
+      chHistoryHtml()+
     '</div>';
 }
