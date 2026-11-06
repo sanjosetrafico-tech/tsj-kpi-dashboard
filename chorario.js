@@ -296,8 +296,8 @@ function chFmt(value){
 
 function chClass(value){
   if(!Number.isFinite(value))return '';
-  if(value<90)return 'bad';
-  if(value<95)return 'warn';
+  if(value<85)return 'bad';
+  if(value<90)return 'warn';
   return 'good';
 }
 
