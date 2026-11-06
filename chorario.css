@@ -66,3 +66,66 @@ body.print-chorario .shell{padding:0!important}
 body.print-chorario .ch-cut{break-inside:avoid;box-shadow:none}
 body.print-chorario .ch-grid{gap:8px}
 }
+
+.ch-summary-main{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.ch-summary-main>div:first-child{min-width:0}
+.ch-trend{display:inline-flex;align-items:center;gap:7px;border-radius:12px;padding:8px 10px;font-size:11px;font-weight:850;white-space:nowrap}
+.ch-trend b{font-size:22px;line-height:1}
+.ch-trend span{font-size:10px;line-height:1.15}
+.ch-trend.up{background:#edf9f4;color:#08734e}
+.ch-trend.down{background:#fff0f2;color:#b4233c}
+.ch-trend.flat{background:#f1eff0;color:#6f696d}
+.ch-score-wrap{display:inline-flex;align-items:center;justify-content:flex-end;gap:6px;white-space:nowrap}
+.ch-trend.compact{padding:2px 5px;border-radius:7px;gap:2px;vertical-align:middle}
+.ch-trend.compact b{font-size:14px}
+.ch-trend.compact span{display:none}
+.ch-trend.compact small{font-size:8px;font-weight:900}
+.ch-export-stage{
+position:fixed;
+left:-12000px;
+top:0;
+width:1420px;
+padding:0;
+background:#fff;
+z-index:-1
+}
+.ch-export-card{
+width:1400px!important;
+border:0!important;
+border-radius:0!important;
+box-shadow:none!important;
+background:#fff!important;
+overflow:visible!important
+}
+.ch-export-card .ch-cut-head{
+padding:8px 14px 4px!important;
+background:#fff!important;
+border:0!important
+}
+.ch-export-meta{
+width:100%;
+text-align:right;
+font-size:13px;
+font-weight:800;
+color:#746d72
+}
+.ch-export-card .ch-summary{padding:6px 10px 8px!important;gap:10px!important}
+.ch-export-card .ch-summary-card{min-height:110px;padding:13px 16px!important;border-radius:15px!important}
+.ch-export-card .ch-summary-card.horario{border-top:5px solid #1d6fc0!important}
+.ch-export-card .ch-summary-card.cabecera{border-top:5px solid #dc267f!important}
+.ch-export-card .ch-summary-card .big{font-size:42px!important}
+.ch-export-card .ch-summary-card .sub{font-size:12px!important}
+.ch-export-card .ch-grid{padding:0 10px 10px!important;gap:10px!important}
+.ch-export-card .ch-panel{border-radius:14px!important}
+.ch-export-card .ch-panel-title{padding:10px 14px!important;font-size:16px!important}
+.ch-export-card .ch-table{font-size:12px!important}
+.ch-export-card .ch-table th{font-size:10px!important;padding:6px 9px!important}
+.ch-export-card .ch-table td{padding:5px 9px!important}
+.ch-export-card .ch-score{font-weight:950!important}
+.ch-export-card .ch-trend.compact small{font-size:7px!important}
+@media(max-width:760px){
+.ch-summary-main{align-items:flex-start}
+.ch-trend:not(.compact){padding:6px 8px}
+.ch-trend:not(.compact) span{display:none}
+}
+
