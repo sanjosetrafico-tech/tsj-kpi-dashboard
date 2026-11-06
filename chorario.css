@@ -240,3 +240,53 @@ body.profile-chorario #datePicker,
 body.profile-chorario #refreshBtn{
 display:none!important
 }
+
+.ch-cut-actions{
+display:flex;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+justify-content:flex-end
+}
+.ch-cut-share{
+padding:7px 11px;
+font-size:12px
+}
+.ch-export-day-stage{
+width:1420px
+}
+.ch-export-day{
+width:1400px;
+background:#fff;
+padding:10px;
+box-sizing:border-box
+}
+.ch-export-day-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+padding:4px 4px 10px;
+font-size:15px;
+color:var(--ink)
+}
+.ch-export-day-head b{
+font-size:18px
+}
+.ch-export-day-head span{
+font-size:12px;
+color:var(--muted);
+font-weight:800
+}
+.ch-export-day .ch-cuts{
+gap:12px
+}
+.ch-export-day .ch-cut{
+box-shadow:none!important
+}
+@media(max-width:620px){
+.ch-cut-actions{
+width:100%;
+justify-content:flex-start
+}
+}
