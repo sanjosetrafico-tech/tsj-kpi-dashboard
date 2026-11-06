@@ -18,10 +18,10 @@
 .ch-empty{background:var(--paper);border:1px dashed #cfc6cb;border-radius:16px;padding:34px;text-align:center;color:var(--muted)}
 .ch-cuts{display:flex;flex-direction:column;gap:16px}
 .ch-cut{background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
-.ch-cut-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:#fbfafb}
+.ch-cut-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border-bottom:1px solid var(--line);background:#fbfafb}
 .ch-cut-title{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-.ch-cut-title b{font-size:18px}
-.ch-cut-title span{font-size:12px;color:var(--muted)}
+.ch-cut-title b{font-size:16px}
+.ch-cut-title span{font-size:11px;color:var(--muted)}
 .ch-delete{border:0;background:transparent;color:var(--bad);font-weight:850;cursor:pointer}
 .ch-summary{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 14px 0}
 .ch-summary-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:#fff}
@@ -36,13 +36,13 @@
 .ch-panel-title.horario{background:#eef4fb;color:#193f72}
 .ch-panel-title.cabecera{background:#fff0f7;color:#8e295d}
 .ch-meta{font-size:11px;font-weight:800;opacity:.75}
-.ch-table{width:100%;border-collapse:collapse;font-size:16px}
+.ch-table{width:100%;border-collapse:collapse;font-size:15px}
 .ch-table th{background:#f7f4f6;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.04em;padding:10px 12px;text-align:right;border-bottom:1px solid var(--line)}
 .ch-table th:first-child,.ch-table td:first-child{text-align:left}
 .ch-table td{padding:11px 12px;border-bottom:1px solid #eee9ec;text-align:right;font-variant-numeric:tabular-nums}
 .ch-table tr:last-child td{border-bottom:0}
-.ch-line{font-weight:950;font-size:17px}
-.ch-score{display:inline-flex;justify-content:flex-end;min-width:78px;font-weight:950;font-size:18px}
+.ch-line{font-weight:950;font-size:16px}
+.ch-score{display:inline-flex;justify-content:flex-end;min-width:78px;font-weight:950;font-size:17px}
 .ch-score.good{color:var(--good)}
 .ch-score.warn{color:#a7650b}
 .ch-score.bad{color:var(--bad)}
@@ -132,7 +132,7 @@ color:#746d72
 
 .ch-table td:nth-child(3),
 .ch-table td:nth-child(4){
-font-size:16px;
+font-size:15px;
 font-weight:650
 }
 .ch-export-card .ch-table td:nth-child(3),
@@ -165,7 +165,7 @@ font-size:18px
 .ch-history-head span{
 display:block;
 margin-top:3px;
-font-size:12px;
+font-size:13px;
 color:var(--muted)
 }
 .ch-history-table-wrap{
@@ -180,7 +180,7 @@ font-size:14px
 padding:10px 12px;
 background:#f7f4f6;
 color:var(--muted);
-font-size:11px;
+font-size:13px;
 text-transform:uppercase;
 letter-spacing:.04em;
 text-align:right;
@@ -192,10 +192,11 @@ white-space:nowrap
 text-align:left
 }
 .ch-history-table td{
-padding:11px 12px;
+padding:13px 12px;
 text-align:right;
 border-bottom:1px solid #eee9ec;
-white-space:nowrap
+white-space:nowrap;
+font-size:15px
 }
 .ch-history-table tr:last-child td{
 border-bottom:0
@@ -223,7 +224,7 @@ font-weight:850
 font-size:16px
 }
 .ch-history-trend span{
-font-size:11px
+font-size:14px
 }
 .ch-history-trend.up{color:#08734e}
 .ch-history-trend.down{color:#b4233c}
