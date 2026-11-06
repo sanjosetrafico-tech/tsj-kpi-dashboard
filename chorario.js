@@ -162,22 +162,60 @@ function chRowClass(value){
   return cls==='bad'?'ch-row-bad':cls==='warn'?'ch-row-warn':'';
 }
 
-function chMetricCard(label,rows,kind){
+function chTrend(current,previous){
+  if(!Number.isFinite(current)||!Number.isFinite(previous)){
+    return{arrow:'—',label:'Sin corte anterior',delta:null,cls:'flat'};
+  }
+  const delta=current-previous;
+  if(Math.abs(delta)<0.01){
+    return{arrow:'→',label:'Sin cambio',delta:0,cls:'flat'};
+  }
+  return{
+    arrow:delta>0?'↑':'↓',
+    label:(delta>0?'+':'')+delta.toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2})+' pts',
+    delta:delta,
+    cls:delta>0?'up':'down'
+  };
+}
+
+function chTrendHtml(current,previous,compact){
+  const trend=chTrend(current,previous);
+  const label=trend.delta===null?'Sin corte anterior':trend.label;
+  return '<span class="ch-trend '+trend.cls+(compact?' compact':'')+'" title="'+esc(label)+'">'+
+    '<b>'+trend.arrow+'</b>'+
+    (compact&&trend.delta!==null?'<small>'+esc(trend.label.replace(' pts',''))+'</small>':'<span>'+esc(label)+'</span>')+
+    '</span>';
+}
+
+function chPreviousLine(previousRows,linea){
+  return (previousRows||[]).find(function(row){return row.linea===linea;})||null;
+}
+
+function chMetricCard(label,rows,kind,previousRows){
   const avg=chWeighted(rows,'cumplimiento');
+  const prevAvg=previousRows?chWeighted(previousRows,'cumplimiento'):null;
   const atraso=chWeighted(rows,'atraso');
   const adelanto=chWeighted(rows,'adelanto');
   return '<div class="ch-summary-card '+kind+'">'+
-    '<div class="eyebrow">'+esc(label)+'</div>'+
-    '<div class="big '+chClass(avg)+'">'+chFmt(avg)+'</div>'+
-    '<div class="sub">Promedio ponderado · Atraso '+chFmt(atraso)+' · Adelanto '+chFmt(adelanto)+'</div>'+
+    '<div class="ch-summary-main">'+
+      '<div>'+
+        '<div class="eyebrow">'+esc(label)+'</div>'+
+        '<div class="big '+chClass(avg)+'">'+chFmt(avg)+'</div>'+
+        '<div class="sub">Atraso '+chFmt(atraso)+' · Adelanto '+chFmt(adelanto)+'</div>'+
+      '</div>'+
+      chTrendHtml(avg,prevAvg,false)+
+    '</div>'+
     '</div>';
 }
 
-function chTable(title,rows,kind){
+function chTable(title,rows,kind,previousRows){
   const body=(rows||[]).map(function(row){
+    const prev=chPreviousLine(previousRows,row.linea);
+    const prevValue=prev?prev.cumplimiento:null;
     return '<tr class="'+chRowClass(row.cumplimiento)+'">'+
       '<td class="ch-line">'+esc(row.linea)+'</td>'+
-      '<td><span class="ch-score '+chClass(row.cumplimiento)+'">'+chFmt(row.cumplimiento)+'</span></td>'+
+      '<td><span class="ch-score-wrap"><span class="ch-score '+chClass(row.cumplimiento)+'">'+chFmt(row.cumplimiento)+'</span>'+
+      chTrendHtml(row.cumplimiento,prevValue,true)+'</span></td>'+
       '<td>'+chFmt(row.atraso)+'</td>'+
       '<td>'+chFmt(row.adelanto)+'</td>'+
       '</tr>';
@@ -277,34 +315,126 @@ function chCriticalText(rows){
   return values.join(', ')||'Sin líneas <90%';
 }
 
-function chShareText(){
+function chLatestCutInfo(){
   const cuts=chActiveCuts();
-  const date=CH_STATE.activeDate;
-  if(!cuts.length)return '';
-
-  const parts=['TSJ · Cumplimiento horario y cabecera · '+chDateLabel(date)];
-
-  cuts.forEach(function(cut){
-    parts.push(
-      '',
-      'Corte '+cut.time,
-      'C. Horario: '+chFmt(chWeighted(cut.horario,'cumplimiento')),
-      '<90% Horario: '+chCriticalText(cut.horario),
-      'C. Cabecera: '+chFmt(chWeighted(cut.cabecera,'cumplimiento')),
-      '<90% Cabecera: '+chCriticalText(cut.cabecera)
-    );
-  });
-
-  return parts.join('\n');
+  if(!cuts.length)return null;
+  return{
+    cut:cuts[cuts.length-1],
+    previous:cuts.length>1?cuts[cuts.length-2]:null,
+    index:cuts.length-1,
+    total:cuts.length,
+    date:CH_STATE.activeDate
+  };
 }
 
-function shareCHWhatsApp(){
-  const text=chShareText();
-  if(!text){
+function chShareText(){
+  const info=chLatestCutInfo();
+  if(!info)return '';
+  const cut=info.cut;
+  const prev=info.previous;
+  const h=chWeighted(cut.horario,'cumplimiento');
+  const c=chWeighted(cut.cabecera,'cumplimiento');
+  const ph=prev?chWeighted(prev.horario,'cumplimiento'):null;
+  const pc=prev?chWeighted(prev.cabecera,'cumplimiento'):null;
+  const th=chTrend(h,ph);
+  const tc=chTrend(c,pc);
+
+  return[
+    'Cumplimiento · '+chDateLabel(info.date)+' · Corte '+(info.index+1)+' · '+cut.time,
+    'C. Horario: '+chFmt(h)+(th.delta===null?'':' '+th.arrow+' '+th.label),
+    'C. Cabecera: '+chFmt(c)+(tc.delta===null?'':' '+tc.arrow+' '+tc.label)
+  ].join('\n');
+}
+
+function chExportNode(){
+  const info=chLatestCutInfo();
+  if(!info)throw new Error('No hay cortes cargados.');
+  const source=document.querySelector('.ch-cut[data-cut-index="'+info.index+'"]');
+  if(!source)throw new Error('No se encontro el corte para exportar.');
+
+  const stage=document.createElement('div');
+  stage.className='ch-export-stage';
+  const clone=source.cloneNode(true);
+  clone.classList.add('ch-export-card');
+
+  clone.querySelectorAll('.ch-delete,.ch-note').forEach(function(el){el.remove();});
+
+  const head=clone.querySelector('.ch-cut-head');
+  if(head){
+    head.innerHTML='<div class="ch-export-meta">Corte '+(info.index+1)+' · '+esc(info.cut.time)+' · '+chDateLabel(info.date)+'</div>';
+  }
+
+  stage.appendChild(clone);
+  document.body.appendChild(stage);
+  return{stage:stage,node:clone,info:info};
+}
+
+async function chRenderCanvas(){
+  if(!window.html2canvas)throw new Error('No se pudo cargar el generador de imagen.');
+  const out=chExportNode();
+  try{
+    await new Promise(function(resolve){requestAnimationFrame(function(){requestAnimationFrame(resolve);});});
+    return await html2canvas(out.node,{
+      backgroundColor:'#ffffff',
+      scale:2,
+      useCORS:true,
+      logging:false
+    });
+  }finally{
+    out.stage.remove();
+  }
+}
+
+function chCanvasBlob(canvas){
+  return new Promise(function(resolve,reject){
+    canvas.toBlob(function(blob){
+      if(blob)resolve(blob);
+      else reject(new Error('No se pudo generar la imagen.'));
+    },'image/png',0.96);
+  });
+}
+
+function chDownloadBlob(blob,name){
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download=name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(function(){URL.revokeObjectURL(url);},1500);
+}
+
+async function shareCHWhatsApp(){
+  const info=chLatestCutInfo();
+  if(!info){
     alert('No hay cortes cargados.');
     return;
   }
-  window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank','noopener');
+
+  try{
+    const canvas=await chRenderCanvas();
+    const blob=await chCanvasBlob(canvas);
+    const safeTime=String(info.cut.time||'').replace(':','');
+    const name='Cumplimiento_'+info.date+'_'+safeTime+'.png';
+    const file=new File([blob],name,{type:'image/png'});
+    const text=chShareText();
+
+    if(navigator.canShare&&navigator.canShare({files:[file]})&&navigator.share){
+      await navigator.share({
+        files:[file],
+        title:'Cumplimiento horario y cabecera',
+        text:text
+      });
+      return;
+    }
+
+    chDownloadBlob(blob,name);
+    window.open('https://wa.me/?text='+encodeURIComponent(text+'\n\nSe genero la imagen para adjuntar.'),'_blank','noopener');
+  }catch(err){
+    if(err&&err.name==='AbortError')return;
+    alert(err.message||'No se pudo generar la imagen.');
+  }
 }
 
 async function copyCHSummary(){
@@ -321,27 +451,40 @@ async function copyCHSummary(){
   }
 }
 
-function exportCHorarioPDF(){
-  if(!chActiveCuts().length){
+async function exportCHorarioPDF(){
+  const info=chLatestCutInfo();
+  if(!info){
     alert('No hay cortes cargados.');
     return;
   }
+  if(!window.jspdf||!window.jspdf.jsPDF){
+    alert('No se pudo cargar el generador de PDF.');
+    return;
+  }
 
-  const previousTitle=document.title;
-  document.title='TSJ_Cumplimiento_'+(CH_STATE.activeDate||'dia');
-  document.body.classList.add('print-chorario');
-
-  const cleanup=function(){
-    document.body.classList.remove('print-chorario');
-    document.title=previousTitle;
-  };
-
-  window.addEventListener('afterprint',cleanup,{once:true});
-  window.print();
-  setTimeout(cleanup,3000);
+  try{
+    const canvas=await chRenderCanvas();
+    const img=canvas.toDataURL('image/png',1);
+    const jsPDF=window.jspdf.jsPDF;
+    const pdf=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
+    const pageW=297;
+    const pageH=210;
+    const margin=7;
+    const maxW=pageW-margin*2;
+    const maxH=pageH-margin*2;
+    const ratio=Math.min(maxW/canvas.width,maxH/canvas.height);
+    const w=canvas.width*ratio;
+    const h=canvas.height*ratio;
+    const x=(pageW-w)/2;
+    const y=(pageH-h)/2;
+    pdf.addImage(img,'PNG',x,y,w,h,undefined,'FAST');
+    pdf.save('Cumplimiento_'+info.date+'_'+String(info.cut.time||'').replace(':','')+'.pdf');
+  }catch(err){
+    alert(err.message||'No se pudo generar el PDF.');
+  }
 }
 
-function renderCHorario(){
+function renderCHorariofunction renderCHorario(){
   const root=document.querySelector('#chorario');
   if(!root)return;
 
