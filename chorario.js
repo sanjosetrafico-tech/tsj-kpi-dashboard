@@ -537,7 +537,6 @@ function renderCHorario(){
       '<div><h2>C. Horario</h2><div style="font-size:12px;color:var(--muted);margin-top:4px">Cumplimiento Horario y Cumplimiento Cabecera · hasta 3 cortes diarios</div></div>'+
       '<div class="ch-report-actions">'+
         dateSelect+
-        '<button class="ch-action" type="button" onclick="copyCHSummary()">Copiar resumen</button>'+
         '<button class="ch-action whatsapp" type="button" onclick="shareCHWhatsApp()">WhatsApp</button>'+
         '<button class="ch-action primary" type="button" onclick="exportCHorarioPDF()">PDF</button>'+
       '</div>'+
