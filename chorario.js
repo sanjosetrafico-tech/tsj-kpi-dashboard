@@ -135,7 +135,7 @@ async function chLoadShared(force){
 
     const dates=Object.keys(CH_STATE.days).sort().reverse();
     CH_STATE.activeDate=
-      isInitialLoad&&CH_STATE.days[today]
+      isInitialLoad
       ?today
       :currentDate&&CH_STATE.days[currentDate]
       ?currentDate
@@ -390,7 +390,12 @@ function chActiveCuts(){
 }
 
 function chAvailableDates(){
-  return Object.keys(CH_STATE.days||{}).sort().reverse();
+  const dates=Object.keys(CH_STATE.days||{});
+  const today=chTodayISO();
+
+  if(dates.indexOf(today)===-1)dates.push(today);
+
+  return dates.sort().reverse();
 }
 
 function chSetActiveDate(value){
