@@ -27,6 +27,13 @@ function saveCHState(){
   if(typeof LAST_RENDER!=='undefined')LAST_RENDER.chorario='';
 }
 
+function chTodayISO(){
+  const now=new Date();
+  const pad=function(value){return String(value).padStart(2,'0');};
+
+  return now.getFullYear()+'-'+pad(now.getMonth()+1)+'-'+pad(now.getDate());
+}
+
 async function chApi(path,options){
   const opts=options||{};
   const headers=Object.assign({
@@ -122,11 +129,15 @@ async function chLoadShared(force){
     }
 
     const currentDate=CH_STATE.activeDate;
+    const isInitialLoad=!CH_SHARED_READY;
+    const today=chTodayISO();
     CH_STATE.days=chRemoteRowsToState(rows||[]);
 
     const dates=Object.keys(CH_STATE.days).sort().reverse();
     CH_STATE.activeDate=
-      currentDate&&CH_STATE.days[currentDate]
+      isInitialLoad&&CH_STATE.days[today]
+      ?today
+      :currentDate&&CH_STATE.days[currentDate]
       ?currentDate
       :(dates[0]||'');
 
@@ -386,6 +397,17 @@ function chSetActiveDate(value){
   CH_STATE.activeDate=value;
   saveCHState();
   renderCHorario();
+}
+
+function chOpenHistoryDate(value){
+  chSetActiveDate(value);
+
+  // El detalle completo del día seleccionado se muestra arriba del histórico.
+  // Llevamos al usuario allí para que el cambio sea inmediato y visible.
+  requestAnimationFrame(function(){
+    const root=document.querySelector('#chorario');
+    if(root)root.scrollIntoView({behavior:'smooth',block:'start'});
+  });
 }
 
 async function chSaveCut(){
@@ -811,7 +833,7 @@ function chHistoryHtml(){
       '<tbody>'+
         rows.map(function(row){
           return '<tr>'+
-            '<td><button class="ch-history-date" type="button" onclick="chSetActiveDate(\''+row.date+'\')">'+chDateLabel(row.date)+'</button></td>'+
+            '<td><button class="ch-history-date" type="button" onclick="chOpenHistoryDate(\''+row.date+'\')" title="Ver todos los cortes y el detalle del día">'+chDateLabel(row.date)+'</button></td>'+
             '<td>'+row.cuts+'</td>'+
             '<td>'+esc(row.lastTime||'—')+'</td>'+
             '<td><b class="'+chClass(row.hLast)+'">'+chFmt(row.hLast)+'</b></td>'+
