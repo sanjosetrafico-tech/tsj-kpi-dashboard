@@ -636,11 +636,24 @@ function chDownloadBlob(blob,name){
   setTimeout(function(){URL.revokeObjectURL(url);},1500);
 }
 
+function chIsMobileDevice(){
+  if(navigator.userAgentData&&typeof navigator.userAgentData.mobile==='boolean'){
+    return navigator.userAgentData.mobile;
+  }
+
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent||''
+  );
+}
+
 async function chShareImage(canvas,name){
   const blob=await chCanvasBlob(canvas);
   const file=new File([blob],name,{type:'image/png'});
 
-  if(navigator.canShare&&navigator.canShare({files:[file]})&&navigator.share){
+  // Desktop browsers such as Brave can expose navigator.share, but route it to
+  // the Windows share sheet instead of WhatsApp Web. Reserve native sharing
+  // for mobile devices and keep the desktop flow predictable.
+  if(chIsMobileDevice()&&navigator.canShare&&navigator.canShare({files:[file]})&&navigator.share){
     await navigator.share({files:[file]});
     return;
   }
