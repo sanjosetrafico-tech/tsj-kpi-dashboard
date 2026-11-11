@@ -2,7 +2,7 @@
 const CH_STORE_KEY='TSJ_C_HORARIO_V1';
 let CH_VERSION=0;
 let CH_DRAFT_TIME=new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit',hour12:false});
-let CH_PENDING={horario:null,cabecera:null};
+let CH_PENDING={horario:null,cabecera:null,base:null};
 let CH_STATE=loadCHState();
 const CH_API_URL='https://xmosbwnredpzsrziqeux.supabase.co/rest/v1/ch_horario_cuts';
 const CH_API_KEY='sb_publishable_M_X1Lv-0SQuzXqd3-Seb7w_IXqbzsGK';
@@ -225,6 +225,104 @@ function chRowsFromSheet(sheet){
   });
 }
 
+function chTimeKey(value){
+  if(value===null||value===undefined||value==='')return '';
+
+  if(typeof value==='number'&&Number.isFinite(value)){
+    const totalMinutes=Math.round((value%1)*24*60);
+    const hours=Math.floor(totalMinutes/60)%24;
+    const minutes=totalMinutes%60;
+    return String(hours).padStart(2,'0')+':'+String(minutes).padStart(2,'0');
+  }
+
+  const raw=String(value).trim();
+  const match=raw.match(/^(\d{1,2}):(\d{2})/);
+
+  return match
+    ?String(Number(match[1])).padStart(2,'0')+':'+match[2]
+    :raw;
+}
+
+function chUTrackMetric(counts){
+  const horario=Number(counts.HORARIO||0);
+  const atraso=Number(counts.ATRASADO||0);
+  const adelanto=Number(counts.ADELANTADO||0);
+  const postes=horario+atraso+adelanto;
+
+  if(!postes){
+    return{cumplimiento:null,atraso:null,adelanto:null,postes:0};
+  }
+
+  return{
+    cumplimiento:horario/postes*100,
+    atraso:atraso/postes*100,
+    adelanto:adelanto/postes*100,
+    postes:postes
+  };
+}
+
+function chParseUTrackBase(rows){
+  if(!rows.length)throw new Error('La base UTrack no contiene filas de datos.');
+
+  const sample=rows[0];
+  const dateKey=chFindKey(sample,['Fecha']);
+  const stateKey=chFindKey(sample,['Estado']);
+  const startKey=chFindKey(sample,['Comienzo Programado']);
+  const scheduledKey=chFindKey(sample,['Hora Presupuestado','Hora Presupuestada']);
+  const postKey=chFindKey(sample,['Poste']);
+
+  if(!dateKey||!stateKey||!startKey||!scheduledKey||!postKey){
+    throw new Error('El archivo no corresponde a la base MediasVueltas de UTrack.');
+  }
+
+  const counts={
+    horario:{HORARIO:0,ATRASADO:0,ADELANTADO:0},
+    cabecera:{HORARIO:0,ATRASADO:0,ADELANTADO:0}
+  };
+
+  let date='';
+
+  rows.forEach(function(row){
+    if(!date)date=chDateISO(row[dateKey]);
+
+    const state=chHeaderKey(row[stateKey]);
+
+    if(state!=='HORARIO'&&state!=='ATRASADO'&&state!=='ADELANTADO'){
+      return;
+    }
+
+    const scheduled=chTimeKey(row[scheduledKey]);
+    const start=chTimeKey(row[startKey]);
+
+    if(!scheduled||!start)return;
+
+    if(scheduled===start){
+      const post=chHeaderKey(row[postKey]);
+
+      // UTrack separa los registros de portón del indicador de cabecera.
+      if(post.indexOf('POSTE')===0)return;
+
+      counts.cabecera[state]++;
+      return;
+    }
+
+    counts.horario[state]++;
+  });
+
+  const horario=chUTrackMetric(counts.horario);
+  const cabecera=chUTrackMetric(counts.cabecera);
+
+  if(!horario.postes||!cabecera.postes){
+    throw new Error('No se pudieron identificar los postes de Cumplimiento y Cabecera en la base UTrack.');
+  }
+
+  return{
+    date:date,
+    horario:horario,
+    cabecera:cabecera
+  };
+}
+
 function chParseRows(rows,type){
   if(!rows.length)throw new Error('El archivo no contiene filas de datos.');
 
@@ -272,7 +370,15 @@ async function chReadExcel(file,type){
   const workbook=XLSX.read(buffer,{type:'array'});
   const sheetName=workbook.SheetNames[0];
   if(!sheetName)throw new Error('El Excel no contiene hojas.');
-  const rows=chRowsFromSheet(workbook.Sheets[sheetName]);
+
+  const sheet=workbook.Sheets[sheetName];
+
+  if(type==='base'){
+    const rawRows=XLSX.utils.sheet_to_json(sheet,{defval:'',raw:true});
+    return chParseUTrackBase(rawRows);
+  }
+
+  const rows=chRowsFromSheet(sheet);
   return chParseRows(rows,type);
 }
 
@@ -291,6 +397,16 @@ async function handleCHFile(event,type){
 }
 
 function chWeighted(rows,key){
+  const explicit=(rows||[]).map(function(row){
+    return row&&row._utrack?row._utrack:null;
+  }).find(function(metric){
+    return metric&&Number.isFinite(Number(metric[key]));
+  });
+
+  if(explicit){
+    return Number(explicit[key]);
+  }
+
   const valid=(rows||[]).filter(function(row){return Number.isFinite(row[key]);});
   if(!valid.length)return null;
   const totalWeight=valid.reduce(function(sum,row){return sum+(Number(row.viajes)||0);},0);
@@ -416,21 +532,22 @@ function chOpenHistoryDate(value){
 }
 
 async function chSaveCut(){
-  if(!CH_PENDING.horario||!CH_PENDING.cabecera){
-    alert('Importá los dos Excel: Cumplimiento Horario y Cumplimiento Cabecera.');
+  if(!CH_PENDING.horario||!CH_PENDING.cabecera||!CH_PENDING.base){
+    alert('Importá los tres archivos: C. Horario, C. Cabecera y Base UTrack (MediasVueltas).');
     return;
   }
 
   const dateH=CH_PENDING.horario.date;
   const dateC=CH_PENDING.cabecera.date;
+  const dateB=CH_PENDING.base.date;
 
-  if(!dateH||!dateC){
+  if(!dateH||!dateC||!dateB){
     alert('No pude identificar la fecha en uno de los archivos.');
     return;
   }
 
-  if(dateH!==dateC){
-    alert('Los dos Excel corresponden a fechas distintas.');
+  if(dateH!==dateC||dateH!==dateB){
+    alert('Los tres archivos corresponden a fechas distintas.');
     return;
   }
 
@@ -444,17 +561,29 @@ async function chSaveCut(){
   const time=String(CH_DRAFT_TIME||'').trim()||
     new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit',hour12:false});
 
+  const horarioRows=CH_PENDING.horario.rows.map(function(row,index){
+    return index===0
+      ?Object.assign({},row,{_utrack:Object.assign({},CH_PENDING.base.horario,{source:CH_PENDING.base.name})})
+      :row;
+  });
+
+  const cabeceraRows=CH_PENDING.cabecera.rows.map(function(row,index){
+    return index===0
+      ?Object.assign({},row,{_utrack:Object.assign({},CH_PENDING.base.cabecera,{source:CH_PENDING.base.name})})
+      :row;
+  });
+
   const cut={
     time:time,
-    horario:CH_PENDING.horario.rows,
-    cabecera:CH_PENDING.cabecera.rows,
+    horario:horarioRows,
+    cabecera:cabeceraRows,
     sourceHorario:CH_PENDING.horario.name,
     sourceCabecera:CH_PENDING.cabecera.name
   };
 
   try{
     await chUpsertShared(dateH,cut);
-    CH_PENDING={horario:null,cabecera:null};
+    CH_PENDING={horario:null,cabecera:null,base:null};
     CH_DRAFT_TIME=new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit',hour12:false});
     CH_STATE.activeDate=dateH;
     await chLoadShared(true);
@@ -866,7 +995,7 @@ function renderCHorario(){
   if(!CH_STATE.activeDate&&dates.length)CH_STATE.activeDate=dates[0];
 
   const cuts=chActiveCuts();
-  const canSave=!!(CH_PENDING.horario&&CH_PENDING.cabecera)&&cuts.length<3;
+  const canSave=!!(CH_PENDING.horario&&CH_PENDING.cabecera&&CH_PENDING.base)&&cuts.length<3;
 
   const dateSelect=dates.length
     ?'<select class="ch-action" onchange="chSetActiveDate(this.value)">'+
@@ -898,7 +1027,7 @@ function renderCHorario(){
 
       '</article>';
     }).join('')+'</div>'
-    :'<div class="ch-empty">Importá los dos Excel del primer corte para generar el informe del día.</div>';
+    :'<div class="ch-empty">Importá C. Horario, C. Cabecera y la Base UTrack del primer corte para generar el informe del día.</div>';
 
   root.innerHTML=
     '<div class="section-head">'+
@@ -925,6 +1054,16 @@ function renderCHorario(){
           '<input type="file" accept=".xlsx,.xls" onchange="handleCHFile(event,\'cabecera\')"></label>'+
           '<div class="ch-file-state '+(CH_PENDING.cabecera?'ok':'')+'">'+
             (CH_PENDING.cabecera?'Listo · '+chDateLabel(CH_PENDING.cabecera.date):'Línea · Cumplimiento · Atrasos · Adelantos')+
+          '</div>'+
+        '</div>'+
+        '<div class="ch-upload">'+
+          '<strong>Base UTrack · MediasVueltas</strong>'+
+          '<label class="ch-file-label"><span class="ch-file-name">'+esc(CH_PENDING.base?CH_PENDING.base.name:'Seleccionar archivo')+'</span><span>Importar</span>'+
+          '<input type="file" accept=".xlsx,.xls" onchange="handleCHFile(event,\'base\')"></label>'+
+          '<div class="ch-file-state '+(CH_PENDING.base?'ok':'')+'">'+
+            (CH_PENDING.base
+              ?'Listo · '+chDateLabel(CH_PENDING.base.date)+' · '+num(CH_PENDING.base.horario.postes)+' postes'
+              :'Base de postes para alinear el total con UTrack')+
           '</div>'+
         '</div>'+
         '<div class="ch-control">'+
