@@ -125,46 +125,55 @@ box-shadow:var(--shadow);
 .report-btn:hover{opacity:.88}
 
 .units-report-root{display:none}
-.units-report-sheet{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#181416;background:#fff}
+.units-report-root.units-report-rendering{display:block;position:fixed;left:-240mm;top:0;width:210mm;background:#fff;z-index:-9999;pointer-events:none}
+.units-report-sheet{position:relative;box-sizing:border-box;width:210mm;height:297mm;padding:11mm 11mm 14mm;overflow:hidden;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#181416;background:#fff}
 .units-report-header{display:flex;align-items:center;justify-content:space-between;gap:6mm;padding-bottom:3mm;border-bottom:1px solid #ded8dc}
-.units-report-brand{display:flex;align-items:center;gap:4mm}
-.units-report-logo{width:28mm;height:auto}
-.units-report-company{font-size:10pt;font-weight:850;letter-spacing:.08em}
-.units-report-period{text-align:right;color:#655e63;font-size:8pt;line-height:1.35}
-.units-report-title{margin:4mm 0 1mm;font-size:18pt;line-height:1.05}
-.units-report-subtitle{margin:0 0 4mm;color:#6f676c;font-size:8pt}
-.units-report-kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:2.5mm;margin-bottom:4mm}
-.units-report-kpi{min-height:23mm;padding:3.2mm;border:1px solid #e7e1e4;border-radius:3mm;background:#fff}
-.units-report-kpi-label{color:#6b6268;font-size:6.7pt;font-weight:850;text-transform:uppercase;letter-spacing:.03em}
-.units-report-kpi-value{margin-top:2mm;font-size:16pt;font-weight:950;line-height:1.05}
-.units-report-kpi-sub{margin-top:1.5mm;color:#6f676c;font-size:6.5pt;line-height:1.25}
-.units-report-summary-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:3mm}
-.units-report-box{border:1px solid #e7e1e4;border-radius:3mm;padding:3.2mm;background:#fff}
-.units-report-box h3{margin:0 0 2.5mm;font-size:9pt}
-.units-report-bars{display:flex;flex-direction:column;gap:1.5mm}
-.units-report-bar-row{display:grid;grid-template-columns:24mm 1fr 8mm;gap:2mm;align-items:center;font-size:6.6pt}
+.units-report-brand{display:flex;align-items:center;gap:3.5mm}
+.units-report-logo{width:22mm;height:auto}
+.units-report-company{font-size:9.5pt;font-weight:850;letter-spacing:.06em}
+.units-report-period{text-align:right;color:#655e63;font-size:7.5pt;line-height:1.35}
+.units-report-title{margin:4mm 0 1mm;font-size:17pt;line-height:1.05}
+.units-report-subtitle{margin:0 0 4mm;color:#6f676c;font-size:7.8pt;line-height:1.35}
+.units-report-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4mm;margin-bottom:3.5mm}
+.units-report-kpi{min-height:23mm;padding:3mm;border:1px solid #e7e1e4;border-radius:2.7mm;background:#fff}
+.units-report-kpi-label{color:#6b6268;font-size:6.4pt;font-weight:850;text-transform:uppercase;letter-spacing:.025em;line-height:1.22}
+.units-report-kpi-value{margin-top:1.6mm;font-size:15pt;font-weight:950;line-height:1.05}
+.units-report-kpi-sub{margin-top:1.2mm;color:#6f676c;font-size:6.3pt;line-height:1.25}
+.units-report-summary-grid{display:grid;grid-template-columns:1.16fr .84fr;grid-template-rows:auto auto;gap:2.6mm}
+.units-report-summary-grid>.units-report-box:first-child{grid-row:1 / span 2}
+.units-report-box{border:1px solid #e7e1e4;border-radius:2.7mm;padding:3mm;background:#fff}
+.units-report-box h3{margin:0 0 2.2mm;font-size:8.6pt}
+.units-report-bars{display:flex;flex-direction:column;gap:1.4mm}
+.units-report-bar-row{display:grid;grid-template-columns:20mm 1fr 7mm;gap:1.7mm;align-items:center;font-size:6.4pt}
 .units-report-bar-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.units-report-bar-track{height:2.5mm;background:#f0ecee;border-radius:99px;overflow:hidden}
+.units-report-bar-track{height:2.4mm;background:#f0ecee;border-radius:99px;overflow:hidden}
 .units-report-bar-fill{height:100%;background:#ed2e91;border-radius:99px}
 .units-report-bar-value{text-align:right;font-weight:850}
-.units-report-mini-table{width:100%;border-collapse:collapse;table-layout:fixed}.units-report-mini-table th,.units-report-mini-table td{padding:1.5mm 1.4mm;border-bottom:1px solid #eee9ec;font-size:6.6pt;line-height:1.2}
-.units-report-mini-table th{background:#faf8f9;color:#645d62;font-size:6pt;text-transform:uppercase}
+.units-report-mini-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.units-report-mini-table th,.units-report-mini-table td{padding:1.35mm 1.3mm;border-bottom:1px solid #eee9ec;font-size:6.35pt;line-height:1.18}
+.units-report-mini-table th{background:#faf8f9;color:#645d62;font-size:5.8pt;text-transform:uppercase}
 .units-report-detail-title{display:flex;justify-content:space-between;align-items:end;gap:4mm;margin:4mm 0 3mm}
-.units-report-detail-title h2{margin:0;font-size:13pt}
+.units-report-detail-title h2{margin:0;font-size:12.5pt}
 .units-report-detail-title span{color:#6f676c;font-size:7pt}
-.units-report-detail-columns{display:grid;grid-template-columns:1fr 1fr;gap:4mm;align-items:start}
 .units-report-detail-table{width:100%;border-collapse:collapse;table-layout:fixed}
-.units-report-detail-table th,.units-report-detail-table td{padding:1.45mm 1.2mm;border-bottom:1px solid #e8e2e5;font-size:6.3pt;line-height:1.15}
-.units-report-detail-table th{background:#f6f3f5;color:#5f575c;font-size:5.8pt;font-weight:850;text-transform:uppercase}
-.units-report-detail-table td:nth-child(1),.units-report-detail-table th:nth-child(1){width:13%}
-.units-report-detail-table td:nth-child(2),.units-report-detail-table th:nth-child(2){width:10%}
-.units-report-detail-table td:nth-child(3),.units-report-detail-table th:nth-child(3){width:10%}
-.units-report-detail-table td:nth-child(4),.units-report-detail-table th:nth-child(4){width:20%}
-.units-report-detail-table td:nth-child(5),.units-report-detail-table th:nth-child(5){width:20%}
-.units-report-detail-table td:nth-child(6),.units-report-detail-table th:nth-child(6){width:27%}
+.units-report-detail-table th,.units-report-detail-table td{padding:1.75mm 1.4mm;border-bottom:1px solid #e8e2e5;font-size:7pt;line-height:1.18;vertical-align:middle;overflow-wrap:anywhere}
+.units-report-detail-table th{background:#f6f3f5;color:#5f575c;font-size:6.2pt;font-weight:850;text-transform:uppercase;letter-spacing:.015em}
+.units-report-detail-table th:nth-child(1){width:12%}
+.units-report-detail-table th:nth-child(2){width:10%}
+.units-report-detail-table th:nth-child(3){width:10%}
+.units-report-detail-table th:nth-child(4){width:20%}
+.units-report-detail-table th:nth-child(5){width:20%}
+.units-report-detail-table th:nth-child(6){width:28%}
+.units-report-detail-sheet.dense .units-report-detail-table th,.units-report-detail-sheet.dense .units-report-detail-table td{padding:1.25mm 1.1mm;font-size:6.2pt}
+.units-report-detail-sheet.dense .units-report-detail-table th{font-size:5.7pt}
+.units-report-detail-columns{display:grid;grid-template-columns:1fr 1fr;gap:3mm;align-items:start}
+.units-report-detail-columns.is-two .units-report-detail-table th,.units-report-detail-columns.is-two .units-report-detail-table td{padding:1.1mm .75mm;font-size:5.25pt;line-height:1.12}
+.units-report-detail-columns.is-two .units-report-detail-table th{font-size:4.9pt}
+.units-report-detail-columns.is-two .units-report-motive{padding:.45mm .8mm;font-size:4.9pt}
 .units-report-change{font-weight:900}
-.units-report-motive{display:inline-block;padding:.8mm 1.6mm;border-radius:99px;background:#fff0f8;color:#be176d;font-weight:850}
-.units-report-note{margin-top:3mm;color:#6f676c;font-size:6.5pt;line-height:1.35}
+.units-report-motive{display:inline-block;max-width:100%;padding:.65mm 1.3mm;border-radius:99px;background:#fff0f8;color:#be176d;font-weight:850;line-height:1.15;white-space:normal}
+.units-report-note{margin-top:3mm;color:#6f676c;font-size:6.4pt;line-height:1.35}
+.units-report-page-footer{position:absolute;left:11mm;right:11mm;bottom:6mm;display:flex;justify-content:space-between;gap:6mm;padding-top:2.2mm;border-top:1px solid #eee9ec;color:#81787e;font-size:5.9pt}
 
 /* REPORTE MENSUAL OS */
 .os-report-root{display:none}
@@ -425,7 +434,7 @@ th{background:#faf8f9;color:#645d62;font-size:10px;text-transform:uppercase;lett
 }
 
 @page{size:A4 portrait;margin:8mm}
-@page unitsReport{size:A4 landscape;margin:7mm}
+@page unitsReport{size:A4 portrait;margin:0}
 @page osReport{size:A4 landscape;margin:7mm}
 @media print{
 body.print-units-report .shell{display:none!important}
@@ -4571,59 +4580,45 @@ return `
 <th>Fecha</th>
 <th>Línea</th>
 <th>Serv.</th>
-<th>Int. planificado</th>
-<th>Int. que salió</th>
+<th>Interno planificado</th>
+<th>Interno reemplazo</th>
 <th>Motivo</th>
 </tr>
 </thead>
 
 <tbody>
 
-${
-(rows||[]).map(row=>`
+${(rows||[]).map(row=>`
 
 <tr>
 
-<td>
-${esc(row.fecha)}
-</td>
+<td>${esc(row.fecha||'-')}</td>
 
-<td>
-${esc(row.linea||'—')}
-</td>
+<td>${esc(dashboardCode(row.linea)||'-')}</td>
 
-<td>
-${esc(
+<td>${esc(
+dashboardCode(
 row.turno
 ||
 row.servicio
 ||
-'—'
-)}
-</td>
+'-'
+)
+)}</td>
 
-<td class="units-report-change">
-${esc(row.averia)}
-</td>
+<td class="units-report-change">${esc(row.averia||'-')}</td>
 
-<td class="units-report-change">
-${esc(row.reemplazo)}
-</td>
+<td class="units-report-change">${esc(row.reemplazo||'-')}</td>
 
 <td>
 <span class="units-report-motive">
-${esc(
-reportReasonLabel(
-row.motivo
-)
-)}
+${esc(reportReasonLabel(row.motivo)||'Sin especificar')}
 </span>
 </td>
 
 </tr>
 
-`).join('')
-}
+`).join('')}
 
 </tbody>
 
@@ -4632,104 +4627,38 @@ row.motivo
 
 function buildUnitsReport(){
 
-const rows=
-getUnitsReportRows();
-
-const p=
-DATA.period||{};
-
-const selected=
-reportDateParts(
-selectedDDMM('salidas')
-);
-
-const selectedDay=
-selected?.day
-||
-0;
-
-const selectedMonth=
-selected?.month
-||
-Number(p.month)
-||
-0;
-
-const selectedYear=
-Number(p.year)
-||
-new Date().getFullYear();
+const rows=getUnitsReportRows();
+const p=DATA.period||{};
+const selected=reportDateParts(selectedDDMM('salidas'));
+const selectedDay=selected?.day||0;
+const selectedMonth=selected?.month||Number(p.month)||0;
+const selectedYear=Number(p.year)||new Date().getFullYear();
 
 const periodText=
 `01/${pad2(selectedMonth)}/${selectedYear} al ${pad2(selectedDay)}/${pad2(selectedMonth)}/${selectedYear}`;
 
-const byDate=
-reportAggregate(
-rows,
-row=>row.fecha
-);
+const byDate=reportAggregate(rows,row=>row.fecha);
+byDate.sort((a,b)=>(reportDateParts(a.label)?.day||0)-(reportDateParts(b.label)?.day||0));
 
-byDate.sort((a,b)=>
-(reportDateParts(a.label)?.day||0)
--
-(reportDateParts(b.label)?.day||0)
-);
+const byReason=reportAggregate(rows,row=>reportReasonLabel(row.motivo));
+const byPlanned=reportAggregate(rows,row=>row.averia);
+const byReplacement=reportAggregate(rows,row=>row.reemplazo);
+const byLine=reportAggregate(rows,row=>dashboardCode(row.linea));
 
-const byReason=
-reportAggregate(
-rows,
-row=>
-reportReasonLabel(
-row.motivo
-)
-);
+const daysWithChanges=byDate.length;
+const average=daysWithChanges?rows.length/daysWithChanges:0;
 
-const byPlanned=
-reportAggregate(
-rows,
-row=>row.averia
-);
+const topPlanned=byPlanned[0]||{label:'-',value:0};
+const topReplacement=byReplacement[0]||{label:'-',value:0};
+const topLine=byLine[0]||{label:'-',value:0};
+const topReason=byReason[0]||{label:'-',value:0};
+const totalPages=rows.length?2:1;
 
-const byReplacement=
-reportAggregate(
-rows,
-row=>row.reemplazo
-);
-
-const byLine=
-reportAggregate(
-rows,row=>row.linea
-);
-
-const daysWithChanges=
-byDate.length;
-
-const average=
-daysWithChanges
-?
-rows.length/daysWithChanges
-:
-0;
-
-const topPlanned=
-byPlanned[0]
-||
-{label:'—',value:0};
-
-const topReplacement=
-byReplacement[0]
-||
-{label:'—',value:0};
-
-const topLine=
-byLine[0]
-||
-{label:'—',value:0};
-
-const topReason=
-byReason[0]
-||
-{label:'—',value:0};
+const footer=page=>`
+<div class="units-report-page-footer">
+<span>Transporte San José S.A. - Uso interno</span>
+<span>Página ${page} de ${totalPages}</span>
+</div>`;
 
 const summaryPage=`
 
@@ -4738,146 +4667,60 @@ const summaryPage=`
 <div class="units-report-header">
 
 <div class="units-report-brand">
-
-<img
-class="units-report-logo"
-src="logo-tsj.png"
-alt="TSJ"
->
-
-<div class="units-report-company">
-TRANSPORTE SAN JOSÉ S.A.
-</div>
-
+<img class="units-report-logo" src="logo-tsj.png" alt="TSJ">
+<div class="units-report-company">TRANSPORTE SAN JOSÉ S.A.</div>
 </div>
 
 <div class="units-report-period">
-
-Planillería · Reemplazos de unidades
-
+Planillería - Reemplazos de unidades
 <br>
-
-Período:
-${esc(periodText)}
-
+Período: ${esc(periodText)}
 </div>
 
 </div>
 
-<h1 class="units-report-title">
-Reporte de Reemplazos de Unidades
-</h1>
+<h1 class="units-report-title">Reporte de Reemplazos de Unidades</h1>
 
 <p class="units-report-subtitle">
-
 Diferencias entre la unidad prevista en la planificación y la unidad que finalmente inicia el servicio.
-
 </p>
 
 <div class="units-report-kpis">
 
 <div class="units-report-kpi">
-
-<div class="units-report-kpi-label">
-Reemplazos acumulados
-</div>
-
-<div class="units-report-kpi-value">
-${num(rows.length)}
-</div>
-
-<div class="units-report-kpi-sub">
-Hasta el día seleccionado
-</div>
-
+<div class="units-report-kpi-label">Reemplazos acumulados</div>
+<div class="units-report-kpi-value">${num(rows.length)}</div>
+<div class="units-report-kpi-sub">Hasta el día seleccionado</div>
 </div>
 
 <div class="units-report-kpi">
-
-<div class="units-report-kpi-label">
-Días con reemplazos
-</div>
-
-<div class="units-report-kpi-value">
-${num(daysWithChanges)}
-</div>
-
-<div class="units-report-kpi-sub">
-Jornadas con al menos un cambio
-</div>
-
+<div class="units-report-kpi-label">Días con reemplazos</div>
+<div class="units-report-kpi-value">${num(daysWithChanges)}</div>
+<div class="units-report-kpi-sub">Jornadas con al menos un cambio</div>
 </div>
 
 <div class="units-report-kpi">
-
-<div class="units-report-kpi-label">
-Promedio por día
-</div>
-
-<div class="units-report-kpi-value">
-
-${average.toLocaleString(
-'es-AR',
-{
-minimumFractionDigits:1,
-maximumFractionDigits:1
-}
-)}
-
-</div>
-
-<div class="units-report-kpi-sub">
-Sobre días con reemplazos
-</div>
-
+<div class="units-report-kpi-label">Promedio por día</div>
+<div class="units-report-kpi-value">${average.toLocaleString('es-AR',{minimumFractionDigits:1,maximumFractionDigits:1})}</div>
+<div class="units-report-kpi-sub">Sobre días con reemplazos</div>
 </div>
 
 <div class="units-report-kpi">
-
-<div class="units-report-kpi-label">
-Int. planificado más reemplazado
-</div>
-
-<div class="units-report-kpi-value">
-${esc(topPlanned.label)}
-</div>
-
-<div class="units-report-kpi-sub">
-${num(topPlanned.value)} reemplazos
-</div>
-
+<div class="units-report-kpi-label">Interno planificado más reemplazado</div>
+<div class="units-report-kpi-value">${esc(topPlanned.label)}</div>
+<div class="units-report-kpi-sub">${num(topPlanned.value)} reemplazos</div>
 </div>
 
 <div class="units-report-kpi">
-
-<div class="units-report-kpi-label">
-Backup más utilizado
-</div>
-
-<div class="units-report-kpi-value">
-${esc(topReplacement.label)}
-</div>
-
-<div class="units-report-kpi-sub">
-${num(topReplacement.value)} salidas
-</div>
-
+<div class="units-report-kpi-label">Backup más utilizado</div>
+<div class="units-report-kpi-value">${esc(topReplacement.label)}</div>
+<div class="units-report-kpi-sub">${num(topReplacement.value)} salidas</div>
 </div>
 
 <div class="units-report-kpi">
-
-<div class="units-report-kpi-label">
-Línea con más reemplazos
-</div>
-
-<div class="units-report-kpi-value">
-${esc(topLine.label)}
-</div>
-
-<div class="units-report-kpi-sub">
-${num(topLine.value)} reemplazos
-</div>
-
+<div class="units-report-kpi-label">Línea con más reemplazos</div>
+<div class="units-report-kpi-value">${esc(topLine.label)}</div>
+<div class="units-report-kpi-sub">${num(topLine.value)} reemplazos</div>
 </div>
 
 </div>
@@ -4885,263 +4728,178 @@ ${num(topLine.value)} reemplazos
 <div class="units-report-summary-grid">
 
 <div class="units-report-box">
-
-<h3>
-Reemplazos por día
-</h3>
-
-${reportBarsHtml(
-byDate,
-31
-)}
-
+<h3>Reemplazos por día</h3>
+${reportBarsHtml(byDate,31)}
 </div>
 
 ${reportMiniTableHtml(
 'Internos planificados con mayor recurrencia',
 byPlanned,
 'Interno',
-8
+10
 )}
 
 ${reportMiniTableHtml(
 'Motivos principales',
 byReason,
 'Motivo',
-8
+12
 )}
 
 </div>
 
 <div class="units-report-note">
-
-Motivo más frecuente:
-
-<strong>
-${esc(topReason.label)}
-</strong>
-
-·
-
-${num(topReason.value)}
-
-registros.
-
+Motivo más frecuente: <strong>${esc(topReason.label)}</strong> - ${num(topReason.value)} registros.
 La información corresponde a Planillería y contempla desde el primer día del mes hasta la fecha seleccionada.
-
 </div>
+
+${footer(1)}
 
 </section>
 `;
 
-if(!rows.length){
-return summaryPage;
+if(!rows.length)return summaryPage;
+
+const useTwoColumns=rows.length>30;
+const densityClass=rows.length>20?' dense':'';
+let detailContent='';
+
+if(useTwoColumns){
+const splitAt=Math.ceil(rows.length/2);
+detailContent=`
+<div class="units-report-detail-columns is-two">
+<div>${reportDetailTableHtml(rows.slice(0,splitAt))}</div>
+<div>${reportDetailTableHtml(rows.slice(splitAt))}</div>
+</div>`;
+}else{
+detailContent=reportDetailTableHtml(rows);
 }
 
-const PAGE_SIZE=
-48;
+const detailPage=`
 
-const pages=[];
-
-for(
-let start=0;
-start<rows.length;
-start+=PAGE_SIZE
-){
-
-const chunk=
-rows.slice(
-start,
-start+PAGE_SIZE
-);
-
-const splitAt=
-Math.ceil(
-chunk.length/2
-);
-
-const left=
-chunk.slice(
-0,
-splitAt
-);
-
-const right=
-chunk.slice(
-splitAt
-);
-
-const pageNumber=
-pages.length+2;
-
-pages.push(`
-
-<section class="units-report-sheet">
+<section class="units-report-sheet units-report-detail-sheet${densityClass}">
 
 <div class="units-report-header">
 
 <div class="units-report-brand">
-
-<img
-class="units-report-logo"
-src="logo-tsj.png"
-alt="TSJ"
->
-
-<div class="units-report-company">
-TRANSPORTE SAN JOSÉ S.A.
-</div>
-
+<img class="units-report-logo" src="logo-tsj.png" alt="TSJ">
+<div class="units-report-company">TRANSPORTE SAN JOSÉ S.A.</div>
 </div>
 
 <div class="units-report-period">
-
 Detalle acumulado
-
 <br>
-
 ${esc(periodText)}
-
 </div>
 
 </div>
 
 <div class="units-report-detail-title">
-
-<h2>
-Detalle diario de reemplazos
-</h2>
-
-<span>
-Página ${pageNumber}
-</span>
-
+<h2>Detalle diario de reemplazos</h2>
+<span>${num(rows.length)} registros</span>
 </div>
 
-<div class="units-report-detail-columns">
+${detailContent}
 
-<div>
-${reportDetailTableHtml(left)}
-</div>
-
-<div>
-
-${
-right.length
-?
-reportDetailTableHtml(
-right
-)
-:
-''
-}
-
-</div>
-
-</div>
+${footer(2)}
 
 </section>
-`);
+`;
 
+return summaryPage+detailPage;
 }
 
-return(
-summaryPage
-+
-pages.join('')
-);
+async function exportUnitsReport(){
 
-}
+const root=$('#unitsReportRoot');
+if(!root)return;
 
-function exportUnitsReport(){
+const date=selectedISO('salidas')||'reporte';
+const filename=`TSJ_Reporte_Reemplazos_Unidades_${date}.pdf`;
 
-const root=
-$('#unitsReportRoot');
+root.innerHTML=buildUnitsReport();
+root.setAttribute('aria-hidden','false');
+root.classList.add('units-report-rendering');
 
-if(!root){
-return;
-}
-
-const previousTitle=
-document.title;
-
-const date=
-selectedISO('salidas')
-||
-'reporte';
-
-root.innerHTML=
-buildUnitsReport();
-
-root.setAttribute(
-'aria-hidden',
-'false'
-);
-
-document.title=
-`TSJ_Reporte_Reemplazos_Unidades_${date}`;
-
-document.body
-.classList
-.add(
-'print-units-report'
-);
-
-let cleaned=
-false;
-
-const cleanup=
-()=>{
-
-if(cleaned){
-return;
-}
-
-cleaned=
-true;
-
-document.body
-.classList
-.remove(
-'print-units-report'
-);
-
-root.setAttribute(
-'aria-hidden',
-'true'
-);
-
+const cleanup=()=>{
+root.classList.remove('units-report-rendering');
+root.setAttribute('aria-hidden','true');
 root.innerHTML='';
-
-document.title=
-previousTitle;
-
 };
 
-window.addEventListener(
-'afterprint',
-cleanup,
-{once:true}
+try{
+
+if(document.fonts?.ready){
+await document.fonts.ready;
+}
+
+await Promise.all(
+[...root.querySelectorAll('img')].map(img=>
+img.complete
+?Promise.resolve()
+:new Promise(resolve=>{
+img.addEventListener('load',resolve,{once:true});
+img.addEventListener('error',resolve,{once:true});
+})
+)
 );
 
-requestAnimationFrame(
-()=>{
+const PDF=window.jspdf?.jsPDF;
 
-requestAnimationFrame(
-()=>{
+if(!PDF||typeof html2canvas!=='function'){
+throw new Error('No se encuentran disponibles las librerías de generación PDF.');
+}
 
-window.print();
+const sheets=[...root.querySelectorAll('.units-report-sheet')];
 
+const pdf=new PDF({
+orientation:'portrait',
+unit:'mm',
+format:'a4',
+compress:true
+});
+
+for(let i=0;i<sheets.length;i++){
+
+const canvas=await html2canvas(
+sheets[i],
+{
+scale:2,
+backgroundColor:'#ffffff',
+useCORS:true,
+logging:false,
+scrollX:0,
+scrollY:0
 }
 );
 
+const image=canvas.toDataURL('image/jpeg',0.94);
+
+if(i>0){
+pdf.addPage('a4','portrait');
 }
+
+pdf.addImage(
+image,
+'JPEG',
+0,
+0,
+210,
+297,
+undefined,
+'FAST'
 );
 
-setTimeout(
-cleanup,
-60000
-);
+}
+
+pdf.save(filename);
+
+}catch(err){
+console.error('Error al generar reporte de reemplazos',err);
+alert('No se pudo generar el reporte PDF. Intente nuevamente.');
+}finally{
+cleanup();
+}
 
 }
 
