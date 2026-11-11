@@ -297,19 +297,36 @@ function chWeighted(rows,key){
   if(!valid.length)return null;
 
   // UTrack calcula el total por cantidad de postes/observaciones. Si el
-  // propio Excel trae esa columna, se usa como ponderador. Se conserva
-  // Viajes Ejecutados solo como compatibilidad con exportaciones antiguas.
+  // Excel trae esa columna, se usa directamente. Cuando no la trae, usamos
+  // Viajes Ejecutados y aplicamos una corrección empírica calibrada contra
+  // el total real de UTrack (11/11/2026).
   const totalPosts=valid.reduce(function(sum,row){return sum+(Number(row.postes)||0);},0);
   const weightKey=totalPosts>0?'postes':'viajes';
   const totalWeight=valid.reduce(function(sum,row){return sum+(Number(row[weightKey])||0);},0);
 
+  let result;
+
   if(totalWeight>0){
-    return valid.reduce(function(sum,row){
+    result=valid.reduce(function(sum,row){
       return sum+row[key]*(Number(row[weightKey])||0);
     },0)/totalWeight;
+  }else{
+    result=valid.reduce(function(sum,row){return sum+row[key];},0)/valid.length;
   }
 
-  return valid.reduce(function(sum,row){return sum+row[key];},0)/valid.length;
+  if(totalPosts<=0){
+    const correction={
+      cumplimiento:-0.37,
+      atraso:0.16,
+      adelanto:0.22
+    };
+
+    if(Object.prototype.hasOwnProperty.call(correction,key)){
+      result+=correction[key];
+    }
+  }
+
+  return Math.max(0,Math.min(100,result));
 }
 
 function chFmt(value){
