@@ -71,6 +71,25 @@ jobs:
 
           wait "$p1" "$p2" "$p3" "$p4" "$p5"
 
+          # Conservar una copia mensual de Planillería para los reportes históricos.
+          # Durante el mes se actualiza el mismo archivo; al cambiar de mes queda
+          # archivado y el nuevo mes comienza a escribirse en otro JSON.
+          if jq -e '.salidas.unitRows != null and .period.year != null and .period.month != null' data/salidas.json >/dev/null 2>&1; then
+            year="$(jq -r '.period.year' data/salidas.json)"
+            month="$(jq -r '.period.month' data/salidas.json)"
+            archive="$(printf 'data/units-report-%04d-%02d.json' "$year" "$month")"
+
+            jq '{
+              year: (.period.year | tonumber),
+              month: (.period.month | tonumber),
+              day: (.period.day | tonumber),
+              source: (.sources.salidas // .salidas.source // {}),
+              unitRows: (.salidas.unitRows // [])
+            }' data/salidas.json > "$archive"
+
+            echo "Histórico de reemplazos actualizado: $archive"
+          fi
+
           rm -rf .tmp-cache
 
       - name: Publicar cache si cambio
