@@ -1,0 +1,1163 @@
+{
+  "year": 2026,
+  "month": 2,
+  "day": 28,
+  "source": {
+    "name": "RESUMEN SALIDAS REMPLAZOS FEBRERO",
+    "id": "15XKA_ndV2Yq7izGyq7mPicM5w2eQAO3bQL79uQS__Jg"
+  },
+  "unitRows": [
+    {
+      "fecha": "01/02",
+      "averia": "17",
+      "reemplazo": "31",
+      "motivo": "Perdida de combustible",
+      "linea": "G",
+      "turno": "2"
+    },
+    {
+      "fecha": "01/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "02/02",
+      "averia": "24",
+      "reemplazo": "19",
+      "motivo": "CARTELERIA",
+      "linea": "F",
+      "turno": "2"
+    },
+    {
+      "fecha": "02/02",
+      "averia": "207",
+      "reemplazo": "210",
+      "motivo": "BATERIA",
+      "linea": "G",
+      "turno": "100"
+    },
+    {
+      "fecha": "02/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "02/02",
+      "averia": "NEIVERT FEDERICO",
+      "reemplazo": "QUIROGA HECTOR",
+      "motivo": "TARDE",
+      "linea": "F",
+      "turno": "2"
+    },
+    {
+      "fecha": "03/02",
+      "averia": "207",
+      "reemplazo": "13",
+      "motivo": "BATERIA",
+      "linea": "G",
+      "turno": "100"
+    },
+    {
+      "fecha": "03/02",
+      "averia": "24",
+      "reemplazo": "49",
+      "motivo": "CARTELERIA",
+      "linea": "F",
+      "turno": "2"
+    },
+    {
+      "fecha": "03/02",
+      "averia": "204",
+      "reemplazo": "47",
+      "motivo": "DEFINICION DE TRAFICO",
+      "linea": "D",
+      "turno": "5"
+    },
+    {
+      "fecha": "03/02",
+      "averia": "21",
+      "reemplazo": "19",
+      "motivo": "A. A.",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "03/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "03/02",
+      "averia": "LEDESMA ALEJANDRO",
+      "reemplazo": "VARISCO JOSE",
+      "motivo": "AUSENTE",
+      "linea": "D",
+      "turno": "3"
+    },
+    {
+      "fecha": "04/02",
+      "averia": "102",
+      "reemplazo": "109",
+      "motivo": "CORREA A. A.",
+      "linea": "A",
+      "turno": "100/101"
+    },
+    {
+      "fecha": "04/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "04/02",
+      "averia": "QUIROGA HECTOR",
+      "reemplazo": "ROLDAN LAUTARO",
+      "motivo": "AUSENTE",
+      "linea": "G",
+      "turno": "1"
+    },
+    {
+      "fecha": "04/02",
+      "averia": "BUTUS  FRANCISCO",
+      "reemplazo": "BARZOLA MAURO",
+      "motivo": "AUSENTE",
+      "linea": "A",
+      "turno": "100"
+    },
+    {
+      "fecha": "04/02",
+      "averia": "DECHANZI MATIAS",
+      "reemplazo": "SORIA JONATHAN",
+      "motivo": "AUSENTE",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "05/02",
+      "averia": "37",
+      "reemplazo": "47",
+      "motivo": "MANGUERA A.A.",
+      "linea": "M",
+      "turno": "1"
+    },
+    {
+      "fecha": "05/02",
+      "averia": "24",
+      "reemplazo": "49",
+      "motivo": "LUCES QUEMADAS",
+      "linea": "F",
+      "turno": "2"
+    },
+    {
+      "fecha": "05/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "05/02",
+      "averia": "BUTUS FRANCISCO",
+      "reemplazo": "BARZOLA MAURO",
+      "motivo": "AUSENTE",
+      "linea": "A",
+      "turno": "100"
+    },
+    {
+      "fecha": "06/02",
+      "averia": "17",
+      "reemplazo": "21",
+      "motivo": "PERDIDA DE ACEITE",
+      "linea": "G",
+      "turno": "2"
+    },
+    {
+      "fecha": "06/02",
+      "averia": "203",
+      "reemplazo": "210",
+      "motivo": "BATERI",
+      "linea": "D",
+      "turno": "3"
+    },
+    {
+      "fecha": "06/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "06/02",
+      "averia": "REDING BALTAZAR",
+      "reemplazo": "MESA MARIO",
+      "motivo": "AUSENTE",
+      "linea": "L",
+      "turno": "1"
+    },
+    {
+      "fecha": "06/02",
+      "averia": "REARTES IGNACIO",
+      "reemplazo": "FERNANDEZ JORGE",
+      "motivo": "AUSENTE",
+      "linea": "B",
+      "turno": "1"
+    },
+    {
+      "fecha": "07/02",
+      "averia": "17",
+      "reemplazo": "47",
+      "motivo": "Ventanilla Rota",
+      "linea": "G",
+      "turno": "2"
+    },
+    {
+      "fecha": "07/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "07/02",
+      "averia": "Alarcon Aguilar",
+      "reemplazo": "Bargas Exequiel",
+      "motivo": "AUSENTE",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "08/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "08/02",
+      "averia": "QUIROGA HECTOR",
+      "reemplazo": "CABEZA JOSE",
+      "motivo": "TARDE",
+      "linea": "G",
+      "turno": "1"
+    },
+    {
+      "fecha": "08/02",
+      "averia": "ALARCON AGUILAR",
+      "reemplazo": "RODRIGUEZ TREPICCIO",
+      "motivo": "TARDE",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "08/02",
+      "averia": "CALFACANTE",
+      "reemplazo": "ALARCON JESUS",
+      "motivo": "AUSENTE",
+      "linea": "H",
+      "turno": "1"
+    },
+    {
+      "fecha": "09/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "09/02",
+      "averia": "VEGA GUSTAVO",
+      "reemplazo": "LONDERO FERNANDO",
+      "motivo": "ERROR PLAN DIARIO",
+      "linea": "F",
+      "turno": "100"
+    },
+    {
+      "fecha": "09/02",
+      "averia": "MARTINEZ MATIAS",
+      "reemplazo": "VERA MANGONA HORACIO",
+      "motivo": "AUSENTE",
+      "linea": "P",
+      "turno": "2"
+    },
+    {
+      "fecha": "10/02",
+      "averia": "207",
+      "reemplazo": "49",
+      "motivo": "BATERIA",
+      "linea": "G",
+      "turno": "100"
+    },
+    {
+      "fecha": "10/02",
+      "averia": "202",
+      "reemplazo": "13",
+      "motivo": "ELECTRICO",
+      "linea": "D",
+      "turno": "10"
+    },
+    {
+      "fecha": "10/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "10/02",
+      "averia": "UNREIM JOSE",
+      "reemplazo": "MESA MARIO",
+      "motivo": "AUSENTE",
+      "linea": "G",
+      "turno": "1"
+    },
+    {
+      "fecha": "10/02",
+      "averia": "LLOVER NICOLAS",
+      "reemplazo": "LONDERO FERNANDO",
+      "motivo": "AUSENTE",
+      "linea": "F",
+      "turno": "4"
+    },
+    {
+      "fecha": "11/02",
+      "averia": "17",
+      "reemplazo": "49",
+      "motivo": "vidrio",
+      "linea": "G",
+      "turno": "2"
+    },
+    {
+      "fecha": "11/02",
+      "averia": "205",
+      "reemplazo": "217",
+      "motivo": "SUBE",
+      "linea": "G",
+      "turno": "101"
+    },
+    {
+      "fecha": "11/02",
+      "averia": "206",
+      "reemplazo": "202",
+      "motivo": "SUBE",
+      "linea": "L",
+      "turno": "100"
+    },
+    {
+      "fecha": "11/02",
+      "averia": "103",
+      "reemplazo": "109",
+      "motivo": "SUBE",
+      "linea": "A",
+      "turno": "2"
+    },
+    {
+      "fecha": "11/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "11/02",
+      "averia": "REARTES IGNACIO",
+      "reemplazo": "VARISCO JOSE",
+      "motivo": "AUSENTE",
+      "linea": "B",
+      "turno": "1"
+    },
+    {
+      "fecha": "12/02",
+      "averia": "47",
+      "reemplazo": "49",
+      "motivo": "SIN SUBE",
+      "linea": "G",
+      "turno": "2"
+    },
+    {
+      "fecha": "12/02",
+      "averia": "204",
+      "reemplazo": "213",
+      "motivo": "SIN SUBE",
+      "linea": "D",
+      "turno": "5"
+    },
+    {
+      "fecha": "12/02",
+      "averia": "205",
+      "reemplazo": "217",
+      "motivo": "SIN SUBE",
+      "linea": "G",
+      "turno": "101"
+    },
+    {
+      "fecha": "12/02",
+      "averia": "206",
+      "reemplazo": "214",
+      "motivo": "SIN SUBE",
+      "linea": "L",
+      "turno": "100"
+    },
+    {
+      "fecha": "12/02",
+      "averia": "103",
+      "reemplazo": "110",
+      "motivo": "SIN SUBE",
+      "linea": "A",
+      "turno": "2"
+    },
+    {
+      "fecha": "12/02",
+      "averia": "105",
+      "reemplazo": "109",
+      "motivo": "SUBE/ TECLADO",
+      "linea": "B",
+      "turno": "1"
+    },
+    {
+      "fecha": "12/02",
+      "averia": "207",
+      "reemplazo": "208",
+      "motivo": "DESCONFIGURACION DE SUBE",
+      "linea": "G",
+      "turno": "100"
+    },
+    {
+      "fecha": "12/02",
+      "averia": "27",
+      "reemplazo": "19",
+      "motivo": "R DUAL PINCHADA",
+      "linea": "F",
+      "turno": "120"
+    },
+    {
+      "fecha": "12/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "12/02",
+      "averia": "QUIROGA HECTOR",
+      "reemplazo": "SOÑEZ GERMAN",
+      "motivo": "TARDE",
+      "linea": "G",
+      "turno": "4"
+    },
+    {
+      "fecha": "12/02",
+      "averia": "DECHANZI MATIAS",
+      "reemplazo": "ROLDAN LAUTARO",
+      "motivo": "AUSENTE",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "12/02",
+      "averia": "ARANDA ALEJANDRO",
+      "reemplazo": "ALVAREZ MAXIMILIANO",
+      "motivo": "AUSENTE",
+      "linea": "H",
+      "turno": "101"
+    },
+    {
+      "fecha": "13/02",
+      "averia": "107",
+      "reemplazo": "110",
+      "motivo": "A A",
+      "linea": "B",
+      "turno": "2"
+    },
+    {
+      "fecha": "13/02",
+      "averia": "205",
+      "reemplazo": "217",
+      "motivo": "SIN SUBE",
+      "linea": "G",
+      "turno": "101"
+    },
+    {
+      "fecha": "13/02",
+      "averia": "206",
+      "reemplazo": "214",
+      "motivo": "SIN SUBE",
+      "linea": "L",
+      "turno": "100"
+    },
+    {
+      "fecha": "13/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "14/02",
+      "averia": "202",
+      "reemplazo": "13",
+      "motivo": "ELECTRICO",
+      "linea": "D",
+      "turno": "10"
+    },
+    {
+      "fecha": "14/02",
+      "averia": "1",
+      "reemplazo": "49",
+      "motivo": "SUBE DESCONFIGURADA",
+      "linea": "C",
+      "turno": "100"
+    },
+    {
+      "fecha": "14/02",
+      "averia": "104",
+      "reemplazo": "102",
+      "motivo": "Aire acondicionado gotea aceite",
+      "linea": "A",
+      "turno": "3"
+    },
+    {
+      "fecha": "14/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "15/02",
+      "averia": "45",
+      "reemplazo": "40",
+      "motivo": "SUBE DESCONFIGURADA",
+      "linea": "P",
+      "turno": "1"
+    },
+    {
+      "fecha": "15/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "15/02",
+      "averia": "DEL VALLE MARCELO",
+      "reemplazo": "RETAMAR JULIO",
+      "motivo": "AUSENTE",
+      "linea": "D",
+      "turno": "10"
+    },
+    {
+      "fecha": "15/02",
+      "averia": "SOÑEZ GERMAN",
+      "reemplazo": "ALTAMIRANO GUSTAVO",
+      "motivo": "AUSENTE",
+      "linea": "B",
+      "turno": "1"
+    },
+    {
+      "fecha": "16/02",
+      "averia": "45",
+      "reemplazo": "49",
+      "motivo": "SUBE DESCONFIGURADA",
+      "linea": "P",
+      "turno": "1"
+    },
+    {
+      "fecha": "16/02",
+      "averia": "2",
+      "reemplazo": "13",
+      "motivo": "VIDRIO",
+      "linea": "C",
+      "turno": "2"
+    },
+    {
+      "fecha": "16/02",
+      "averia": "47",
+      "reemplazo": "40",
+      "motivo": "SUBE TILDADA",
+      "linea": "G",
+      "turno": "2"
+    },
+    {
+      "fecha": "16/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "17/02",
+      "averia": "45",
+      "reemplazo": "49",
+      "motivo": "SUBE DESCONFIGURADA",
+      "linea": "P",
+      "turno": "1"
+    },
+    {
+      "fecha": "17/02",
+      "averia": "2",
+      "reemplazo": "13",
+      "motivo": "VIDRIO",
+      "linea": "C",
+      "turno": "2"
+    },
+    {
+      "fecha": "17/02",
+      "averia": "47",
+      "reemplazo": "40",
+      "motivo": "SUBE TILDADA",
+      "linea": "G",
+      "turno": "2"
+    },
+    {
+      "fecha": "17/02",
+      "averia": "103",
+      "reemplazo": "106",
+      "motivo": "DIFERENCIAL",
+      "linea": "A",
+      "turno": "2"
+    },
+    {
+      "fecha": "17/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "18/02",
+      "averia": "20",
+      "reemplazo": "13",
+      "motivo": "VIDRIO",
+      "linea": "F",
+      "turno": "1"
+    },
+    {
+      "fecha": "18/02",
+      "averia": "205",
+      "reemplazo": "217",
+      "motivo": "SIN SUBE",
+      "linea": "G",
+      "turno": "101"
+    },
+    {
+      "fecha": "18/02",
+      "averia": "206",
+      "reemplazo": "214",
+      "motivo": "SIN SUBE",
+      "linea": "LINEA",
+      "turno": "100"
+    },
+    {
+      "fecha": "18/02",
+      "averia": "110",
+      "reemplazo": "23",
+      "motivo": "DEFINICION DE TRAFICO",
+      "linea": "B",
+      "turno": "2"
+    },
+    {
+      "fecha": "18/02",
+      "averia": "103",
+      "reemplazo": "110",
+      "motivo": "DIFERENCIAL",
+      "linea": "A",
+      "turno": "2"
+    },
+    {
+      "fecha": "18/02",
+      "averia": "104",
+      "reemplazo": "49",
+      "motivo": "A. A.",
+      "linea": "A",
+      "turno": "102/103"
+    },
+    {
+      "fecha": "18/02",
+      "averia": "45",
+      "reemplazo": "19",
+      "motivo": "SUBE DESCONFIGURADA",
+      "linea": "P",
+      "turno": "1"
+    },
+    {
+      "fecha": "18/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "18/02",
+      "averia": "CABELLO MANUEL",
+      "reemplazo": "ROLDAN LAUTARO",
+      "motivo": "AUSENTE",
+      "linea": "G",
+      "turno": "1"
+    },
+    {
+      "fecha": "19/02",
+      "averia": "21",
+      "reemplazo": "19",
+      "motivo": "VIDRIO",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "19/02",
+      "averia": "35",
+      "reemplazo": "30",
+      "motivo": "VIDRIO",
+      "linea": "H",
+      "turno": "1"
+    },
+    {
+      "fecha": "19/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "20/02",
+      "averia": "45",
+      "reemplazo": "19",
+      "motivo": "TECLADO SUBE NO FUNCIONA",
+      "linea": "P",
+      "turno": "1"
+    },
+    {
+      "fecha": "20/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "20/02",
+      "averia": "4143 QUIROGA HECTOR",
+      "reemplazo": "SOÑEZ GERMAN",
+      "motivo": "AUSENTE",
+      "linea": "G",
+      "turno": "1"
+    },
+    {
+      "fecha": "20/02",
+      "averia": "4064 VARISCO JOSE",
+      "reemplazo": "RETAMAR JULIO",
+      "motivo": "AUSENTE",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "21/02",
+      "averia": "26",
+      "reemplazo": "18",
+      "motivo": "Vidrio roto",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "21/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "21/02",
+      "averia": "4143 QUIROGA HECTOR",
+      "reemplazo": "SOÑEZ GERMAN",
+      "motivo": "TARDE",
+      "linea": "G",
+      "turno": "2"
+    },
+    {
+      "fecha": "21/02",
+      "averia": "4009 FERNANDEZ ROBERTO",
+      "reemplazo": "RODRIGUEZ TREPICCIO",
+      "motivo": "AUSENTE",
+      "linea": "F",
+      "turno": "4"
+    },
+    {
+      "fecha": "22/02",
+      "averia": "26",
+      "reemplazo": "50",
+      "motivo": "VIDRIO",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "22/02",
+      "averia": "32",
+      "reemplazo": "33",
+      "motivo": "SUBE DESCONFIGURADA",
+      "linea": "H",
+      "turno": "2"
+    },
+    {
+      "fecha": "22/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "22/02",
+      "averia": "4100 CALFACANTE",
+      "reemplazo": "SEGOVIA RODRIGUEZ",
+      "motivo": "AUSENTE",
+      "linea": "H",
+      "turno": "1"
+    },
+    {
+      "fecha": "22/02",
+      "averia": "4038 MENDOZA CARLOS",
+      "reemplazo": "BARGAS EXEQUIEL",
+      "motivo": "TARDE",
+      "linea": "L",
+      "turno": "2"
+    },
+    {
+      "fecha": "23/02",
+      "averia": "26",
+      "reemplazo": "19",
+      "motivo": "VIDRIO",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "23/02",
+      "averia": "32",
+      "reemplazo": "35",
+      "motivo": "SUBE DESCONFIGURADA",
+      "linea": "H",
+      "turno": "2"
+    },
+    {
+      "fecha": "23/02",
+      "averia": "46",
+      "reemplazo": "21",
+      "motivo": "SIN SUBE",
+      "linea": "P",
+      "turno": "1"
+    },
+    {
+      "fecha": "23/02",
+      "averia": "215",
+      "reemplazo": "208",
+      "motivo": "GOMA PINCHADA",
+      "linea": "L",
+      "turno": "1"
+    },
+    {
+      "fecha": "23/02",
+      "averia": "102",
+      "reemplazo": "107",
+      "motivo": "PIERDE ACEITE y GAS AA",
+      "linea": "A",
+      "turno": "100"
+    },
+    {
+      "fecha": "23/02",
+      "averia": "103",
+      "reemplazo": "109",
+      "motivo": "DIFERENCIAL",
+      "linea": "A",
+      "turno": "102 y 103"
+    },
+    {
+      "fecha": "23/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "24/02",
+      "averia": "16",
+      "reemplazo": "21",
+      "motivo": "NO FUNCIONA SUBE",
+      "linea": "G",
+      "turno": "1"
+    },
+    {
+      "fecha": "24/02",
+      "averia": "46",
+      "reemplazo": "30",
+      "motivo": "SIN SUBE",
+      "linea": "P",
+      "turno": "1"
+    },
+    {
+      "fecha": "24/02",
+      "averia": "102",
+      "reemplazo": "109",
+      "motivo": "A.A.",
+      "linea": "A",
+      "turno": "100/101"
+    },
+    {
+      "fecha": "24/02",
+      "averia": "32",
+      "reemplazo": "35",
+      "motivo": "SUBE DESCONFIGURADA",
+      "linea": "H",
+      "turno": "2"
+    },
+    {
+      "fecha": "24/02",
+      "averia": "50",
+      "reemplazo": "16",
+      "motivo": "SIN TACOGRAFO",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "24/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "24/02",
+      "averia": "4038 MENDOZA CARLOS",
+      "reemplazo": "IBARRA SAMUEL",
+      "motivo": "TARDE",
+      "linea": "L",
+      "turno": "2"
+    },
+    {
+      "fecha": "25/02",
+      "averia": "102",
+      "reemplazo": "109",
+      "motivo": "A.A.",
+      "linea": "A",
+      "turno": "100/101"
+    },
+    {
+      "fecha": "25/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "25/02",
+      "averia": "4065 SOÑEZ GERMAN",
+      "reemplazo": "MALDONADO JOSE",
+      "motivo": "AUSENTE",
+      "linea": "G",
+      "turno": "1"
+    },
+    {
+      "fecha": "25/02",
+      "averia": "4091 DIAZ FRANCO",
+      "reemplazo": "ALVAREZ MAXIMILIANO",
+      "motivo": "AUSENTE",
+      "linea": "B",
+      "turno": "1"
+    },
+    {
+      "fecha": "26/02",
+      "averia": "206",
+      "reemplazo": "214",
+      "motivo": "ERROR DEL CHOFER",
+      "linea": "L",
+      "turno": "100"
+    },
+    {
+      "fecha": "26/02",
+      "averia": "39",
+      "reemplazo": "30",
+      "motivo": "SUBE",
+      "linea": "M",
+      "turno": "2"
+    },
+    {
+      "fecha": "26/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "26/02",
+      "averia": "4123 CABELLO MANUEL",
+      "reemplazo": "SORIA JONATHAN",
+      "motivo": "AUSENTE",
+      "linea": "G",
+      "turno": "1"
+    },
+    {
+      "fecha": "26/02",
+      "averia": "4156 ALTAMIRANO GUSTAVO",
+      "reemplazo": "SOÑEZ GERMAN",
+      "motivo": "TARDE",
+      "linea": "P",
+      "turno": "3"
+    },
+    {
+      "fecha": "27/02",
+      "averia": "105",
+      "reemplazo": "46",
+      "motivo": "A. A. /PERDIDA ACEITE",
+      "linea": "B",
+      "turno": "1"
+    },
+    {
+      "fecha": "27/02",
+      "averia": "106",
+      "reemplazo": "10",
+      "motivo": "CONFIGURACION GPS",
+      "linea": "B",
+      "turno": "100"
+    },
+    {
+      "fecha": "27/02",
+      "averia": "103",
+      "reemplazo": "110",
+      "motivo": "DIFERENCIAL",
+      "linea": "A",
+      "turno": "2"
+    },
+    {
+      "fecha": "27/02",
+      "averia": "39",
+      "reemplazo": "30",
+      "motivo": "SUBE DESCONFIGURADA",
+      "linea": "M",
+      "turno": "2"
+    },
+    {
+      "fecha": "27/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "27/02",
+      "averia": "4051 LESCANO GUSTAVO",
+      "reemplazo": "SIONE LEONARDO",
+      "motivo": "TARDE",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "27/02",
+      "averia": "4070 CASTRO JUAN",
+      "reemplazo": "ALVAREZ MAXIMILIANO",
+      "motivo": "AUSENTE",
+      "linea": "F",
+      "turno": "100"
+    },
+    {
+      "fecha": "27/02",
+      "averia": "4059 WEAFLER ALEXIS",
+      "reemplazo": "LESCANO GUSTAVO",
+      "motivo": "AUSENTE",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "27/02",
+      "averia": "4143 QUIROGA HECTOR",
+      "reemplazo": "SORIA JONATHAN",
+      "motivo": "TARDE",
+      "linea": "G",
+      "turno": "101"
+    },
+    {
+      "fecha": "27/02",
+      "averia": "4097 LEGUIZAMON MAURICIO",
+      "reemplazo": "QUIROGA HECTOR",
+      "motivo": "DEFINICION DE TRAFICO POR CAMBIO EN DIAGRAMACION",
+      "linea": "C",
+      "turno": "4"
+    },
+    {
+      "fecha": "28/02",
+      "averia": "1",
+      "reemplazo": "10",
+      "motivo": "SUBE DESCONFIGURADA",
+      "linea": "C",
+      "turno": "100"
+    },
+    {
+      "fecha": "28/02",
+      "averia": "32",
+      "reemplazo": "33",
+      "motivo": "SUBE DESCONFIGURADA",
+      "linea": "H",
+      "turno": "2"
+    },
+    {
+      "fecha": "28/02",
+      "averia": "105",
+      "reemplazo": "46",
+      "motivo": "A. A.",
+      "linea": "B",
+      "turno": "1"
+    },
+    {
+      "fecha": "28/02",
+      "averia": "106",
+      "reemplazo": "103",
+      "motivo": "GPS DESCONFIGURADO",
+      "linea": "B",
+      "turno": "100/101"
+    },
+    {
+      "fecha": "28/02",
+      "averia": "101",
+      "reemplazo": "49",
+      "motivo": "A. A.",
+      "linea": "A",
+      "turno": "1"
+    },
+    {
+      "fecha": "28/02",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    }
+  ]
+}
