@@ -1,0 +1,667 @@
+{
+  "year": 2026,
+  "month": 7,
+  "day": 31,
+  "source": {
+    "name": "RESUMEN SALIDAS Y REEMPLAZOS JULIO",
+    "id": "1Wf0-w2KS0UJdbjmAOY8WtoAauQXIOUJMqDdhl-QL33k"
+  },
+  "unitRows": [
+    {
+      "fecha": "01/07",
+      "averia": "208",
+      "reemplazo": "47",
+      "motivo": "Pantalla LED",
+      "linea": "F",
+      "turno": "21"
+    },
+    {
+      "fecha": "01/07",
+      "averia": "26",
+      "reemplazo": "48",
+      "motivo": "SISTEMA",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "01/07",
+      "averia": "205",
+      "reemplazo": "29",
+      "motivo": "CAMBIO",
+      "linea": "P",
+      "turno": "20"
+    },
+    {
+      "fecha": "01/07",
+      "averia": "29",
+      "reemplazo": "205",
+      "motivo": "CAMBIO",
+      "linea": "P",
+      "turno": "2"
+    },
+    {
+      "fecha": "01/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "01/07",
+      "averia": "ALMADA DIEGO",
+      "reemplazo": "OLMOS GODOY",
+      "motivo": "FALTA (AYER AVISO )",
+      "linea": "P",
+      "turno": "2"
+    },
+    {
+      "fecha": "02/07",
+      "averia": "26",
+      "reemplazo": "48",
+      "motivo": "SISTEMA",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "02/07",
+      "averia": "209",
+      "reemplazo": "217",
+      "motivo": "Perdida Liq. Refrig",
+      "linea": "G",
+      "turno": "3"
+    },
+    {
+      "fecha": "02/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "02/07",
+      "averia": "COMAS CARLOS",
+      "reemplazo": "RIOS DANIEL",
+      "motivo": "LLEGADA TARDE",
+      "linea": "H",
+      "turno": "1"
+    },
+    {
+      "fecha": "02/07",
+      "averia": "VARISCO JOSE",
+      "reemplazo": "SORIA JONATHAN",
+      "motivo": "FALTA",
+      "linea": "F2",
+      "turno": "201"
+    },
+    {
+      "fecha": "03/07",
+      "averia": "26",
+      "reemplazo": "48",
+      "motivo": "SISTEMA",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "03/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "04/07",
+      "averia": "26",
+      "reemplazo": "48",
+      "motivo": "SISTEMA",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "04/07",
+      "averia": "215",
+      "reemplazo": "47",
+      "motivo": "",
+      "linea": "M",
+      "turno": "2"
+    },
+    {
+      "fecha": "04/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "04/07",
+      "averia": "4016 Cesario",
+      "reemplazo": "Lombardo 4061",
+      "motivo": "descompostura",
+      "linea": "H",
+      "turno": "2"
+    },
+    {
+      "fecha": "04/07",
+      "averia": "4047 KERPS",
+      "reemplazo": "4027 ARANDA",
+      "motivo": "RENUNCIA",
+      "linea": "A",
+      "turno": "1"
+    },
+    {
+      "fecha": "05/07",
+      "averia": "103",
+      "reemplazo": "109",
+      "motivo": "SUBE",
+      "linea": "A",
+      "turno": "101"
+    },
+    {
+      "fecha": "05/07",
+      "averia": "18",
+      "reemplazo": "47",
+      "motivo": "SUBE",
+      "linea": "F",
+      "turno": "1"
+    },
+    {
+      "fecha": "05/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "06/07",
+      "averia": "109",
+      "reemplazo": "107",
+      "motivo": "se repite",
+      "linea": "B",
+      "turno": "1"
+    },
+    {
+      "fecha": "06/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "07/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "08/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "09/07",
+      "averia": "205",
+      "reemplazo": "217",
+      "motivo": "pintura",
+      "linea": "p",
+      "turno": "101"
+    },
+    {
+      "fecha": "09/07",
+      "averia": "215",
+      "reemplazo": "201",
+      "motivo": "perdida de aceite",
+      "linea": "m",
+      "turno": "101"
+    },
+    {
+      "fecha": "09/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "10/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "11/07",
+      "averia": "34",
+      "reemplazo": "47",
+      "motivo": "TALLER",
+      "linea": "L",
+      "turno": "2"
+    },
+    {
+      "fecha": "11/07",
+      "averia": "205",
+      "reemplazo": "48",
+      "motivo": "Error horario",
+      "linea": "P",
+      "turno": "20"
+    },
+    {
+      "fecha": "11/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "12/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "12/07",
+      "averia": "LLOVER CARLOS",
+      "reemplazo": "HERTEL JAVIER",
+      "motivo": "FALTA",
+      "linea": "P",
+      "turno": "10"
+    },
+    {
+      "fecha": "13/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "14/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "15/07",
+      "averia": "203",
+      "reemplazo": "47",
+      "motivo": "embrague",
+      "linea": "D",
+      "turno": "2"
+    },
+    {
+      "fecha": "15/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "15/07",
+      "averia": "VARISCO",
+      "reemplazo": "DIAZ",
+      "motivo": "FALTA",
+      "linea": "M",
+      "turno": "1"
+    },
+    {
+      "fecha": "15/07",
+      "averia": "WEAFFLER",
+      "reemplazo": "UNREIN",
+      "motivo": "LLEGADA TARDE",
+      "linea": "F",
+      "turno": "2"
+    },
+    {
+      "fecha": "16/07",
+      "averia": "217",
+      "reemplazo": "48",
+      "motivo": "Embrague",
+      "linea": "G",
+      "turno": "5"
+    },
+    {
+      "fecha": "16/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "16/07",
+      "averia": "Reding Baltazar",
+      "reemplazo": "4063-Unrein Jose",
+      "motivo": "ausente",
+      "linea": "L",
+      "turno": "1"
+    },
+    {
+      "fecha": "17/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "18/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "19/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "20/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "21/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "21/07",
+      "averia": "ANTIVERO ANDRES",
+      "reemplazo": "UNREIN GERARDO",
+      "motivo": "FALTA",
+      "linea": "D",
+      "turno": "3"
+    },
+    {
+      "fecha": "22/07",
+      "averia": "4",
+      "reemplazo": "47",
+      "motivo": "VIDRIO",
+      "linea": "G",
+      "turno": "100"
+    },
+    {
+      "fecha": "22/07",
+      "averia": "14",
+      "reemplazo": "48",
+      "motivo": "Falta CHIP Diesel",
+      "linea": "G",
+      "turno": "5"
+    },
+    {
+      "fecha": "22/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "22/07",
+      "averia": "MELGAREJO",
+      "reemplazo": "ARIADNA ROSENBERGER",
+      "motivo": "ENFERMEDAD",
+      "linea": "P",
+      "turno": "10"
+    },
+    {
+      "fecha": "22/07",
+      "averia": "ESCOBAR DIEGO",
+      "reemplazo": "UNREIN GERARDO",
+      "motivo": "FALTA",
+      "linea": "M",
+      "turno": "100"
+    },
+    {
+      "fecha": "23/07",
+      "averia": "26",
+      "reemplazo": "48",
+      "motivo": "CHIP DIESEL",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "23/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "24/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "24/07",
+      "averia": "AGUIKAR EXEQUIEL",
+      "reemplazo": "SPOTURNO GUSTAVO",
+      "motivo": "FALTA",
+      "linea": "H",
+      "turno": "2"
+    },
+    {
+      "fecha": "25/07",
+      "averia": "26",
+      "reemplazo": "48",
+      "motivo": "CHIP DIESEL",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "25/07",
+      "averia": "32",
+      "reemplazo": "49",
+      "motivo": "PREVENTIVO",
+      "linea": "H",
+      "turno": "2"
+    },
+    {
+      "fecha": "25/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "26/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "27/07",
+      "averia": "26",
+      "reemplazo": "47",
+      "motivo": "chip diesel",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "27/07",
+      "averia": "18",
+      "reemplazo": "48",
+      "motivo": "pedido por taller",
+      "linea": "F",
+      "turno": "1"
+    },
+    {
+      "fecha": "27/07",
+      "averia": "7",
+      "reemplazo": "49",
+      "motivo": "NO ARRANCA",
+      "linea": "D",
+      "turno": "5"
+    },
+    {
+      "fecha": "27/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "27/07",
+      "averia": "AGUILAR EXEQUIEL",
+      "reemplazo": "CAÑETE SERGIO",
+      "motivo": "LLEGADA TARDE x rueda pinchada",
+      "linea": "H",
+      "turno": "1"
+    },
+    {
+      "fecha": "28/07",
+      "averia": "18",
+      "reemplazo": "48",
+      "motivo": "Estetica",
+      "linea": "F",
+      "turno": "1"
+    },
+    {
+      "fecha": "28/07",
+      "averia": "11",
+      "reemplazo": "46",
+      "motivo": "GPS",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "28/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "28/07",
+      "averia": "PACIFICO GERARDO",
+      "reemplazo": "SORIA JONATHAN",
+      "motivo": "FALTA (ENFERMEDD)",
+      "linea": "E",
+      "turno": "2"
+    },
+    {
+      "fecha": "29/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "29/07",
+      "averia": "ESCOBAR DIEGO",
+      "reemplazo": "SPOTURNO GUSTAVO",
+      "motivo": "FALTA C/ AVISO",
+      "linea": "M",
+      "turno": "100"
+    },
+    {
+      "fecha": "30/07",
+      "averia": "213",
+      "reemplazo": "217",
+      "motivo": "Parabrisas",
+      "linea": "L",
+      "turno": "3"
+    },
+    {
+      "fecha": "30/07",
+      "averia": "42",
+      "reemplazo": "48",
+      "motivo": "Luneta",
+      "linea": "G",
+      "turno": "4"
+    },
+    {
+      "fecha": "30/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "31/07",
+      "averia": "2",
+      "reemplazo": "48",
+      "motivo": "Preventivo",
+      "linea": "C",
+      "turno": "2"
+    },
+    {
+      "fecha": "31/07",
+      "averia": "3",
+      "reemplazo": "49",
+      "motivo": "Preventivo",
+      "linea": "C",
+      "turno": "1"
+    },
+    {
+      "fecha": "31/07",
+      "averia": "31",
+      "reemplazo": "50",
+      "motivo": "Preventivo",
+      "linea": "H",
+      "turno": "1"
+    },
+    {
+      "fecha": "31/07",
+      "averia": "TITULAR",
+      "reemplazo": "REMPLAZO",
+      "motivo": "MOTIVO",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "31/07",
+      "averia": "ROMERO SEBASTIAN",
+      "reemplazo": "TOLOZA REYNALDO",
+      "motivo": "FALTA",
+      "linea": "L",
+      "turno": "3"
+    },
+    {
+      "fecha": "31/07",
+      "averia": "VARISCO JOSE",
+      "reemplazo": "BASSO NELSON",
+      "motivo": "LLEGADA TARDE }",
+      "linea": "F",
+      "turno": "201"
+    }
+  ]
+}
