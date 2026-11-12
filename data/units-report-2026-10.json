@@ -1,0 +1,811 @@
+{
+  "year": 2026,
+  "month": 10,
+  "day": 31,
+  "source": {
+    "name": "RESUMEN SALIDAS Y REEMPLAZOS OCTUBRE",
+    "id": "1tlu75d42dNvZYsoRBTGW3-U8Y2hiOaavz1q6S5i4lns"
+  },
+  "unitRows": [
+    {
+      "fecha": "01/10",
+      "averia": "20",
+      "reemplazo": "47",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "201"
+    },
+    {
+      "fecha": "01/10",
+      "averia": "42",
+      "reemplazo": "48",
+      "motivo": "TALLER",
+      "linea": "G",
+      "turno": "4"
+    },
+    {
+      "fecha": "01/10",
+      "averia": "2",
+      "reemplazo": "46",
+      "motivo": "AACC",
+      "linea": "C",
+      "turno": "1"
+    },
+    {
+      "fecha": "01/10",
+      "averia": "202",
+      "reemplazo": "49",
+      "motivo": "NO FUNCIONA CARTEL",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "02/10",
+      "averia": "20",
+      "reemplazo": "47",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "201"
+    },
+    {
+      "fecha": "02/10",
+      "averia": "42",
+      "reemplazo": "48",
+      "motivo": "TALLER",
+      "linea": "G",
+      "turno": "4"
+    },
+    {
+      "fecha": "02/10",
+      "averia": "11",
+      "reemplazo": "49",
+      "motivo": "TALLER",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "02/10",
+      "averia": "23",
+      "reemplazo": "50",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "7"
+    },
+    {
+      "fecha": "02/10",
+      "averia": "214",
+      "reemplazo": "46",
+      "motivo": "TALLER",
+      "linea": "H",
+      "turno": "3"
+    },
+    {
+      "fecha": "02/10",
+      "averia": "19",
+      "reemplazo": "18",
+      "motivo": "sin sube",
+      "linea": "F",
+      "turno": "2"
+    },
+    {
+      "fecha": "03/10",
+      "averia": "42",
+      "reemplazo": "48",
+      "motivo": "TALLER",
+      "linea": "G",
+      "turno": "2"
+    },
+    {
+      "fecha": "03/10",
+      "averia": "2",
+      "reemplazo": "46",
+      "motivo": "AACC",
+      "linea": "C",
+      "turno": "1"
+    },
+    {
+      "fecha": "03/10",
+      "averia": "28",
+      "reemplazo": "50",
+      "motivo": "Asiento Chofer",
+      "linea": "G",
+      "turno": "1"
+    },
+    {
+      "fecha": "04/10",
+      "averia": "2",
+      "reemplazo": "46",
+      "motivo": "AACC",
+      "linea": "C",
+      "turno": "1"
+    },
+    {
+      "fecha": "05/10",
+      "averia": "214",
+      "reemplazo": "48",
+      "motivo": "TALLER",
+      "linea": "H",
+      "turno": "3"
+    },
+    {
+      "fecha": "05/10",
+      "averia": "42",
+      "reemplazo": "49",
+      "motivo": "TALLER",
+      "linea": "G",
+      "turno": "4"
+    },
+    {
+      "fecha": "05/10",
+      "averia": "11",
+      "reemplazo": "50",
+      "motivo": "TALLER",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "06/10",
+      "averia": "214",
+      "reemplazo": "49",
+      "motivo": "TALLER",
+      "linea": "H",
+      "turno": "3"
+    },
+    {
+      "fecha": "06/10",
+      "averia": "42",
+      "reemplazo": "48",
+      "motivo": "TALLER",
+      "linea": "G",
+      "turno": "4"
+    },
+    {
+      "fecha": "06/10",
+      "averia": "11",
+      "reemplazo": "50",
+      "motivo": "TALLER",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "06/10",
+      "averia": "19",
+      "reemplazo": "47",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "2"
+    },
+    {
+      "fecha": "07/10",
+      "averia": "2",
+      "reemplazo": "46",
+      "motivo": "AACC",
+      "linea": "C",
+      "turno": "1"
+    },
+    {
+      "fecha": "07/10",
+      "averia": "203",
+      "reemplazo": "48",
+      "motivo": "AACC",
+      "linea": "D",
+      "turno": "2"
+    },
+    {
+      "fecha": "07/10",
+      "averia": "34",
+      "reemplazo": "49",
+      "motivo": "AACC",
+      "linea": "L",
+      "turno": "1"
+    },
+    {
+      "fecha": "07/10",
+      "averia": "33",
+      "reemplazo": "50",
+      "motivo": "NO ARRANCO",
+      "linea": "H",
+      "turno": "22"
+    },
+    {
+      "fecha": "08/10",
+      "averia": "11",
+      "reemplazo": "48",
+      "motivo": "TALLER",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "08/10",
+      "averia": "22",
+      "reemplazo": "50",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "1"
+    },
+    {
+      "fecha": "08/10",
+      "averia": "28",
+      "reemplazo": "49",
+      "motivo": "TALLER",
+      "linea": "G",
+      "turno": "1"
+    },
+    {
+      "fecha": "08/10",
+      "averia": "42",
+      "reemplazo": "46",
+      "motivo": "TALLER",
+      "linea": "G",
+      "turno": "4"
+    },
+    {
+      "fecha": "08/10",
+      "averia": "214",
+      "reemplazo": "42",
+      "motivo": "TALLER",
+      "linea": "H",
+      "turno": "3"
+    },
+    {
+      "fecha": "09/10",
+      "averia": "11",
+      "reemplazo": "48",
+      "motivo": "TALLER",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "09/10",
+      "averia": "33",
+      "reemplazo": "49",
+      "motivo": "TALLER",
+      "linea": "H2",
+      "turno": "20"
+    },
+    {
+      "fecha": "09/10",
+      "averia": "27",
+      "reemplazo": "50",
+      "motivo": "Preventivo",
+      "linea": "G",
+      "turno": "2"
+    },
+    {
+      "fecha": "09/10",
+      "averia": "201",
+      "reemplazo": "46",
+      "motivo": "Preventivo",
+      "linea": "D",
+      "turno": "3"
+    },
+    {
+      "fecha": "10/10",
+      "averia": "12",
+      "reemplazo": "47",
+      "motivo": "Eléctrico",
+      "linea": "E",
+      "turno": "1"
+    },
+    {
+      "fecha": "10/10",
+      "averia": "19",
+      "reemplazo": "50",
+      "motivo": "Limpiaparabrisas",
+      "linea": "F",
+      "turno": "2"
+    },
+    {
+      "fecha": "10/10",
+      "averia": "106",
+      "reemplazo": "104",
+      "motivo": "Taller",
+      "linea": "B",
+      "turno": "2"
+    },
+    {
+      "fecha": "10/10",
+      "averia": "6",
+      "reemplazo": "46",
+      "motivo": "Rueda pinchada",
+      "linea": "D",
+      "turno": "1"
+    },
+    {
+      "fecha": "11/10",
+      "averia": "23",
+      "reemplazo": "47",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "2"
+    },
+    {
+      "fecha": "13/10",
+      "averia": "23",
+      "reemplazo": "47",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "7"
+    },
+    {
+      "fecha": "13/10",
+      "averia": "21",
+      "reemplazo": "49",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "13/10",
+      "averia": "11",
+      "reemplazo": "48",
+      "motivo": "Sto Tomé",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "13/10",
+      "averia": "20",
+      "reemplazo": "50",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "201"
+    },
+    {
+      "fecha": "14/10",
+      "averia": "11",
+      "reemplazo": "48",
+      "motivo": "Sto Tomé",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "14/10",
+      "averia": "21",
+      "reemplazo": "47",
+      "motivo": "Taller",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "14/10",
+      "averia": "6",
+      "reemplazo": "46",
+      "motivo": "Chip Diesel",
+      "linea": "D",
+      "turno": "7"
+    },
+    {
+      "fecha": "14/10",
+      "averia": "2",
+      "reemplazo": "50",
+      "motivo": "SERVIS",
+      "linea": "C",
+      "turno": "1"
+    },
+    {
+      "fecha": "15/10",
+      "averia": "11",
+      "reemplazo": "48",
+      "motivo": "Taller",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "15/10",
+      "averia": "21",
+      "reemplazo": "47",
+      "motivo": "Taller",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "15/10",
+      "averia": "6",
+      "reemplazo": "46",
+      "motivo": "Chip Diesel",
+      "linea": "D",
+      "turno": "7"
+    },
+    {
+      "fecha": "15/10",
+      "averia": "216",
+      "reemplazo": "50",
+      "motivo": "Vidrio",
+      "linea": "E",
+      "turno": "3"
+    },
+    {
+      "fecha": "15/10",
+      "averia": "42",
+      "reemplazo": "49",
+      "motivo": "Taller",
+      "linea": "G",
+      "turno": "4"
+    },
+    {
+      "fecha": "16/10",
+      "averia": "11",
+      "reemplazo": "48",
+      "motivo": "Taller",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "16/10",
+      "averia": "21",
+      "reemplazo": "47",
+      "motivo": "Taller",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "16/10",
+      "averia": "212",
+      "reemplazo": "46",
+      "motivo": "Estética",
+      "linea": "A",
+      "turno": "3"
+    },
+    {
+      "fecha": "19/10",
+      "averia": "11",
+      "reemplazo": "48",
+      "motivo": "Taller",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "19/10",
+      "averia": "21",
+      "reemplazo": "47",
+      "motivo": "Taller",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "19/10",
+      "averia": "212",
+      "reemplazo": "46",
+      "motivo": "Estética",
+      "linea": "A",
+      "turno": "3"
+    },
+    {
+      "fecha": "19/10",
+      "averia": "215",
+      "reemplazo": "49",
+      "motivo": "Problemas electricos",
+      "linea": "M",
+      "turno": "2"
+    },
+    {
+      "fecha": "20/10",
+      "averia": "11",
+      "reemplazo": "48",
+      "motivo": "Taller",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "20/10",
+      "averia": "21",
+      "reemplazo": "47",
+      "motivo": "Taller",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "20/10",
+      "averia": "208",
+      "reemplazo": "50",
+      "motivo": "Taller",
+      "linea": "F",
+      "turno": "9"
+    },
+    {
+      "fecha": "20/10",
+      "averia": "215",
+      "reemplazo": "49",
+      "motivo": "Eléctrico",
+      "linea": "M",
+      "turno": "2"
+    },
+    {
+      "fecha": "21/10",
+      "averia": "11",
+      "reemplazo": "48",
+      "motivo": "Taller",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "21/10",
+      "averia": "21",
+      "reemplazo": "47",
+      "motivo": "Taller",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "21/10",
+      "averia": "208",
+      "reemplazo": "50",
+      "motivo": "Taller",
+      "linea": "F",
+      "turno": "9"
+    },
+    {
+      "fecha": "21/10",
+      "averia": "215",
+      "reemplazo": "49",
+      "motivo": "Eléctrico",
+      "linea": "M",
+      "turno": "2"
+    },
+    {
+      "fecha": "22/10",
+      "averia": "11",
+      "reemplazo": "48",
+      "motivo": "Taller",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "22/10",
+      "averia": "21",
+      "reemplazo": "47",
+      "motivo": "Taller",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "22/10",
+      "averia": "208",
+      "reemplazo": "46",
+      "motivo": "Taller",
+      "linea": "F",
+      "turno": "9"
+    },
+    {
+      "fecha": "22/10",
+      "averia": "215",
+      "reemplazo": "49",
+      "motivo": "Eléctrico",
+      "linea": "M",
+      "turno": "2"
+    },
+    {
+      "fecha": "22/10",
+      "averia": "40",
+      "reemplazo": "50",
+      "motivo": "Chip Diesel",
+      "linea": "P",
+      "turno": "1"
+    },
+    {
+      "fecha": "23/10",
+      "averia": "11",
+      "reemplazo": "48",
+      "motivo": "TALLER",
+      "linea": "G",
+      "turno": "6"
+    },
+    {
+      "fecha": "23/10",
+      "averia": "208",
+      "reemplazo": "47",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "9"
+    },
+    {
+      "fecha": "23/10",
+      "averia": "40",
+      "reemplazo": "50",
+      "motivo": "Chip Diesel",
+      "linea": "P",
+      "turno": "1"
+    },
+    {
+      "fecha": "24/10",
+      "averia": "107",
+      "reemplazo": "104",
+      "motivo": "TALLER",
+      "linea": "B",
+      "turno": "1"
+    },
+    {
+      "fecha": "24/10",
+      "averia": "39",
+      "reemplazo": "50",
+      "motivo": "TALLER",
+      "linea": "P",
+      "turno": "10"
+    },
+    {
+      "fecha": "25/10",
+      "averia": "45",
+      "reemplazo": "50",
+      "motivo": "taller",
+      "linea": "A",
+      "turno": "1"
+    },
+    {
+      "fecha": "26/10",
+      "averia": "17",
+      "reemplazo": "49",
+      "motivo": "taller",
+      "linea": "L",
+      "turno": "5"
+    },
+    {
+      "fecha": "26/10",
+      "averia": "202",
+      "reemplazo": "47",
+      "motivo": "taller",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "26/10",
+      "averia": "8",
+      "reemplazo": "46",
+      "motivo": "estetica",
+      "linea": "D",
+      "turno": "8"
+    },
+    {
+      "fecha": "26/10",
+      "averia": "208",
+      "reemplazo": "48",
+      "motivo": "embrague",
+      "linea": "F",
+      "turno": "9"
+    },
+    {
+      "fecha": "27/10",
+      "averia": "208",
+      "reemplazo": "47",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "9"
+    },
+    {
+      "fecha": "27/10",
+      "averia": "8",
+      "reemplazo": "46",
+      "motivo": "ESTETICA",
+      "linea": "D",
+      "turno": "8"
+    },
+    {
+      "fecha": "27/10",
+      "averia": "28",
+      "reemplazo": "48",
+      "motivo": "Preventivo",
+      "linea": "G",
+      "turno": "1"
+    },
+    {
+      "fecha": "27/10",
+      "averia": "7",
+      "reemplazo": "50",
+      "motivo": "Preventivo",
+      "linea": "D",
+      "turno": "7"
+    },
+    {
+      "fecha": "28/10",
+      "averia": "208",
+      "reemplazo": "47",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "9"
+    },
+    {
+      "fecha": "28/10",
+      "averia": "201",
+      "reemplazo": "46",
+      "motivo": "ESTETICA",
+      "linea": "D",
+      "turno": "3"
+    },
+    {
+      "fecha": "28/10",
+      "averia": "43",
+      "reemplazo": "50",
+      "motivo": "VIDRIO",
+      "linea": "D",
+      "turno": "1"
+    },
+    {
+      "fecha": "28/10",
+      "averia": "3",
+      "reemplazo": "49",
+      "motivo": "TALLER",
+      "linea": "C",
+      "turno": "10"
+    },
+    {
+      "fecha": "29/10",
+      "averia": "201",
+      "reemplazo": "46",
+      "motivo": "ESTETICA",
+      "linea": "D",
+      "turno": "3"
+    },
+    {
+      "fecha": "29/10",
+      "averia": "3",
+      "reemplazo": "50",
+      "motivo": "TALLER",
+      "linea": "C",
+      "turno": "10"
+    },
+    {
+      "fecha": "29/10",
+      "averia": "6",
+      "reemplazo": "47",
+      "motivo": "PREVENTIVO",
+      "linea": "D",
+      "turno": "7"
+    },
+    {
+      "fecha": "30/10",
+      "averia": "201",
+      "reemplazo": "46",
+      "motivo": "ESTETICA",
+      "linea": "D",
+      "turno": "3"
+    },
+    {
+      "fecha": "30/10",
+      "averia": "3",
+      "reemplazo": "50",
+      "motivo": "TALLER",
+      "linea": "C",
+      "turno": "10"
+    },
+    {
+      "fecha": "30/10",
+      "averia": "26",
+      "reemplazo": "47",
+      "motivo": "GPS",
+      "linea": "F",
+      "turno": "8"
+    },
+    {
+      "fecha": "30/10",
+      "averia": "19",
+      "reemplazo": "48",
+      "motivo": "PREVENTIVO",
+      "linea": "F",
+      "turno": "2"
+    },
+    {
+      "fecha": "31/10",
+      "averia": "201",
+      "reemplazo": "46",
+      "motivo": "ESTETICA",
+      "linea": "D",
+      "turno": "3"
+    },
+    {
+      "fecha": "31/10",
+      "averia": "3",
+      "reemplazo": "48",
+      "motivo": "TALLER",
+      "linea": "C",
+      "turno": "10"
+    },
+    {
+      "fecha": "31/10",
+      "averia": "39",
+      "reemplazo": "50",
+      "motivo": "PREVENTIVO",
+      "linea": "P",
+      "turno": "10"
+    }
+  ]
+}
