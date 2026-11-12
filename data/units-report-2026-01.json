@@ -1,0 +1,1563 @@
+{
+  "year": 2026,
+  "month": 1,
+  "day": 31,
+  "source": {
+    "name": "RESUMEN SALIDAS Y REMPLAZOS ENERO",
+    "id": "1ycpn6i0WxQEBPHy19nDjb-AibdU3NgcuEBhiT2ReYQ0"
+  },
+  "unitRows": [
+    {
+      "fecha": "02/01",
+      "averia": "28",
+      "reemplazo": "19",
+      "motivo": "G",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "02/01",
+      "averia": "214",
+      "reemplazo": "206",
+      "motivo": "L",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "02/01",
+      "averia": "37",
+      "reemplazo": "27",
+      "motivo": "M",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "02/01",
+      "averia": "214",
+      "reemplazo": "212",
+      "motivo": "L",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "02/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "02/01",
+      "averia": "Del Valle Marcelo",
+      "reemplazo": "Sandoval Damian",
+      "motivo": "D",
+      "linea": "10",
+      "turno": ""
+    },
+    {
+      "fecha": "02/01",
+      "averia": "Ríos Roberto",
+      "reemplazo": "Wolff Furlong",
+      "motivo": "M",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "03/01",
+      "averia": "39",
+      "reemplazo": "33",
+      "motivo": "M",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "03/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "03/01",
+      "averia": "AGUILAR IVAN",
+      "reemplazo": "WOLFF FURLONG MARIO",
+      "motivo": "A",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "04/01",
+      "averia": "105",
+      "reemplazo": "107",
+      "motivo": "B",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "04/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "04/01",
+      "averia": "VARISCO JOSE",
+      "reemplazo": "DEL VALLE",
+      "motivo": "F",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "04/01",
+      "averia": "FRUTOS GONZALO",
+      "reemplazo": "LOPEZ JONATAN",
+      "motivo": "C",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "04/01",
+      "averia": "BARRETO FACUNDO",
+      "reemplazo": "CARPIO DARIO",
+      "motivo": "G",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "05/01",
+      "averia": "49",
+      "reemplazo": "30",
+      "motivo": "G",
+      "linea": "6",
+      "turno": ""
+    },
+    {
+      "fecha": "05/01",
+      "averia": "104",
+      "reemplazo": "110",
+      "motivo": "A",
+      "linea": "40",
+      "turno": ""
+    },
+    {
+      "fecha": "05/01",
+      "averia": "105",
+      "reemplazo": "109",
+      "motivo": "B",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "05/01",
+      "averia": "37",
+      "reemplazo": "23",
+      "motivo": "M",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "05/01",
+      "averia": "108",
+      "reemplazo": "110",
+      "motivo": "A",
+      "linea": "4",
+      "turno": ""
+    },
+    {
+      "fecha": "05/01",
+      "averia": "106",
+      "reemplazo": "105",
+      "motivo": "B",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "05/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "06/01",
+      "averia": "32",
+      "reemplazo": "16",
+      "motivo": "H",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "06/01",
+      "averia": "204",
+      "reemplazo": "210",
+      "motivo": "D",
+      "linea": "4",
+      "turno": ""
+    },
+    {
+      "fecha": "06/01",
+      "averia": "44",
+      "reemplazo": "17",
+      "motivo": "D",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "06/01",
+      "averia": "102",
+      "reemplazo": "105",
+      "motivo": "A",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "06/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "06/01",
+      "averia": "AGUIAR HERNAN",
+      "reemplazo": "ALARCON GERMAN",
+      "motivo": "L",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "07/01",
+      "averia": "102",
+      "reemplazo": "105",
+      "motivo": "A",
+      "linea": "2 y 20",
+      "turno": ""
+    },
+    {
+      "fecha": "07/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "07/01",
+      "averia": "Del Valle Marcelo",
+      "reemplazo": "Kerps Leandro",
+      "motivo": "D",
+      "linea": "10",
+      "turno": ""
+    },
+    {
+      "fecha": "07/01",
+      "averia": "Llover Nicolas",
+      "reemplazo": "Aguilera Emanuel",
+      "motivo": "F",
+      "linea": "6",
+      "turno": ""
+    },
+    {
+      "fecha": "07/01",
+      "averia": "wolff Furlong",
+      "reemplazo": "Antivero",
+      "motivo": "F",
+      "linea": "6",
+      "turno": ""
+    },
+    {
+      "fecha": "08/01",
+      "averia": "105",
+      "reemplazo": "110",
+      "motivo": "B",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "08/01",
+      "averia": "106",
+      "reemplazo": "109",
+      "motivo": "B",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "08/01",
+      "averia": "21",
+      "reemplazo": "17",
+      "motivo": "F",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "08/01",
+      "averia": "29",
+      "reemplazo": "16",
+      "motivo": "G",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "08/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "08/01",
+      "averia": "VARISCO JOSE",
+      "reemplazo": "BARRETO ERNESTO",
+      "motivo": "F",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "08/01",
+      "averia": "BARRETO ERNESTO",
+      "reemplazo": "DIAZ FRANCO",
+      "motivo": "L",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "09/01",
+      "averia": "18",
+      "reemplazo": "19",
+      "motivo": "F",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "09/01",
+      "averia": "203",
+      "reemplazo": "210",
+      "motivo": "D",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "09/01",
+      "averia": "49",
+      "reemplazo": "50",
+      "motivo": "G",
+      "linea": "6",
+      "turno": ""
+    },
+    {
+      "fecha": "09/01",
+      "averia": "17",
+      "reemplazo": "11",
+      "motivo": "C",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "09/01",
+      "averia": "26",
+      "reemplazo": "16",
+      "motivo": "F",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "09/01",
+      "averia": "108",
+      "reemplazo": "104",
+      "motivo": "A",
+      "linea": "40",
+      "turno": ""
+    },
+    {
+      "fecha": "09/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "09/01",
+      "averia": "WOLFF FURLONG",
+      "reemplazo": "REARTES IGNACIO",
+      "motivo": "A",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "09/01",
+      "averia": "FERNANDEZ ROBERTO",
+      "reemplazo": "Mesa Mario",
+      "motivo": "F",
+      "linea": "6",
+      "turno": ""
+    },
+    {
+      "fecha": "10/01",
+      "averia": "3",
+      "reemplazo": "5",
+      "motivo": "C",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "10/01",
+      "averia": "104",
+      "reemplazo": "109",
+      "motivo": "A",
+      "linea": "4",
+      "turno": ""
+    },
+    {
+      "fecha": "10/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "11/01",
+      "averia": "104",
+      "reemplazo": "101",
+      "motivo": "A",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "11/01",
+      "averia": "49",
+      "reemplazo": "29",
+      "motivo": "G",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "11/01",
+      "averia": "26",
+      "reemplazo": "17",
+      "motivo": "F",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "11/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "11/01",
+      "averia": "VARISCO JOSE",
+      "reemplazo": "BARZOLA EXEQUIEL",
+      "motivo": "F",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "11/01",
+      "averia": "WOLFF FURLONG",
+      "reemplazo": "SCHVAB DIEGO",
+      "motivo": "A",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "12/01",
+      "averia": "3",
+      "reemplazo": "5",
+      "motivo": "C",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "12/01",
+      "averia": "37",
+      "reemplazo": "30",
+      "motivo": "M",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "12/01",
+      "averia": "49",
+      "reemplazo": "19",
+      "motivo": "G",
+      "linea": "6",
+      "turno": ""
+    },
+    {
+      "fecha": "12/01",
+      "averia": "26",
+      "reemplazo": "17",
+      "motivo": "F",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "12/01",
+      "averia": "104",
+      "reemplazo": "110",
+      "motivo": "B",
+      "linea": "2 y 20",
+      "turno": ""
+    },
+    {
+      "fecha": "12/01",
+      "averia": "203",
+      "reemplazo": "208",
+      "motivo": "D",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "12/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "12/01",
+      "averia": "SANDOVAL",
+      "reemplazo": "LOMBARDO MARTIN",
+      "motivo": "A",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "13/01",
+      "averia": "29",
+      "reemplazo": "23",
+      "motivo": "G",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "13/01",
+      "averia": "207",
+      "reemplazo": "208",
+      "motivo": "G",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "13/01",
+      "averia": "26",
+      "reemplazo": "30",
+      "motivo": "F",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "13/01",
+      "averia": "7",
+      "reemplazo": "19",
+      "motivo": "L",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "13/01",
+      "averia": "2",
+      "reemplazo": "47",
+      "motivo": "C",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "13/01",
+      "averia": "206",
+      "reemplazo": "215",
+      "motivo": "L",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "13/01",
+      "averia": "104",
+      "reemplazo": "110",
+      "motivo": "A",
+      "linea": "4/40",
+      "turno": ""
+    },
+    {
+      "fecha": "13/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "13/01",
+      "averia": "ARANDA ALFREDO",
+      "reemplazo": "SOÑEZ GERMAN",
+      "motivo": "A",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "13/01",
+      "averia": "HERNANDEZ AMILCAR",
+      "reemplazo": "ALARCON JESUS",
+      "motivo": "G",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "14/01",
+      "averia": "213",
+      "reemplazo": "208",
+      "motivo": "D",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "14/01",
+      "averia": "108",
+      "reemplazo": "110",
+      "motivo": "B",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "14/01",
+      "averia": "110",
+      "reemplazo": "108",
+      "motivo": "A",
+      "linea": "4",
+      "turno": ""
+    },
+    {
+      "fecha": "14/01",
+      "averia": "108",
+      "reemplazo": "110",
+      "motivo": "B",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "14/01",
+      "averia": "110",
+      "reemplazo": "108",
+      "motivo": "A",
+      "linea": "40",
+      "turno": ""
+    },
+    {
+      "fecha": "14/01",
+      "averia": "44",
+      "reemplazo": "47",
+      "motivo": "D",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "14/01",
+      "averia": "108",
+      "reemplazo": "109",
+      "motivo": "A",
+      "linea": "4",
+      "turno": ""
+    },
+    {
+      "fecha": "14/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "14/01",
+      "averia": "DEL VALLE MARCELO",
+      "reemplazo": "AGUILERA EMANUEL",
+      "motivo": "D",
+      "linea": "10",
+      "turno": ""
+    },
+    {
+      "fecha": "15/01",
+      "averia": "37",
+      "reemplazo": "47",
+      "motivo": "M",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "15/01",
+      "averia": "201",
+      "reemplazo": "48",
+      "motivo": "D",
+      "linea": "11",
+      "turno": ""
+    },
+    {
+      "fecha": "15/01",
+      "averia": "203",
+      "reemplazo": "210",
+      "motivo": "D",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "15/01",
+      "averia": "107",
+      "reemplazo": "1",
+      "motivo": "B",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "15/01",
+      "averia": "104",
+      "reemplazo": "110",
+      "motivo": "A",
+      "linea": "4",
+      "turno": ""
+    },
+    {
+      "fecha": "15/01",
+      "averia": "35",
+      "reemplazo": "19",
+      "motivo": "H",
+      "linea": "5",
+      "turno": ""
+    },
+    {
+      "fecha": "15/01",
+      "averia": "10",
+      "reemplazo": "35",
+      "motivo": "C",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "15/01",
+      "averia": "16",
+      "reemplazo": "23",
+      "motivo": "G",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "15/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "15/01",
+      "averia": "BARRETO JEREMIAS",
+      "reemplazo": "BARRETO ERNESTO",
+      "motivo": "G",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "15/01",
+      "averia": "SOÑEZ GERMAN",
+      "reemplazo": "REDING BALTAZAR",
+      "motivo": "L",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "16/01",
+      "averia": "16",
+      "reemplazo": "19",
+      "motivo": "G",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "16/01",
+      "averia": "10",
+      "reemplazo": "9",
+      "motivo": "C",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "16/01",
+      "averia": "107",
+      "reemplazo": "110",
+      "motivo": "B",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "16/01",
+      "averia": "201",
+      "reemplazo": "49",
+      "motivo": "D",
+      "linea": "11",
+      "turno": ""
+    },
+    {
+      "fecha": "16/01",
+      "averia": "212",
+      "reemplazo": "210",
+      "motivo": "L",
+      "linea": "6",
+      "turno": ""
+    },
+    {
+      "fecha": "16/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "16/01",
+      "averia": "UNREIM JOSE",
+      "reemplazo": "LAGGER",
+      "motivo": "G",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "16/01",
+      "averia": "ALVAREZ OSCAR",
+      "reemplazo": "BARRETO FACUNDO",
+      "motivo": "C",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "16/01",
+      "averia": "SOÑEZ GERMAN",
+      "reemplazo": "ALARCON JESUS",
+      "motivo": "L",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "16/01",
+      "averia": "ALARCON JESUS",
+      "reemplazo": "ALVAREZ OSCAR",
+      "motivo": "L",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "16/01",
+      "averia": "VARISCO",
+      "reemplazo": "RODRIGUEZ TREPICCIO",
+      "motivo": "F",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "17/01",
+      "averia": "3",
+      "reemplazo": "48",
+      "motivo": "C",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "17/01",
+      "averia": "10",
+      "reemplazo": "9",
+      "motivo": "C",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "17/01",
+      "averia": "16",
+      "reemplazo": "19",
+      "motivo": "G",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "17/01",
+      "averia": "107",
+      "reemplazo": "110",
+      "motivo": "B",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "17/01",
+      "averia": "201",
+      "reemplazo": "49",
+      "motivo": "D",
+      "linea": "11",
+      "turno": ""
+    },
+    {
+      "fecha": "17/01",
+      "averia": "202",
+      "reemplazo": "208",
+      "motivo": "D",
+      "linea": "10",
+      "turno": ""
+    },
+    {
+      "fecha": "17/01",
+      "averia": "21",
+      "reemplazo": "22",
+      "motivo": "F",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "17/01",
+      "averia": "207",
+      "reemplazo": "205",
+      "motivo": "G",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "17/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "18/01",
+      "averia": "110",
+      "reemplazo": "104",
+      "motivo": "B",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "18/01",
+      "averia": "206",
+      "reemplazo": "212",
+      "motivo": "L",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "18/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "18/01",
+      "averia": "FERNANDEZ ROBERTO",
+      "reemplazo": "NEIVERT FEDERICO",
+      "motivo": "F",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "19/01",
+      "averia": "105",
+      "reemplazo": "110",
+      "motivo": "B",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "19/01",
+      "averia": "206",
+      "reemplazo": "212",
+      "motivo": "L",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "19/01",
+      "averia": "103",
+      "reemplazo": "109",
+      "motivo": "A",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "19/01",
+      "averia": "107",
+      "reemplazo": "23",
+      "motivo": "B",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "19/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "19/01",
+      "averia": "METZLER SABRINA",
+      "reemplazo": "ALARCON JESUS",
+      "motivo": "B",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "19/01",
+      "averia": "GIADAS JUAN",
+      "reemplazo": "BRAGACRISTIAN",
+      "motivo": "G",
+      "linea": "6",
+      "turno": ""
+    },
+    {
+      "fecha": "19/01",
+      "averia": "NEIVERT FEDERICO",
+      "reemplazo": "REARTES IGNACIO",
+      "motivo": "F",
+      "linea": "5",
+      "turno": ""
+    },
+    {
+      "fecha": "20/01",
+      "averia": "28",
+      "reemplazo": "46",
+      "motivo": "G",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "20/01",
+      "averia": "105",
+      "reemplazo": "109",
+      "motivo": "B",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "20/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "20/01",
+      "averia": "ARANDA ALFREDO",
+      "reemplazo": "HERTEL JAVIER",
+      "motivo": "A",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "21/01",
+      "averia": "16",
+      "reemplazo": "47",
+      "motivo": "G",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "21/01",
+      "averia": "20",
+      "reemplazo": "49",
+      "motivo": "F",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "21/01",
+      "averia": "3",
+      "reemplazo": "48",
+      "motivo": "C",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "21/01",
+      "averia": "21",
+      "reemplazo": "19",
+      "motivo": "F",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "21/01",
+      "averia": "19",
+      "reemplazo": "21",
+      "motivo": "F",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "21/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "22/01",
+      "averia": "211",
+      "reemplazo": "214",
+      "motivo": "L",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "22/01",
+      "averia": "108",
+      "reemplazo": "110",
+      "motivo": "A",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "22/01",
+      "averia": "21",
+      "reemplazo": "19",
+      "motivo": "F",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "22/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "22/01",
+      "averia": "Pacífico Gerardo",
+      "reemplazo": "Salva",
+      "motivo": "",
+      "linea": "",
+      "turno": ""
+    },
+    {
+      "fecha": "22/01",
+      "averia": "Collin",
+      "reemplazo": "Ibarra",
+      "motivo": "",
+      "linea": "",
+      "turno": ""
+    },
+    {
+      "fecha": "23/01",
+      "averia": "41",
+      "reemplazo": "48",
+      "motivo": "P",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "23/01",
+      "averia": "43",
+      "reemplazo": "208",
+      "motivo": "D",
+      "linea": "5",
+      "turno": ""
+    },
+    {
+      "fecha": "23/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "23/01",
+      "averia": "COLLIN GUILLERMO",
+      "reemplazo": "IBARRA SAMUEL",
+      "motivo": "D",
+      "linea": "5",
+      "turno": ""
+    },
+    {
+      "fecha": "23/01",
+      "averia": "PACIFICO GERARDO",
+      "reemplazo": "SALVA MAURICIO",
+      "motivo": "E",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "23/01",
+      "averia": "SOÑEZ GERMAN",
+      "reemplazo": "MESA MARIO",
+      "motivo": "LINEA",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "24/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "25/01",
+      "averia": "35",
+      "reemplazo": "33",
+      "motivo": "H",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "25/01",
+      "averia": "209",
+      "reemplazo": "42",
+      "motivo": "G",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "25/01",
+      "averia": "203",
+      "reemplazo": "210",
+      "motivo": "D",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "25/01",
+      "averia": "211",
+      "reemplazo": "48",
+      "motivo": "L",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "25/01",
+      "averia": "105",
+      "reemplazo": "109",
+      "motivo": "B",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "25/01",
+      "averia": "20",
+      "reemplazo": "49",
+      "motivo": "F",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "25/01",
+      "averia": "103",
+      "reemplazo": "110",
+      "motivo": "A",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "25/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "26/01",
+      "averia": "211",
+      "reemplazo": "214",
+      "motivo": "L",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "26/01",
+      "averia": "16",
+      "reemplazo": "48",
+      "motivo": "G",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "26/01",
+      "averia": "10",
+      "reemplazo": "9",
+      "motivo": "C",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "26/01",
+      "averia": "105",
+      "reemplazo": "109",
+      "motivo": "B",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "26/01",
+      "averia": "203",
+      "reemplazo": "210",
+      "motivo": "D",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "26/01",
+      "averia": "103",
+      "reemplazo": "110",
+      "motivo": "A",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "26/01",
+      "averia": "35",
+      "reemplazo": "19",
+      "motivo": "H",
+      "linea": "5",
+      "turno": ""
+    },
+    {
+      "fecha": "26/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "26/01",
+      "averia": "AGUILERA EMANUEL",
+      "reemplazo": "IBARRA SANUEL",
+      "motivo": "E",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "26/01",
+      "averia": "ALVAREZ OSCAR",
+      "reemplazo": "RODRIGUEZ TREPICCIO",
+      "motivo": "L",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "27/01",
+      "averia": "7",
+      "reemplazo": "AA",
+      "motivo": "30",
+      "linea": "L",
+      "turno": "2"
+    },
+    {
+      "fecha": "27/01",
+      "averia": "43",
+      "reemplazo": "BUJE",
+      "motivo": "47",
+      "linea": "D",
+      "turno": "5"
+    },
+    {
+      "fecha": "27/01",
+      "averia": "217",
+      "reemplazo": "BATERIA",
+      "motivo": "210",
+      "linea": "L",
+      "turno": "4"
+    },
+    {
+      "fecha": "27/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "27/01",
+      "averia": "Ledesma Alejandro",
+      "reemplazo": "Antivero Andres",
+      "motivo": "D",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "28/01",
+      "averia": "16",
+      "reemplazo": "48",
+      "motivo": "G",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "28/01",
+      "averia": "47",
+      "reemplazo": "43",
+      "motivo": "D",
+      "linea": "5",
+      "turno": ""
+    },
+    {
+      "fecha": "28/01",
+      "averia": "202",
+      "reemplazo": "210",
+      "motivo": "D",
+      "linea": "10",
+      "turno": ""
+    },
+    {
+      "fecha": "28/01",
+      "averia": "108",
+      "reemplazo": "110",
+      "motivo": "A",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "28/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "28/01",
+      "averia": "ALMADA DIEGO",
+      "reemplazo": "CABELLO MANUEL",
+      "motivo": "P",
+      "linea": "4",
+      "turno": ""
+    },
+    {
+      "fecha": "29/01",
+      "averia": "20",
+      "reemplazo": "13",
+      "motivo": "F",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "29/01",
+      "averia": "26",
+      "reemplazo": "19",
+      "motivo": "F",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "29/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "29/01",
+      "averia": "VARISCO JOSE",
+      "reemplazo": "REARTES IGNACIO",
+      "motivo": "F",
+      "linea": "20",
+      "turno": ""
+    },
+    {
+      "fecha": "29/01",
+      "averia": "RIOS ROBERTO",
+      "reemplazo": "MALDONADO JOSE",
+      "motivo": "M",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "30/01",
+      "averia": "21",
+      "reemplazo": "19",
+      "motivo": "F",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "30/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "LINEA",
+      "linea": "TURNO",
+      "turno": ""
+    },
+    {
+      "fecha": "30/01",
+      "averia": "BARZOLA MAURO",
+      "reemplazo": "ALVAREZ MAXIMILIANO",
+      "motivo": "A",
+      "linea": "2",
+      "turno": ""
+    },
+    {
+      "fecha": "30/01",
+      "averia": "LEAL FABIO",
+      "reemplazo": "SALVA MAURICIO",
+      "motivo": "B",
+      "linea": "3",
+      "turno": ""
+    },
+    {
+      "fecha": "30/01",
+      "averia": "CABELLO MANUEL",
+      "reemplazo": "ARANDA ALFRREDO",
+      "motivo": "G",
+      "linea": "1",
+      "turno": ""
+    },
+    {
+      "fecha": "31/01",
+      "averia": "207",
+      "reemplazo": "47",
+      "motivo": "DEFINICION DE TRAFICO",
+      "linea": "G",
+      "turno": "2"
+    },
+    {
+      "fecha": "31/01",
+      "averia": "21",
+      "reemplazo": "13",
+      "motivo": "A. A.",
+      "linea": "F",
+      "turno": "3"
+    },
+    {
+      "fecha": "31/01",
+      "averia": "NO ASISTIO",
+      "reemplazo": "REMPLAZO",
+      "motivo": "",
+      "linea": "LINEA",
+      "turno": "TURNO"
+    },
+    {
+      "fecha": "31/01",
+      "averia": "QUIROGA HECTOR",
+      "reemplazo": "GODOY ADRIAN",
+      "motivo": "",
+      "linea": "D",
+      "turno": "3"
+    }
+  ]
+}
