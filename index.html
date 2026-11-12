@@ -119,8 +119,11 @@ box-shadow:var(--shadow);
 .plan-observations{display:flex;flex-direction:column;gap:8px}
 .plan-observation-item{padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#faf9fa;font-size:12px;line-height:1.4}
 
-.report-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+.report-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px;flex-wrap:wrap}
 .report-card-head h3{margin:0}
+.report-card-actions{display:flex;align-items:center;gap:8px}
+.report-month-select{min-width:142px;border:1px solid #d9d2d6;background:#fff;color:var(--ink);border-radius:10px;padding:8px 30px 8px 10px;font-size:11px;font-weight:750;cursor:pointer}
+.report-month-select:focus{outline:2px solid rgba(237,46,145,.18);outline-offset:1px}
 .report-btn{border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:10px;padding:8px 13px;font-size:11px;font-weight:850;cursor:pointer}
 .report-btn:hover{opacity:.88}
 
@@ -669,6 +672,9 @@ let ACTIVE_TAB=sanitizeTab(REQUESTED_TAB);
 
 let OS_HISTORY_QUERY='';
 let OS_HISTORY_SELECTED_KEY='';
+
+let UNITS_REPORT_MONTH_KEY='';
+const UNITS_REPORT_MONTH_CACHE={};
 
 const READY={planServ:false,salidas:false,guardia:false,os:false,kpi:false,graficos:false};
 const VERSION={planServ:0,salidas:0,guardia:0,os:0,kpi:0,graficos:0};
@@ -1664,6 +1670,15 @@ ${bars(countBy(units,'motivo'))}
 
 <div class="report-card-head">
 <h3>Unidades reemplazadas</h3>
+<div class="report-card-actions">
+<select
+id="unitsReportMonth"
+class="report-month-select"
+aria-label="Mes del reporte de unidades reemplazadas"
+onchange="setUnitsReportMonth(this.value)"
+>
+${unitsReportMonthOptionsHtml()}
+</select>
 <button
 type="button"
 class="report-btn"
@@ -1671,6 +1686,7 @@ onclick="exportUnitsReport()"
 >
 Reporte
 </button>
+</div>
 </div>
 
 ${table([
@@ -4371,31 +4387,119 @@ String(b.label),
 );
 }
 
-function getUnitsReportRows(){
+function unitsReportCurrentKey(){
+const p=DATA.period||{};
+const year=Number(p.year)||new Date().getFullYear();
+const month=Number(p.month)||(new Date().getMonth()+1);
+return year+'-'+pad2(month);
+}
 
-const d=DATA.salidas||{};
+function unitsReportMonthLabel(year,month){
+const label=new Date(Number(year),Number(month)-1,1)
+.toLocaleDateString('es-AR',{month:'long',year:'numeric'});
+return label.charAt(0).toLocaleUpperCase('es-AR')+label.slice(1);
+}
 
-const selected=
-reportDateParts(
-selectedDDMM('salidas')
+function unitsReportMonthOptionsHtml(){
+const p=DATA.period||{};
+const endYear=Number(p.year)||new Date().getFullYear();
+const endMonth=Number(p.month)||(new Date().getMonth()+1);
+const currentKey=unitsReportCurrentKey();
+
+if(!UNITS_REPORT_MONTH_KEY){
+UNITS_REPORT_MONTH_KEY=currentKey;
+}
+
+const options=[];
+const startIndex=2026*12;
+const endIndex=endYear*12+(endMonth-1);
+
+for(let index=endIndex;index>=startIndex;index--){
+const year=Math.floor(index/12);
+const month=(index%12)+1;
+const key=year+'-'+pad2(month);
+options.push(
+'<option value="'+esc(key)+'" '+(key===UNITS_REPORT_MONTH_KEY?'selected':'')+'>'+
+esc(unitsReportMonthLabel(year,month))+
+'</option>'
 );
+}
 
-if(!selected)return [];
+return options.join('');
+}
+
+function setUnitsReportMonth(value){
+UNITS_REPORT_MONTH_KEY=String(value||'').trim()||unitsReportCurrentKey();
+}
+
+async function loadUnitsReportData(key){
+const currentKey=unitsReportCurrentKey();
+const p=DATA.period||{};
+
+if(key===currentKey){
+return{
+year:Number(p.year)||new Date().getFullYear(),
+month:Number(p.month)||(new Date().getMonth()+1),
+day:Number(p.day)||new Date().getDate(),
+source:DATA.sources?.salidas||DATA.salidas?.source||{},
+unitRows:[...(DATA.salidas?.unitRows||[])]
+};
+}
+
+if(UNITS_REPORT_MONTH_CACHE[key]){
+return UNITS_REPORT_MONTH_CACHE[key];
+}
+
+const url=
+STATIC_DATA_BASE+
+'/units-report-'+
+encodeURIComponent(key)+
+'.json?_='+
+Date.now();
+
+const response=await fetch(url,{cache:'no-store',mode:'cors'});
+
+if(!response.ok){
+throw new Error('No hay histórico disponible para '+key+'.');
+}
+
+const data=await response.json();
+
+if(
+!data
+||
+!Number(data.year)
+||
+!Number(data.month)
+||
+!Array.isArray(data.unitRows)
+){
+throw new Error('El histórico de '+key+' está incompleto.');
+}
+
+UNITS_REPORT_MONTH_CACHE[key]=data;
+return data;
+}
+
+function getUnitsReportRows(reportData){
+
+const d=reportData||{};
+const selectedMonth=Number(d.month)||0;
+const selectedDay=Number(d.day)||31;
 
 return [...(d.unitRows||[])]
 
 .filter(row=>{
 
-const parts=
-reportDateParts(row.fecha);
+const parts=reportDateParts(row.fecha);
 
 if(!parts)return false;
 
-if(parts.month!==selected.month){
+if(selectedMonth&&parts.month!==selectedMonth){
 return false;
 }
 
-if(parts.day>selected.day){
+if(parts.day>selectedDay){
 return false;
 }
 
@@ -4409,45 +4513,16 @@ String(row.reemplazo||'').trim()
 
 .sort((a,b)=>{
 
-const da=
-reportDateParts(a.fecha)?.day
-||
-0;
-
-const db=
-reportDateParts(b.fecha)?.day
-||
-0;
+const da=reportDateParts(a.fecha)?.day||0;
+const db=reportDateParts(b.fecha)?.day||0;
 
 return(
 da-db
-
 ||
-
-String(a.linea||'')
-.localeCompare(
-String(b.linea||''),
-'es',
-{numeric:true}
-)
-
+String(a.linea||'').localeCompare(String(b.linea||''),'es',{numeric:true})
 ||
-
-String(
-a.turno
-||
-a.servicio
-||
-''
-)
-.localeCompare(
-String(
-b.turno
-||
-b.servicio
-||
-''
-),
+String(a.turno||a.servicio||'').localeCompare(
+String(b.turno||b.servicio||''),
 'es',
 {numeric:true}
 )
@@ -4625,13 +4700,12 @@ ${esc(reportReasonLabel(row.motivo)||'Sin especificar')}
 </table>`;
 }
 
-function buildUnitsReport(){
+function buildUnitsReport(reportData){
 
-const rows=getUnitsReportRows();
-const p=DATA.period||{};
-const selected=reportDateParts(selectedDDMM('salidas'));
-const selectedDay=selected?.day||0;
-const selectedMonth=selected?.month||Number(p.month)||0;
+const rows=getUnitsReportRows(reportData);
+const p=reportData||{};
+const selectedDay=Number(p.day)||0;
+const selectedMonth=Number(p.month)||0;
 const selectedYear=Number(p.year)||new Date().getFullYear();
 
 const periodText=
@@ -4690,7 +4764,7 @@ Diferencias entre la unidad prevista en la planificación y la unidad que finalm
 <div class="units-report-kpi">
 <div class="units-report-kpi-label">Reemplazos acumulados</div>
 <div class="units-report-kpi-value">${num(rows.length)}</div>
-<div class="units-report-kpi-sub">Hasta el día seleccionado</div>
+<div class="units-report-kpi-sub">Período seleccionado</div>
 </div>
 
 <div class="units-report-kpi">
@@ -4750,7 +4824,7 @@ byReason,
 
 <div class="units-report-note">
 Motivo más frecuente: <strong>${esc(topReason.label)}</strong> - ${num(topReason.value)} registros.
-La información corresponde a Planillería y contempla desde el primer día del mes hasta la fecha seleccionada.
+La información corresponde a Planillería y contempla el período seleccionado.
 </div>
 
 ${footer(1)}
@@ -4814,10 +4888,25 @@ async function exportUnitsReport(){
 const root=$('#unitsReportRoot');
 if(!root)return;
 
-const date=selectedISO('salidas')||'reporte';
-const filename=`TSJ_Reporte_Reemplazos_Unidades_${date}.pdf`;
+const select=$('#unitsReportMonth');
+const monthKey=
+String(select?.value||UNITS_REPORT_MONTH_KEY||unitsReportCurrentKey()).trim();
 
-root.innerHTML=buildUnitsReport();
+UNITS_REPORT_MONTH_KEY=monthKey;
+
+let reportData;
+
+try{
+reportData=await loadUnitsReportData(monthKey);
+}catch(err){
+console.error('Error al cargar histórico de reemplazos',err);
+alert('No se pudo cargar el reporte de '+monthKey+'.');
+return;
+}
+
+const filename=`TSJ_Reporte_Reemplazos_Unidades_${monthKey}.pdf`;
+
+root.innerHTML=buildUnitsReport(reportData);
 root.setAttribute('aria-hidden','false');
 root.classList.add('units-report-rendering');
 
