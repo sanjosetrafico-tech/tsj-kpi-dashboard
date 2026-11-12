@@ -1693,7 +1693,7 @@ ${table([
 ['Fecha','fecha'],
 ['Avería','averia'],
 ['Reemplazo','reemplazo'],
-['Motivo','motivo',v=>`<span class="pill">${esc(v)}</span>`],
+['Motivo','motivo',v=>`<span class="pill">${esc(reportReasonLabel(v))}</span>`],
 ['Línea','linea',v=>esc(dashboardCode(v))],
 ['Servicio','turno',v=>esc(dashboardCode(v))]
 ],units)}
@@ -4337,7 +4337,175 @@ month:Number(match[2])
 
 function reportReasonLabel(value){
 const text=String(value||'').trim();
-return text||'Sin motivo';
+const key=normalizeText(text);
+
+// Los reportes de reemplazos trabajan siempre con estos 11 motivos estándar.
+// Cualquier texto no reconocido queda como Correctivo para evitar categorías nuevas.
+if(
+key.includes('PREVENT')
+||
+key.includes('SERVIS')
+||
+key.includes('SERVICE')
+||
+key.includes('MANTENIMIENTO PROGRAMADO')
+){
+return 'Preventivo';
+}
+
+if(
+key.includes('SUBE')
+||
+key.includes('TECLADO SUBE')
+||
+key.includes('MAQUINA SUBE')
+){
+return 'SUBE';
+}
+
+if(
+key.includes('GPS')
+){
+return 'GPS';
+}
+
+if(
+key.includes('FRENO')
+){
+return 'Frenos';
+}
+
+if(
+key.includes('NEUMATIC')
+||
+key.includes('CUBIERTA')
+||
+key.includes('RUEDA')
+||
+key.includes('GOMA PINCH')
+||
+key.includes('PINCHAD')
+){
+return 'Neumáticos';
+}
+
+if(
+key.includes('EMBRAG')
+||
+key.includes('EMBREAG')
+||
+key.includes('CAJA')
+||
+key.includes('DIFERENCIAL')
+||
+key.includes('TRANSMISION')
+||
+key.includes('PALANCA DE CAMBIO')
+){
+return 'Transmisión';
+}
+
+if(
+key.includes('SUSPENSION')
+||
+key.includes('ALINEA')
+||
+key.includes('DIRECCION')
+||
+key.includes('BUJE')
+||
+key.includes('BUCATA')
+){
+return 'Suspensión';
+}
+
+if(
+key.includes('ELECTR')
+||
+key.includes('BATER')
+||
+key.includes('ALTERNADOR')
+||
+key.includes('LUZ')
+||
+key.includes('LUCES')
+||
+key.includes('GUIÑO')
+||
+key.includes('CORTOCIR')
+||
+key.includes('CARTEL')
+||
+key.includes('PANTALLA')
+){
+return 'Electricidad';
+}
+
+if(
+key.includes('VIDRIO')
+||
+key.includes('VENTANILLA')
+||
+key.includes('PARABRISA')
+||
+key.includes('LUNETA')
+||
+key.includes('ESTET')
+||
+key.includes('PINTURA')
+||
+key.includes('CHAPA')
+||
+key.includes('CARROCER')
+||
+key.includes('TAPIC')
+||
+key.includes('ASIENTO')
+||
+key.includes('TECHO')
+||
+key.includes('SE LLUEVE')
+||
+key.includes('FILTRA AGUA')
+||
+key.includes('SUCIO')
+){
+return 'Estética';
+}
+
+if(
+key.includes('MOTOR')
+||
+key.includes('REFRIG')
+||
+key.includes('TERMOSTATO')
+||
+key.includes('ACEITE')
+||
+key.includes('COMBUST')
+||
+key.includes('DIESEL')
+||
+key.includes('GNC')
+||
+key.includes('GAS')
+||
+key.includes('TANQUE')
+||
+key.includes('FILTRO')
+||
+key.includes('MANGUERA')
+||
+key.includes('CAÑO ESCAPE')
+||
+key.includes('NO ARRANCA')
+||
+key.includes('NO ARRANCO')
+){
+return 'Motor';
+}
+
+return 'Correctivo';
 }
 
 function reportAggregate(rows,getter){
