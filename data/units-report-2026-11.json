@@ -1,0 +1,163 @@
+{
+  "year": 2026,
+  "month": 11,
+  "day": 12,
+  "source": {
+    "name": "RESUMEN SALIDAS Y REEMPLAZO NOVIEMBRE",
+    "id": "1SWkzYVOmpRDoo76AAHqWnIIZu2XUAaZSjxt_Q-KNEFE"
+  },
+  "unitRows": [
+    {
+      "fecha": "01/11",
+      "averia": "3",
+      "reemplazo": "46",
+      "motivo": "Caja de cambio",
+      "linea": "C",
+      "turno": "1"
+    },
+    {
+      "fecha": "02/11",
+      "averia": "101",
+      "reemplazo": "104",
+      "motivo": "sin sube",
+      "linea": "S",
+      "turno": "3"
+    },
+    {
+      "fecha": "02/11",
+      "averia": "16",
+      "reemplazo": "50",
+      "motivo": "sin A/A",
+      "linea": "S",
+      "turno": "2"
+    },
+    {
+      "fecha": "03/11",
+      "averia": "30",
+      "reemplazo": "47",
+      "motivo": "ESTETICA",
+      "linea": "F",
+      "turno": "5"
+    },
+    {
+      "fecha": "03/11",
+      "averia": "27",
+      "reemplazo": "48",
+      "motivo": "PREVENTIVO",
+      "linea": "G",
+      "turno": "2"
+    },
+    {
+      "fecha": "04/11",
+      "averia": "30",
+      "reemplazo": "47",
+      "motivo": "ESTETICA",
+      "linea": "F",
+      "turno": "5"
+    },
+    {
+      "fecha": "04/11",
+      "averia": "18",
+      "reemplazo": "50",
+      "motivo": "Preventivo",
+      "linea": "S",
+      "turno": "1"
+    },
+    {
+      "fecha": "04/11",
+      "averia": "210",
+      "reemplazo": "48",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "4"
+    },
+    {
+      "fecha": "05/11",
+      "averia": "19",
+      "reemplazo": "47",
+      "motivo": "VIDRIO",
+      "linea": "F",
+      "turno": "2"
+    },
+    {
+      "fecha": "06/11",
+      "averia": "35",
+      "reemplazo": "48",
+      "motivo": "ESTETICA",
+      "linea": "H2",
+      "turno": "21"
+    },
+    {
+      "fecha": "06/11",
+      "averia": "24",
+      "reemplazo": "49",
+      "motivo": "Preventivo",
+      "linea": "L",
+      "turno": "101"
+    },
+    {
+      "fecha": "06/11",
+      "averia": "203",
+      "reemplazo": "46",
+      "motivo": "Preventivo",
+      "linea": "D",
+      "turno": "2"
+    },
+    {
+      "fecha": "06/11",
+      "averia": "107",
+      "reemplazo": "104",
+      "motivo": "palanca de cambio",
+      "linea": "B",
+      "turno": "1"
+    },
+    {
+      "fecha": "11/11",
+      "averia": "101",
+      "reemplazo": "104",
+      "motivo": "ALINEACIÓN",
+      "linea": "S",
+      "turno": "3"
+    },
+    {
+      "fecha": "11/11",
+      "averia": "207",
+      "reemplazo": "48",
+      "motivo": "Preventivo",
+      "linea": "G",
+      "turno": "7"
+    },
+    {
+      "fecha": "11/11",
+      "averia": "23",
+      "reemplazo": "47",
+      "motivo": "Preventivo",
+      "linea": "F",
+      "turno": "7"
+    },
+    {
+      "fecha": "11/11",
+      "averia": "202",
+      "reemplazo": "49",
+      "motivo": "TALLER",
+      "linea": "F",
+      "turno": "20"
+    },
+    {
+      "fecha": "12/11",
+      "averia": "101",
+      "reemplazo": "104",
+      "motivo": "ALINEACIÓN",
+      "linea": "S",
+      "turno": "3"
+    },
+    {
+      "fecha": "12/11",
+      "averia": "207",
+      "reemplazo": "48",
+      "motivo": "ALINEACIÓN",
+      "linea": "G",
+      "turno": "7"
+    }
+  ]
+}
