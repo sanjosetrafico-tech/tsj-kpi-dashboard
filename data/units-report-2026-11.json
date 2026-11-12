@@ -158,6 +158,14 @@
       "motivo": "ALINEACIÓN",
       "linea": "G",
       "turno": "7"
+    },
+    {
+      "fecha": "12/11",
+      "averia": "19",
+      "reemplazo": "50",
+      "motivo": "ELÉCTRICO",
+      "linea": "F",
+      "turno": "2"
     }
   ]
 }
