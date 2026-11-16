@@ -73,7 +73,7 @@ body.recorridos-view .recorridos-open{display:inline-flex}
 .recorridos-frame{display:block;width:100%;height:76dvh;min-height:520px;border:1px solid var(--line);border-radius:12px;background:#fff}
 .ipk-card{padding:12px 14px}.ipk-card strong{font-size:22px;margin-top:4px}.ipk-card small{font-size:10px}.ipk-column strong{font-size:9px;color:#fff;bottom:calc(var(--height) - 16px);z-index:2;text-shadow:0 1px 1px rgba(0,0,0,.3)}
 .ipk-card{padding:10px 13px}.ipk-card strong{font-size:18px;margin-top:3px}.ipk-card small{font-size:9px}.ipk-grid .ipk-chart{min-height:470px}.ipk-grid .ipk-columns{height:420px}
-.ipk-columns{padding-left:54px}.ipk-column strong{color:#222;top:calc(100% - var(--height) - 43px);bottom:auto;text-shadow:none}.ipk-goal-line{left:54px}.ipk-goal-label{left:56px;right:auto;bottom:auto;top:calc(100% - 34px - var(--goal))}.ipk-y-axis{position:absolute;left:0;top:16px;bottom:28px;width:44px;display:flex;flex-direction:column;justify-content:space-between;text-align:right;padding-right:7px;font-size:10px;font-weight:800;color:#6a6a70}.ipk-chart-head{position:relative;z-index:3;background:#fff}
+.ipk-columns{padding-left:54px}.ipk-column strong{color:#222;top:calc(100% - var(--height) - 43px);bottom:auto;text-shadow:none}.ipk-goal-line{left:54px;bottom:calc(28px + var(--goal))}.ipk-goal-label{left:56px;right:auto;bottom:calc(32px + var(--goal));top:auto}.ipk-y-axis{position:absolute;left:0;top:0;bottom:28px;width:44px;display:flex;flex-direction:column;justify-content:space-between;text-align:right;padding-right:7px;font-size:10px;font-weight:800;color:#6a6a70}.ipk-chart-head{position:relative;z-index:3;background:#fff}
 @media(max-width:700px){.recorridos-frame{height:80dvh;min-height:480px}}
 body.profile-guardia .tab[data-tab="kpi"],
 body.profile-guardia #kpi,
@@ -618,7 +618,7 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 <script src="chorario.js?v=16"></script>
 <script>
 
-const API_URL='https://script.google.com/macros/s/AKfycby8SI6xMawYOQqtVF2MHsuVcj-YT8qKcTEv8EAH5CN3hjbCGbhwsfiimVDD8letaKEZlg/exec';
+const API_URL='https://script.google.com/macros/s/AKfycby2Olv8zQaLrmMt4ppnYCq7Pswg01681QiYHsw2tEPnMACXSviplRfQ0FGxoUPPxwuMIA/exec';
 
 const URL_PARAMS=new URLSearchParams(window.location.search);
 const PROFILE=String(URL_PARAMS.get('perfil')||'').trim().toLowerCase();
@@ -5436,7 +5436,7 @@ cleanup,
 ========================================================= */
 
 /* IPK vive fuera de KPI para que pueda cargarse como una solapa independiente. */
-function ipkColumnChart(rows,label){const max=3,goal=ipkGoal()/max*100,ticks=[3,2.5,2,1.5,1,.5,0];return `<div class="ipk-columns"><div class="ipk-y-axis">${ticks.map(x=>`<span>${ipkFormat(x)}</span>`).join('')}</div><div class="ipk-goal-line" style="--goal:${goal}%"></div><span class="ipk-goal-label" style="--goal:${goal}%">Meta ${ipkFormat(ipkGoal())}</span>${rows.map(r=>`<div class="ipk-column" style="--height:${Math.min(r.ipk/max*100,100)}%"><strong>${ipkFormat(r.ipk)}</strong><div class="bar" style="height:${Math.min(r.ipk/max*100,100)}%" aria-label="${ipkFormat(r.ipk)} IPK"></div><span>${esc(r[label])}</span></div>`).join('')}</div>`;}
+function ipkColumnChart(rows,label){const max=3,goalPx=ipkGoal()/max*392,ticks=[3,2.5,2,1.5,1,.5,0];return `<div class="ipk-columns"><div class="ipk-y-axis">${ticks.map(x=>`<span>${ipkFormat(x)}</span>`).join('')}</div><div class="ipk-goal-line" style="--goal:${goalPx}px"></div><span class="ipk-goal-label" style="--goal:${goalPx}px">Meta ${ipkFormat(ipkGoal())}</span>${rows.map(r=>`<div class="ipk-column" style="--height:${Math.min(r.ipk/max*100,100)}%"><strong>${ipkFormat(r.ipk)}</strong><div class="bar" style="height:${Math.min(r.ipk/max*100,100)}%" aria-label="${ipkFormat(r.ipk)} IPK"></div><span>${esc(r[label])}</span></div>`).join('')}</div>`;}
 function renderIPK(){
 const rows=(DATA.ipk?.rows||[]).map(r=>({day:Number(r.day),line:String(r.line||'').trim().toUpperCase(),km:Number(r.km)||0,passengers:Number(r.passengers)||0,model:String(r.model||'').trim()})).filter(r=>r.day&&r.line&&r.km>0);
 const filtered=rows.filter(r=>(IPK_STATE.line==='TODAS'||r.line===IPK_STATE.line)&&(IPK_STATE.model==='TODOS'||r.model===IPK_STATE.model));
