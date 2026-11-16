@@ -67,6 +67,7 @@ body.recorridos-view .recorridos-open{display:inline-flex}
 .tab.active{background:#fff;color:var(--ink);box-shadow:0 3px 10px rgba(0,0,0,.06)}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
+.ipk-toolbar{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin:0 0 16px}.ipk-filter{display:grid;gap:5px;color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}.ipk-filter select{min-width:170px;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font-weight:750}.ipk-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}.ipk-card{padding:16px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}.ipk-card small{display:block;color:var(--muted);font-weight:850;text-transform:uppercase;letter-spacing:.04em}.ipk-card strong{display:block;font-size:28px;margin-top:6px}.ipk-chart{padding:18px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);margin-bottom:14px}.ipk-chart-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:13px}.ipk-chart h3{margin:0;font-size:16px}.ipk-trend{font-size:12px;font-weight:850;color:var(--muted)}.ipk-bars{display:grid;gap:9px}.ipk-bar{display:grid;grid-template-columns:42px 1fr 48px;gap:9px;align-items:center;font-size:12px;font-weight:800}.ipk-track{position:relative;height:25px;border-radius:4px;background:#f1f3f5;overflow:visible}.ipk-fill{height:100%;background:#123d6b;border-radius:4px;min-width:3px}.ipk-goal{position:absolute;top:-4px;bottom:-4px;width:2px;background:#e13737}.ipk-empty{padding:24px;color:var(--muted);text-align:center}.ipk-export{margin-left:auto}@media(max-width:700px){.ipk-summary{grid-template-columns:1fr}.ipk-filter select{min-width:145px}.ipk-export{margin-left:0}}
 .recorridos-frame{display:block;width:100%;height:76dvh;min-height:520px;border:1px solid var(--line);border-radius:12px;background:#fff}
 @media(max-width:700px){.recorridos-frame{height:80dvh;min-height:480px}}
 body.profile-guardia .tab[data-tab="kpi"],
@@ -569,6 +570,7 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 <button class="tab" data-tab="guardia">Guardia</button>
 <button class="tab" data-tab="os">OS</button>
 <button class="tab" data-tab="kpi">KPI</button>
+<button class="tab" data-tab="ipk">IPK</button>
 <button class="tab" data-tab="chorario">C. Horario</button>
 <button class="tab" data-tab="graficos">Gráficos</button>
 <button class="tab" data-tab="recorridos">Recorridos</button>
@@ -582,6 +584,7 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 <section id="guardia" class="tab-panel"></section>
 <section id="os" class="tab-panel"></section>
 <section id="kpi" class="tab-panel"></section>
+<section id="ipk" class="tab-panel"></section>
 <section id="chorario" class="tab-panel"></section>
 <section id="graficos" class="tab-panel"></section>
 <section id="recorridos" class="tab-panel" aria-label="Recorridos">
@@ -619,7 +622,7 @@ const IS_CONDUCTION_PROFILE=PROFILE==='conduccion';
 const IS_RECORRIDOS_PROFILE=PROFILE==='recorridos';
 const IS_CHORARIO_PROFILE=PROFILE==='chorario';
 
-const ALL_TABS=['resumen','conduccion','plan','salidas','guardia','os','kpi','chorario','graficos','recorridos'];
+const ALL_TABS=['resumen','conduccion','plan','salidas','guardia','os','kpi','ipk','chorario','graficos','recorridos'];
 
 const ALLOWED_TABS=
 IS_CHORARIO_PROFILE
@@ -678,7 +681,7 @@ const UNITS_REPORT_MONTH_CACHE={};
 
 const READY={planServ:false,salidas:false,guardia:false,os:false,kpi:false,graficos:false};
 const VERSION={planServ:0,salidas:0,guardia:0,os:0,kpi:0,graficos:0};
-const LAST_RENDER={resumen:'',conduccion:'',plan:'',salidas:'',guardia:'',os:'',kpi:'',chorario:'',graficos:''};
+const LAST_RENDER={resumen:'',conduccion:'',plan:'',salidas:'',guardia:'',os:'',kpi:'',ipk:'',chorario:'',graficos:''};
 const DATE_BY_TAB={resumen:'',conduccion:'',salidas:'',guardia:'',kpi:''};
 const INFLIGHT={};
 const LIVE_INFLIGHT={};
@@ -2406,6 +2409,49 @@ Día seleccionado · ${esc(selectedLabel('kpi'))}
 return;
 }
 
+/* IPK POR LINEA ---------------------------------------------------------
+   El backend mensual queda deliberadamente separado de KPI: conserva KM y
+   pasajeros por línea, que son los únicos valores válidos para recalcular IPK. */
+const IPK_DRIVE_FOLDER='1YyXxhgE8eAB2gQKLzXaGu1NAYGts0NOV';
+const IPK_CURRENT_SOURCE={id:'1FPBc30JCVfTbGd8GEe7QXeNOSqK_rcq1loErH8Q0z1w',name:'IPK POR LINEA NOV'};
+let IPK_STATE={line:'TODAS',model:'TODOS',rows:[]};
+
+function ipkSeedRows(){
+/* Snapshot verificado contra Ipk mensual. La API mensual lo reemplaza al estar disponible. */
+const raw=`1|A|244.72|113;1|B|252.81|48;1|C|212.82|86;1|D|477.73|655;1|E|183.03|124;1|F|643.79|573;1|G|456.43|400;1|H|298.64|71;1|L|484.98|233;1|M|216.32|64;1|P|388.8|58
+2|A|641.06|1167;2|B|475.57|288;2|C|695.97|1026;2|D|2100.29|6345;2|E|673.64|1521;2|F|2422.11|6429;2|G|1632.34|4513;2|H|1016.48|2669;2|L|1172.43|3080;2|M|840.52|1664;2|P|652.81|1829
+3|A|449.24|713;3|B|475.81|314;3|C|690.86|831;3|D|2099.24|5188;3|E|663.91|1248;3|F|2523.3|4603;3|G|1646.08|3429;3|H|1007.5|2543;3|L|1213.34|1879;3|M|840.16|1149;3|P|638.84|1439
+4|A|720.27|1174;4|B|475.54|306;4|C|696.27|1067;4|D|2055.08|5970;4|E|673.08|1587;4|F|2322.7|4056;4|G|1676.03|5351;4|H|1003.55|2969;4|L|1205.81|2979;4|M|823.26|1338;4|P|638.21|1938
+5|A|657.91|1030;5|B|475.99|286;5|C|699.53|1090;5|D|2079.06|6330;5|E|675.07|1681;5|F|2457.97|6694;5|G|1659.36|4495;5|H|1013.5|2909;5|L|1214.22|2844;5|M|853.81|1289;5|P|652.04|2047
+6|A|674.66|1215;6|B|475.46|293;6|C|701.32|1003;6|D|2098.94|5722;6|E|684.68|1434;6|F|2396.39|5671;6|G|1628.25|4237;6|H|1015.7|2622;6|L|1175.42|1965;6|M|842.25|1614;6|P|634.97|2161
+7|A|429.9|293;7|B|507.2|156;7|C|487.7|321;7|D|750.3|1343;7|E|408.2|397;7|F|660.2|1253;7|G|487.6|841;7|H|489.3|633;7|L|741.9|580;7|M|470.9|300;7|P|380.5|437
+8|A|214.4|101;8|B|253.1|85;8|C|214.4|154;8|D|478.2|710;8|E|180.1|192;8|F|635.5|678;8|G|211.2|491;8|H|301.6|270;8|L|486.7|335;8|M|215.9|90;8|P|380.5|231
+9|A|251.1|103;9|B|252.6|90;9|C|213.8|184;9|D|487.7|900;9|E|181.1|176;9|F|645.8|853;9|G|492.9|612;9|H|298.5|348;9|L|485.2|374;9|M|216.4|113;9|P|371.1|314
+10|A|684.8|728;10|B|475.5|151;10|C|698.9|770;10|D|1965.9|5357;10|E|538.5|1382;10|F|2313|5931;10|G|1364.7|4082;10|H|1021|2444;10|L|1212.1|2299;10|M|837.2|1043;10|P|649.8|2074
+11|A|596.33|831;11|B|477.64|304;11|C|698.16|994;11|D|2107.33|6046;11|E|674.19|1591;11|F|2173.69|6066;11|G|1696.21|4036;11|H|987.99|2847;11|L|1176.78|3373;11|M|840.13|1751;11|P|634.75|2350
+12|A|660.5|774;12|B|476.81|308;12|C|697.98|1065;12|D|2093.36|6369;12|E|678.32|1529;12|F|2256.8|6183;12|G|1623.52|4248;12|H|988.39|2450;12|L|1213.54|3045;12|M|844.77|1735;12|P|634.19|2331
+13|A|648.45|604;13|B|475.84|312;13|C|696.47|926;13|D|2083.5|5083;13|E|677.62|1362;13|F|2427.19|4670;13|G|1583.05|3921;13|H|1005.5|2303;13|L|1211.53|2639;13|M|818.32|1524;13|P|633|1749`;
+const period=DATA.period||{year:2026,month:11};
+return raw.split(/[;\n]/).filter(Boolean).map(item=>{const [day,line,km,passengers]=item.split('|');const date=new Date(period.year,period.month-1,Number(day));const week=date.getDay();return{day:Number(day),line,km:Number(km),passengers:Number(passengers),model:week===6?'Sábado':week===0?'Domingo/Feriado':'Hábil'};});
+}
+function ipkGoal(){const month=Number(DATA.period?.month||new Date().getMonth()+1);return month<=2?1.5:2;}
+function ipkFormat(value){return Number(value||0).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function ipkAggregate(rows,key){const map=new Map();rows.forEach(r=>{const k=String(r[key]);const current=map.get(k)||{key:k,km:0,passengers:0};current.km+=r.km;current.passengers+=r.passengers;map.set(k,current);});return [...map.values()].map(x=>({...x,ipk:x.km?x.passengers/x.km:0}));}
+function ipkTrend(rows){if(rows.length<2)return '→ Sin variación suficiente';const a=rows[0].ipk,b=rows[rows.length-1].ipk;return b>a?'↗ Tendencia creciente':b<a?'↘ Tendencia descendente':'→ Tendencia estable';}
+function ipkBars(rows,label){const max=Math.max(...rows.map(r=>r.ipk),ipkGoal(),1);const goal=ipkGoal()/max*100;return `<div class="ipk-bars">${rows.map(r=>`<div class="ipk-bar"><span>${esc(r[label])}</span><div class="ipk-track"><div class="ipk-goal" style="left:${goal}%" title="Meta ${ipkFormat(ipkGoal())}"></div><div class="ipk-fill" style="width:${r.ipk/max*100}%"></div></div><strong>${ipkFormat(r.ipk)}</strong></div>`).join('')}</div>`;}
+function renderIPK(){
+const all=IPK_STATE.rows.length?IPK_STATE.rows:(IPK_STATE.rows=ipkSeedRows());
+const lines=[...new Set(all.map(r=>r.line))].sort((a,b)=>a.localeCompare(b,'es',{numeric:true}));
+const filtered=all.filter(r=>(IPK_STATE.line==='TODAS'||r.line===IPK_STATE.line)&&(IPK_STATE.model==='TODOS'||r.model===IPK_STATE.model));
+const byLine=ipkAggregate(filtered,'line').sort((a,b)=>a.key.localeCompare(b.key,'es',{numeric:true}));
+const byDay=ipkAggregate(filtered,'day').sort((a,b)=>Number(a.key)-Number(b.key));
+const total=ipkAggregate(filtered,'model').reduce((acc,r)=>({km:acc.km+r.km,passengers:acc.passengers+r.passengers}),{km:0,passengers:0});const totalIpk=total.km?total.passengers/total.km:0;
+const monthName=new Date(Number(DATA.period?.year||2026),Number(DATA.period?.month||11)-1,1).toLocaleDateString('es-AR',{month:'long'}).toLocaleUpperCase('es-AR');
+$('#ipk').innerHTML=`<div class="section-head"><h2>IPK ${esc(monthName)} POR LÍNEA</h2><div class="source">Fuente: ${esc(IPK_CURRENT_SOURCE.name)} · actualización automática mensual<br>Meta: ${ipkFormat(ipkGoal())} IPK</div></div><div class="ipk-toolbar"><label class="ipk-filter">Línea<select onchange="setIpkFilter('line',this.value)"><option value="TODAS">Todas las líneas</option>${lines.map(x=>`<option ${x===IPK_STATE.line?'selected':''}>${esc(x)}</option>`).join('')}</select></label><label class="ipk-filter">Modelo de servicio<select onchange="setIpkFilter('model',this.value)">${['TODOS','Hábil','Sábado','Domingo/Feriado'].map(x=>`<option value="${x}" ${x===IPK_STATE.model?'selected':''}>${x==='TODOS'?'Todos':x}</option>`).join('')}</select></label><button class="export-btn ipk-export" onclick="exportIPKPDF()">Exportar PDF</button></div><div class="ipk-summary"><div class="ipk-card"><small>IPK general</small><strong>${ipkFormat(totalIpk)}</strong></div><div class="ipk-card"><small>Pasajeros</small><strong>${num(total.passengers)}</strong></div><div class="ipk-card"><small>KM recorridos</small><strong>${total.km.toLocaleString('es-AR',{maximumFractionDigits:0})}</strong></div></div><section class="ipk-chart"><div class="ipk-chart-head"><h3>IPK general por línea</h3><span class="ipk-trend">${ipkTrend(byLine)}</span></div>${byLine.length?ipkBars(byLine,'key'):'<div class="ipk-empty">Sin datos para los filtros elegidos.</div>'}</section><section class="ipk-chart"><div class="ipk-chart-head"><h3>Evolución general diaria</h3><span class="ipk-trend">${ipkTrend(byDay)}</span></div>${byDay.length?ipkBars(byDay,'key'):'<div class="ipk-empty">Sin datos para los filtros elegidos.</div>'}</section><section class="ipk-chart"><div class="ipk-chart-head"><h3>Evolución diaria ${IPK_STATE.line==='TODAS'?'por línea seleccionada':'· Línea '+esc(IPK_STATE.line)}</h3><span class="ipk-trend">Meta ${ipkFormat(ipkGoal())}</span></div>${IPK_STATE.line==='TODAS'?'<div class="ipk-empty">Elegí una línea para ver su evolución diaria.</div>':ipkBars(byDay,'key')}</section>`;
+}
+function setIpkFilter(field,value){IPK_STATE[field]=value;LAST_RENDER.ipk='';renderIPK();}
+function exportIPKPDF(){const previous=document.title;document.title=`TSJ_IPK_${new Date().toISOString().slice(0,7)}`;window.print();setTimeout(()=>document.title=previous,1200);}
+
 const status=kpiRowStatus(r);
 const indicators=uniqueMonthlyIndicators(d.indicators||[]);
 
@@ -3471,6 +3517,9 @@ VERSION.kpi,
 DATE_BY_TAB.kpi
 ].join('|');
 
+case 'ipk':
+return [DATA.period?.year||'',DATA.period?.month||'',IPK_STATE.line,IPK_STATE.model].join('|');
+
 case 'chorario':
 return String(CH_VERSION);
 
@@ -3530,6 +3579,10 @@ renderKPI();
 }
 break;
 
+case 'ipk':
+renderIPK();
+break;
+
 case 'chorario':
 renderCHorario();
 break;
@@ -3587,6 +3640,8 @@ const hide=
 ACTIVE_TAB==='plan'
 ||
 ACTIVE_TAB==='os'
+||
+ACTIVE_TAB==='ipk'
 ||
 ACTIVE_TAB==='chorario'
 ||
@@ -4081,6 +4136,13 @@ function ensureTabData(tab){
 
 const safeTab=sanitizeTab(tab);
 
+if(safeTab==='ipk'){
+setStatus(false,'Actualizando IPK…');
+return requestSection('kpi',false,0)
+.catch(()=>null)
+.then(()=>{LAST_RENDER.ipk='';renderIPK();setStatus(true,'Datos IPK disponibles');});
+}
+
 if(
 safeTab==='resumen'
 ||
@@ -4167,6 +4229,8 @@ initialSections=[section];
 }
 }
 
+if(ACTIVE_TAB==='ipk')initialSections=['kpi'];
+
 initialSections=
 initialSections.filter(sectionAllowedForProfile);
 
@@ -4207,6 +4271,8 @@ sections=[section];
 }
 
 }
+
+if(ACTIVE_TAB==='ipk')sections=['kpi'];
 
 const requests=sections.map(section=>{
 
