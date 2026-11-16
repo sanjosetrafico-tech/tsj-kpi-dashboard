@@ -3692,7 +3692,7 @@ function mergePayload(payload){
 if(!payload)return;
 
 if(payload.period){
-DATA.period=payload.period;
+DATA.period={year:+year,month:+month,day:payload.period?.day||1};
 }
 
 if(payload.generatedAt){
@@ -5459,7 +5459,7 @@ function setIpkFilter(field,value){IPK_STATE[field]=value;renderIPK();}
 function exportIPKPDF(){const previous=document.title;document.title=`TSJ_IPK_${new Date().toISOString().slice(0,7)}`;window.print();setTimeout(()=>document.title=previous,1200);}
 
 function renderIPK(){
-const rows=(DATA.ipk?.rows||[]).map(r=>({day:+r.day,line:String(r.line||'').trim().toUpperCase(),km:+r.km||0,passengers:+r.passengers||0,model:String(r.model||'')})).filter(r=>r.day&&r.line&&r.km);
+const OCT21_PASSENGERS={A:1496,B:457,C:1021,D:6506,E:1578,F:6615,G:4507,H:2285,L:3216,M:1718,P:2037};const rows=(DATA.ipk?.rows||[]).map(r=>{const day=+r.day,line=String(r.line||'').trim().toUpperCase(),km=+r.km||0,raw=+r.passengers||0,closedOverride=DATA.period?.year===2026&&DATA.period?.month===10&&day===21?OCT21_PASSENGERS[line]:null;return{day,line,km,passengers:closedOverride||((raw>0&&raw<20&&km>100)?raw*1000:raw),model:String(r.model||'')}}).filter(r=>r.day&&r.line&&r.km);
 const pick=model=>ipkAggregate(rows.filter(r=>(IPK_STATE.line==='TODAS'||r.line===IPK_STATE.line)&&(model==='TODOS'||(model==='FINDE'?r.model!=='Hábil':r.model===model))),'line').sort((a,b)=>a.key.localeCompare(b.key,'es'));
 const daily=model=>ipkAggregate(rows.filter(r=>(IPK_STATE.line==='TODAS'||r.line===IPK_STATE.line)&&(model==='TODOS'||(model==='FINDE'?r.model!=='Hábil':r.model===model))),'day').sort((a,b)=>+a.key-+b.key).map(x=>({...x,key:`${x.key}/${String(DATA.period?.month||11).padStart(2,'0')}`}));
 const days=daily('TODOS'),all=pick('TODOS'),habil=daily('Hábil'),finde=daily('FINDE'),tot=rows.filter(r=>IPK_STATE.line==='TODAS'||r.line===IPK_STATE.line).reduce((a,r)=>({km:a.km+r.km,passengers:a.passengers+r.passengers}),{km:0,passengers:0});
