@@ -75,6 +75,7 @@ body.recorridos-view .recorridos-open{display:inline-flex}
 .ipk-card{padding:10px 13px}.ipk-card strong{font-size:18px;margin-top:3px}.ipk-card small{font-size:9px}.ipk-grid .ipk-chart{min-height:470px}.ipk-grid .ipk-columns{height:420px}
 .ipk-columns{padding-left:54px}.ipk-column strong{color:#222;top:calc(100% - var(--height) - 43px);bottom:auto;text-shadow:none}.ipk-goal-line{left:54px;bottom:calc(28px + var(--goal))}.ipk-goal-label{left:56px;right:auto;bottom:calc(32px + var(--goal));top:auto}.ipk-y-axis{position:absolute;left:0;top:0;bottom:28px;width:44px;display:flex;flex-direction:column;justify-content:space-between;text-align:right;padding-right:7px;font-size:10px;font-weight:800;color:#6a6a70}.ipk-chart-head{position:relative;z-index:3;background:#fff}
 @media(max-width:700px){.recorridos-frame{height:80dvh;min-height:480px}}
+@media print{.shell{display:block!important}.shell>header,.shell>.hero,.shell>.tabs,.shell>#errorBox,.shell>footer,.shell>#chartModal{display:none!important}.shell>main{display:block!important}.shell>main>.tab-panel:not(#ipk){display:none!important}.shell>main>#ipk{display:block!important}}
 body.profile-guardia .tab[data-tab="kpi"],
 body.profile-guardia #kpi,
 body.profile-guardia .tab[data-tab="graficos"],
