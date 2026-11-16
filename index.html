@@ -695,6 +695,7 @@ let OS_DRIVER_CATALOG_VERSION=-1;
 let OS_DRIVER_CATALOG=[];
 
 const $=s=>document.querySelector(s);
+window.addEventListener('error',event=>{const panel=$('#ipk');if(panel&&ACTIVE_TAB==='ipk')panel.innerHTML=`<div class="ipk-empty">Error IPK: ${esc(event.message||'sin detalle')}</div>`;});
 
 const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({
 '&':'&amp;',
