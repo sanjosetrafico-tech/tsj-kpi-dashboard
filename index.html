@@ -702,6 +702,7 @@ const SECTION_LAST_SUCCESS={};
 let CACHE_SAVE_TIMER=null;
 let ACTIVE_RENDER_FRAME=null;
 let IPK_STATE={line:'TODAS',model:'TODOS',rows:[]};
+const IPK_CLOSED_DECLARATIONS=Object.freeze({'2026-10':{ipk:2.09,km:295089}});
 const IPK_CURRENT_SOURCE={id:'1FPBc30JCVfTbGd8GEe7QXeNOSqK_rcq1loErH8Q0z1w',name:'IPK POR LINEA NOV'};
 function ipkSeedRows(){return [];}
 function ipkGoal(){const month=Number(DATA.period?.month||new Date().getMonth()+1);return month<=2?1.5:2;}
@@ -2656,7 +2657,7 @@ values:{
 '2026-07':327343,
 '2026-08':330150,
 '2026-09':313903,
-'2026-10':324425
+'2026-10':295089
 },
 budget:{
 '2025-12':283767,
@@ -5469,6 +5470,8 @@ $('#ipk').innerHTML=`<div class="section-head"><h2>IPK ${title} POR LÍNEA</h2><
 const renderIPKBase=renderIPK;
 renderIPK=function(){renderIPKBase();$('#ipk').insertAdjacentHTML('beforeend',`<section class="ipk-chart ipk-history"><div class="ipk-chart-head"><h3>Histórico mensual</h3><span class="ipk-trend">Meses cerrados disponibles</span></div><div class="ipk-history-list"><div class="ipk-history-row"><div><strong>Octubre 2026</strong><small>IPK por línea · mes cerrado · archivo histórico</small></div><div class="ipk-history-actions"><button onclick="loadIpkHistory('2026-10')">Ver</button><button class="pdf" onclick="printIpkHistory('2026-10')">PDF</button></div></div></div></section>`);};
 async function printIpkHistory(value){await loadIpkHistory(value);setTimeout(exportIPKPDF,250);}
+const renderIPKWithHistory=renderIPK;
+renderIPK=function(){renderIPKWithHistory();const key=`${DATA.period?.year}-${String(DATA.period?.month||'').padStart(2,'0')}`,declared=IPK_CLOSED_DECLARATIONS[key];if(!declared)return;const values=$('#ipk').querySelectorAll('.ipk-summary .ipk-card strong');if(values[0])values[0].textContent=ipkFormat(declared.ipk);if(values[2])values[2].textContent=num(declared.km);const source=$('#ipk .source');if(source)source.insertAdjacentHTML('beforeend','<br><strong>Cierre declarado · IPK 2,09 · KM 295.089</strong>');};
 applyProfileUI();
 
 if(ACTIVE_TAB==='recorridos')renderActiveTab();
