@@ -613,7 +613,7 @@ body.recorridos-view .recorridos-frame{flex:1 1 auto;min-height:0;height:100%;bo
 <script src="chorario.js?v=16"></script>
 <script>
 
-const API_URL='https://script.google.com/macros/s/AKfycbxzu1Mob_Z7E0-33nMXmFDk1zsaOWnUyzb1s58z1NH_2qDK4utHfvtO9-N31GtMuYwyEA/exec';
+const API_URL='https://script.google.com/macros/s/AKfycbwRJjGUECeQdaDzevlKJMJ9haw94VuibYlcX6IHCUtm9ewxClRQQqYpMIFMoP3vcEeHKQ/exec';
 
 const URL_PARAMS=new URLSearchParams(window.location.search);
 const PROFILE=String(URL_PARAMS.get('perfil')||'').trim().toLowerCase();
@@ -679,8 +679,8 @@ let OS_HISTORY_SELECTED_KEY='';
 let UNITS_REPORT_MONTH_KEY='';
 const UNITS_REPORT_MONTH_CACHE={};
 
-const READY={planServ:false,salidas:false,guardia:false,os:false,kpi:false,graficos:false};
-const VERSION={planServ:0,salidas:0,guardia:0,os:0,kpi:0,graficos:0};
+const READY={planServ:false,salidas:false,guardia:false,os:false,kpi:false,ipk:false,graficos:false};
+const VERSION={planServ:0,salidas:0,guardia:0,os:0,kpi:0,ipk:0,graficos:0};
 const LAST_RENDER={resumen:'',conduccion:'',plan:'',salidas:'',guardia:'',os:'',kpi:'',ipk:'',chorario:'',graficos:''};
 const DATE_BY_TAB={resumen:'',conduccion:'',salidas:'',guardia:'',kpi:''};
 const INFLIGHT={};
@@ -781,7 +781,7 @@ const snapshot=JSON.parse(raw);
 const age=Date.now()-Number(snapshot.savedAt||0);
 if(!snapshot.data||age>LOCAL_CACHE_MAX_AGE)return false;
 DATA=snapshot.data;
-['planServ','salidas','guardia','os','kpi','graficos'].forEach(section=>{
+['planServ','salidas','guardia','os','kpi','ipk','graficos'].forEach(section=>{
 if(DATA[section]){
 READY[section]=true;
 VERSION[section]=1;
@@ -2440,14 +2440,25 @@ function ipkAggregate(rows,key){const map=new Map();rows.forEach(r=>{const k=Str
 function ipkTrend(rows){if(rows.length<2)return '→ Sin variación suficiente';const a=rows[0].ipk,b=rows[rows.length-1].ipk;return b>a?'↗ Tendencia creciente':b<a?'↘ Tendencia descendente':'→ Tendencia estable';}
 function ipkBars(rows,label){const max=Math.max(...rows.map(r=>r.ipk),ipkGoal(),1);const goal=ipkGoal()/max*100;return `<div class="ipk-bars">${rows.map(r=>`<div class="ipk-bar"><span>${esc(r[label])}</span><div class="ipk-track"><div class="ipk-goal" style="left:${goal}%" title="Meta ${ipkFormat(ipkGoal())}"></div><div class="ipk-fill" style="width:${r.ipk/max*100}%"></div></div><strong>${ipkFormat(r.ipk)}</strong></div>`).join('')}</div>`;}
 function renderIPK(){
-const all=IPK_STATE.rows.length?IPK_STATE.rows:(IPK_STATE.rows=ipkSeedRows());
+const liveRows=(DATA.ipk?.rows||[]).map(row=>({
+day:Number(row.day),
+line:String(row.line||'').trim().toUpperCase(),
+km:Number(row.km)||0,
+passengers:Number(row.passengers)||0,
+model:String(row.model||'').trim()
+})).filter(row=>row.day&&row.line&&row.km>0);
+const all=liveRows.length
+?liveRows
+:(IPK_STATE.rows.length?IPK_STATE.rows:(IPK_STATE.rows=ipkSeedRows()));
 const lines=[...new Set(all.map(r=>r.line))].sort((a,b)=>a.localeCompare(b,'es',{numeric:true}));
 const filtered=all.filter(r=>(IPK_STATE.line==='TODAS'||r.line===IPK_STATE.line)&&(IPK_STATE.model==='TODOS'||r.model===IPK_STATE.model));
 const byLine=ipkAggregate(filtered,'line').sort((a,b)=>a.key.localeCompare(b.key,'es',{numeric:true}));
 const byDay=ipkAggregate(filtered,'day').sort((a,b)=>Number(a.key)-Number(b.key));
 const total=ipkAggregate(filtered,'model').reduce((acc,r)=>({km:acc.km+r.km,passengers:acc.passengers+r.passengers}),{km:0,passengers:0});const totalIpk=total.km?total.passengers/total.km:0;
 const monthName=new Date(Number(DATA.period?.year||2026),Number(DATA.period?.month||11)-1,1).toLocaleDateString('es-AR',{month:'long'}).toLocaleUpperCase('es-AR');
-$('#ipk').innerHTML=`<div class="section-head"><h2>IPK ${esc(monthName)} POR LÍNEA</h2><div class="source">Fuente: ${esc(IPK_CURRENT_SOURCE.name)}<br>Meta: ${ipkFormat(ipkGoal())} IPK</div></div><div class="ipk-toolbar"><label class="ipk-filter">Línea<select onchange="setIpkFilter('line',this.value)"><option value="TODAS">Todas las líneas</option>${lines.map(x=>`<option ${x===IPK_STATE.line?'selected':''}>${esc(x)}</option>`).join('')}</select></label><label class="ipk-filter">Modelo de servicio<select onchange="setIpkFilter('model',this.value)">${['TODOS','Hábil','Sábado','Domingo/Feriado'].map(x=>`<option value="${x}" ${x===IPK_STATE.model?'selected':''}>${x==='TODOS'?'Todos':x}</option>`).join('')}</select></label><button class="export-btn ipk-export" onclick="exportIPKPDF()">Exportar PDF</button></div><div class="ipk-summary"><div class="ipk-card"><small>IPK general</small><strong>${ipkFormat(totalIpk)}</strong></div><div class="ipk-card"><small>Pasajeros</small><strong>${num(total.passengers)}</strong></div><div class="ipk-card"><small>KM recorridos</small><strong>${total.km.toLocaleString('es-AR',{maximumFractionDigits:0})}</strong></div></div><section class="ipk-chart"><div class="ipk-chart-head"><h3>IPK general por línea</h3><span class="ipk-trend">${ipkTrend(byLine)}</span></div>${byLine.length?ipkBars(byLine,'key'):'<div class="ipk-empty">Sin datos para los filtros elegidos.</div>'}</section><section class="ipk-chart"><div class="ipk-chart-head"><h3>Evolución general diaria</h3><span class="ipk-trend">${ipkTrend(byDay)}</span></div>${byDay.length?ipkBars(byDay,'key'):'<div class="ipk-empty">Sin datos para los filtros elegidos.</div>'}</section><section class="ipk-chart"><div class="ipk-chart-head"><h3>Evolución diaria ${IPK_STATE.line==='TODAS'?'por línea seleccionada':'· Línea '+esc(IPK_STATE.line)}</h3><span class="ipk-trend">Meta ${ipkFormat(ipkGoal())}</span></div>${IPK_STATE.line==='TODAS'?'<div class="ipk-empty">Elegí una línea para ver su evolución diaria.</div>':ipkBars(byDay,'key')}</section>`;
+const src=DATA.sources?.ipk||DATA.ipk?.source||IPK_CURRENT_SOURCE;
+const liveNotice=liveRows.length?'Actualización automática desde Drive':'Respaldo local del último archivo válido';
+$('#ipk').innerHTML=`<div class="section-head"><h2>IPK ${esc(monthName)} POR LÍNEA</h2><div class="source">Fuente: ${esc(src.name||IPK_CURRENT_SOURCE.name)} · ${liveNotice}<br>Meta: ${ipkFormat(ipkGoal())} IPK</div></div><div class="ipk-toolbar"><label class="ipk-filter">Línea<select onchange="setIpkFilter('line',this.value)"><option value="TODAS">Todas las líneas</option>${lines.map(x=>`<option ${x===IPK_STATE.line?'selected':''}>${esc(x)}</option>`).join('')}</select></label><label class="ipk-filter">Modelo de servicio<select onchange="setIpkFilter('model',this.value)">${['TODOS','Hábil','Sábado','Domingo/Feriado'].map(x=>`<option value="${x}" ${x===IPK_STATE.model?'selected':''}>${x==='TODOS'?'Todos':x}</option>`).join('')}</select></label><button class="export-btn ipk-export" onclick="exportIPKPDF()">Exportar PDF</button></div><div class="ipk-summary"><div class="ipk-card"><small>IPK general</small><strong>${ipkFormat(totalIpk)}</strong></div><div class="ipk-card"><small>Pasajeros</small><strong>${num(total.passengers)}</strong></div><div class="ipk-card"><small>KM recorridos</small><strong>${total.km.toLocaleString('es-AR',{maximumFractionDigits:0})}</strong></div></div><section class="ipk-chart"><div class="ipk-chart-head"><h3>IPK general por línea</h3><span class="ipk-trend">${ipkTrend(byLine)}</span></div>${byLine.length?ipkBars(byLine,'key'):'<div class="ipk-empty">Sin datos para los filtros elegidos.</div>'}</section><section class="ipk-chart"><div class="ipk-chart-head"><h3>Evolución general diaria</h3><span class="ipk-trend">${ipkTrend(byDay)}</span></div>${byDay.length?ipkBars(byDay,'key'):'<div class="ipk-empty">Sin datos para los filtros elegidos.</div>'}</section><section class="ipk-chart"><div class="ipk-chart-head"><h3>Evolución diaria ${IPK_STATE.line==='TODAS'?'por línea seleccionada':'· Línea '+esc(IPK_STATE.line)}</h3><span class="ipk-trend">Meta ${ipkFormat(ipkGoal())}</span></div>${IPK_STATE.line==='TODAS'?'<div class="ipk-empty">Elegí una línea para ver su evolución diaria.</div>':ipkBars(byDay,'key')}</section>`;
 }
 function setIpkFilter(field,value){IPK_STATE[field]=value;LAST_RENDER.ipk='';renderIPK();}
 function exportIPKPDF(){const previous=document.title;document.title=`TSJ_IPK_${new Date().toISOString().slice(0,7)}`;window.print();setTimeout(()=>document.title=previous,1200);}
@@ -3680,6 +3691,7 @@ DATA.sources={
 'guardia',
 'os',
 'kpi',
+'ipk',
 'graficos'
 ].forEach(section=>{
 
@@ -4040,6 +4052,7 @@ salidas:'salidas',
 guardia:'guardia',
 os:'os',
 kpi:'kpi',
+ipk:'ipk',
 graficos:'kpi'
 };
 
@@ -4138,7 +4151,7 @@ const safeTab=sanitizeTab(tab);
 
 if(safeTab==='ipk'){
 setStatus(false,'Actualizando IPK…');
-return requestSection('kpi',false,0)
+return requestSection('ipk',false,0)
 .catch(()=>null)
 .then(()=>{LAST_RENDER.ipk='';renderIPK();setStatus(true,'Datos IPK disponibles');});
 }
@@ -4229,7 +4242,7 @@ initialSections=[section];
 }
 }
 
-if(ACTIVE_TAB==='ipk')initialSections=['kpi'];
+if(ACTIVE_TAB==='ipk')initialSections=['ipk'];
 
 initialSections=
 initialSections.filter(sectionAllowedForProfile);
@@ -4272,7 +4285,7 @@ sections=[section];
 
 }
 
-if(ACTIVE_TAB==='ipk')sections=['kpi'];
+if(ACTIVE_TAB==='ipk')sections=['ipk'];
 
 const requests=sections.map(section=>{
 
