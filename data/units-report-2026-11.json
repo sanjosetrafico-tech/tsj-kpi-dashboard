@@ -1,7 +1,7 @@
 {
   "year": 2026,
   "month": 11,
-  "day": 15,
+  "day": 16,
   "source": {
     "name": "RESUMEN SALIDAS Y REEMPLAZO NOVIEMBRE",
     "id": "1SWkzYVOmpRDoo76AAHqWnIIZu2XUAaZSjxt_Q-KNEFE"
@@ -198,6 +198,22 @@
       "motivo": "Motor",
       "linea": "R",
       "turno": "1"
+    },
+    {
+      "fecha": "16/11",
+      "averia": "39",
+      "reemplazo": "50",
+      "motivo": "Motor",
+      "linea": "R",
+      "turno": "1"
+    },
+    {
+      "fecha": "16/11",
+      "averia": "203",
+      "reemplazo": "46",
+      "motivo": "Electricidad",
+      "linea": "D",
+      "turno": "2"
     }
   ]
 }
