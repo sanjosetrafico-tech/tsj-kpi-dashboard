@@ -691,11 +691,18 @@ const SILENT_RETRY_DELAYS=[10000,30000,60000];
 const SECTION_LAST_SUCCESS={};
 let CACHE_SAVE_TIMER=null;
 let ACTIVE_RENDER_FRAME=null;
+let IPK_STATE={line:'TODAS',model:'TODOS',rows:[]};
+const IPK_CURRENT_SOURCE={id:'1FPBc30JCVfTbGd8GEe7QXeNOSqK_rcq1loErH8Q0z1w',name:'IPK POR LINEA NOV'};
+function ipkSeedRows(){return [];}
+function ipkGoal(){const month=Number(DATA.period?.month||new Date().getMonth()+1);return month<=2?1.5:2;}
+function ipkFormat(value){return Number(value||0).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function ipkAggregate(rows,key){const map=new Map();rows.forEach(r=>{const k=String(r[key]),x=map.get(k)||{key:k,km:0,passengers:0};x.km+=r.km;x.passengers+=r.passengers;map.set(k,x);});return [...map.values()].map(x=>({...x,ipk:x.km?x.passengers/x.km:0}));}
+function ipkTrend(rows){if(rows.length<2)return '→ Sin variación suficiente';return rows.at(-1).ipk>rows[0].ipk?'↗ Tendencia creciente':rows.at(-1).ipk<rows[0].ipk?'↘ Tendencia descendente':'→ Tendencia estable';}
+function ipkBars(rows,label){const max=Math.max(...rows.map(r=>r.ipk),ipkGoal(),1),goal=ipkGoal()/max*100;return `<div class="ipk-bars">${rows.map(r=>`<div class="ipk-bar"><span>${esc(r[label])}</span><div class="ipk-track"><div class="ipk-goal" style="left:${goal}%"></div><div class="ipk-fill" style="width:${r.ipk/max*100}%"></div></div><strong>${ipkFormat(r.ipk)}</strong></div>`).join('')}</div>`;}
 let OS_DRIVER_CATALOG_VERSION=-1;
 let OS_DRIVER_CATALOG=[];
 
 const $=s=>document.querySelector(s);
-window.addEventListener('error',event=>{const panel=$('#ipk');if(panel&&ACTIVE_TAB==='ipk')panel.innerHTML=`<div class="ipk-empty">Error IPK: ${esc(event.message||'sin detalle')}</div>`;});
 
 const esc=v=>String(v??'').replace(/[&<>"']/g,m=>({
 '&':'&amp;',
