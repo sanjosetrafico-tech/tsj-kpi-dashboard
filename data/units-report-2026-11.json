@@ -286,6 +286,14 @@
       "motivo": "Correctivo",
       "linea": "H",
       "turno": "1"
+    },
+    {
+      "fecha": "18/11",
+      "averia": "211",
+      "reemplazo": "49",
+      "motivo": "SUBE",
+      "linea": "L",
+      "turno": "4"
     }
   ]
 }
