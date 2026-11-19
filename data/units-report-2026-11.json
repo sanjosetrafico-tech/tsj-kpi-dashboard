@@ -310,6 +310,14 @@
       "motivo": "Suspensión",
       "linea": "E",
       "turno": "3"
+    },
+    {
+      "fecha": "19/11",
+      "averia": "211",
+      "reemplazo": "49",
+      "motivo": "SUBE",
+      "linea": "L",
+      "turno": "4"
     }
   ]
 }
