@@ -318,6 +318,22 @@
       "motivo": "SUBE",
       "linea": "L",
       "turno": "4"
+    },
+    {
+      "fecha": "20/11",
+      "averia": "39",
+      "reemplazo": "50",
+      "motivo": "Motor",
+      "linea": "R",
+      "turno": "1"
+    },
+    {
+      "fecha": "20/11",
+      "averia": "101",
+      "reemplazo": "104",
+      "motivo": "Electricidad",
+      "linea": "S",
+      "turno": "3"
     }
   ]
 }
