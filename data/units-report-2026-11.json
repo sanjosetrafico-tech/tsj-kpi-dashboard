@@ -1,7 +1,7 @@
 {
   "year": 2026,
   "month": 11,
-  "day": 20,
+  "day": 21,
   "source": {
     "name": "RESUMEN SALIDAS Y REEMPLAZO NOVIEMBRE",
     "id": "1SWkzYVOmpRDoo76AAHqWnIIZu2XUAaZSjxt_Q-KNEFE"
@@ -350,6 +350,22 @@
       "motivo": "Correctivo",
       "linea": "L",
       "turno": "4"
+    },
+    {
+      "fecha": "21/11",
+      "averia": "45",
+      "reemplazo": "48",
+      "motivo": "Neumáticos",
+      "linea": "P",
+      "turno": "1"
+    },
+    {
+      "fecha": "21/11",
+      "averia": "110",
+      "reemplazo": "106",
+      "motivo": "SUBE",
+      "linea": "B",
+      "turno": "2"
     }
   ]
 }
