@@ -366,6 +366,30 @@
       "motivo": "SUBE",
       "linea": "B",
       "turno": "2"
+    },
+    {
+      "fecha": "22/11",
+      "averia": "49",
+      "reemplazo": "36",
+      "motivo": "",
+      "linea": "L",
+      "turno": "2"
+    },
+    {
+      "fecha": "22/11",
+      "averia": "29",
+      "reemplazo": "40",
+      "motivo": "",
+      "linea": "P",
+      "turno": "1"
+    },
+    {
+      "fecha": "22/11",
+      "averia": "45",
+      "reemplazo": "9",
+      "motivo": "",
+      "linea": "P",
+      "turno": "10"
     }
   ]
 }
