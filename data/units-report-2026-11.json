@@ -390,6 +390,22 @@
       "motivo": "Electricidad",
       "linea": "B",
       "turno": "1"
+    },
+    {
+      "fecha": "23/11",
+      "averia": "45",
+      "reemplazo": "50",
+      "motivo": "Electricidad",
+      "linea": "P",
+      "turno": "10"
+    },
+    {
+      "fecha": "23/11",
+      "averia": "101",
+      "reemplazo": "104",
+      "motivo": "Electricidad",
+      "linea": "S",
+      "turno": "1"
     }
   ]
 }
