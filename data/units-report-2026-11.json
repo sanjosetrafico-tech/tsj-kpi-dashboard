@@ -430,6 +430,14 @@
       "motivo": "Suspensión",
       "linea": "F",
       "turno": "2"
+    },
+    {
+      "fecha": "24/11",
+      "averia": "39",
+      "reemplazo": "48",
+      "motivo": "Motor",
+      "linea": "R",
+      "turno": "1"
     }
   ]
 }
