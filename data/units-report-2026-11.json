@@ -438,6 +438,22 @@
       "motivo": "Motor",
       "linea": "R",
       "turno": "1"
+    },
+    {
+      "fecha": "25/11",
+      "averia": "39",
+      "reemplazo": "48",
+      "motivo": "Motor",
+      "linea": "R",
+      "turno": "1"
+    },
+    {
+      "fecha": "25/11",
+      "averia": "29",
+      "reemplazo": "47",
+      "motivo": "Suspensión",
+      "linea": "P",
+      "turno": "2"
     }
   ]
 }
