@@ -454,6 +454,22 @@
       "motivo": "Suspensión",
       "linea": "P",
       "turno": "2"
+    },
+    {
+      "fecha": "26/11",
+      "averia": "29",
+      "reemplazo": "47",
+      "motivo": "Suspensión",
+      "linea": "P",
+      "turno": "2"
+    },
+    {
+      "fecha": "26/11",
+      "averia": "203",
+      "reemplazo": "46",
+      "motivo": "Electricidad",
+      "linea": "D",
+      "turno": "2"
     }
   ]
 }
