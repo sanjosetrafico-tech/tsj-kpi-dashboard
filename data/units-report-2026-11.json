@@ -470,6 +470,30 @@
       "motivo": "Correctivo",
       "linea": "B",
       "turno": "2"
+    },
+    {
+      "fecha": "27/11",
+      "averia": "106",
+      "reemplazo": "104",
+      "motivo": "Correctivo",
+      "linea": "B",
+      "turno": "2"
+    },
+    {
+      "fecha": "27/11",
+      "averia": "4",
+      "reemplazo": "48",
+      "motivo": "Suspensión",
+      "linea": "G",
+      "turno": "100"
+    },
+    {
+      "fecha": "27/11",
+      "averia": "39",
+      "reemplazo": "50",
+      "motivo": "Motor",
+      "linea": "R",
+      "turno": "1"
     }
   ]
 }
